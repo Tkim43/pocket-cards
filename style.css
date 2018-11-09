@@ -1,0 +1,12 @@
+.category{
+    font-size: 3em;
+    text-align :center;
+    border: black solid 3px;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+.title{
+    border: black solid 3px;
+}
