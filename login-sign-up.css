@@ -1,0 +1,28 @@
+
+
+.nav-wrapper {
+    text-align: center;
+}
+
+nav {
+    height: 60px;
+}
+
+form {
+    margin: 5% 0;
+}
+
+.main-title {
+    color: white;
+    height: 10%;
+    font-size: 2em;
+}
+
+.username_field, .email_field, .password_field {
+    justify-content: center;
+}
+
+.username_row, .email_row, .password_row {
+    display: flex;
+    margin: 0;
+}
