@@ -1,4 +1,4 @@
-/* Sign Up Page */
+/* Login Page  */
 
 .nav-wrapper {
     text-align: center;
@@ -18,11 +18,11 @@ form {
     font-size: 2em;
 }
 
-.username_field, .email_field, .password_field {
+.username_field, .password_field {
     justify-content: center;
 }
 
-.username_row, .email_row, .password_row {
+.username_row, .password_row {
     display: flex;
     margin: 0;
 }
