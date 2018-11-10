@@ -1,0 +1,46 @@
+
+
+/* Sets Page */
+
+.category{
+    font-size: 3em;
+    text-align :center;
+    border: black solid 3px;
+    height: 70%;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+.text-center{
+    text-align: center;
+}
+.title{
+    border: black solid 3px;
+}
+.title h1{
+    font-size: 10rem;
+}
+.setsContainer{
+    height: 25vh;
+    font-size: 100%;
+}
+.displayBox{
+    border: black solid 3px;
+    width: 85vw;
+    height: 75vh;
+    font-size: 10em;
+}
+.arrow-nav{
+    font-size: 4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    top: 20%;
+}
+.fraction{
+    border: black solid 3px;
+    height: 80%;
+    width: 70%;
+}
