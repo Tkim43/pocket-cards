@@ -2,6 +2,7 @@
     font-size: 3em;
     text-align :center;
     border: black solid 3px;
+    height: 70%;
 }
 .center{
     display: flex;
@@ -9,4 +10,11 @@
 }
 .title{
     border: black solid 3px;
+}
+.title h1{
+    font-size: 10rem;
+}
+.setsContainer{
+    height: 25vh;
+    font-size: 100%;
 }
