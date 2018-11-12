@@ -1,3 +1,10 @@
 .title{
     font-size: 3em;
 }
+img{
+    width: 35%;
+    height: 35%;
+}
+.largeDisplayArea{
+    background: grey;
+}
