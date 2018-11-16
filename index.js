@@ -1,10 +1,26 @@
 const express = require('express');
+const cors = require('cors');
 const PORT = process.env.PORT || 9000;
 
 const app = express();
 
-app.get('/test',(req,res) =>{
-    res.send('<h1>this is a test route, and it is work </h1>');
+app.use(cors());
+
+app.get('/api/test',(req,res) =>{
+    res.send({
+            success: true,
+            message: 'API test working',
+            something: 'something else'
+        });
+});
+
+app.get ('/api/user', (req, res) => {
+    res.send({
+        success: true,
+        username: 'brian',
+        email: 'richchigga@gmail.com',
+        name: 'brian'
+    });
 });
 
 app.listen(PORT, ()=>{

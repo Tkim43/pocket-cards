@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Learning-Fuze/c918_uberquizlet#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.4"
   }
 }
