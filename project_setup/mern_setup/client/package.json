@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "node dev_server.js",
+    "dev":"npm run dev --prefix ..",
     "bundle": "webpack --config webpack.prod.js --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
