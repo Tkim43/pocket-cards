@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quizlet</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="modal.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel ="stylesheet" href="user-page.css">
+</head>
+<body>
+<div class="container">
+    <nav>
+        <div class="green lighten-2 nav-wrapper">
+            <a href="" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="">GINGER</a></li>
+                <li><a href="">BREAD<span class="new badge">300</span></a></li>
+                <li><a href="">MAN</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="title section center">
+
+    <div class="left-section">
+    <div class="user-icon">
+        <img src="images/tiffany22.png" alt="pepsi">
+    </div>
+    </div>
+
+    <div class="right-section">   
+    <div class="user-name"><b>Gingerbread93</b></div>
+    <div class="sort latest"><span>Latest</span></div>
+    <div class="sort alphabetical"><span>Alphabetical</span></div>
+    </div>
+
+    <div class="bottom-section">
+            <div class="sort-display">sort:</div>
+            <div class="sort-display-latest">Latest</div>
+    </div>
+    
+    </div>
+
+
+    <div class="category card-panel hoverable modal-trigger" href="#modal1">Create a New Category +</div>
+    <!-- Modal Structure -->
+ <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Enter Category</h4>
+          <form class="form">
+             <input type="text">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <a class="create-category modal-close green lighten-2 waves-effect waves-light btn-flat">Create category</a>
+        </div>
+      </div>
+
+    <div class="category card-panel hoverable">Physics</div>
+    <div class="category card-panel hoverable">Math</div>
+    <div class="category card-panel hoverable">Ginger Rebellion</div>
+    <div class="center">
+    </div>
+</div>
+
+</body>
+</html> 
