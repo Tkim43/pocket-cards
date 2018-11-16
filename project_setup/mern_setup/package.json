@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev":"npm-run-all --parallel dev:*",
+    "dev": "npm-run-all --parallel dev:*",
     "dev:client": "npm start --prefix client",
     "dev:server": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
