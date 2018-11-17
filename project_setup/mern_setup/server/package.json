@@ -1,0 +1,32 @@
+{
+  "name": "mern_setup",
+  "version": "1.0.0",
+  "description": "setting up a nodeJS with ReactJS frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:client": "npm start --prefix client",
+    "dev:server": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Learning-Fuze/c918_uberquizlet.git"
+  },
+  "author": "Tiffany Kim, Brandon Park, Vienna Tran, Kyle Umbarger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Learning-Fuze/c918_uberquizlet/issues"
+  },
+  "homepage": "https://github.com/Learning-Fuze/c918_uberquizlet#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6",
+    "npm-run-all": "^4.1.3"
+  }
+}
