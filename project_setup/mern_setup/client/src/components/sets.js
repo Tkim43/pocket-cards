@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 class Sets extends Component{
     constructor(props){
@@ -10,9 +10,9 @@ class Sets extends Component{
             data:[]
         }
     }
-    componentDidMount(){
-        this.getUserData();
-    }
+    // componentDidMount(){
+    //     this.getUserData();
+    // }
     // example async call
     // async getUserData(){
     //     try{
