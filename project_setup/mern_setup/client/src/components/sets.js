@@ -1,15 +1,10 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 class Sets extends Component{
     constructor(props){
         super(props)
         this.state ={
-            'delete': '',
-            'edit':'',
-            'add':'',
-            'log in':'',
-            'submit':'',
-            'create card':''
         }
     }
     delete(){
@@ -20,7 +15,10 @@ class Sets extends Component{
     render(){
         return(
             <div>
-                <button onClick="">Add</button>
+                <div className="border">
+                    <h1>Sets</h1>
+                </div>
+                <Link>EDIT</Link>
             </div>
         )
     }
