@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 
@@ -25,3 +26,13 @@ class Sets extends Component{
 }
 
 export default Sets;
+
+import React from 'react';
+
+
+export default props => (
+    <div>
+        <h1>My Sets</h1>
+        <p>lorem ipsum dummy datat</p>
+    </div>
+);
