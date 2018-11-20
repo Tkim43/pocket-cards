@@ -13,7 +13,7 @@ class inputDefinition extends Component {
 
     render () {
         return (
-            <div>
+            <div className = "container">
                 <h1>Cards Created: 10</h1>
 
                 <div className="row">
