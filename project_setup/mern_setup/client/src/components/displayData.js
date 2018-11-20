@@ -1,10 +1,9 @@
-
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import dummyData from '../../../server/managingCards';
+import dummyData from '../../../server/editBack';
 
-class Sets extends Component{
+class displayData extends Component{
     constructor(props){
         super(props)
         this.state ={
@@ -39,11 +38,13 @@ class Sets extends Component{
                 <div className="border">
                     <h1>Sets</h1>
                 </div>
-                <Link to ="/displayData" className ="btn green darken-2">sets</Link>
-                <Link to ="/editSets" className="btn green darken-2">Edit sets</Link>
+                <div>
+
+                </div>
+                <Link to ="/manageSets" className="btn green darken-2">Edit sets</Link>
             </div>
         )
     }
 }
 
-export default Sets;
+export default displayData;
