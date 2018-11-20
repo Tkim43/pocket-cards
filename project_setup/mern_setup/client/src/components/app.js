@@ -10,7 +10,7 @@ import { Route } from 'react-router-dom';
 
 
 const App = () => (
-    <div className = "container">
+    <div>
         {/* <div className="app">
             <Test/>
         </div> */}
