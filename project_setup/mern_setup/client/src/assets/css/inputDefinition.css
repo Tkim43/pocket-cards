@@ -1,0 +1,13 @@
+/* inputDefinition Component CSS */
+
+.buttonDiv {
+    display: flex;
+    margin: 10px auto;
+    justify-content: center;
+}
+
+button {
+    display: flex;
+    width: 100%;
+    max-width: 450px;
+}

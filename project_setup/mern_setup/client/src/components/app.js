@@ -6,6 +6,7 @@ import Navbar from './nav_bar';
 import Profile from './profile';
 import Sets from './sets';
 import Flashcards from './flashcards';
+import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
 import displayData from './displayData'
 import editSets from './editSets'
@@ -13,7 +14,7 @@ import editSets from './editSets'
 
 
 const App = () => (
-    <div className = "container">
+    <div>
         {/* <div className="app">
             <Test/>
             <Button/>
@@ -25,6 +26,7 @@ const App = () => (
         <Route path = "/flashcards" component = {Flashcards}/>
         <Route path = "/displayData" component= {displayData}/>
         <Route path = "/editSets" component={editSets}/>
+        <Route path = "/createflashcards" component = {InputDefinition}/>
     </div>
 );
 

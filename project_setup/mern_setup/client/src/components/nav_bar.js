@@ -19,7 +19,7 @@ class Navbar extends Component {
                 <nav>
                     <div className="nav-wrapper">
                         <Link to = "#" data-target = "slide-out" className = "sidenav-trigger"> <i className="material-icons">dehaze</i> </Link>
-                        <ul className = "right hide-on-med-and-down">
+                        <ul className = "left hide-on-med-and-down">
                             <li className = "nav-item">
                                 <Link to = "/" className = "nav-link"> Profile </Link>
                             </li>
