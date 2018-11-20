@@ -9,10 +9,13 @@ import Flashcards from './flashcards';
 import { Route } from 'react-router-dom';
 
 
+
 const App = () => (
     <div>
         {/* <div className="app">
             <Test/>
+            <Button/>
+        </div>
         </div> */}
         <Navbar/>
         <Route exact path = "/" component = {Profile}/>
@@ -22,3 +25,5 @@ const App = () => (
 );
 
 export default App;
+
+
