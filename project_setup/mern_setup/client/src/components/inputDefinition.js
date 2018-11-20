@@ -34,13 +34,13 @@ class inputDefinition extends Component {
                     </button>
                 </div>
                 <div className = "buttonDiv">
-                    <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
-                        <i className="material-icons right">done</i>
+                    <button className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
+                        <i className="material-icons right">create</i>
                     </button>
                 </div>
                 <div className = "buttonDiv">
-                    <button className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
-                        <i className="material-icons right">create</i>
+                    <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
+                        <i className="material-icons right">done</i>
                     </button>
                 </div>
             </div>
