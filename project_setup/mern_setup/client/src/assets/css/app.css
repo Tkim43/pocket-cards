@@ -33,6 +33,10 @@ body {
     animation: spin 10s linear infinite;
 }
 
+.border{
+    border: black solid 3px;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

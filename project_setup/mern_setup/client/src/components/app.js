@@ -7,6 +7,8 @@ import Profile from './profile';
 import Sets from './sets';
 import Flashcards from './flashcards';
 import { Route } from 'react-router-dom';
+import displayData from './displayData'
+import editSets from './editSets'
 
 
 
@@ -21,6 +23,8 @@ const App = () => (
         <Route exact path = "/" component = {Profile}/>
         <Route path = "/sets" component = {Sets}/>
         <Route path = "/flashcards" component = {Flashcards}/>
+        <Route path = "/displayData" component= {displayData}/>
+        <Route path = "/editSets" component={editSets}/>
     </div>
 );
 
