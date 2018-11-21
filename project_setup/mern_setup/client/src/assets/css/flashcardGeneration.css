@@ -1,7 +1,23 @@
 /* Flashcard Generation Page */
 
 .card{
-    /* border: solid 1px black; */
-    min-width: 400px;
+    max-height: 350px;
     height: 400px;
+}
+
+.row {
+    display: flex;
+}
+
+.col.s2.card-container{
+    align-items: center;
+    display: flex;
+}
+
+.card-panel.red.lighten-2 {
+    width: 100%;
+}
+
+.buttonDiv > button {
+    margin: 0 10px;
 }
