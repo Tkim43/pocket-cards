@@ -1,0 +1,7 @@
+/* Flashcard Generation Page */
+
+.card{
+    /* border: solid 1px black; */
+    min-width: 400px;
+    height: 400px;
+}
