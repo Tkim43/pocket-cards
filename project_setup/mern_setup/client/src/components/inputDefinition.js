@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import 'materialize-css/dist/css/materialize.min.css';
-import 'materialize-css/dist/js/materialize';
 import "../assets/css/inputDefinition.css";
 // import $ from 'jquery';
 
 
 class inputDefinition extends Component {
-
-    // componentDidMount () {
-    //     $('textarea#textarea1, textarea#textarea2').characterCounter();
-    // }
+    state = {
+        term: ''
+    }
 
     render () {
+
+        const { term } = this.state;
+
         return (
             <div className = "container">
                 <h1>Cards Created: 10</h1>
@@ -19,12 +19,16 @@ class inputDefinition extends Component {
                 <div className="row">
                     <form className="col s12">
                         <div className="row">
-                            <label htmlFor="textarea1">Term</label>
-                            <textarea className="materialize-textarea" id="textarea1" data-length="50"></textarea>
+                            <div className="input-field col s12">
+                                <textarea value={term} onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
+                                <label htmlFor="textarea1">Term</label>
+                                <p className="right-align">{term.length}/100</p>
+                            </div>
+                            
                         </div>
                         <div className="row">
                             <label htmlFor="textarea2">Definition</label>
-                            <textarea className="materialize-textarea" id="textarea2" data-length="120"></textarea>
+                            <textarea ref={e => this.text2 = e} className="materialize-textarea" id="textarea2" data-length="120"></textarea>
                         </div>
                     </form>
                 </div>

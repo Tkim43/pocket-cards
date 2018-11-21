@@ -1,6 +1,7 @@
-import React from 'react';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize';
 import '../assets/css/app.css';
-import logo from '../assets/images/logo.svg';
+import React from 'react';
 import Test from './test';
 import Navbar from './nav_bar';
 import Profile from './profile';
