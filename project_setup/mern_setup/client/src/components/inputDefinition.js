@@ -22,7 +22,7 @@ class inputDefinition extends Component {
                             <div className="input-field col s12">
                                 <textarea value={term} onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
                                 <label htmlFor="textarea1">Term</label>
-                                <p className="right-align">{term.length}/100</p>
+                                <p className="right-align">{term.length}/50</p>
                             </div>
                             
                         </div>
