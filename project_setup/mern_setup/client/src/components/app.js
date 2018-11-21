@@ -17,11 +17,6 @@ import editSets from './editSets'
 
 const App = () => (
     <div>
-        {/* <div className="app">
-            <Test/>
-            <Button/>
-        </div>
-        </div> */}
         <Navbar/>
         <Route exact path = "/" component = {Profile}/>
         <Route path = "/sets" component = {Sets}/>
