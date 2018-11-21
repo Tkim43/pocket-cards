@@ -18,6 +18,6 @@
     width: 100%;
 }
 
-.buttonDiv > button {
+.buttonDiv > *{
     margin: 0 10px;
 }

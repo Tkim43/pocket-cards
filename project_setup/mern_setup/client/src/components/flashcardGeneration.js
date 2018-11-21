@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../assets/css/FlashcardGeneration.css';
 import listData from '../dummy_data/list';
+import { Link } from 'react-router-dom';
 
 class FlashcardGeneration extends Component {
 
@@ -22,6 +23,10 @@ class FlashcardGeneration extends Component {
         });
     }
 
+    onClick () {
+        event.preventDefault();
+
+    }
 
     render () {
 
@@ -63,13 +68,16 @@ class FlashcardGeneration extends Component {
                     </div>
                 </div>
                 {listCards}
-                <div className = "buttonDiv">
-                    <button className="blue lighten-2 btn waves-effect waves-light btn-large col s6 left-align" name="action">Add Card
+                <div className = "buttonDiv center">
+                    <Link className="blue lighten-2 btn waves-effect waves-light btn-large col s6 " to = "/createflashcards" name="action">
                         <i className="material-icons right">add</i>
-                    </button>
-                    <button className="green lighten-2 btn waves-effect waves-light btn-large col s6 right-align" type="done" name="action">Done
+                        Add Card
+                    </Link>
+                    <Link className="green lighten-2 btn waves-effect waves-light btn-large col s6 " to = "/sets" name="action">
                         <i className="material-icons right">done</i>
-                    </button>
+                        Done
+                    </Link>
+
                 </div>
 
             </div>
