@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import profileInfo from '../dummy_data/profile_info';
 import "../assets/css/profile.css";
 import picture from "../assets/images/profile_pic.jpg";
+import {Link} from 'react-router-dom';
 
 class Profile extends Component {
 
@@ -48,22 +49,30 @@ class Profile extends Component {
         return (
             <div className = "container profile-container">
                 {profileInformation}
-                {/* <div className = "row">
-                    <button className = "btn light-blue lighten-3">Latest</button>
+                <div className = "sort-row row">
+                    <div className="sort">Sort: </div>
                     <button className = "btn light-blue lighten-3">Alphabetical</button>
-                </div> */}
-                
-                <div className="col s12 card-container">
-                    <div className = "card-panel green lighten-2 white-text center">Create a New Category +</div>
                 </div>
-                <div className="col s12 card-container">
-                    <div className = "card-panel green lighten-2 white-text center">Physics</div>
+                <div className="row">
+                    <div className="col s12 card-container">
+                        <div className = "card-panel orange lighten-2 white-text center">Create a New Category +</div>
+                    </div>
                 </div>
-                <div className="col s12 card-container">
-                    <div className = "card-panel green lighten-2 white-text center">Math</div>
+
+                <div className="row">
+                    <div className="col s12 card-container">
+                        <Link to = "/sets" className = "card-panel green lighten-2 white-text center">Physics</Link>
+                    </div>
                 </div>
-                <div className="col s12 card-container">
-                    <div className = "card-panel green lighten-2 white-text center">Ginger Rebellion</div>
+                <div className="row">
+                    <div className="col s12 card-container">
+                        <Link to = "/sets" className = "card-panel green lighten-2 white-text center">Math</Link>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12 card-container">
+                        <Link to = "/sets" className = "card-panel green lighten-2 white-text center">Ginger Rebellion</Link>
+                    </div>
                 </div>
             </div>
         );

@@ -15,6 +15,7 @@
 
 .profile-heading {
     display: flex;
+    justify-content: center;
     margin: 10px 0;
     flex-direction: column;
 }
@@ -26,4 +27,13 @@
 
 .button-profile-heading > button{
     margin-right: 10px;
+}
+
+.sort-row {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.card-container > * {
+    display: block;
 }
