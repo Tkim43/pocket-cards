@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import React, {Component} from 'react';
+import { Field, reduxForm } from 'redux-form';
 
 
 class Signup extends Component {
@@ -11,10 +11,19 @@ class Signup extends Component {
 
     render () {
         return (
-            <h1>this is the signup page</h1>
+            <div>
+                <h1>this is the signup page</h1>
+                <form>
+                    <div className="input-field">
+                        <Field name = "username" component = "input"/>
+                        <label>Username</label>
+                    </div>
+                </form>
+            </div>
+            
         );
     }
 }
 
-export default Signup;
+export default reduxForm ({form: 'sign-up'})(Signup);
 
