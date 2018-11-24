@@ -55,7 +55,7 @@ class Profile extends Component {
                 </div>
                 <div className="row">
                     <div className="col s12 card-container">
-                        <div className = "card-panel orange lighten-2 white-text center">Create a New Category +</div>
+                        <Link to = "/modal" className = "card-panel orange lighten-2 white-text center">Create a New Category +</Link>
                     </div>
                 </div>
 
