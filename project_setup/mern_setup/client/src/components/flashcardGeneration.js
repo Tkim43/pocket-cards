@@ -23,10 +23,6 @@ class FlashcardGeneration extends Component {
         });
     }
 
-    onClick () {
-        event.preventDefault();
-
-    }
 
     render () {
 
@@ -45,7 +41,10 @@ class FlashcardGeneration extends Component {
                         </div>
                     </div>
                     <div className="col s2 card-container">
-                        <div className = "card-panel red lighten-2 white-text center">Trashcan</div>
+                        <div className = "card-panel red lighten-2 white-text center">
+                        Delete
+                            <i className="material-icons right">delete</i>
+                        </div>
                     </div>
                 </div>
                 );

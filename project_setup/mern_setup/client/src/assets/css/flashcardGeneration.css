@@ -21,3 +21,7 @@
 .buttonDiv > *{
     margin: 0 10px;
 }
+
+.card-panel > i {
+    margin: 0 auto;
+}
