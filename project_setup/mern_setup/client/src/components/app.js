@@ -16,6 +16,8 @@ import frontEditMode from './frontEditMode'
 import backEditMode from './backEditMode'
 import editSets from './editSets'
 import logIn from './logIn'
+import editSets from './editSets';
+import modal from './modal';
 
 
 
@@ -23,6 +25,7 @@ const App = () => (
     <div>
         <Navbar/>
         <Route exact path = "/" component = {Profile}/>
+        <Route path = "/modal" component = {modal}/>
         <Route path = "/sets" component = {Sets}/>
         <Route path = "/flashcards" component = {Flashcards}/>
         <Route path = "/displayFront" component= {displayFront}/>
