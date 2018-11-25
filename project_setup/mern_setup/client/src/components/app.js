@@ -10,8 +10,12 @@ import Flashcards from './flashcards';
 import FlashcardGeneration from './flashcardGeneration';
 import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
-import displayData from './displayData'
+import displayFront from './displayFront'
+import displayBack from './displayBAck'
+import frontEditMode from './frontEditMode'
+import backEditMode from './backEditMode'
 import editSets from './editSets'
+import logIn from './logIn'
 
 
 
@@ -21,9 +25,13 @@ const App = () => (
         <Route exact path = "/" component = {Profile}/>
         <Route path = "/sets" component = {Sets}/>
         <Route path = "/flashcards" component = {Flashcards}/>
-        <Route path = "/displayData" component= {displayData}/>
+        <Route path = "/displayFront" component= {displayFront}/>
+        <Route path = "/displayBack" component= {displayBack}/>
+        <Route path = "/frontEditMode" component= {frontEditMode}/>
+        <Route path = "/backEditMode" component= {backEditMode}/>
         <Route path = "/editSets" component={editSets}/>
         <Route path = "/createflashcards" component = {InputDefinition}/>
+        <Route path = "/logIn" component = {logIn}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
     </div>
 );

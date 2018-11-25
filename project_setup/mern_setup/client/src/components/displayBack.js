@@ -1,14 +1,13 @@
-
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import dummyData from '../../../server/managingCards';
+import dummyData from '../../../server/editBack';
 
-class Sets extends Component{
+class displayBack extends Component{
     constructor(props){
         super(props)
         this.state ={
-            data:[]
+            data:[],
         }
     }
     componentDidMount(){
@@ -16,7 +15,7 @@ class Sets extends Component{
     }
 
     componentDidUpdate() {
-        console.log("State after using set state ", this.state);
+        // console.log("State after using set state ", this.state);
     }
     // example async call
     // async getUserData(){
@@ -24,8 +23,7 @@ class Sets extends Component{
     //         // const resp = await axios.get(BASE_URL + API_KEY);
     //         // const resp = await axios.get(dummyData);
     //         this.setState({
-    //             data: dummyData,
-                
+    //             data: dummyData
     //         });
     //     }catch(err){
     //         this.setState({
@@ -33,31 +31,30 @@ class Sets extends Component{
     //         });
     //     }
     // }
-    getUserData(){
+    getUserData (){
         this.setState({
             data: dummyData,
+            back_description: dummyData[0].back_description
         })
     }
     render(){
         console.log(this.state)
-        const userSets = this.state.data.map((item,index) =>{
-            return(
-                <div key= {item.index} className="row set">
-                    <Link to="/displayFront" className ="btn blue darken-2">{item.subCategory}</Link>
-                </div>
-            )
-        });
+        const {back_description} = this.state
         return(
-            <div className="center">
-                <div className="border">Physics</div>
-                <div>{userSets}</div>
+            <div>
                 <div className="row">
-                    <Link to ="/manageSets" className="btn blue darken-2">Edit sets</Link>
-                    <Link to ="/" className="btn grey darken-2">Home</Link>
+                    <h1>Back of Card</h1>
                 </div>
+                <div className="card border center">{back_description}</div>
+                <div className="row">
+                    <Link to ="/displayFront" className="btn green darken-2">Flip to Front</Link>
+                    <Link to ="/sets" className="btn green darken-2">Card Set Complete</Link>
+                    <Link to ="/editSets" className="btn green darken-2">Edit More Cards</Link>
+                </div>
+                
             </div>
         )
     }
 }
 
-export default Sets;
+export default displayBack;

@@ -3,8 +3,11 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import dummyData from '../../../server/managingCards';
+import kangaroo from '../assets/images/kangaroo_logo_3.png'
+import "../assets/css/logIn.css";
 
-class Sets extends Component{
+
+class LogIn extends Component{
     constructor(props){
         super(props)
         this.state ={
@@ -39,25 +42,18 @@ class Sets extends Component{
         })
     }
     render(){
-        console.log(this.state)
-        const userSets = this.state.data.map((item,index) =>{
-            return(
-                <div key= {item.index} className="row set">
-                    <Link to="/displayFront" className ="btn blue darken-2">{item.subCategory}</Link>
-                </div>
-            )
-        });
         return(
             <div className="center">
-                <div className="border">Physics</div>
-                <div>{userSets}</div>
+                <div className="border">Log in Page</div>
+                <img src={kangaroo}></img>
+                <p className ="font">Pocket Cards</p>
                 <div className="row">
-                    <Link to ="/manageSets" className="btn blue darken-2">Edit sets</Link>
-                    <Link to ="/" className="btn grey darken-2">Home</Link>
+                    <Link to ="/editSets" className="btn light blue darken-2">Sign Up</Link>
+                    <Link to ="/profile" className="btn black darken-2">Log In Now</Link>
                 </div>
             </div>
         )
     }
 }
 
-export default Sets;
+export default LogIn;
