@@ -12,7 +12,8 @@ import Signup from './sign-up';
 import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
 import displayData from './displayData'
-import editSets from './editSets'
+import editSets from './editSets';
+import modal from './modal';
 
 
 
@@ -20,6 +21,7 @@ const App = () => (
     <div>
         <Navbar/>
         <Route exact path = "/" component = {Profile}/>
+        <Route path = "/modal" component = {modal}/>
         <Route path = "/sets" component = {Sets}/>
         <Route path = "/flashcards" component = {Flashcards}/>
         <Route path = "/displayData" component= {displayData}/>
