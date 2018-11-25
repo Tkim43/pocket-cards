@@ -17,7 +17,6 @@ import frontEditMode from './frontEditMode'
 import backEditMode from './backEditMode'
 import editSets from './editSets'
 import logIn from './logIn'
-import editSets from './editSets';
 import modal from './modal';
 
 
