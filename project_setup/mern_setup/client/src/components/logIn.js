@@ -47,6 +47,7 @@ class LogIn extends Component{
                 <div className="border">Log in Page</div>
                 <img src={kangaroo}></img>
                 <p className ="font">Pocket Cards</p>
+                <div>Welcome to Pocket Cards, our mission is to help students practice and master whatever they are learning. Pocket Cards provides engaging, customizable flashcards with contributions from people everywhere.</div>
                 <div className="row">
                     <Link to ="/editSets" className="btn light blue darken-2">Sign Up</Link>
                     <Link to ="/profile" className="btn black darken-2">Log In Now</Link>
