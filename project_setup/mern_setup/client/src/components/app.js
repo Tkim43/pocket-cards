@@ -8,6 +8,7 @@ import Profile from './profile';
 import Sets from './sets';
 import Flashcards from './flashcards';
 import FlashcardGeneration from './flashcardGeneration';
+import Signup from './sign-up';
 import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
 import displayFront from './displayFront'
@@ -16,7 +17,6 @@ import frontEditMode from './frontEditMode'
 import backEditMode from './backEditMode'
 import editSets from './editSets'
 import logIn from './logIn'
-import editSets from './editSets';
 import modal from './modal';
 
 
@@ -36,6 +36,7 @@ const App = () => (
         <Route path = "/createflashcards" component = {InputDefinition}/>
         <Route path = "/logIn" component = {logIn}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
+        <Route path = "/signup" component = {Signup}/>
     </div>
 );
 
