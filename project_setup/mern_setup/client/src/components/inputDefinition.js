@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import "../assets/css/inputDefinition.css";
+import { Link } from 'react-router-dom';
 // import $ from 'jquery';
 
 
@@ -33,19 +34,19 @@ class inputDefinition extends Component {
                     </form>
                 </div>
                 <div className = "buttonDiv">
-                    <button className="blue lighten-2 btn waves-effect waves-light btn-large" name="action">Add Card
+                    <Link to="/createflashcards" className="blue lighten-2 btn waves-effect waves-light btn-large" name="action">Add Card
                         <i className="material-icons right">add</i>
-                    </button>
+                    </Link>
                 </div>
                 <div className = "buttonDiv">
-                    <button className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
+                    <Link to="/editSets" className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
                         <i className="material-icons right">create</i>
-                    </button>
+                    </Link>
                 </div>
                 <div className = "buttonDiv">
-                    <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
+                    <Link to="/sets" className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
                         <i className="material-icons right">done</i>
-                    </button>
+                    </Link>
                 </div>
             </div>
         );
