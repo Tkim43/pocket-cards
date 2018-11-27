@@ -16,6 +16,10 @@ class FlashcardGeneration extends Component {
         this.getListData ();
     }
 
+    onClick () {
+
+    }
+
     getListData () {
         //Call server to get data
         this.setState ({
@@ -31,14 +35,14 @@ class FlashcardGeneration extends Component {
 
                 <div key = {item.id} className="row">
                     <div className="col s5 card-container">
-                        <div className="card-panel teal lighten-1 white-text card" >
+                        <Link to = "/frontEditMode" className="card-panel teal lighten-1 white-text card" >
                             <div>{item.term}</div>
-                        </div> 
+                        </Link> 
                     </div>
                     <div className="col s5 card-container">
-                        <div className="card-panel teal lighten-1 white-text card">
+                        <Link to = "/backEditMode" className="card-panel teal lighten-1 white-text card">
                             <div>{item.definition}</div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col s2 card-container">
                         <div className = "card-panel red lighten-2 white-text center">

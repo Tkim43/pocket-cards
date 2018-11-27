@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import "../assets/css/inputDefinition.css";
 import { Link } from 'react-router-dom';
-// import $ from 'jquery';
 
 
 class inputDefinition extends Component {
     state = {
-        term: ''
+        term: '',
+        defintion: ''
     }
 
     render () {
 
-        const { term } = this.state;
+        const { term, defintion } = this.state;
 
         return (
             <div className = "container">
@@ -23,13 +23,16 @@ class inputDefinition extends Component {
                             <div className="input-field col s12">
                                 <textarea value={term} onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
                                 <label htmlFor="textarea1">Term</label>
-                                <p className="right-align">{term.length}/50</p>
+                                <div className="right-align">{term.length}/50</div>
                             </div>
                             
                         </div>
                         <div className="row">
-                            <label htmlFor="textarea2">Definition</label>
-                            <textarea ref={e => this.text2 = e} className="materialize-textarea" id="textarea2" data-length="120"></textarea>
+                            <div className="input-field col s12">
+                                <textarea value={defintion} onChange={ e => this.setState({defintion: e.target.value})}  className="materialize-textarea" id="textarea2"></textarea>
+                                <label htmlFor="textarea2">Definition</label>
+                                <div className="right-align">{defintion.length}/150</div>
+                            </div>
                         </div>
                     </form>
                 </div>
