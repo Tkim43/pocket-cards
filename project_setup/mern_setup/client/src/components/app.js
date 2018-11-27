@@ -17,8 +17,6 @@ import frontEditMode from './frontEditMode'
 import backEditMode from './backEditMode'
 import logIn from './logIn'
 
-
-
 const App = () => (
     <div>
         <Navbar/>

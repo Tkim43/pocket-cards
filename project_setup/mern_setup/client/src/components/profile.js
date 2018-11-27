@@ -56,11 +56,9 @@ class Profile extends Component {
                     <button className = "btn light-blue lighten-3">Alphabetical</button>
                 </div>
                 <div className="row">
-                    <div className="col s12 card-container">
-                        <BasicModal />
-                        <div onClick={this.openModal} to = "/modal" className = "card-panel orange lighten-2 white-text center hoverable modal-trigger">Create a New Category +</div>
-                        
-                    </div>
+                <div className="col s12 card-container">
+                        <BasicModal/>
+                </div>
                 </div>
 
                 <div className="row">
