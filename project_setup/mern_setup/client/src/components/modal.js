@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './modal.css';
+import '../assets/css/modal.css';
 import {Link} from 'react-router-dom';
 
 class ButtonModal extends Component {
