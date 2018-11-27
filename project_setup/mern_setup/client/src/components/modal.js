@@ -17,7 +17,7 @@ class ButtonModal extends Component {
             return (
                 <div className="basic-modal" onClick={this.close}>
                     <div onClick={e => e.stopPropagation()} className="basic-modal-content">
-                        <div onClick={this.close} className="basic-modal-close">X</div>
+                        <div onClick={this.close} className="basic-modal-close center">X</div>
                             <div>
                                 <form className="col s12">
                                         <div className="row">
