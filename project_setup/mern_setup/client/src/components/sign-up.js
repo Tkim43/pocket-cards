@@ -4,7 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 
 class Signup extends Component {
     renderInput (props) {
-        // console.log('Render Input: ', props);
         return (
             <div className= {`input-field col ${props.size}`}>
                 <input {...props.input} type="text"/>
@@ -19,8 +18,6 @@ class Signup extends Component {
     }
 
     render () {
-        // console.log("item props: ", this.props);
-
         const { handleSubmit } = this.props;
 
         return (
