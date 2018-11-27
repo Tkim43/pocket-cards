@@ -1,92 +1,244 @@
 const express = require('express');
 const mysql = require ('mysql');
-const server = express();
+const app = express();
+// const router = express.Router();
 
-const PORT = 3000 || 3001;
+const PORT = process.env.PORT || 3001;
 
 const db = mysql.createConnection({
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'root',
-    'database': 'pocketcards',
-    'port': 3306
-})
+        'host': 'localhost',
+        'user': 'root',
+        'password': 'root',
+        'database': 'pocketcards',
+        'port': 3306,
+        insecureAuth: true
+    });
 
-db.connect();
 
-// server.use(express.static(resolve(__dirname,'client','dist')));
-// server.use(express.urlendcoded({extended: false}));
+db.connect((err) => {
+    if (err) throw err;
 
-server.get('api/:userID/userhome', (req, res, next) => {
-    //get avatar & username from users
-    // SELECT `displayName`, `avatar` FROM `users` WHERE ID = :userID
+    console.log('Database Connected');
 
 });
 
-server.get('/api/:userID/userhome', (req, res) => {
-    //get category from sets
-    // SELECT `category` FROM `sets` WHERE userID = :userID
+// module.exports = db;
 
 
-});
-
-server.post('/api/:userID/input_category', (req, res, next)=>{
-    //post category
-    //INSERT INTO `sets`(`userID`, `category`) VALUES (:userID, :category)
-
-});
-
-server.post('/api/:setID/input_category',(req, res)=>{
-    //post sub category
-    // INSERT INTO `topics`(`setID`, `subCategory`) VALUES (:setID, :category)
-})
+//middleware 
+app.use(express.static(resolve(__dirname,'client','dist')));
+app.use(express.json());
+app.use(express.urlendcoded({extended: false}));
 
 
-server.post('/api/:topicID/create_card', (req, res)=>{
-    //post to front cards and back
-    // INSERT INTO `cards`(`topicID`, `frontText`, `backText`) VALUES (topicID, frontText, backText')
+//Endpoints 
+
+//get avatar & username from users
+app.get('api/:userID/userhome', (req, res, next) => {
+    let { userID } = req.params;
+    let query = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
+    let inserts = ['displayName', 'avatar', 'users', 'ID', userID];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formated SQL", sql);
     
+    db.query(sql, (err, results, fields) => {
+        if (err) return next(err);
 
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
 });
 
-server.get('/api/:topicID/card', (req, res)=>{
-    //get card front and back
-    // SELECT * FROM `cards` WHERE `topicID`= :topicID
 
-});
-
-
-server.patch('/api/:topicID/update_card_front', (req, res)=>{
-    //update front of card
-    // UPDATE `cards` SET `frontText`=frontText WHERE `topicID`= topicID
-
-});
-
-server.patch('api/:topicID/update_card_back', (req, res)=>{
-    //update back of card
-    // UPDATE `cards` SET `backText`=backText WHERE `topicID`= topicID
-
-});
-
-server.get('/api/:userID/set_managing', (req, res, next)=> {
+app.get('/api/:userID/userhome', (req, res) => {
+    let { userID } = req.params;
     //get category from sets
-    // SELECT `category` FROM `sets` WHERE userID = :userID
+    let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    let inserts = ['category', 'sets', 'userID', userID];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formated SQL", sql);
+
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
+});
+
+
+//post category
+app.post('/api/:userID/input_category', (req, res, next)=>{
+    const { userID } = req.body;
+    let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
+    let inserts = ['sets', 'userID', 'category', userID, category];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formated SQL", sql);
+
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
+});
+
+
+//post sub category
+app.post('/api/:setID/input_category',(req, res)=>{
+    const { setID } = req.body;
+    let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
+    let inserts = ['topics', 'setID', 'subCategory', setID, category];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formated SQL", sql);
+
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
+
+});
+
+
+//post to front cards and back
+app.post('/api/:topicID/create_card', (req, res)=>{
+    const { topicID } = req.body;
+    let query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
+    let inserts = ['cards', 'topicID', 'frontText', 'backText', topicID, frontText, backText];
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formated SQL", sql);
+
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
 
 
 });
 
-server.get('/api/:setID/set_managing', (req, res)=> {
+app.get('/api/:topicID/card', (req, res)=>{
+    const { topicID } = req.params;
+    //get card front and back
+    let query = 'SELECT * FROM ?? WHERE ??= ?';
+    let inserts = ['cards', 'topicID', topicID];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formated SQL", sql);
+
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
+});
+
+
+// app.patch('/api/:topicID/update_card_front', (req, res)=>{
+    // const { topicID } = req.params;
+//     //update front of card
+//     // UPDATE `cards` SET `frontText`=frontText WHERE `topicID`= topicID
+
+// });
+
+// app.patch('api/:topicID/update_card_back', (req, res)=>{
+    // const { topicID } = req.params;
+//     //update back of card
+//     // UPDATE `cards` SET `backText`=backText WHERE `topicID`= topicID
+
+// });
+
+//get category from sets
+app.get('/api/:userID/set_managing', (req, res, next)=> {
+    const { userID } = req.params;
+    let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    let inserts = ['category', 'sets', 'userID', userID];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formatted sql", sql);
+
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
+
+});
+
+app.get('/api/:setID/set_managing', (req, res)=> {
+    const { setID } = req.params;
     //get sub category from topics
-    // SELECT `subCategory` FROM `topics` WHERE `setID` = :setID
+    let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    let inserts = ['subCategory', 'topics', 'setID', setID];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formatted sql", sql);
+
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
 
 });
 
-// server.delete('/api/set_managing', (req, res)=>{
+// app.delete('/api/set_managing', (req, res)=>{
 //     //delete functionality for cards
 
 // });
 
+// add routes to express app
+routes(app);
 
-server.listen(PORT, ()=>{
+//starts Express server on defined port
+app.listen(PORT, ()=>{
     console.log("I'm listening to your ginger soul");
 });
