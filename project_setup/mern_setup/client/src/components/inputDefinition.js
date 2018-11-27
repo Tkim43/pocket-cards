@@ -33,8 +33,6 @@ class inputDefinition extends Component {
                                 <label htmlFor="textarea2">Definition</label>
                                 <div className="right-align">{defintion.length}/150</div>
                             </div>
-                            {/* <label htmlFor="textarea2">Definition</label>
-                            <textarea ref={e => this.text2 = e} className="materialize-textarea" id="textarea2" data-length="120"></textarea> */}
                         </div>
                     </form>
                 </div>
