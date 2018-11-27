@@ -16,6 +16,7 @@ import displayBack from './displayBAck'
 import frontEditMode from './frontEditMode'
 import backEditMode from './backEditMode'
 import logIn from './logIn'
+import Signin from './sign-in'
 
 const App = () => (
     <div>
@@ -31,6 +32,7 @@ const App = () => (
         <Route path = "/logIn" component = {logIn}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
         <Route path = "/signup" component = {Signup}/>
+        <Route path = "/signin" component = {Signin}/>
     </div>
 );
 

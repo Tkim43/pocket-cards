@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
+import {Link} from 'react-router-dom';
 
 
-class Signup extends Component {
+class Signin extends Component {
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
@@ -22,7 +23,7 @@ class Signup extends Component {
 
         return (
             <div className = "container">
-                <h1>this is the signup page</h1>
+                <h1>this is the log in page</h1>
                 <form onSubmit = {handleSubmit(this.handleSubmitUsername)}>
                     <div className="row">
                         <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
@@ -31,11 +32,8 @@ class Signup extends Component {
                         <Field size = "s12" name = "password" label = "password" component = {this.renderInput}/>
                     </div>
                     <div className="row">
-                        <Field size = "s12" name = "email" label = "email" component = {this.renderInput}/>
-                    </div>
-                    <div className="row">
                         <div className="col s12 right-align">
-                            <button className = "green lighten-2 btn">Sign up</button>
+                            <Link to = "/" className = "green lighten-2 btn">Log In</Link>
                         </div>
                     </div>
                 </form>
@@ -57,15 +55,12 @@ function validate (formValues) {
     if(!formValues.password){
         error.password = "Please enter a valid password";
     }
-    if(!formValues.email){
-        error.email = "Please enter a valid email address";
-    }
 
     return error;
 }
 
 export default reduxForm ({
-    form: 'sign-up',
+    form: 'sign-in',
     validate: validate
-})(Signup);
+})(Signin);
  
