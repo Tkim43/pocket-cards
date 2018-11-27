@@ -1,84 +1,56 @@
-// import React from 'react'
-// // import { Link } from 'react-router-dom';
-// import Modal from 'react-modal';
+import React, { Component } from 'react';
+import './modal.css';
+import {Link} from 'react-router-dom';
 
-// const customStyles = {
-//     content : {
-//       top                   : '50%',
-//       left                  : '50%',
-//       right                 : 'auto',
-//       bottom                : 'auto',
-//       marginRight           : '-50%',
-//       transform             : 'translate(-50%, -50%)'
-//     }
-//   };
-   
-//   // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-//   Modal.setAppElement('#root')
+class ButtonModal extends Component {
+    state = {
+        isOpen: false
+    };
 
-   
-//   class modal extends React.Component {
-//     constructor() {
-//       super();
-   
-//       this.state = {
-//         modalIsOpen: false
-//       };
-   
-//       this.openModal = this.openModal.bind(this);
-//       this.afterOpenModal = this.afterOpenModal.bind(this);
-//       this.closeModal = this.closeModal.bind(this);
-//     }
-   
-//     openModal() {
-//       this.setState({modalIsOpen: true});
-//     }
-   
-//     afterOpenModal() {
-//       // references are now sync'd and can be accessed.
-//       this.subtitle1.style.color = '#f00';
-//       this.subtitle2.style.color = '#f00';
-//     }
-   
-//     closeModal() {
-//       this.setState({modalIsOpen: false});
-//     }
-   
-//     render() {
+    open = () => this.setState({isOpen: true});
 
-//         const { term } = this.state;
+    close = () => this.setState({isOpen: false});
 
-//       return (
-//         <div>
-//           <button onClick={this.openModal}>Create Category</button>
-//           <Modal
-//             isOpen={this.state.modalIsOpen}
-//             onAfterOpen={this.afterOpenModal}
-//             onRequestClose={this.closeModal}
-//             style={customStyles}
-//             contentLabel="Example Modal"
-//           >
-   
-//             <button onClick={this.closeModal}>x</button>
-//             <form className="col s12">
-//             <div className="row">
-//             <div className="input-field col s12">
-//             <h5 ref={subtitle1 => this.subtitle1 = subtitle1}>Enter Category</h5>
-//             <textarea value={term} onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
-//             </div>
-//             </div>
+    render(){
 
-//             <div className="row"> 
-//                 <div className="input-field col s12">
-//                 <h5 ref={subtitle2 => this.subtitle2 = subtitle2}>Enter Title</h5>
-//                         <textarea value={term} onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
-//                 </div>  
-//             </div>
-//             </form>
-//           </Modal>
-//         </div>
-//       );
-//     }
-//   }
+        if(this.state.isOpen){
+            return (
+                <div className="basic-modal" onClick={this.close}>
+                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
+                        <div onClick={this.close} className="basic-modal-close">X</div>
+                            <div>
+                                <form className="col s12">
+                                        <div className="row">
+                                            <div className="input-field col s12">
+                                                <textarea onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
+                                                <label htmlFor="textarea1">Create Category</label>
+                                            </div>
+                                        </div>
+                                        <div className="row"> 
+                                            <div className="input-field col s12">
+                                                <textarea onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
+                                                <label htmlFor="textarea1">Create Title</label>
+                                            </div>  
+                                        </div>
+                                        <div className = "buttonDiv">
+                                            <Link to = "/createflashcards" className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                                Create Card
+                                            </Link>
+                                        </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            )
+        }
 
-// export default modal;
+        return (
+          
+            <div onClick={this.open} className = "card-panel orange lighten-2 white-text center" >Create Category</div>
+            
+    
+        );
+    }
+}
+
+export default ButtonModal;
