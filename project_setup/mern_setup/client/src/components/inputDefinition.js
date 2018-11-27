@@ -39,7 +39,7 @@ class inputDefinition extends Component {
                     </Link>
                 </div>
                 <div className = "buttonDiv">
-                    <Link to="/editSets" className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
+                    <Link to="/flashcardGeneration" className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
                         <i className="material-icons right">create</i>
                     </Link>
                 </div>
