@@ -42,7 +42,7 @@ class Sets extends Component{
         console.log(this.state)
         const userSets = this.state.data.map((item,index) =>{
             return(
-                <div key= {item.index} className="row set">
+                <div key= {index} className="row set">
                     <Link to="/displayFront" className ="btn blue darken-2">{item.subCategory}</Link>
                 </div>
             )
@@ -52,7 +52,7 @@ class Sets extends Component{
                 <div className="border">Physics</div>
                 <div>{userSets}</div>
                 <div className="row">
-                    <Link to ="/manageSets" className="btn blue darken-2">Edit sets</Link>
+                    <Link to ="/flashcardGeneration" className="btn blue darken-2">Edit sets</Link>
                     <Link to ="/" className="btn grey darken-2">Home</Link>
                 </div>
             </div>
