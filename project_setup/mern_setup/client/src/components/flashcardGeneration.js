@@ -32,12 +32,12 @@ class FlashcardGeneration extends Component {
                 <div key = {item.id} className="row">
                     <div className="col s5 card-container">
                         <div className="card-panel teal lighten-1 white-text card" >
-                            <p>{item.term}</p>
+                            <div>{item.term}</div>
                         </div> 
                     </div>
                     <div className="col s5 card-container">
                         <div className="card-panel teal lighten-1 white-text card">
-                            <p>{item.definition}</p>
+                            <div>{item.definition}</div>
                         </div>
                     </div>
                     <div className="col s2 card-container">
