@@ -9,7 +9,7 @@ class Signup extends Component {
             <div className= {`input-field col ${props.size}`}>
                 <input {...props.input} type="text"/>
                 <label htmlFor="">{props.label}</label>
-                <p className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</p>
+                <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
             </div>
         );
     }
