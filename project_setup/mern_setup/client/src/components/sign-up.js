@@ -4,12 +4,11 @@ import { Field, reduxForm } from 'redux-form';
 
 class Signup extends Component {
     renderInput (props) {
-        // console.log('Render Input: ', props);
         return (
             <div className= {`input-field col ${props.size}`}>
                 <input {...props.input} type="text"/>
                 <label htmlFor="">{props.label}</label>
-                <p className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</p>
+                <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
             </div>
         );
     }
@@ -19,8 +18,6 @@ class Signup extends Component {
     }
 
     render () {
-        // console.log("item props: ", this.props);
-
         const { handleSubmit } = this.props;
 
         return (
