@@ -170,19 +170,50 @@ app.get('/api/:topicID/card', (req, res)=>{
 });
 
 
-// app.patch('/api/:topicID/update_card_front', (req, res)=>{
-    // const { topicID } = req.params;
-//     //update front of card
-//     // UPDATE `cards` SET `frontText`=frontText WHERE `topicID`= topicID
+//update front of car
+app.patch('/api/:topicID/update_card_front', (req, res)=>{
+    const { topicID } = req.params;
+    
+    let query = 'UPDATE ?? SET ??=? WHERE ??= ?';
+    let inserts = ['cards', 'frontText', frontText, 'topicID', topicID];
 
-// });
+    let sql = mysql.format(query, inserts);
 
-// app.patch('api/:topicID/update_card_back', (req, res)=>{
-    // const { topicID } = req.params;
-//     //update back of card
-//     // UPDATE `cards` SET `backText`=backText WHERE `topicID`= topicID
+    console.log("This is the formated SQL", sql);
 
-// });
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
+
+});
+
+//update back of card
+app.patch('api/:topicID/update_card_back', (req, res)=>{
+    const { topicID } = req.params;
+    let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?'
+    let inserts = ['cards', 'backText', backText, 'topicID', topicID]
+
+    console.log("This is the formated SQL", sql);
+
+    //error handling
+    db.query(sql, (err, results, fields)=>{
+        if(err) return next(err);
+
+        const output = {
+            success: true,
+            data: results
+        };
+        res.json(output);
+    });
+
+});
 
 //get category from sets
 app.get('/api/:userID/set_managing', (req, res, next)=> {
