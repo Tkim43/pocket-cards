@@ -42,11 +42,11 @@ class displayFront extends Component{
         const {front_description} = this.state
         console.log(front_description)
         return(
-            <div>
+            <div className="container">
                 <div className="row">
                     <h1>Edit Mode Front of Card</h1>
                 </div>
-                <div className="card border center">{front_description}</div>
+                <div className="card center">{front_description}</div>
                 <div className="row">
                     <Link to ="/backEditMode" className="btn green darken-2">Flip to Back</Link>
                     <Link to ="/sets" className="btn green darken-2">Card Set Complete</Link>
