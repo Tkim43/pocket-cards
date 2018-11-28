@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import dummyData from '../../../server/editFront';
+import '../assets/css/card.css'
 
 class displayFront extends Component{
     constructor(props){
@@ -42,11 +43,11 @@ class displayFront extends Component{
         const {front_description} = this.state
         console.log(front_description)
         return(
-            <div>
+            <div className="container">
                 <div className="row">
                     <h1>Front of Card</h1>
                 </div>
-                <div className="card border center">{front_description}</div>
+                <div className="card center">{front_description}</div>
                 <div className="row">
                     <Link to ="/displayBack" className="btn green darken-2">Flip to Back</Link>
                     <Link to ="/sets" className="btn green darken-2">Card Set Complete</Link>

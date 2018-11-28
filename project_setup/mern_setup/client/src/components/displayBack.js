@@ -41,11 +41,11 @@ class displayBack extends Component{
         console.log(this.state)
         const {back_description} = this.state
         return(
-            <div>
+            <div className="container center">
                 <div className="row">
                     <h1>Back of Card</h1>
                 </div>
-                <div className="card border center">{back_description}</div>
+                <div className="card center">{back_description}</div>
                 <div className="row">
                     <Link to ="/displayFront" className="btn green darken-2">Flip to Front</Link>
                     <Link to ="/sets" className="btn green darken-2">Card Set Complete</Link>
