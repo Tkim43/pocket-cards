@@ -21,7 +21,7 @@ class Navbar extends Component {
                         <Link to = "#" data-target = "slide-out" className = "sidenav-trigger"> <i className="material-icons">dehaze</i> </Link>
                         <ul className = "left hide-on-med-and-down">
                             <li className = "nav-item">
-                                <Link to = "/" className = "nav-link"> Profile </Link>
+                                <Link to = "/profile" className = "nav-link"> Profile </Link>
                             </li>
                             <li className = "nav-item">
                                 <Link to = "/sets" className = "nav-link"> My Sets </Link>
@@ -36,7 +36,7 @@ class Navbar extends Component {
                 <ul id="slide-out" className="sidenav">
                     <li />
                     <li>
-                        <Link to = "/"> Profile </Link>
+                        <Link to = "/profile"> Profile </Link>
                     </li>
                     <li>
                         <Link to = "/sets"> My Sets </Link>

@@ -15,21 +15,21 @@ import displayFront from './displayFront'
 import displayBack from './displayBAck'
 import frontEditMode from './frontEditMode'
 import backEditMode from './backEditMode'
-import logIn from './logIn'
+import Login from './login'
 import Signin from './sign-in'
 
 const App = () => (
     <div>
         <Navbar/>
-        <Route exact path = "/" component = {Profile}/>
+        <Route exact path = "/" component = {Login}/>
         <Route path = "/sets" component = {Sets}/>
+        <Route path = "/profile" component = {Profile}/>
         <Route path = "/flashcards" component = {Flashcards}/>
         <Route path = "/displayFront" component= {displayFront}/>
         <Route path = "/displayBack" component= {displayBack}/>
         <Route path = "/frontEditMode" component= {frontEditMode}/>
         <Route path = "/backEditMode" component= {backEditMode}/>
         <Route path = "/createflashcards" component = {InputDefinition}/>
-        <Route path = "/logIn" component = {logIn}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
         <Route path = "/signup" component = {Signup}/>
         <Route path = "/signin" component = {Signin}/>

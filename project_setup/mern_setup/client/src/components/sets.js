@@ -53,7 +53,7 @@ class Sets extends Component{
                 <div>{userSets}</div>
                 <div className="row">
                     <Link to ="/flashcardGeneration" className="btn blue darken-2">Edit sets</Link>
-                    <Link to ="/" className="btn grey darken-2">Home</Link>
+                    <Link to ="/profile" className="btn grey darken-2">Home</Link>
                 </div>
             </div>
         )
