@@ -37,3 +37,12 @@
 .card-container > * {
     display: block;
 }
+
+.sort-button {
+    margin: 0 10px;
+}
+
+.profile-pic{
+    height: 100%;
+    width: 100%;
+}

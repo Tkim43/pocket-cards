@@ -18,6 +18,10 @@ class Profile extends Component {
     componentDidMount () {
         this.getListData ();
     }
+
+    changeSort() {
+        
+    }
     
     getListData () {
         //Call server to get data
@@ -28,19 +32,19 @@ class Profile extends Component {
     }
 
     render () {
-
+        console.log(this.state.list.data);
         const profileInformation = this.state.list.map( (item,index) => {
             return (
                 <div key = {item.id} className="row">
                     <div className="col s2 profile-heading">
-                        <img src= {picture} alt="" className="circle responsive-img"></img>
+                        <img src= {picture} alt="" className="circle responsive-img profile-pic"></img>
                     </div>
                     <div className="col s10 profile-heading">
                         <div className="black-text">{item.username}</div>
-                        <div className="button-profile-heading">
+                        {/* <div className="button-profile-heading">
                             <button className = "btn-small light-blue lighten-3">Latest</button>
                             <button className = "btn-small light-blue lighten-3">Alphabetical</button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             );
@@ -52,8 +56,10 @@ class Profile extends Component {
             <div className = "container profile-container">
                 {profileInformation}
                 <div className = "sort-row row">
-                    <div className="sort">Sort: </div>
-                    <button className = "btn light-blue lighten-3">Alphabetical</button>
+                    <div className="sort col s12">Sort: 
+                        <button className = "btn-small light-blue lighten-3 sort-button">Latest</button>
+                        <button className = "btn-small light-blue lighten-3 sort-button">Alphabetical</button>
+                    </div>
                 </div>
                 <div className="row">
                 <div className="col s12 card-container">
