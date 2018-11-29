@@ -257,9 +257,9 @@ app.get('/api/set_managing/:userID', (req, res, next)=> {
     });
 }, errorHandling);
 
+//get sub category from topics (tiff)
 app.get('/api/set_managing/:setID', (req, res)=> {
     const { setID } = req.params;
-    //get sub category from topics (tiff)
     let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
     let inserts = ['subCategory', 'topics', 'setID', setID];
 
