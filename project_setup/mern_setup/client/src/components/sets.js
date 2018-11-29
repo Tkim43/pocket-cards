@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import dummyData from '../../../server/managingCards';
+import { connect } from 'react-redux';
 
 class Sets extends Component{
     constructor(props){
@@ -13,6 +14,9 @@ class Sets extends Component{
     }
     componentDidMount(){
         this.getUserData();
+        if(!this.props.auth){
+            this.props.history.push("/signin");
+        }
     }
 
     componentDidUpdate() {
@@ -60,4 +64,10 @@ class Sets extends Component{
     }
 }
 
-export default Sets;
+function mapStateToProps(state){
+    return {
+        auth: state.user.auth
+    }
+}
+
+export default connect(mapStateToProps)(Sets);

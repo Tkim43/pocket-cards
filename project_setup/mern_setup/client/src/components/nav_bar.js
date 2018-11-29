@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import 'materialize-css/dist/css/materialize.min.css';
 import  M from 'materialize-css/dist/js/materialize';
+import {userSignIn, userSignOut} from "../actions/index";
 
 class Navbar extends Component {
 
@@ -13,10 +15,26 @@ class Navbar extends Component {
         });
     }
 
+    renderLinks () {
+        const { auth, signIn, signOut } = this.props;
+
+        if(auth){
+            return <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
+        }
+
+        return <button onClick = {signIn} className = "blue lighten-2 btn">Sign In</button>
+    }
+
     render() {
+        const navStyle = {
+            padding: '0 8px'
+        }
+
+        console.log('User Auth:', this.props.auth);
+
         return (
             <div>
-                <nav>
+                <nav style = {navStyle} className = "lime darken-2 ">
                     <div className="nav-wrapper">
                         <Link to = "#" data-target = "slide-out" className = "sidenav-trigger"> <i className="material-icons">dehaze</i> </Link>
                         <ul className = "left hide-on-med-and-down">
@@ -28,6 +46,9 @@ class Navbar extends Component {
                             </li>
                             <li className = "nav-item">
                                 <Link to = "/flashcards" className = "nav-link"> My Flashcards </Link>
+                            </li>
+                            <li className = "nav-item">
+                                {this.renderLinks()}
                             </li>
                         </ul>
                     </div>
@@ -45,6 +66,9 @@ class Navbar extends Component {
                         <Link to = "/flashcards"> My Flashcards </Link>
                     </li>
                     <li>
+                        {this.renderLinks()}
+                    </li>
+                    <li>
                         <div className="divider" />
                     </li>
                     <li>
@@ -56,4 +80,13 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+function mapStateToProps (state){
+    return {
+        auth: state.user.auth
+    }
+}
+
+export default connect(mapStateToProps, {
+    signIn: userSignIn,
+    signOut: userSignOut
+})(Navbar);
