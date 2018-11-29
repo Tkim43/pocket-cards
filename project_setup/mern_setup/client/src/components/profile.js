@@ -4,6 +4,7 @@ import "../assets/css/profile.css";
 import picture from "../assets/images/profile_pic.jpg";
 import {Link} from 'react-router-dom';
 import BasicModal from './modal';
+import auth from '../hoc/auth';
 
 class Profile extends Component {
 
@@ -89,4 +90,4 @@ class Profile extends Component {
 }
 
 
-export default Profile;
+export default auth(Profile);
