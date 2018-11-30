@@ -38,8 +38,8 @@ function errorHandling(req, res){
 
 //Endpoints 
 
-//get avatar & username from users
-app.get('/api/userhome', (req, res, next) => {
+//get avatar & username from users (DONE)
+app.get('/api/userhome/:userID', (req, res, next) => {
     let { userID } = req.params;
     let query = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     let inserts = ['displayName', 'avatar', 'users', 'ID', 2];
@@ -61,8 +61,9 @@ app.get('/api/userhome', (req, res, next) => {
 
         output.users = results;
 
-        let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
-        let inserts = ['category', 'sets', 'userID', 1];
+        //get all categories with userID (DONE)
+        let query = 'SELECT * FROM ?? WHERE ?? = ?';
+        let inserts = ['sets', 'userID', userID];
 
         let sql = mysql.format(query, inserts);
 
@@ -83,11 +84,66 @@ app.get('/api/userhome', (req, res, next) => {
 }, errorHandling);
 
 
-//post category (vienna)
-app.post('/api/create_category', (req, res, next)=>{
-    const { userID, category } = req.body;
-    let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
-    let inserts = ['sets', 'userID', 'category', userID, category];
+// get category and all subcategory data of sets joined to topics based on userID (done), but params not working (tiff and viena)
+app.get('/api/set_managing/:userID', (req, res, next)=> {
+    const { userID } = req.params;
+    let query = 'SELECT * FROM `topics` INNER JOIN `sets` ON sets.ID = topics.setID WHERE `userID` = userID'
+    let inserts = ['topics', 'sets', Number(userID)];
+    // let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    // let inserts = ['category', 'sets', 'userID', userID];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formatted sql", sql);
+
+    const output = {
+        success: true
+    };
+
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
+
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
+
+
+// //get sub category from topics (tiff)
+// app.get('/api/set_managing/:setID', (req, res)=> {
+//     const { setID } = req.params;
+//     let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+//     let inserts = ['subCategory', 'topics', 'setID', setID];
+
+//     let sql = mysql.format(query, inserts);
+
+//     console.log("This is the formatted sql", sql);
+
+//     const output = {
+//         success: true
+//     };
+
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
+
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
+//get card front and back (tiff)
+app.get('/api/card/:topicID', (req, res, next)=>{
+    const { topicID } = req.params;
+    let query = 'SELECT * FROM ?? WHERE ??= ?';
+    let inserts = ['cards', 'topicID', topicID];
 
     let sql = mysql.format(query, inserts);
 
@@ -108,6 +164,7 @@ app.post('/api/create_category', (req, res, next)=>{
         res.send(output);
     });
 }, errorHandling);
+
 
 //post sub category (vienna)
 app.post('/api/create_subcategory',(req, res, next)=>{
@@ -135,6 +192,31 @@ app.post('/api/create_subcategory',(req, res, next)=>{
     });
 }, errorHandling);
 
+//post category (vienna)
+app.post('/api/create_category', (req, res, next)=>{
+    const { userID, category } = req.body;
+    let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
+    let inserts = ['sets', 'userID', 'category', userID, category];
+
+    let sql = mysql.format(query, inserts);
+
+    console.log("This is the formated SQL", sql);
+
+    const output = {
+        success: true
+    };
+
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
+
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 // //post to front cards and back (b/v)
 // app.post('/api/:topicID/create_card', (req, res)=>{
@@ -158,33 +240,6 @@ app.post('/api/create_subcategory',(req, res, next)=>{
 
 
 // });
-
-app.get('/api/card/:topicID', (req, res, next)=>{
-    const { topicID } = req.params;
-    //get card front and back (tiff)
-    let query = 'SELECT * FROM ?? WHERE ??= ?';
-    let inserts = ['cards', 'topicID', topicID];
-
-    let sql = mysql.format(query, inserts);
-
-    console.log("This is the formated SQL", sql);
-
-    const output = {
-        success: true
-    };
-
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
-        return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
-}, errorHandling);
-
 
 // //update front of card (tiff)
 // app.patch('/api/:topicID/update_card_front', (req, res)=>{
@@ -231,58 +286,6 @@ app.get('/api/card/:topicID', (req, res, next)=>{
 
 // });
 
-//get category from sets (tiff = works)
-app.get('/api/set_managing/:userID', (req, res, next)=> {
-    const { userID } = req.params;
-    let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    let inserts = ['category', 'sets', 'userID', userID];
-
-    let sql = mysql.format(query, inserts);
-
-    console.log("This is the formatted sql", sql);
-
-    const output = {
-        success: true
-    };
-
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
-        return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
-}, errorHandling);
-
-//get sub category from topics (tiff)
-app.get('/api/set_managing/:setID', (req, res)=> {
-    const { setID } = req.params;
-    let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    let inserts = ['subCategory', 'topics', 'setID', setID];
-
-    let sql = mysql.format(query, inserts);
-
-    console.log("This is the formatted sql", sql);
-
-    const output = {
-        success: true
-    };
-
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
-        return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
-}, errorHandling);
-
 // app.delete('/api/set_managing', (req, res)=>{
 //     //delete functionality for cards
 
@@ -293,5 +296,5 @@ app.get('/api/set_managing/:setID', (req, res)=> {
 
 //starts Express server on defined port
 app.listen(PORT, ()=>{
-    console.log("I'm listening to your ginger soul");
+    console.log("I'm listening to Tiffany's Demands ... give her all the endpoints she wants");
 });
