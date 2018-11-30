@@ -10,8 +10,8 @@ const db = mysql.createConnection({
         'host': 'localhost',
         'user': 'root',
         'password': 'root',
-        'database': 'pocketcardstest',
-        'port': 8889,
+        'database': 'pocketcards',
+        'port': 3306,
         insecureAuth: true
     });
 
