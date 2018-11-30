@@ -1,0 +1,8 @@
+.loading-container{
+    display: flex;
+    height: 50vh;
+
+}
+.preloader-wrapper{
+    margin:auto;
+}
