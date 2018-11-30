@@ -11,7 +11,7 @@ const db = mysql.createConnection({
         'user': 'root',
         'password': 'root',
         'database': 'pocketcards',
-        'port': 3306,
+        'port': 8889,
         insecureAuth: true
     });
 
