@@ -2,13 +2,15 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../assets/css/sets.css'
 import dummyData from '../../../server/managingCards';
 
 class Sets extends Component{
     constructor(props){
         super(props)
         this.state ={
-            data:[]
+            data:[],
+            loading: true
         }
     }
     componentDidMount(){
@@ -34,12 +36,34 @@ class Sets extends Component{
     //     }
     // }
     getUserData(){
-        this.setState({
-            data: dummyData,
-        })
+        setTimeout(() => {
+            this.setState({
+                data: dummyData,
+                loading: false
+            })
+        }, 750);
     }
     render(){
         console.log(this.state)
+        if(this.state.loading){
+            return (
+                <div className="loading-container">
+                    <div className="preloader-wrapper big active">
+                        <div className="spinner-layer spinner-blue-only">
+                            <div className="circle-clipper left">
+                            <div class="circle"></div>
+                            </div>
+                            <div className="gap-patch">
+                                <div className="circle"></div>
+                            </div>
+                            <div className="circle-clipper right">
+                                <div className="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
         const userSets = this.state.data.map((item,index) =>{
             return(
                 <div key= {index} className="row set">
