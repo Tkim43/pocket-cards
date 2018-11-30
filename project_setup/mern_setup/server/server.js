@@ -10,8 +10,8 @@ const db = mysql.createConnection({
         'host': 'localhost',
         'user': 'root',
         'password': 'root',
-        'database': 'pocketcards',
-        'port': 3306,
+        'database': 'pocketcardstest',
+        'port': 8889,
         insecureAuth: true
     });
 
@@ -42,7 +42,7 @@ function errorHandling(req, res){
 app.get('/api/userhome', (req, res, next) => {
     let { userID } = req.params;
     let query = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-    let inserts = ['displayName', 'avatar', 'users', 'ID', 1];
+    let inserts = ['displayName', 'avatar', 'users', 'ID', 2];
 
     let sql = mysql.format(query, inserts);
 
