@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/css/sets.css'
 import dummyData from '../../../server/managingCards';
+import auth from '../hoc/auth';
 
 class Sets extends Component{
     constructor(props){
@@ -84,4 +85,5 @@ class Sets extends Component{
     }
 }
 
-export default Sets;
+
+export default auth(Sets);

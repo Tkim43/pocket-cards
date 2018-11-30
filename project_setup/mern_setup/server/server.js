@@ -42,7 +42,7 @@ function errorHandling(req, res){
 app.get('/api/userhome/:userID', (req, res, next) => {
     let { userID } = req.params;
     let query = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-    let inserts = ['displayName', 'avatar', 'users', 'ID', userID];
+    let inserts = ['displayName', 'avatar', 'users', 'ID', 2];
 
     let sql = mysql.format(query, inserts);
 
