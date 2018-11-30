@@ -1,7 +1,7 @@
 import axios from 'axios';
 import types from './types';
 
-const BASE_URL = '/api/userhome';
+const BASE_URL = '/api';
 
 export function userSignIn(){
     console.log("user sign in called");
@@ -23,8 +23,7 @@ export function userSignUp(){
 }
 
 export function getProfileData () {
-
-    const resp = axios.get(BASE_URL);
+    const resp = axios.get(BASE_URL + "/userhome");
     console.log("this is the response from axios ", resp);
     return {
         type: types.GET_PROFILE_DATA,
