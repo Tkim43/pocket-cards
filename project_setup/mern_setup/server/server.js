@@ -293,5 +293,5 @@ app.get('/api/set_managing/:setID', (req, res)=> {
 
 //starts Express server on defined port
 app.listen(PORT, ()=>{
-    console.log("I'm listening to your ginger soul");
+    console.log("I'm listening to Tiffany's Demands ... give her all the endpoints she wants");
 });
