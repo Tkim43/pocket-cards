@@ -10,8 +10,8 @@ const db = mysql.createConnection({
         'host': 'localhost',
         'user': 'root',
         'password': 'root',
-        'database': 'pocketcardstest',
-        'port': 8889,
+        'database': 'pocketcards',
+        'port': 3306,
         insecureAuth: true
     });
 
@@ -19,7 +19,7 @@ const db = mysql.createConnection({
 db.connect((err) => {
     if (err) throw err;
 
-    console.log('Database Connected');
+    console.log("Database Connected");
 
 });
 
@@ -89,8 +89,6 @@ app.get('/api/set_managing/:userID', (req, res, next)=> {
     const { userID } = req.params;
     let query = 'SELECT * FROM `topics` INNER JOIN `sets` ON sets.ID = topics.setID WHERE `userID` = userID'
     let inserts = ['topics', 'sets', Number(userID)];
-    // let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    // let inserts = ['category', 'sets', 'userID', userID];
 
     let sql = mysql.format(query, inserts);
 
@@ -113,37 +111,11 @@ app.get('/api/set_managing/:userID', (req, res, next)=> {
 }, errorHandling);
 
 
-// //get sub category from topics (tiff)
-// app.get('/api/set_managing/:setID', (req, res)=> {
-//     const { setID } = req.params;
-//     let query = 'SELECT ?? FROM ?? WHERE ?? = ?';
-//     let inserts = ['subCategory', 'topics', 'setID', setID];
-
-//     let sql = mysql.format(query, inserts);
-
-//     console.log("This is the formatted sql", sql);
-
-//     const output = {
-//         success: true
-//     };
-
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
-
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
-
-//get card front and back (tiff)
-app.get('/api/card/:topicID', (req, res, next)=>{
-    const { topicID } = req.params;
-    let query = 'SELECT * FROM ?? WHERE ??= ?';
-    let inserts = ['cards', 'topicID', topicID];
+//get card front and back joined with topicID (working), but params not working (tiff)
+app.get('/api/cards/:setID', (req, res, next)=>{
+    const { setID } = req.params;
+    let query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE `setID` = setID'
+    let inserts = ['cards', 'topics', 'setID', Number(setID)];
 
     let sql = mysql.format(query, inserts);
 
@@ -192,31 +164,33 @@ app.post('/api/create_subcategory',(req, res, next)=>{
     });
 }, errorHandling);
 
+
 //post category (vienna)
-app.post('/api/create_category', (req, res, next)=>{
-    const { userID, category } = req.body;
-    let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
-    let inserts = ['sets', 'userID', 'category', userID, category];
+// app.post('/api/create_category', (req, res, next)=>{
+//     const { userID, category } = req.body;
+//     let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
+//     let inserts = ['sets', 'userID', 'category', userID, category];
 
-    let sql = mysql.format(query, inserts);
+//     let sql = mysql.format(query, inserts);
 
-    console.log("This is the formated SQL", sql);
+//     console.log("This is the formated SQL", sql);
 
-    const output = {
-        success: true
-    };
+//     const output = {
+//         success: true
+//     };
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
-        return next();
-        };
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
 
-        output.data = results;
-        res.send(output);
-    });
-}, errorHandling);
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
 
 // //post to front cards and back (b/v)
 // app.post('/api/:topicID/create_card', (req, res)=>{
@@ -296,5 +270,5 @@ app.post('/api/create_category', (req, res, next)=>{
 
 //starts Express server on defined port
 app.listen(PORT, ()=>{
-    console.log("I'm listening to Tiffany's Demands ... give her all the endpoints she wants");
+    console.log("Tiff likes messing with gingers because she secretly loves them!");
 });
