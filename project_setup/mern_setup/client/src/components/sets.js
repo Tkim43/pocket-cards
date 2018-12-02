@@ -52,7 +52,7 @@ class Sets extends Component{
                     <div className="preloader-wrapper big active">
                         <div className="spinner-layer spinner-blue-only">
                             <div className="circle-clipper left">
-                            <div class="circle"></div>
+                            <div className="circle"></div>
                             </div>
                             <div className="gap-patch">
                                 <div className="circle"></div>

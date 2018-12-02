@@ -6,6 +6,11 @@ import { getProfileData } from '../actions';
 import BasicModal from './modal';
 
 class Profile extends Component {
+
+    handleAlphabeticalClick () {
+
+        console.log('button was clicked');
+    }
     
     componentDidMount () {
         console.log("Component Mounted: ", this.props.getProfileData());
@@ -17,9 +22,10 @@ class Profile extends Component {
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
         }
-        const profileCategories =  this.props.sets.map ( (item, index) => {
+
+        const profileCategories =  this.props.sets.map ( (item, ID) => {
             return (
-                <div className="row" key = {index}>
+                <div className="row" key = {ID}>
                     <div className="col s12 card-container">
                         <Link to = "/sets" className = "card-panel green lighten-2 white-text center">{item.category}</Link>
                     </div>
@@ -47,7 +53,7 @@ class Profile extends Component {
                 <div className = "sort-row row">
                     <div className="sort col s12">Sort: 
                         <button className = "btn-small light-blue lighten-3 sort-button">Latest</button>
-                        <button className = "btn-small light-blue lighten-3 sort-button">Alphabetical</button>
+                        <button onClick = {this.handleAlphabeticalClick} className = "btn-small light-blue lighten-3 sort-button">Alphabetical</button>
                     </div>
                 </div>
                 <div className="row">
