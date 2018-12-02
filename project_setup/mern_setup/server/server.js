@@ -84,10 +84,10 @@ app.get('/api/userhome/:userID', (req, res, next) => {
 }, errorHandling);
 
 
-// get category and all subcategory data of sets joined to topics based on userID (done), but params not working (tiff and viena)
+// get category and all subcategory data of sets joined to topics based on userID (DONE)
 app.get('/api/set_managing/:userID', (req, res, next)=> {
     const { userID } = req.params;
-    let query = 'SELECT * FROM `topics` INNER JOIN `sets` ON sets.ID = topics.setID WHERE `userID` = userID'
+    let query = 'SELECT * FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE `userID` = ?'
     let inserts = ['topics', 'sets', Number(userID)];
 
     let sql = mysql.format(query, inserts);
@@ -111,10 +111,10 @@ app.get('/api/set_managing/:userID', (req, res, next)=> {
 }, errorHandling);
 
 
-//get card front and back joined with topicID (working), but params not working (tiff)
+//get card front and back joined with setID (DONE)
 app.get('/api/cards/:setID', (req, res, next)=>{
     const { setID } = req.params;
-    let query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE `setID` = setID'
+    let query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ?'
     let inserts = ['cards', 'topics', 'setID', Number(setID)];
 
     let sql = mysql.format(query, inserts);
@@ -138,11 +138,11 @@ app.get('/api/cards/:setID', (req, res, next)=>{
 }, errorHandling);
 
 
-//post sub category (vienna)
+//post sub category (vienna, not done)
 app.post('/api/create_subcategory',(req, res, next)=>{
-    const { setID, category } = req.body;
+    const { setID, subCategory } = req.body;
     let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
-    let inserts = ['topics', 'setID', 'subCategory', setID, category];
+    let inserts = ['topics', 'setID', 'subCategory', Number(setID), subCategory];
 
     let sql = mysql.format(query, inserts);
 
