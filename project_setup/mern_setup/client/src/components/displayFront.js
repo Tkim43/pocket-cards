@@ -1,47 +1,20 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import dummyData from '../../../server/editFront';
 import '../assets/css/card.css'
+// whenver you're using redux use connect
+import {connect} from 'react-redux';
+// import your actions
+import {getCardData} from '../actions'; 
+
 
 class displayFront extends Component{
-    constructor(props){
-        super(props)
-        this.state ={
-            data:[],
-        }
-    }
     componentDidMount(){
-        this.getUserData();
-    }
-
-    componentDidUpdate() {
-        // console.log("State after using set state ", this.state);
-    }
-    // example async call
-    // async getUserData(){
-    //     try{
-    //         // const resp = await axios.get(BASE_URL + API_KEY);
-    //         // const resp = await axios.get(dummyData);
-    //         this.setState({
-    //             data: dummyData
-    //         });
-    //     }catch(err){
-    //         this.setState({
-    //             error: 'Error getting userData'
-    //         });
-    //     }
-    // }
-    getUserData (){
-        this.setState({
-            data: dummyData,
-            front_description: dummyData[0].front_description
-        })
+        // make sure to initialize the function ()
+        this.props.getCardData();
     }
     render(){
-        console.log(this.state)
-        const {front_description} = this.state
-        console.log(front_description)
+        console.log("displayfront", this.props)
+        const front_description = this.props.front_description
         return(
             <div className="container">
                 <div className="row">
@@ -59,4 +32,15 @@ class displayFront extends Component{
     }
 }
 
-export default displayFront;
+// anytime you're pulling anything from redux use mapstate to props
+function mapStateToProps(state){
+    console.log("this is the state", state)
+    return {
+        front_description: state.card.front_description
+    }
+}
+
+// then connect it 
+export default connect(mapStateToProps,{
+    getCardData
+})(displayFront);
