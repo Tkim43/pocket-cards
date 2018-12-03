@@ -2,10 +2,17 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getCardData} from '../actions'; 
+import {sendCardData} from '../actions';
 
 class editFrontMode extends Component{
     state = {
         frontText: ''
+    }
+    async componentDidMount(){
+        await this.props.getCardData();
+        this.setState({
+            frontText: this.props.front_description
+        })
     }
     updateValue = event => {
         // debugger;
@@ -14,11 +21,8 @@ class editFrontMode extends Component{
             frontText: event.currentTarget.value
         })
     }
-    async componentDidMount(){
-        await this.props.getCardData();
-        this.setState({
-            frontText: this.props.front_description
-        })
+    sendUpdate = () =>{
+        this.props.sendCardData();
     }
     render(){
         if(this.state.frontText === '' || this.state.frontText === undefined){
@@ -52,7 +56,7 @@ class editFrontMode extends Component{
                 </div>
                 <div className="row">
                     <Link to ="/backEditMode" className="btn green darken-2">Flip to Back</Link>
-                    <Link to ="/sets" className="btn green darken-2">Card Set Complete</Link>
+                    <Link to ="/sets" className="btn grey darken-2" onClick = {this.sendUpdate()}>Done</Link>
                     <Link to ="/flashcardGeneration" className="btn green darken-2">Edit More Cards</Link>
                 </div>
                 
@@ -70,4 +74,5 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps,{
     getCardData,
+    sendCardData
 })(editFrontMode);

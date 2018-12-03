@@ -54,3 +54,11 @@ export function getCardData(){
 
 }
 
+export function sendCardData(){
+    const resp = axios.patch(`${BASE_URL}/update_cards/1`);
+    console.log("Update Cards Sever resposne", resp)
+    return {
+        type: types.SEND_CARD_DATA,
+        payload: resp
+    }
+}

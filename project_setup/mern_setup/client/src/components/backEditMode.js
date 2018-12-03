@@ -52,7 +52,7 @@ class editBackMode extends Component{
                 </div>
                 <div className="row">
                     <Link to ="/frontEditMode" className="btn green darken-2">Flip to Front</Link>
-                    <Link to ="/sets" className="btn green darken-2">Card Set Complete</Link>
+                    <Link to ="/sets" className="btn grey darken-2">Done</Link>
                     <Link to ="/flashcardGeneration" className="btn green darken-2">Edit More Cards</Link>
                 </div>
             </div>
