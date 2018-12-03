@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import "../assets/css/profile.css";
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProfileData } from '../actions';
-import { sortAlphabetical } from '../actions';
+import { getProfileData, sortAlphabetical, sortByLatest } from '../actions';
 import BasicModal from './modal';
 
 class Profile extends Component {
@@ -12,10 +11,14 @@ class Profile extends Component {
         console.log('button was clicked');
         this.props.sortAlphabetical ();
     }
+
+    handleSortByLatestClick = () => {
+        console.log('SORT button was clicked');
+        this.props.sortByLatest ();
+    }
     
     componentDidMount () {
-        console.log("Component Mounted: ", this.props.getProfileData());
-        this.props.getProfileData ();
+        this.props.sortByLatest ();
     }
 
     render () { 
@@ -53,7 +56,7 @@ class Profile extends Component {
                 </div>
                 <div className = "sort-row row">
                     <div className="sort col s12">Sort: 
-                        <button className = "btn-small light-blue lighten-3 sort-button">Latest</button>
+                        <button onClick = {this.handleSortByLatestClick} className = "btn-small light-blue lighten-3 sort-button">Latest</button>
                         <button onClick = {this.handleAlphabeticalClick} className = "btn-small light-blue lighten-3 sort-button">Alphabetical</button>
                     </div>
                 </div>
@@ -78,6 +81,6 @@ function mapStateToProps(state){
 
 
 export default connect(mapStateToProps, {
-    getProfileData : getProfileData,
-    sortAlphabetical : sortAlphabetical
+    sortAlphabetical : sortAlphabetical,
+    sortByLatest: sortByLatest
 })(Profile);
