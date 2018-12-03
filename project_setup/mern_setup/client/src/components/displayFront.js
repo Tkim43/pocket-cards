@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 // import your actions
 import {getCardData} from '../actions'; 
 
-
 class displayFront extends Component{
     componentDidMount(){
         // make sure to initialize the function ()
