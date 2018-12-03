@@ -139,30 +139,30 @@ app.get('/api/cards/:setID', (req, res, next)=>{
 
 
 //post sub category (vienna, not done)
-app.post('/api/create_subcategory',(req, res, next)=>{
-    const { setID, subCategory } = req.body;
-    let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
-    let inserts = ['topics', 'setID', 'subCategory', Number(setID), subCategory];
+// app.post('/api/create_subcategory',(req, res, next)=>{
+//     const { setID, subCategory } = req.body;
+//     let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
+//     let inserts = ['topics', 'setID', 'subCategory', Number(setID), subCategory];
 
-    let sql = mysql.format(query, inserts);
+//     let sql = mysql.format(query, inserts);
 
-    console.log("This is the formated SQL", sql);
+//     console.log("This is the formated SQL", sql);
 
-    const output = {
-        success: true
-    };
+//     const output = {
+//         success: true
+//     };
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
-        return next();
-        };
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
 
-        output.data = results;
-        res.send(output);
-    });
-}, errorHandling);
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
 
 
 //post category (vienna)
@@ -215,50 +215,32 @@ app.post('/api/create_subcategory',(req, res, next)=>{
 
 // });
 
-// //update front of card (tiff)
-// app.patch('/api/:topicID/update_card_front', (req, res)=>{
-//     const { topicID } = req.params;
+//update front and back of card (DONE)
+app.patch('/api/update_cards/:userID', (req, res, next)=>{
+    const { ID, frontText, backText } = req.body;
     
-//     let query = 'UPDATE ?? SET ??=? WHERE ??= ?';
-//     let inserts = ['cards', 'frontText', frontText, 'topicID', topicID];
+    let query = 'UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?';
+    let inserts = ['cards', 'frontText', frontText, 'backText', backText, 'ID', Number(ID)];
 
-//     let sql = mysql.format(query, inserts);
+    let sql = mysql.format(query, inserts);
 
-//     console.log("This is the formated SQL", sql);
+    console.log("This is the formated SQL", sql);
 
-//     //error handling
-//     db.query(sql, (err, results, fields)=>{
-//         if(err) return next(err);
+    const output = {
+        success: true
+    };
 
-//         const output = {
-//             success: true,
-//             data: results
-//         };
-//         res.json(output);
-//     });
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-// });
-
-// //update back of card (tiff)
-// app.patch('api/:topicID/update_card_back', (req, res)=>{
-//     const { topicID } = req.params;
-//     let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?'
-//     let inserts = ['cards', 'backText', backText, 'topicID', topicID]
-
-//     console.log("This is the formated SQL", sql);
-
-//     //error handling
-//     db.query(sql, (err, results, fields)=>{
-//         if(err) return next(err);
-
-//         const output = {
-//             success: true,
-//             data: results
-//         };
-//         res.json(output);
-//     });
-
-// });
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 // app.delete('/api/set_managing', (req, res)=>{
 //     //delete functionality for cards
