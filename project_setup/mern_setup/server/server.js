@@ -137,83 +137,108 @@ app.get('/api/cards/:setID', (req, res, next)=>{
     });
 }, errorHandling);
 
+// post username and avatar (DONE, but without OATH/Password Fields)
+app.post('/api/sign_up', (req, res, next)=>{
+    const { displayName, avatar } = req.body;
+    let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
+    let inserts = ['users', 'displayName', 'avatar', displayName, avatar];
 
-//post sub category (vienna, not done)
-// app.post('/api/create_subcategory',(req, res, next)=>{
-//     const { setID, subCategory } = req.body;
-//     let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
-//     let inserts = ['topics', 'setID', 'subCategory', Number(setID), subCategory];
+    let sql = mysql.format(query, inserts);
 
-//     let sql = mysql.format(query, inserts);
+    console.log("This is the formated SQL", sql);
 
-//     console.log("This is the formated SQL", sql);
+    const output = {
+        success: true
+    };
 
-//     const output = {
-//         success: true
-//     };
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+// post category (DONE)
+app.post('/api/set_management/create_category', (req, res, next)=>{
+    const { userID, category } = req.body;
+    let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
+    let inserts = ['sets', 'userID', 'category', userID, category];
 
+    let sql = mysql.format(query, inserts);
 
-//post category (vienna)
-// app.post('/api/create_category', (req, res, next)=>{
-//     const { userID, category } = req.body;
-//     let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
-//     let inserts = ['sets', 'userID', 'category', userID, category];
+    console.log("This is the formated SQL", sql);
 
-//     let sql = mysql.format(query, inserts);
+    const output = {
+        success: true
+    };
 
-//     console.log("This is the formated SQL", sql);
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//     const output = {
-//         success: true
-//     };
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+//post sub category (DONE)
+app.post('/api/set_management/create_subcategory',(req, res, next)=>{
+    const { setID, subCategory } = req.body;
+    let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
+    let inserts = ['topics', 'setID', 'subCategory', Number(setID), subCategory];
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+    let sql = mysql.format(query, inserts);
 
+    console.log("This is the formated SQL", sql);
 
-// //post to front cards and back (b/v)
-// app.post('/api/:topicID/create_card', (req, res)=>{
-//     const { topicID } = req.body;
-//     let query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
-//     let inserts = ['cards', 'topicID', 'frontText', 'backText', topicID, frontText, backText];
-//     let sql = mysql.format(query, inserts);
+    const output = {
+        success: true
+    };
 
-//     console.log("This is the formated SQL", sql);
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//     //error handling
-//     db.query(sql, (err, results, fields)=>{
-//         if(err) return next(err);
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
-//         const output = {
-//             success: true,
-//             data: results
-//         };
-//         res.json(output);
-//     });
+//post to front cards and back (b/v)
+app.post('/api/set_management/create_card', (req, res)=>{
+    const { topicID, frontText, backText } = req.body;
+    let query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
+    let inserts = ['cards', 'topicID', 'frontText', 'backText', Number(topicID), frontText, backText];
+    let sql = mysql.format(query, inserts);
 
+    console.log("This is the formated SQL", sql);
 
-// });
+    const output = {
+        success: true
+    };
+
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
+
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 //update front and back of card (DONE)
 app.patch('/api/update_cards/:userID', (req, res, next)=>{
