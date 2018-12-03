@@ -80,8 +80,8 @@ class Profile extends Component {
                 </div>
                 <div className = "sort-row row">
                     <div className="sort col s12">Sort: 
-                        <button onClick = {this.handleSortByLatestClick} className = "btn-small light-blue lighten-3 sort-button">Latest</button>
-                        <button onClick = {this.handleAlphabeticalClick} className = "btn-small light-blue lighten-3 sort-button">Alphabetical</button>
+                        <button onClick = {this.handleSortByLatestClick} className = "btn-small soft-blue sort-button">Latest</button>
+                        <button onClick = {this.handleAlphabeticalClick} className = "btn-small soft-blue sort-button">Alphabetical</button>
                     </div>
                 </div>
                 <div className="row">

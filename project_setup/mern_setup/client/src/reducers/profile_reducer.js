@@ -22,9 +22,8 @@ export default (state = DEFAULT_STATE, action) => {
             });
             return {...state, sets: alphabetical, user: action.payload.data.users[0]};
         case types.SORT_BY_LATEST:
-            const sortByLatest = action.payload.data.sets.slice().sort(function(a, b) {
-                return a.created - b.created;
-            });
+            const sortByLatest = action.payload.data.sets.slice().sort().reverse();
+            console.log("sorted list:",sortByLatest)
             return {...state, sets: sortByLatest, user: action.payload.data.users[0]};     
         default:
             return state;

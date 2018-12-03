@@ -53,10 +53,17 @@
 
 /* Getting the button to change color */
 
-.button.btn-small.light-blue.sort-button:active {
+.button.btn-small.soft-blue.sort-button:active {
     background-color: #6db0cf;
 }
 
-.light-blue {
+.soft-blue {
     background-color: #81d4fa;
+}
+.btn:focus, .btn-large:focus, .btn-small:focus, .btn-floating:focus{
+    background-color: #6db0cf;
+}
+
+.btn:hover, .btn-large:hover, .btn-small:hover{
+    background-color: #6db0cf;
 }
