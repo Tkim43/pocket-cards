@@ -32,3 +32,13 @@ export function getProfileData () {
         payload: resp
     }
 }
+
+export function sortAlphabetical () {
+    // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
+    const resp = axios.get(`${BASE_URL}/userhome/2`);
+    console.log("this is the ALPHABETICAL response from axios ", resp);
+    return {
+        type: types.SORT_ALPHABETICAL,
+        payload: resp
+    }
+}

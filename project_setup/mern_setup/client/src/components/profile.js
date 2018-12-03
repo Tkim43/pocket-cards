@@ -2,14 +2,15 @@ import React, {Component} from 'react';
 import "../assets/css/profile.css";
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProfileData } from '../actions'; 
+import { getProfileData } from '../actions';
+import { sortAlphabetical } from '../actions';
 import BasicModal from './modal';
 
 class Profile extends Component {
 
-    handleAlphabeticalClick () {
-
+    handleAlphabeticalClick = () => {
         console.log('button was clicked');
+        this.props.sortAlphabetical ();
     }
     
     componentDidMount () {
@@ -78,4 +79,5 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps, {
     getProfileData : getProfileData,
+    sortAlphabetical : sortAlphabetical
 })(Profile);
