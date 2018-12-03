@@ -11,7 +11,7 @@ export default (state = DEFAULT_STATE, action) => {
             console.log("card data action", action.payload)
             return {...state, front_description: action.payload.data.data[0].frontText, back_description: action.payload.data.data[0].backText}
         default:
-            console.log("card data action", action)
+            // console.log("card data action", action)
             return state;
     }
 }

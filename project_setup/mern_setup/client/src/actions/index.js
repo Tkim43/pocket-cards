@@ -26,7 +26,6 @@ export function userSignUp(){
 export function sortAlphabetical () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
-    console.log("this is the ALPHABETICAL response from axios ", resp);
     return {
         type: types.SORT_ALPHABETICAL,
         payload: resp
@@ -37,7 +36,6 @@ export function sortAlphabetical () {
 export function sortByLatest () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
-    console.log("this is the ALPHABETICAL response from axios ", resp);
     return {
         type: types.SORT_BY_LATEST,
         payload: resp
@@ -46,7 +44,6 @@ export function sortByLatest () {
 
 export function getCardData(){
     const resp = axios.get(`${BASE_URL}/cards/1`);
-    console.log("Get Data resp", resp);
     return{
         type: types.GET_CARD_DATA,
         payload: resp

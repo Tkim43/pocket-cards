@@ -1,6 +1,21 @@
+/* Inside Profile Container */
+
 .profile-container{
     display: flex;
     flex-direction: column;
+}
+
+.profile-section {
+    max-height: 200px;
+}
+
+.profile-pic{
+    height: 100%;
+    width: 100%;
+}
+
+.avatar-text {
+    font-size: 4vw;
 }
 
 .row > .btn {
@@ -13,44 +28,35 @@
     justify-content: center;
 }
 
-.profile-heading {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
-    flex-direction: column;
-}
-
-.button-profile-heading {
-    flex-direction: row;
-    display: flex;
-}
-
-.button-profile-heading > button{
-    margin-right: 10px;
-}
+/* Inside Sort Row */
 
 .sort-row {
     align-items: center;
     justify-content: flex-start;
 }
 
-.card-container > * {
-    display: block;
-}
-
 .sort-button {
     margin: 0 10px;
 }
 
-.profile-pic{
-    height: 100%;
-    width: 100%;
+/* Inside Card Container */
+
+.card-container > * {
+    display: block;
 }
 
-.profile-section {
-    max-height: 200px;
+/* Inside Category section */
+
+.category-info {
+    flex-direction: column;
 }
 
-.avatar-text {
-    font-size: 4vw;
+/* Getting the button to change color */
+
+.button.btn-small.light-blue.sort-button:active {
+    background-color: #6db0cf;
+}
+
+.light-blue {
+    background-color: #81d4fa;
 }

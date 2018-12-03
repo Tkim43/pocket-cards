@@ -2,19 +2,43 @@ import React, {Component} from 'react';
 import "../assets/css/profile.css";
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProfileData, sortAlphabetical, sortByLatest } from '../actions';
+import { sortAlphabetical, sortByLatest } from '../actions';
 import BasicModal from './modal';
 
 class Profile extends Component {
 
     handleAlphabeticalClick = () => {
-        console.log('button was clicked');
         this.props.sortAlphabetical ();
     }
 
     handleSortByLatestClick = () => {
-        console.log('SORT button was clicked');
         this.props.sortByLatest ();
+    }
+
+    findTimePassed = item => {
+        var timeCreated = new Date (item.created);
+        var date = new Date();
+        var now = date.getTime();
+        var result = now - timeCreated.getTime();
+        if(result >= 86400000){
+            var numOfDays = result / 86400000;
+            return `Updated : ${Math.floor(numOfDays)} days ago`;
+        }
+        else if(result >= 3600000){
+            var numOfHours = result / 3600000;
+            return `Updated ${Math.floor(numOfHours)} hours ago`;
+        }
+        else if(result >= 60000){
+            var numOfMinutes = result / 60000;
+            return `Updated ${Math.floor(numOfMinutes)} minutes ago`;
+        }
+        else if (result >= 1000){
+            var numOfSeconds = result / 1000;
+            return `Updated ${Math.floor(numOfSeconds)} seconds ago`;
+        }
+        else {
+            return "Updated Now";
+        }
     }
     
     componentDidMount () {
@@ -22,14 +46,14 @@ class Profile extends Component {
     }
 
     render () { 
-        console.log("Profile props: ", this.props);
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
         }
 
         const profileCategories =  this.props.sets.map ( (item, ID) => {
             return (
-                <div className="row" key = {ID}>
+                <div className="row category-info" key = {ID}>
+                    <div className = "col s12">{this.findTimePassed(item)}</div>
                     <div className="col s12 card-container">
                         <Link to = "/sets" className = "card-panel green lighten-2 white-text center">{item.category}</Link>
                     </div>
@@ -82,5 +106,5 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps, {
     sortAlphabetical : sortAlphabetical,
-    sortByLatest: sortByLatest
+    sortByLatest: sortByLatest,
 })(Profile);
