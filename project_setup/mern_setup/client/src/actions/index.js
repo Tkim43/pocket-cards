@@ -33,6 +33,7 @@ export function sortAlphabetical () {
     }
 }
 
+
 export function sortByLatest () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
@@ -41,5 +42,15 @@ export function sortByLatest () {
         type: types.SORT_BY_LATEST,
         payload: resp
     }
+}
+
+export function getCardData(){
+    const resp = axios.get(`${BASE_URL}/cards/1`);
+    console.log("Get Data resp", resp);
+    return{
+        type: types.GET_CARD_DATA,
+        payload: resp
+    }
+
 }
 
