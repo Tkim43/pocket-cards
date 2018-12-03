@@ -7,9 +7,9 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, action) => {
     switch (action.type){
-        case types.type.GET_CARD_DATA:
+        case types.GET_CARD_DATA:
             console.log("card data action", action)
-            return {...state}
+            return {}
         default:
             return state;
     }

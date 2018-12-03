@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import '../assets/css/card.css'
 // whenver you're using redux use connect
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 // import your actions
-import { getCardData } from '../actions'; 
+import {getCardData} from '../actions'; 
 
 
 class displayFront extends Component{
@@ -34,6 +34,7 @@ class displayFront extends Component{
 
 // anytime you're pulling anything from redux use mapstate to props
 function mapStateToProps(state){
+    console.log("this is the state", state)
     return {
         back_description: state,
         front_description: state

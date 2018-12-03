@@ -34,8 +34,8 @@ export function getProfileData () {
 }
 
 export function getCardData(){
-    const resp = axios.get(`${BASE_URL}/cards/:setID`)
-    console.log("Get Data resp", resp)
+    const resp = axios.get(`${BASE_URL}/cards/1`);
+    console.log("Get Data resp", resp);
     return{
         type: types.GET_CARD_DATA,
         payload: resp
