@@ -1,45 +1,15 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import dummyData from '../../../server/editBack';
+import {connect} from 'react-redux';
+import {getCardData} from '../actions'; 
 
 class displayBack extends Component{
-    constructor(props){
-        super(props)
-        this.state ={
-            data:[],
-        }
-    }
     componentDidMount(){
-        this.getUserData();
-    }
-
-    componentDidUpdate() {
-        // console.log("State after using set state ", this.state);
-    }
-    // example async call
-    // async getUserData(){
-    //     try{
-    //         // const resp = await axios.get(BASE_URL + API_KEY);
-    //         // const resp = await axios.get(dummyData);
-    //         this.setState({
-    //             data: dummyData
-    //         });
-    //     }catch(err){
-    //         this.setState({
-    //             error: 'Error getting userData'
-    //         });
-    //     }
-    // }
-    getUserData (){
-        this.setState({
-            data: dummyData,
-            back_description: dummyData[0].back_description
-        })
+        this.props.getCardData();
     }
     render(){
-        console.log(this.state)
-        const {back_description} = this.state
+        console.log("back description props",this.props)
+        const back_description = this.props.back_description
         return(
             <div className="container center">
                 <div className="row">
@@ -57,4 +27,14 @@ class displayBack extends Component{
     }
 }
 
-export default displayBack;
+function mapStateToProps(state){
+    console.log("this is the state", state)
+    return {
+        back_description: state.card.back_description
+    }
+}
+
+// then connect it 
+export default connect(mapStateToProps,{
+    getCardData
+})(displayBack);

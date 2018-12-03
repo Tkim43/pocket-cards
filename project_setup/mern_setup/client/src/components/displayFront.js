@@ -14,7 +14,7 @@ class displayFront extends Component{
     }
     render(){
         console.log("displayfront", this.props)
-        const front_description = this.props[front_description]
+        const front_description = this.props.front_description
         return(
             <div className="container">
                 <div className="row">
@@ -36,8 +36,7 @@ class displayFront extends Component{
 function mapStateToProps(state){
     console.log("this is the state", state)
     return {
-        back_description: state,
-        front_description: state
+        front_description: state.card.front_description
     }
 }
 
