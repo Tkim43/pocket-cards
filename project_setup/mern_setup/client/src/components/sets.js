@@ -75,7 +75,7 @@ function mapStateToProps(state){
     }
 }
 
-export default auth(Sets);
+// export default auth(Sets);
 export default connect(mapStateToProps, {
     getSetsData: getSetsData
 })(Sets);
