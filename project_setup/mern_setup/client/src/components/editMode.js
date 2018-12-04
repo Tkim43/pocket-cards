@@ -4,28 +4,38 @@ import {connect} from 'react-redux';
 import {getCardData} from '../actions'; 
 import {sendCardData} from '../actions';
 
-class editFrontMode extends Component{
+class editMode extends Component{
     state = {
-        frontText: ''
+        frontText: '',
+        backText: ''
     }
     async componentDidMount(){
         await this.props.getCardData();
         this.setState({
-            frontText: this.props.front_description
+            frontText: this.props.front_description,
+            backText: this.props.back_description
         })
     }
-    updateValue = event => {
-        // debugger;
-        // console.log(event);
+
+    componentDidUpdate() {
+        console.log("hellooooooo" ,this.props);
+    }
+    updateFrontValue = event => {
         this.setState({
             frontText: event.currentTarget.value
         })
     }
-    sendUpdate = () =>{
-        this.props.sendCardData();
+    updateBackValue = event => {
+        this.setState({
+            backText: event.currentTarget.value
+        })
+    }
+    sendCardData = () =>{
+        debugger;
+        this.props.sendCardData({ID: 1, frontText: this.state.frontText, backText: this.state.backText})
     }
     render(){
-        if(this.state.frontText === '' || this.state.frontText === undefined){
+        if(this.state.frontText === undefined){
             return (
                 <div className="loading-container">
                     <div className="preloader-wrapper big active">
@@ -44,19 +54,25 @@ class editFrontMode extends Component{
                 </div>
             )
         }
-        const front_description = this.props.front_description
+        const back_description = this.props.backText
+        console.log("back", back_description)
         return(
             <div className="container">
                 <div className="row">
-                    <h1>Edit Mode Front of Card</h1>
+                    <h1>Edit Mode</h1>
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">mode_edit</i>
-                    <textarea className="center active materialize-textarea" onChange={this.updateValue} value={this.state.frontText}></textarea>
+                    <textarea className="center active materialize-textarea s6" onChange={this.updateFrontValue} value={this.state.frontText}></textarea>
+                    <label>Front</label>
+                </div>
+                <div className ="input-field col s12">
+                    <i className="material-icons prefix">mode_edit</i>
+                    <textarea className="center active materialize-textarea s6" onChange={this.updateBackValue} value={this.state.backText}></textarea>
+                    <label>Back</label>
                 </div>
                 <div className="row">
-                    <Link to ="/backEditMode" className="btn green darken-2">Flip to Back</Link>
-                    <Link to ="/sets" className="btn grey darken-2" onClick = {this.sendUpdate()}>Done</Link>
+                    <Link to ="/displayFront" className="btn grey darken-2" onClick = {this.sendCardData}>Done</Link>
                     <Link to ="/flashcardGeneration" className="btn green darken-2">Edit More Cards</Link>
                 </div>
                 
@@ -75,4 +91,4 @@ function mapStateToProps(state){
 export default connect(mapStateToProps,{
     getCardData,
     sendCardData
-})(editFrontMode);
+})(editMode);

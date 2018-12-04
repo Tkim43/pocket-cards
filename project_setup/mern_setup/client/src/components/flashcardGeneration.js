@@ -35,12 +35,12 @@ class FlashcardGeneration extends Component {
 
                 <div key = {item.id} className="row">
                     <div className="col s5 card-container">
-                        <Link to = "/frontEditMode" className="card-panel teal lighten-1 white-text card" >
+                        <Link to = "/editMode" className="card-panel teal lighten-1 white-text card" >
                             <div>{item.term}</div>
                         </Link> 
                     </div>
                     <div className="col s5 card-container">
-                        <Link to = "/backEditMode" className="card-panel teal lighten-1 white-text card">
+                        <Link to = "/editMode" className="card-panel teal lighten-1 white-text card">
                             <div>{item.definition}</div>
                         </Link>
                     </div>

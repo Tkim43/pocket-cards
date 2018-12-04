@@ -13,8 +13,7 @@ import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
 import displayFront from './displayFront'
 import displayBack from './displayBAck'
-import frontEditMode from './frontEditMode'
-import backEditMode from './backEditMode'
+import editMode from './editMode'
 import Login from './login'
 import Signin from './sign-in'
 
@@ -27,8 +26,7 @@ const App = () => (
         <Route path = "/flashcards" component = {Flashcards}/>
         <Route path = "/displayFront" component= {displayFront}/>
         <Route path = "/displayBack" component= {displayBack}/>
-        <Route path = "/frontEditMode" component= {frontEditMode}/>
-        <Route path = "/backEditMode" component= {backEditMode}/>
+        <Route path = "/editMode" component= {editMode}/>
         <Route path = "/createflashcards" component = {InputDefinition}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
         <Route path = "/signup" component = {Signup}/>
