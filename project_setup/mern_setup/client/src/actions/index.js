@@ -28,6 +28,7 @@ export function getProfileData () {
     // const resp = axios.get(BASE_URL + "/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
     console.log("this is the response from axios ", resp);
+}
 
 export function sortAlphabetical () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
@@ -48,8 +49,6 @@ export function getSetsData (){
     }
 }
 
-
-
 export function sortByLatest () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
@@ -65,7 +64,6 @@ export function getCardData(){
         type: types.GET_CARD_DATA,
         payload: resp
     }
-
 }
 
 export function sendCardData(updatedFrontDescription){
