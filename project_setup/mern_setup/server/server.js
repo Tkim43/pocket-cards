@@ -267,10 +267,117 @@ app.patch('/api/update_cards/:userID', (req, res, next)=>{
     });
 }, errorHandling);
 
-// app.delete('/api/set_managing', (req, res)=>{
-//     //delete functionality for cards
 
-// });
+//delete displayName, subCategories, and all cards
+// app.delete('', (req, res, next)=>{
+//     const {  } = req.body;
+    
+//     let query = '';
+//     let inserts = [];
+
+//     let sql = mysql.format(query, inserts);
+
+//     console.log("This is the formated SQL", sql);
+
+//     const output = {
+//         success: true
+//     };
+
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
+
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
+
+//delete category, subCategories, and all cards
+// app.delete('', (req, res, next)=>{
+//     const {  } = req.body;
+    
+//     let query = '';
+//     let inserts = [];
+
+//     let sql = mysql.format(query, inserts);
+
+//     console.log("This is the formated SQL", sql);
+
+//     const output = {
+//         success: true
+//     };
+
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
+
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
+
+//delete subCategory and all cards
+// app.delete('', (req, res, next)=>{
+//     const {  } = req.body;
+    
+//     let query = '';
+//     let inserts = [];
+
+//     let sql = mysql.format(query, inserts);
+
+//     console.log("This is the formated SQL", sql);
+
+//     const output = {
+//         success: true
+//     };
+
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
+
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
+
+//delete card (DONE)
+app.delete('/api/set_management/delete_card', (req, res, next)=>{
+        const { ID, topicID  } = req.body;
+        
+        let query = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
+        let inserts = ['cards','ID',Number(ID), 'topicID', Number(topicID)];
+    
+        let sql = mysql.format(query, inserts);
+    
+        console.log("This is the formated SQL", sql);
+    
+        const output = {
+            success: true
+        };
+    
+        db.query(sql, (err, results)=>{
+            if(err) {
+                req.status = 500;
+            req.error = 'Error getting user data';
+            return next();
+            };
+    
+            output.data = results;
+            res.send(output);
+        });
+    }, errorHandling);
 
 // add routes to express app
 // routes(app);
