@@ -14,7 +14,7 @@ export default (state = DEFAULT_STATE, action) => {
             console.log("Card sending action", action)
             return{...state, front_description: '', back_description: ''}
         default:
-            console.log("card data action", action)
+            // console.log("card data action", action)
             return state;
     }
 }
