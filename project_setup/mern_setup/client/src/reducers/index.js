@@ -11,7 +11,7 @@ const rootReducer = combineReducers ({
     user: userReducer,
     profile: profileReducer,
     form: formReducer,
-    sets:setsReducer
+    sets:setsReducer,
     card: cardReducer
 });
 

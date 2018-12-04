@@ -38,31 +38,12 @@ class Sets extends Component{
             
         console.log('Sets Props:', this.props)
 
-        const userCategory = this.props.data.map ((item, index) => {
+        const userCategory = this.props.data.map ((item, ID) => {
           return(
-                <div key= {index} className="row set">
+                <div key= {ID} className="row set">
                     <div className ="btn blue darken-2">{item.category}</div>
-
-        console.log(this.state)
-        if(this.state.loading){
-            return (
-                <div className="loading-container">
-                    <div className="preloader-wrapper big active">
-                        <div className="spinner-layer spinner-blue-only">
-                            <div className="circle-clipper left">
-                            <div className="circle"></div>
-                            </div>
-                            <div className="gap-patch">
-                                <div className="circle"></div>
-                            </div>
-                            <div className="circle-clipper right">
-                                <div className="circle"></div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            );  
+            ) 
         }
     );
 
@@ -84,7 +65,7 @@ class Sets extends Component{
                     <Link to ="/profile" className="btn grey darken-2">Home</Link>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -94,7 +75,7 @@ function mapStateToProps(state){
     }
 }
 
-// export default auth(Sets);
+export default auth(Sets);
 export default connect(mapStateToProps, {
     getSetsData: getSetsData
 })(Sets);
