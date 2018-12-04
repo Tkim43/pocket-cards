@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Link} from 'react-router-dom';
+import { userSignIn } from '../actions';
+import { connect } from 'react-redux';
 
 
 class Signin extends Component {
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type="text" id = {props.input}/>
-                <label htmlFor= {props.input} >{props.label}</label>
+                <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
+                <label htmlFor= {props.input.name} >{props.label}</label>
                 <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
             </div>
         );
@@ -16,6 +18,7 @@ class Signin extends Component {
 
     handleSubmitUsername (values) {
         console.log('Form values: ', values);
+        this.props.userSignIn(values);
     }
 
     render () {
@@ -29,11 +32,12 @@ class Signin extends Component {
                         <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
                     </div>
                     <div className="row">
-                        <Field size = "s12" name = "password" label = "password" component = {this.renderInput}/>
+                        <Field size = "s12" type = "password" name = "password" label = "password" component = {this.renderInput}/>
                     </div>
                     <div className="row">
                         <div className="col s12 right-align">
-                            <Link to = "/" className = "green lighten-2 btn">Log In</Link>
+                            <button className = "btn green lighten-2">Sign In</button>
+                            {/* <Link to = "/profile" className = "green lighten-2 btn">Log In</Link> */}
                         </div>
                     </div>
                 </form>
@@ -59,8 +63,12 @@ function validate (formValues) {
     return error;
 }
 
-export default reduxForm ({
+Signin = reduxForm ({
     form: 'sign-in',
-    validate: validate
+    validate: validate,
 })(Signin);
+
+export default connect(null, {
+    userSignIn: userSignIn
+})(Signin)
  

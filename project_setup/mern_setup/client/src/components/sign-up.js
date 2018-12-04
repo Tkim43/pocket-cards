@@ -8,7 +8,7 @@ class Signup extends Component {
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type= {props.type} id = {props.input.name}/>
+                <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor={props.input.name} >{props.label}</label>
                 <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
             </div>
