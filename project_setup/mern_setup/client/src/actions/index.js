@@ -17,12 +17,6 @@ export function userSignOut(){
     }
 }
 
-export function userSignUp(){
-    return {
-        type: types.SIGN_UP
-    }
-}
-
 export function sortAlphabetical () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
@@ -48,6 +42,13 @@ export function getCardData(){
         type: types.GET_CARD_DATA,
         payload: resp
     }
+}
 
+export function userSignUp(user){
+    return async function (dispatch){
+        const resp = await axios.post("http://api.reactprototypes.com/signup",user);
+
+        console.log("sign up response",resp);
+    }
 }
 

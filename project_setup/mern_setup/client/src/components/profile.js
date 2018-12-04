@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest } from '../actions';
 import BasicModal from './modal';
+import auth from '../hoc/auth';
 
 class Profile extends Component {
 
@@ -105,7 +106,7 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {
+export default auth(connect(mapStateToProps, {
     sortAlphabetical : sortAlphabetical,
     sortByLatest: sortByLatest,
-})(Profile);
+})(Profile));

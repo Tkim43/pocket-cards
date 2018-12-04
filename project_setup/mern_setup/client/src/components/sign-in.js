@@ -7,8 +7,8 @@ class Signin extends Component {
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type="text"/>
-                <label htmlFor="">{props.label}</label>
+                <input {...props.input} type="text" id = {props.input}/>
+                <label htmlFor= {props.input} >{props.label}</label>
                 <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
             </div>
         );

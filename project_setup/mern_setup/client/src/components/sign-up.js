@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { userSignUp } from '../actions';
 
 
 class Signup extends Component {
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type="text"/>
-                <label htmlFor="">{props.label}</label>
+                <input {...props.input} type= {props.type} id = {props.input.name}/>
+                <label htmlFor={props.input.name} >{props.label}</label>
                 <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
             </div>
         );
     }
 
-    handleSubmitUsername (values) {
+    handleSignUp = (values) => {
         console.log('Form values: ', values);
+        this.props.userSignUp(values);
     }
 
     render () {
@@ -23,12 +26,12 @@ class Signup extends Component {
         return (
             <div className = "container">
                 <h1>this is the signup page</h1>
-                <form onSubmit = {handleSubmit(this.handleSubmitUsername)}>
+                <form onSubmit = {handleSubmit(this.handleSignUp)}>
                     <div className="row">
                         <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
                     </div>
                     <div className="row">
-                        <Field size = "s12" name = "password" label = "password" component = {this.renderInput}/>
+                        <Field size = "s12" name = "password" type = "password" label = "password" component = {this.renderInput}/>
                     </div>
                     <div className="row">
                         <Field size = "s12" name = "email" label = "email" component = {this.renderInput}/>
@@ -64,8 +67,11 @@ function validate (formValues) {
     return error;
 }
 
-export default reduxForm ({
+Signup = reduxForm ({
     form: 'sign-up',
     validate: validate
 })(Signup);
  
+export default connect (null, {
+    userSignUp: userSignUp
+})(Signup);
