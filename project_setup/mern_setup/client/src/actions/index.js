@@ -23,6 +23,12 @@ export function userSignUp(){
     }
 }
 
+
+export function getProfileData () {
+    // const resp = axios.get(BASE_URL + "/userhome/:userID");
+    const resp = axios.get(`${BASE_URL}/userhome/1`);
+    console.log("this is the response from axios ", resp);
+
 export function sortAlphabetical () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
@@ -31,6 +37,17 @@ export function sortAlphabetical () {
         payload: resp
     }
 }
+
+//Vienna's
+export function getSetsData (){
+    const resp = axios.get(`${BASE_URL}/set_managing/1`);
+    console.log("this is the response from axios for sets:", resp);
+    return{
+        type: types.GET_SETS_DATA,
+        payload: resp
+    }
+}
+
 
 
 export function sortByLatest () {
