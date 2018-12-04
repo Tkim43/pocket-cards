@@ -255,7 +255,7 @@ app.patch('/api/update_cards/:userID', (req, res, next)=>{
         success: true
     };
 
-    db.query(sql, (err, results)=>{
+    db.query(sql, (err, results)=>{ console.error(err);
         if(err) {
             req.status = 500;
         req.error = 'Error getting user data';
