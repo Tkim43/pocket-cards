@@ -2,24 +2,58 @@ import React, {Component} from 'react';
 import "../assets/css/profile.css";
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProfileData } from '../actions'; 
+import { sortAlphabetical, sortByLatest } from '../actions';
 import BasicModal from './modal';
 
 class Profile extends Component {
+
+    handleAlphabeticalClick = () => {
+        this.props.sortAlphabetical ();
+    }
+
+    handleSortByLatestClick = () => {
+        this.props.sortByLatest ();
+    }
+
+    findTimePassed = item => {
+        var timeCreated = new Date (item.created);
+        var date = new Date();
+        var now = date.getTime();
+        var result = now - timeCreated.getTime();
+        if(result >= 86400000){
+            var numOfDays = result / 86400000;
+            return `Updated : ${Math.floor(numOfDays)} days ago`;
+        }
+        else if(result >= 3600000){
+            var numOfHours = result / 3600000;
+            return `Updated ${Math.floor(numOfHours)} hours ago`;
+        }
+        else if(result >= 60000){
+            var numOfMinutes = result / 60000;
+            return `Updated ${Math.floor(numOfMinutes)} minutes ago`;
+        }
+        else if (result >= 1000){
+            var numOfSeconds = result / 1000;
+            return `Updated ${Math.floor(numOfSeconds)} seconds ago`;
+        }
+        else {
+            return "Updated Now";
+        }
+    }
     
     componentDidMount () {
-        console.log("Component Mounted: ", this.props.getProfileData());
-        this.props.getProfileData ();
+        this.props.sortByLatest ();
     }
 
     render () { 
-        console.log("Profile props: ", this.props);
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
         }
-        const profileCategories =  this.props.sets.map ( (item, index) => {
+
+        const profileCategories =  this.props.sets.map ( (item, ID) => {
             return (
-                <div className="row" key = {index}>
+                <div className="row category-info" key = {ID}>
+                    <div className = "col s12">{this.findTimePassed(item)}</div>
                     <div className="col s12 card-container">
                         <Link to = "/sets" className = "card-panel green lighten-2 white-text center">{item.category}</Link>
                     </div>
@@ -46,8 +80,8 @@ class Profile extends Component {
                 </div>
                 <div className = "sort-row row">
                     <div className="sort col s12">Sort: 
-                        <button className = "btn-small light-blue lighten-3 sort-button">Latest</button>
-                        <button className = "btn-small light-blue lighten-3 sort-button">Alphabetical</button>
+                        <button onClick = {this.handleSortByLatestClick} className = "btn-small soft-blue sort-button">Latest</button>
+                        <button onClick = {this.handleAlphabeticalClick} className = "btn-small soft-blue sort-button">Alphabetical</button>
                     </div>
                 </div>
                 <div className="row">
@@ -71,5 +105,6 @@ function mapStateToProps(state){
 
 
 export default connect(mapStateToProps, {
-    getProfileData : getProfileData,
+    sortAlphabetical : sortAlphabetical,
+    sortByLatest: sortByLatest,
 })(Profile);

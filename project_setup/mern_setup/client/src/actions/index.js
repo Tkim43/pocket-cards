@@ -23,15 +23,21 @@ export function userSignUp(){
     }
 }
 
+
 export function getProfileData () {
     // const resp = axios.get(BASE_URL + "/userhome/:userID");
     const resp = axios.get(`${BASE_URL}/userhome/1`);
     console.log("this is the response from axios ", resp);
+
+export function sortAlphabetical () {
+    // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
+    const resp = axios.get(`${BASE_URL}/userhome/1`);
     return {
-        type: types.GET_PROFILE_DATA,
+        type: types.SORT_ALPHABETICAL,
         payload: resp
     }
 }
+
 //Vienna's
 export function getSetsData (){
     const resp = axios.get(`${BASE_URL}/set_managing/1`);
@@ -41,3 +47,24 @@ export function getSetsData (){
         payload: resp
     }
 }
+
+
+
+export function sortByLatest () {
+    // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
+    const resp = axios.get(`${BASE_URL}/userhome/1`);
+    return {
+        type: types.SORT_BY_LATEST,
+        payload: resp
+    }
+}
+
+export function getCardData(){
+    const resp = axios.get(`${BASE_URL}/cards/1`);
+    return{
+        type: types.GET_CARD_DATA,
+        payload: resp
+    }
+
+}
+

@@ -13,6 +13,7 @@ class Sets extends Component{
     }
 
     render(){
+
     
         // if(this.state.loading){
         //     return (
@@ -41,6 +42,25 @@ class Sets extends Component{
           return(
                 <div key= {index} className="row set">
                     <div className ="btn blue darken-2">{item.category}</div>
+
+        console.log(this.state)
+        if(this.state.loading){
+            return (
+                <div className="loading-container">
+                    <div className="preloader-wrapper big active">
+                        <div className="spinner-layer spinner-blue-only">
+                            <div className="circle-clipper left">
+                            <div className="circle"></div>
+                            </div>
+                            <div className="gap-patch">
+                                <div className="circle"></div>
+                            </div>
+                            <div className="circle-clipper right">
+                                <div className="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             );  
         }
