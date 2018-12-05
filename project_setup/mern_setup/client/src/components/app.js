@@ -12,8 +12,7 @@ import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
 import displayFront from './displayFront';
 import displayBack from './displayBack';
-// import frontEditMode from './frontEditMode';
-// import backEditMode from './backEditMode';
+import editMode from './editMode';
 import Login from './login';
 import Signin from './sign-in';
 
