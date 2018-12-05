@@ -32,16 +32,15 @@ class displayCard extends Component{
                 <div className="row">
                     <h1>{this.state.flipped ? "Front of Card" : "Back of Card"}</h1>
                 </div>
-                <div className={"card cardFlips center " + this.state.flipped ? "cardflip" : ''}>
-                    <div className="back">{this.state.flipped ? front_description : back_description}</div>
-                    <div className="front">{this.state.flipped ? back_description : front_description}</div>
+                <div className={"card center cardflip grey " + (this.state.flipped ? "" : "flipped")}>
+                    <div className="front">{front_description}</div>
+                    <div className="back">{back_description}</div>
                 </div>
                 <div className="row down">
                     <button className="btn green darken-2" onClick={this.flipCard}>{this.state.flipped ? "Flip to Back" : "Flip to Front"}</button>
                     <Link to ="/sets" className="btn green darken-2">Card Set Complete</Link>
                     <Link to ="/flashcardGeneration" className="btn green darken-2">Edit More Cards</Link>
                 </div>
-                
             </div>
         )
     }
