@@ -52,17 +52,48 @@ class Signin extends Component {
 function validate (formValues) {
     const error = {};
 
-    if(!formValues.username){
-        error.username = "Please enter a valid username";
-    }
-    if(formValues.password && (formValues.password.length < 8 || formValues.password.length > 32)){
-        error.password = "Please enter a password that is greater than 8 characters, but less than or equal to 32 characters";
+    // if(!formValues.username){
+    //     error.username = "Please enter a valid username";
+    // }
+
+    if(!formValues.email){
+        error.email = "Please enter an email";
     }
     if(!formValues.password){
         error.password = "Please enter a valid password";
     }
+    if(formValues.password && (formValues.password.length < 8 || formValues.password.length > 32)){
+        error.password = "Please enter a password that is greater than 8 characters, but less than or equal to 32 characters";
+    }
+
+    checkIfValidEmail (formValues.email, error);
+    checkIfValidPassword (formValues.password, error);
 
     return error;
+}
+
+function checkIfValidEmail(email, error){
+    const regex = /^(\w)*[@]{1}(\w)+[.]{1}(\w)+$/g;
+    const testEmail = regex.test(email);
+
+    if(testEmail === true){
+        console.log("valid email satisfied");
+    }
+    else {
+        error.email = "Please input an email that ends with @[your-email-provider]";
+    }
+}
+
+function checkIfValidPassword(password, error){
+    const regex = /^([a-zA-Z]{1})((?=.*\d)(?=.*[a-z])(?=.*[A-Z])).{6,32}$/g;
+    const testPassword = regex.test(password);
+
+    if(testPassword === true) {
+        console.log('your password was accepted');
+    }
+    else {
+        error.password = "Please input a password that is between 6 - 32 characters";
+    }
 }
 
 Signin = reduxForm ({

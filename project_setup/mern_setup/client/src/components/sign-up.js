@@ -62,7 +62,7 @@ function validate (formValues) {
         error.password = "Please enter a valid password";
     }
     if(!formValues.email){
-        error.email = "Please enter a valid email address";
+        error.email = "Please enter an email address";
     }
 
     return error;
