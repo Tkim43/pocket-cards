@@ -5,6 +5,9 @@ const BASE_URL = '/api';
 // const USER_ID = "?userID=2";
 
 export function userSignOut(){
+
+    localStorage.removeItem("token");
+
     return {
         type: types.SIGN_OUT
     }
@@ -18,7 +21,6 @@ export function sortAlphabetical () {
         payload: resp
     }
 }
-
 
 export function sortByLatest () {
     // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
@@ -39,16 +41,44 @@ export function getCardData(){
 
 export function userSignUp(user){
     return async function (dispatch){
-        const resp = await axios.post("http://api.reactprototypes.com/signup",user);
+        try {
+            const resp = await axios.post("http://api.reactprototypes.com/signup",user);
 
-        console.log("sign up response",resp);
+            console.log("sign up response",resp);
+
+            localStorage.setItem('token', resp.data.token);
+
+            dispatch({
+                type: types.SIGN_UP
+            });
+
+        } catch (err){
+            dispatch ({
+                type: types.SIGN_UP_ERROR,
+                error: "email address already exists"
+            });
+        }
     }
 }
 
 export function userSignIn(user){
     return async function (dispatch){
-        const resp = await axios.post("http://api.reactprototypes.com/signin",user);
+        try {
+            const resp = await axios.post("http://api.reactprototypes.com/signin",user);
 
-        console.log("sign up response",resp);
+            console.log("sign in response",resp);
+    
+            localStorage.setItem('token', resp.data.token);
+    
+            dispatch({
+                type: types.SIGN_IN
+            });
+        } catch (err){
+            dispatch({
+                type: types.SIGN_IN_ERROR,
+                error: "Invalid email and/or password"
+            });
+        }
+        
     }
 }

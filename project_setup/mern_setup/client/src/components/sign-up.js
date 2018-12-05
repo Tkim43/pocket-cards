@@ -21,24 +21,25 @@ class Signup extends Component {
     }
 
     render () {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, signUpError } = this.props;
 
         return (
             <div className = "container">
                 <h1>this is the signup page</h1>
                 <form onSubmit = {handleSubmit(this.handleSignUp)}>
-                    <div className="row">
+                    {/* <div className="row">
                         <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
+                    </div> */}
+                    <div className="row">
+                        <Field size = "s12" name = "email" label = "email" component = {this.renderInput}/>
                     </div>
                     <div className="row">
                         <Field size = "s12" name = "password" type = "password" label = "password" component = {this.renderInput}/>
                     </div>
                     <div className="row">
-                        <Field size = "s12" name = "email" label = "email" component = {this.renderInput}/>
-                    </div>
-                    <div className="row">
                         <div className="col s12 right-align">
                             <button className = "green lighten-2 btn">Sign up</button>
+                            <div className = "red-text text-darken-2">{signUpError}</div>
                         </div>
                     </div>
                 </form>
@@ -71,7 +72,13 @@ Signup = reduxForm ({
     form: 'sign-up',
     validate: validate
 })(Signup);
+
+function mapStateToProps (state){
+    return {
+        signUpError: state.user.signUpError
+    }
+}
  
-export default connect (null, {
+export default connect (mapStateToProps, {
     userSignUp: userSignUp
 })(Signup);

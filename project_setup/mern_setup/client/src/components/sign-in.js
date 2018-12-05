@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {Link} from 'react-router-dom';
 import { userSignIn } from '../actions';
 import { connect } from 'react-redux';
 
@@ -16,20 +15,23 @@ class Signin extends Component {
         );
     }
 
-    handleSubmitUsername (values) {
-        console.log('Form values: ', values);
+    handleSignIn = (values) => {
+        console.log('sign in form values: ', values);
         this.props.userSignIn(values);
     }
 
     render () {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, signInError} = this.props;
 
         return (
             <div className = "container">
                 <h1>this is the log in page</h1>
-                <form onSubmit = {handleSubmit(this.handleSubmitUsername)}>
-                    <div className="row">
+                <form onSubmit = {handleSubmit(this.handleSignIn)}>
+                    {/* <div className="row">
                         <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
+                    </div> */}
+                    <div className="row">
+                        <Field size = "s12" name = "email" label = "email" component = {this.renderInput}/>
                     </div>
                     <div className="row">
                         <Field size = "s12" type = "password" name = "password" label = "password" component = {this.renderInput}/>
@@ -37,7 +39,7 @@ class Signin extends Component {
                     <div className="row">
                         <div className="col s12 right-align">
                             <button className = "btn green lighten-2">Sign In</button>
-                            {/* <Link to = "/profile" className = "green lighten-2 btn">Log In</Link> */}
+                            <div className = "red-text text-darken-2">{signInError}</div>
                         </div>
                     </div>
                 </form>
@@ -64,11 +66,17 @@ function validate (formValues) {
 }
 
 Signin = reduxForm ({
-    form: 'sign-in',
+    form: 'signin',
     validate: validate,
 })(Signin);
 
-export default connect(null, {
+function mapStateToProps (state){
+    return {
+        signInError: state.user.signInError
+    }
+}
+
+export default connect(mapStateToProps, {
     userSignIn: userSignIn
-})(Signin)
+})(Signin);
  

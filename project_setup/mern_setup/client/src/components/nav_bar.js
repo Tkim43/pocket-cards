@@ -1,8 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import 'materialize-css/dist/css/materialize.min.css';
-// import  M from 'materialize-css/dist/js/materialize';
 import { userSignOut } from "../actions/index";
 
 class Navbar extends Component {
@@ -17,6 +15,7 @@ class Navbar extends Component {
 
     renderLinks () {
         const { auth, signOut } = this.props;
+        console.log("this is the props from navbar:",this.props);
 
         if(auth){
             return (
@@ -29,6 +28,9 @@ class Navbar extends Component {
                     </li>
                     <li className = "nav-item">
                         <Link to = "/flashcards" className = "nav-link"> My Flashcards </Link>
+                    </li>
+                    <li className = "nav-item">
+                        <div className="divider" />
                     </li>
                     <li className = "nav-item">
                         <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
@@ -69,12 +71,6 @@ class Navbar extends Component {
 
                 <ul id="slide-out" className="sidenav">
                     {this.renderLinks()}
-                    <li>
-                        <div className="divider" />
-                    </li>
-                    <li>
-                        <a className="subheader">Logout</a>
-                    </li>
                 </ul> 
         </div>
         );
