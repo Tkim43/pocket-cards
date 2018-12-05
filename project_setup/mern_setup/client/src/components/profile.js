@@ -51,11 +51,12 @@ class Profile extends Component {
         }
 
         const profileCategories =  this.props.sets.map ( (item, ID) => {
+            
             return (
-                <div className="row category-info" key = {ID}>
+                <div className="row category-info" key = {item.ID}>
                     <div className = "col s12">{this.findTimePassed(item)}</div>
                     <div className="col s12 card-container">
-                        <Link to = "/sets" className = "card-panel green lighten-2 white-text center">{item.category}</Link>
+                        <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center">{item.category}</Link>
                     </div>
                 </div>
             );

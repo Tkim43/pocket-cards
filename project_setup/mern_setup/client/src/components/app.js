@@ -23,7 +23,7 @@ const App = () => (
     <div>
         <Navbar/>
         <Route exact path = "/" component = {Login}/>
-        <Route path = "/sets" component = {auth(Sets)}/>
+        <Route path = "/sets/:set_id" component = {auth(Sets)}/>
         <Route path = "/profile" component = {auth(Profile)}/>
         <Route path = "/flashcards" component = {auth(Flashcards)}/>
         <Route path = "/displayFront" component= {displayFront}/>
