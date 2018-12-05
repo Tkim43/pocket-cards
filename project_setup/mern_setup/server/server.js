@@ -85,10 +85,10 @@ app.get('/api/userhome/:userID', (req, res, next) => {
 
 
 // get category and all subcategory data of sets joined to topics based on userID (DONE)
-app.get('/api/set_managing/:userID', (req, res, next)=> {
-    const { userID } = req.params;
-    let query = 'SELECT * FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE `userID` = ?'
-    let inserts = ['topics', 'sets', Number(userID)];
+app.get('/api/set_management/:userID/:setID', (req, res, next)=> {
+    const { userID, setID } = req.params;
+    let query = 'SELECT * FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE ?? = ? AND ?? = ?';
+    let inserts = ['topics', 'sets', 'userID', Number(userID), 'setID', Number(setID)];
 
     let sql = mysql.format(query, inserts);
 
@@ -112,10 +112,10 @@ app.get('/api/set_managing/:userID', (req, res, next)=> {
 
 
 //get card front and back joined with setID (DONE)
-app.get('/api/cards/:setID', (req, res, next)=>{
-    const { setID } = req.params;
-    let query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ?'
-    let inserts = ['cards', 'topics', 'setID', Number(setID)];
+app.get('/api/cards/:setID/:topicID', (req, res, next)=>{
+    const { setID, topicID } = req.params;
+    let query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
+    let inserts = ['cards', 'topics', 'setID', Number(setID), 'topicID', Number(topicID)];
 
     let sql = mysql.format(query, inserts);
 
@@ -215,7 +215,7 @@ app.post('/api/set_management/create_subcategory',(req, res, next)=>{
     });
 }, errorHandling);
 
-//post to front cards and back (b/v)
+//post to front cards and back (DONE)
 app.post('/api/set_management/create_card', (req, res)=>{
     const { topicID, frontText, backText } = req.body;
     let query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
@@ -267,10 +267,117 @@ app.patch('/api/update_cards/:userID', (req, res, next)=>{
     });
 }, errorHandling);
 
-// app.delete('/api/set_managing', (req, res)=>{
-//     //delete functionality for cards
 
-// });
+//delete displayName, subCategories, and all cards
+// app.delete('', (req, res, next)=>{
+//     const {  } = req.body;
+    
+//     let query = '';
+//     let inserts = [];
+
+//     let sql = mysql.format(query, inserts);
+
+//     console.log("This is the formated SQL", sql);
+
+//     const output = {
+//         success: true
+//     };
+
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
+
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
+
+//delete category, subCategories, and all cards
+// app.delete('', (req, res, next)=>{
+//     const {  } = req.body;
+    
+//     let query = '';
+//     let inserts = [];
+
+//     let sql = mysql.format(query, inserts);
+
+//     console.log("This is the formated SQL", sql);
+
+//     const output = {
+//         success: true
+//     };
+
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
+
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
+
+//delete subCategory and all cards
+// app.delete('', (req, res, next)=>{
+//     const {  } = req.body;
+    
+//     let query = '';
+//     let inserts = [];
+
+//     let sql = mysql.format(query, inserts);
+
+//     console.log("This is the formated SQL", sql);
+
+//     const output = {
+//         success: true
+//     };
+
+//     db.query(sql, (err, results)=>{
+//         if(err) {
+//             req.status = 500;
+//         req.error = 'Error getting user data';
+//         return next();
+//         };
+
+//         output.data = results;
+//         res.send(output);
+//     });
+// }, errorHandling);
+
+
+//delete card (DONE)
+app.delete('/api/set_management/delete_card', (req, res, next)=>{
+        const { ID, topicID  } = req.body;
+        
+        let query = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
+        let inserts = ['cards','ID',Number(ID), 'topicID', Number(topicID)];
+    
+        let sql = mysql.format(query, inserts);
+    
+        console.log("This is the formated SQL", sql);
+    
+        const output = {
+            success: true
+        };
+    
+        db.query(sql, (err, results)=>{
+            if(err) {
+                req.status = 500;
+            req.error = 'Error getting user data';
+            return next();
+            };
+    
+            output.data = results;
+            res.send(output);
+        });
+    }, errorHandling);
 
 // add routes to express app
 // routes(app);

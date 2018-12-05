@@ -1,64 +1,63 @@
 import React, {Component} from 'react';
 import '../assets/css/FlashcardGeneration.css';
-import listData from '../dummy_data/list';
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getAllCardData} from '../actions'
 
 class FlashcardGeneration extends Component {
-
-    constructor (props){
-        super(props);
-        this.state = {
-            list : []
-        }
+    componentDidMount(){
+        this.props.getAllCardData();
     }
-
-    componentDidMount () {
-        this.getListData ();
-    }
-
-    onClick () {
-
-    }
-
-    getListData () {
-        //Call server to get data
-        this.setState ({
-            list: listData
-        });
-    }
-
-
     render () {
-
-        const listCards = this.state.list.map( (item,index) => {
-            return (
-
-                <div key = {item.id} className="row">
-                    <div className="col s5 card-container">
-                        <Link to = "/frontEditMode" className="card-panel teal lighten-1 white-text card" >
-                            <div>{item.term}</div>
-                        </Link> 
-                    </div>
-                    <div className="col s5 card-container">
-                        <Link to = "/backEditMode" className="card-panel teal lighten-1 white-text card">
-                            <div>{item.definition}</div>
-                        </Link>
-                    </div>
-                    <div className="col s2 card-container">
-                        <div className = "card-panel red lighten-2 white-text center">
-                        Delete
-                            <i className="material-icons right">delete</i>
+        console.log("this is your card", this.props.card)
+        if(!this.props.card.all_descriptions[0]){
+            return(
+                <div className="loading-container">
+                    <div className="preloader-wrapper big active">
+                        <div className="spinner-layer spinner-blue-only">
+                            <div className="circle-clipper left">
+                            <div className="circle"></div>
+                            </div>
+                            <div className="gap-patch">
+                                <div className="circle"></div>
+                            </div>
+                            <div className="circle-clipper right">
+                                <div className="circle"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                );
-        } );
-
+            )
+        }
+        const cardCounter = this.props.card.all_descriptions.length
+        const listCards = this.props.card.all_descriptions.map((item,ID) =>{
+            return(
+                 <div key = {item.ID} className="row">
+                    <div className="col s5 card-container">
+                       <Link to = "/editMode" className="card-panel teal lighten-1 white-text card" >
+                            <div>{item.frontText}</div>
+                       </Link> 
+                   </div>
+                    <div className="col s5 card-container">
+                       <Link to = "/editMode" className="card-panel teal lighten-1 white-text card">
+                            <div>{item.backText}</div>
+                        </Link>
+                   </div>
+                    <div className="col s2 card-container">
+                      <div className = "card-panel red lighten-2 white-text center">
+                      Delete
+                          <i className="material-icons right">delete</i>
+                       </div>
+                   </div>
+                </div>
+            )
+        })
+        const category = this.props.card.all_descriptions[0].subCategory
         return (
 
             <div className = "flashcard-container">
-                <h1 className = "col s12 center">Cartoons</h1>
-                <h2 className = "col s12 center">Cards Created: 3</h2>
+                <h1 className = "col s12 center">{category}</h1>
+                <h2 className = "col s12 center">Card Counter: {cardCounter}</h2>
                 <div className="row">                    
                     <div className="col s5 card-container">
                         <div className="card-panel blue lighten-2 white-text center">Term</div> 
@@ -88,4 +87,11 @@ class FlashcardGeneration extends Component {
     }
 }
 
-export default FlashcardGeneration;
+function mapStateToProps(state){
+    console.log("this is the state", state)
+    return state
+}
+
+export default connect(mapStateToProps, {
+    getAllCardData,
+})(FlashcardGeneration);

@@ -28,8 +28,7 @@ const App = () => (
         <Route path = "/flashcards" component = {auth(Flashcards)}/>
         <Route path = "/displayFront" component= {displayFront}/>
         <Route path = "/displayBack" component= {displayBack}/>
-        <Route path = "/frontEditMode" component= {frontEditMode}/>
-        <Route path = "/backEditMode" component= {backEditMode}/>
+        <Route path = "/editMode" component= {editMode}/>
         <Route path = "/createflashcards" component = {InputDefinition}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
         <Route path = "/signup" component = {auth(Signup, '/profile', false)}/>
