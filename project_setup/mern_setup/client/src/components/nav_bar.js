@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import 'materialize-css/dist/css/materialize.min.css';
-import  M from 'materialize-css/dist/js/materialize';
-import {userSignIn, userSignOut} from "../actions/index";
+import { userSignOut } from "../actions/index";
 
 class Navbar extends Component {
 
@@ -16,13 +14,41 @@ class Navbar extends Component {
     }
 
     renderLinks () {
-        const { auth, signIn, signOut } = this.props;
+        const { auth, signOut } = this.props;
+        console.log("this is the props from navbar:",this.props);
 
         if(auth){
-            return <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
+            return (
+                <Fragment>
+                    <li className = "nav-item">
+                        <Link to = "/profile" className = "nav-link"> Profile </Link>
+                    </li>
+                    <li className = "nav-item">
+                        <Link to = "/sets" className = "nav-link"> My Sets </Link>
+                    </li>
+                    <li className = "nav-item">
+                        <Link to = "/flashcards" className = "nav-link"> My Flashcards </Link>
+                    </li>
+                    <li className = "nav-item">
+                        <div className="divider" />
+                    </li>
+                    <li className = "nav-item">
+                        <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
+                    </li>
+                </Fragment>
+            );
         }
 
-        return <button onClick = {signIn} className = "blue lighten-2 btn">Sign In</button>
+        return (
+        <Fragment>
+            <li className = "nav-item">
+                <Link to = "/signin">Sign In</Link>
+            </li>
+            <li className="nav-item">
+                <Link to = "/signup" >Sign Up</Link>
+            </li>
+        </Fragment>
+        );
     }
 
     render() {
@@ -38,42 +64,13 @@ class Navbar extends Component {
                     <div className="nav-wrapper">
                         <Link to = "#" data-target = "slide-out" className = "sidenav-trigger"> <i className="material-icons">dehaze</i> </Link>
                         <ul className = "left hide-on-med-and-down">
-                            <li className = "nav-item">
-                                <Link to = "/profile" className = "nav-link"> Profile </Link>
-                            </li>
-                            <li className = "nav-item">
-                                <Link to = "/sets" className = "nav-link"> My Sets </Link>
-                            </li>
-                            <li className = "nav-item">
-                                <Link to = "/flashcards" className = "nav-link"> My Flashcards </Link>
-                            </li>
-                            <li className = "nav-item">
-                                {this.renderLinks()}
-                            </li>
+                            {this.renderLinks()}
                         </ul>
                     </div>
                 </nav>
 
                 <ul id="slide-out" className="sidenav">
-                    <li />
-                    <li>
-                        <Link to = "/profile"> Profile </Link>
-                    </li>
-                    <li>
-                        <Link to = "/sets"> My Sets </Link>
-                    </li>
-                    <li>
-                        <Link to = "/flashcards"> My Flashcards </Link>
-                    </li>
-                    <li>
-                        {this.renderLinks()}
-                    </li>
-                    <li>
-                        <div className="divider" />
-                    </li>
-                    <li>
-                        <a className="subheader">Logout</a>
-                    </li>
+                    {this.renderLinks()}
                 </ul> 
         </div>
         );
@@ -87,6 +84,5 @@ function mapStateToProps (state){
 }
 
 export default connect(mapStateToProps, {
-    signIn: userSignIn,
     signOut: userSignOut
 })(Navbar);

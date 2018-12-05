@@ -4,22 +4,12 @@ import types from './types';
 const BASE_URL = '/api';
 // const USER_ID = "?userID=2";
 
-export function userSignIn(){
-    console.log("user sign in called");
-    return {
-        type: types.SIGN_IN
-    }
-}
-
 export function userSignOut(){
+
+    localStorage.removeItem("token");
+
     return {
         type: types.SIGN_OUT
-    }
-}
-
-export function userSignUp(){
-    return {
-        type: types.SIGN_UP
     }
 }
 
@@ -66,6 +56,50 @@ export function getCardData(){
     }
 }
 
+export function userSignUp(user){
+    return async function (dispatch){
+        try {
+            const resp = await axios.post("http://api.reactprototypes.com/signup",user);
+
+            console.log("sign up response",resp);
+
+            localStorage.setItem('token', resp.data.token);
+
+            dispatch({
+                type: types.SIGN_UP
+            });
+
+        } catch (err){
+            dispatch ({
+                type: types.SIGN_UP_ERROR,
+                error: "email address already exists"
+            });
+        }
+    }
+}
+
+export function userSignIn(user){
+    return async function (dispatch){
+        try {
+            const resp = await axios.post("http://api.reactprototypes.com/signin",user);
+
+            console.log("sign in response",resp);
+    
+            localStorage.setItem('token', resp.data.token);
+    
+            dispatch({
+                type: types.SIGN_IN
+            });
+        } catch (err){
+            dispatch({
+                type: types.SIGN_IN_ERROR,
+                error: "Invalid email and/or password"
+            });
+        }
+        
+    }
+}
+
 export function sendCardData(updatedFrontDescription){
     const resp = axios.patch(`${BASE_URL}/update_cards/1`, updatedFrontDescription);
     console.log("Update Cards Sever response", resp)
@@ -82,3 +116,4 @@ export function getAllCardData(){
         payload: resp
     }
 }
+

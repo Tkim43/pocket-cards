@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/css/sets.css'
-import auth from '../hoc/auth';
 import { connect } from 'react-redux';
 import {getSetsData} from '../actions';
 
@@ -79,3 +78,4 @@ function mapStateToProps(state){
 export default connect(mapStateToProps, {
     getSetsData: getSetsData
 })(Sets);
+
