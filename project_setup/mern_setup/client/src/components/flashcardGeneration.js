@@ -1,58 +1,37 @@
 import React, {Component} from 'react';
 import '../assets/css/FlashcardGeneration.css';
-import listData from '../dummy_data/list';
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getAllCardData} from '../actions'
 
 class FlashcardGeneration extends Component {
-
-    constructor (props){
-        super(props);
-        this.state = {
-            list : []
-        }
+    componentDidMount(){
+        this.props.getAllCardData()
     }
-
-    componentDidMount () {
-        this.getListData ();
-    }
-
-    onClick () {
-
-    }
-
-    getListData () {
-        //Call server to get data
-        this.setState ({
-            list: listData
-        });
-    }
-
-
     render () {
-
-        const listCards = this.state.list.map( (item,index) => {
-            return (
-
-                <div key = {item.id} className="row">
+        console.log("this is your props", this.props)
+        const listCards = this.props.card.all_descriptions.map((item,ID) =>{
+            return(
+                 <div key = {item.ID} className="row">
                     <div className="col s5 card-container">
-                        <Link to = "/editMode" className="card-panel teal lighten-1 white-text card" >
-                            <div>{item.term}</div>
-                        </Link> 
-                    </div>
+                       <Link to = "/editMode" className="card-panel teal lighten-1 white-text card" >
+                            <div>{item.frontText}</div>
+                       </Link> 
+                   </div>
                     <div className="col s5 card-container">
-                        <Link to = "/editMode" className="card-panel teal lighten-1 white-text card">
-                            <div>{item.definition}</div>
+                       <Link to = "/editMode" className="card-panel teal lighten-1 white-text card">
+                            <div>{item.backText}</div>
                         </Link>
-                    </div>
+                   </div>
                     <div className="col s2 card-container">
-                        <div className = "card-panel red lighten-2 white-text center">
-                        Delete
-                            <i className="material-icons right">delete</i>
-                        </div>
-                    </div>
+                      <div className = "card-panel red lighten-2 white-text center">
+                      Delete
+                          <i className="material-icons right">delete</i>
+                       </div>
+                   </div>
                 </div>
-                );
-        } );
+            )
+        })
 
         return (
 
@@ -88,4 +67,10 @@ class FlashcardGeneration extends Component {
     }
 }
 
-export default FlashcardGeneration;
+function mapStateToProps(state){
+    return state
+}
+
+export default connect(mapStateToProps, {
+    getAllCardData
+})(FlashcardGeneration);

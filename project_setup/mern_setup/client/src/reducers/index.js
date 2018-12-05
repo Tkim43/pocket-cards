@@ -12,7 +12,7 @@ const rootReducer = combineReducers ({
     profile: profileReducer,
     form: formReducer,
     sets:setsReducer,
-    card: cardReducer
+    card: cardReducer,
 });
 
 export default rootReducer;

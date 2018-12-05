@@ -59,7 +59,7 @@ export function sortByLatest () {
 }
 
 export function getCardData(){
-    const resp = axios.get(`${BASE_URL}/cards/1`);
+    const resp = axios.get(`${BASE_URL}/cards/1/1`);
     return{
         type: types.GET_CARD_DATA,
         payload: resp
@@ -71,6 +71,14 @@ export function sendCardData(updatedFrontDescription){
     console.log("Update Cards Sever response", resp)
     return {
         type: types.SEND_CARD_DATA,
+        payload: resp
+    }
+}
+
+export function getAllCardData(){
+    const resp = axios.get(`${BASE_URL}/cards/1/1`);
+    return{
+        type: types.GET_ALL_CARD_DATA,
         payload: resp
     }
 }
