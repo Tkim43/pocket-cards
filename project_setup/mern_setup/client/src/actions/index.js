@@ -40,8 +40,8 @@ export function sortAlphabetical () {
 }
 
 //Vienna's
-export function getSetsData (){
-    const resp = axios.get(`${BASE_URL}/set_management/2/3`);
+export function getSetsData (id){
+    const resp = axios.get(`${BASE_URL}/set_management/1/${id}`);
     console.log("this is the response from axios for sets:", resp);
     return{
         type: types.GET_SETS_DATA,

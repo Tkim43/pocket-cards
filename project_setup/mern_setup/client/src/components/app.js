@@ -21,7 +21,7 @@ const App = () => (
     <div>
         <Navbar/>
         <Route exact path = "/" component = {Login}/>
-        <Route path = "/sets" component = {Sets}/>
+        <Route path = "/sets/:set_id" component = {Sets}/>
         <Route path = "/profile" component = {Profile}/>
         <Route path = "/flashcards" component = {Flashcards}/>
         <Route path = "/displayFront" component= {displayFront}/>
