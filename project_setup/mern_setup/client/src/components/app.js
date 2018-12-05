@@ -11,11 +11,11 @@ import FlashcardGeneration from './flashcardGeneration';
 import Signup from './sign-up';
 import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
-import displayFront from './displayFront'
-import displayBack from './displayBAck'
+import displayCard from './displayCard'
 import editMode from './editMode'
 import Login from './login'
 import Signin from './sign-in'
+
 
 const App = () => (
     <div>
@@ -24,8 +24,7 @@ const App = () => (
         <Route path = "/sets" component = {Sets}/>
         <Route path = "/profile" component = {Profile}/>
         <Route path = "/flashcards" component = {Flashcards}/>
-        <Route path = "/displayFront" component= {displayFront}/>
-        <Route path = "/displayBack" component= {displayBack}/>
+        <Route path = "/displayCard" component= {displayCard}/>
         <Route path = "/editMode" component= {editMode}/>
         <Route path = "/createflashcards" component = {InputDefinition}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>

@@ -2,3 +2,29 @@
     display: flex;
     justify-content: center;
 }
+.cardflip{
+    transform-style: preserve-3d;
+    transition-duration: 5s;
+    perspective: 1000px;
+    position: relative;
+}
+.cardFlips{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+.front, .back {
+    position: absolute;
+    backface-visibility: hidden;
+}
+.back{
+    transform: rotateY(180deg);
+}
+.front {
+    transform: rotateY(180deg);
+}
+.down{
+    position: relative;
+    top: 100%;
+}
