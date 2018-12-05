@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getCardData} from '../actions'; 
 
+
 class displayBack extends Component{
     componentDidMount(){
         this.props.getCardData();

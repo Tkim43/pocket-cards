@@ -6,10 +6,30 @@ import {getAllCardData} from '../actions'
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
-        this.props.getAllCardData()
+        this.props.getAllCardData();
     }
     render () {
-        console.log("this is your props", this.props)
+        console.log("this is your card", this.props.card)
+        if(!this.props.card.all_descriptions[0]){
+            return(
+                <div className="loading-container">
+                    <div className="preloader-wrapper big active">
+                        <div className="spinner-layer spinner-blue-only">
+                            <div className="circle-clipper left">
+                            <div className="circle"></div>
+                            </div>
+                            <div className="gap-patch">
+                                <div className="circle"></div>
+                            </div>
+                            <div className="circle-clipper right">
+                                <div className="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        const cardCounter = this.props.card.all_descriptions.length
         const listCards = this.props.card.all_descriptions.map((item,ID) =>{
             return(
                  <div key = {item.ID} className="row">
@@ -32,12 +52,12 @@ class FlashcardGeneration extends Component {
                 </div>
             )
         })
-
+        const category = this.props.card.all_descriptions[0].subCategory
         return (
 
             <div className = "flashcard-container">
-                <h1 className = "col s12 center">Cartoons</h1>
-                <h2 className = "col s12 center">Cards Created: 3</h2>
+                <h1 className = "col s12 center">{category}</h1>
+                <h2 className = "col s12 center">Card Counter: {cardCounter}</h2>
                 <div className="row">                    
                     <div className="col s5 card-container">
                         <div className="card-panel blue lighten-2 white-text center">Term</div> 
@@ -68,9 +88,10 @@ class FlashcardGeneration extends Component {
 }
 
 function mapStateToProps(state){
+    console.log("this is the state", state)
     return state
 }
 
 export default connect(mapStateToProps, {
-    getAllCardData
+    getAllCardData,
 })(FlashcardGeneration);
