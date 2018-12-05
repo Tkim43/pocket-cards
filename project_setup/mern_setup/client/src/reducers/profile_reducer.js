@@ -6,6 +6,7 @@ const DEFAULT_STATE = {
 };
 
 export default (state = DEFAULT_STATE, action) => {
+    console.log("Action in reducer: ", action);
     switch(action.type){
         case types.SORT_ALPHABETICAL:
             const alphabetical = action.payload.data.sets.slice().sort(function(a, b) {
@@ -22,6 +23,7 @@ export default (state = DEFAULT_STATE, action) => {
             });
             return {...state, sets: alphabetical, user: action.payload.data.users[0]};
         case types.SORT_BY_LATEST:
+            console.log("this is the action", action);
             const sortByLatest = action.payload.data.sets.slice().sort().reverse();
             console.log("sorted list:",sortByLatest)
             return {...state, sets: sortByLatest, user: action.payload.data.users[0]};     

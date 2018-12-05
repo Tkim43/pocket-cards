@@ -1,41 +1,45 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { userSignUp } from '../actions';
 
 
 class Signup extends Component {
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type="text"/>
-                <label htmlFor="">{props.label}</label>
+                <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
+                <label htmlFor={props.input.name} >{props.label}</label>
                 <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
             </div>
         );
     }
 
-    handleSubmitUsername (values) {
+    handleSignUp = (values) => {
         console.log('Form values: ', values);
+        this.props.userSignUp(values);
     }
 
     render () {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, signUpError } = this.props;
 
         return (
             <div className = "container">
                 <h1>this is the signup page</h1>
-                <form onSubmit = {handleSubmit(this.handleSubmitUsername)}>
-                    <div className="row">
+                <form onSubmit = {handleSubmit(this.handleSignUp)}>
+                    {/* <div className="row">
                         <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
-                    </div>
-                    <div className="row">
-                        <Field size = "s12" name = "password" label = "password" component = {this.renderInput}/>
-                    </div>
+                    </div> */}
                     <div className="row">
                         <Field size = "s12" name = "email" label = "email" component = {this.renderInput}/>
                     </div>
                     <div className="row">
+                        <Field size = "s12" name = "password" type = "password" label = "password" component = {this.renderInput}/>
+                    </div>
+                    <div className="row">
                         <div className="col s12 right-align">
                             <button className = "green lighten-2 btn">Sign up</button>
+                            <div className = "red-text text-darken-2">{signUpError}</div>
                         </div>
                     </div>
                 </form>
@@ -64,8 +68,17 @@ function validate (formValues) {
     return error;
 }
 
-export default reduxForm ({
+Signup = reduxForm ({
     form: 'sign-up',
     validate: validate
 })(Signup);
+
+function mapStateToProps (state){
+    return {
+        signUpError: state.user.signUpError
+    }
+}
  
+export default connect (mapStateToProps, {
+    userSignUp: userSignUp
+})(Signup);
