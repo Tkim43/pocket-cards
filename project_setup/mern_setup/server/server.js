@@ -268,88 +268,88 @@ app.patch('/api/update_cards/:userID', (req, res, next)=>{
 }, errorHandling);
 
 
-//delete displayName, subCategories, and all cards
-// app.delete('', (req, res, next)=>{
-//     const {  } = req.body;
+//delete displayName, subCategories, and all cards (DONE)
+app.delete('/api/set_management/delete_user', (req, res, next)=>{
+    const { ID } = req.body;
     
-//     let query = '';
-//     let inserts = [];
+    let query = 'DELETE FROM ?? WHERE ??.??=?';
+    let inserts = ['users','users','ID',Number(ID)];
 
-//     let sql = mysql.format(query, inserts);
+    let sql = mysql.format(query, inserts);
 
-//     console.log("This is the formated SQL", sql);
+    console.log("This is the formated SQL", sql);
 
-//     const output = {
-//         success: true
-//     };
+    const output = {
+        success: true
+    };
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 
-//delete category, subCategories, and all cards
-// app.delete('', (req, res, next)=>{
-//     const {  } = req.body;
+// delete category, subCategories, and all cards (DONE)
+app.delete('/api/set_management/delete_set', (req, res, next)=>{
+    const { ID, userID } = req.body;
     
-//     let query = '';
-//     let inserts = [];
+    let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
+    let inserts = ['sets','sets','ID',Number(ID),'sets','userID',Number(userID)];
 
-//     let sql = mysql.format(query, inserts);
+    let sql = mysql.format(query, inserts);
 
-//     console.log("This is the formated SQL", sql);
+    console.log("This is the formated SQL", sql);
 
-//     const output = {
-//         success: true
-//     };
+    const output = {
+        success: true
+    };
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 
-//delete subCategory and all cards
-// app.delete('', (req, res, next)=>{
-//     const {  } = req.body;
+// delete subCategory and all cards (DONE)
+app.delete('/api/set_management/delete_subCategory_set', (req, res, next)=>{
+    const { ID, setID } = req.body;
     
-//     let query = '';
-//     let inserts = [];
+    let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
+    let inserts = ['topics','topics','ID',Number(ID),'topics','setID',Number(setID)];
 
-//     let sql = mysql.format(query, inserts);
+    let sql = mysql.format(query, inserts);
 
-//     console.log("This is the formated SQL", sql);
+    console.log("This is the formated SQL", sql);
 
-//     const output = {
-//         success: true
-//     };
+    const output = {
+        success: true
+    };
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 
 //delete card (DONE)
