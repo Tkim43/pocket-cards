@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 class Signin extends Component {
     renderInput (props) {
+        console.log("THIS IS THE PROPS: ", props);
         return (
             <div className= {`input-field col ${props.size}`}>
                 <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
@@ -14,6 +15,9 @@ class Signin extends Component {
             </div>
         );
     }
+    renderPassword1 (props) {
+
+    }
 
     handleSignIn = (values) => {
         console.log('sign in form values: ', values);
@@ -21,7 +25,8 @@ class Signin extends Component {
     }
 
     render () {
-        const { handleSubmit, signInError} = this.props;
+        const { handleSubmit} = this.props;
+        console.log("sign in error:", this.props);
 
         return (
             <div className = "container">
@@ -39,7 +44,8 @@ class Signin extends Component {
                     <div className="row">
                         <div className="col s12 right-align">
                             <button className = "btn green lighten-2">Sign In</button>
-                            <div className = "red-text text-darken-2">{signInError}</div>
+                            {/* <div className = "red-text text-darken-2">{signInError}</div> */}
+                            <div className = "red-text text-darken-2">{}</div>
                         </div>
                     </div>
                 </form>
@@ -50,7 +56,8 @@ class Signin extends Component {
 }
 
 function validate (formValues) {
-    const error = {};
+    const error = {
+    };
 
     // if(!formValues.username){
     //     error.username = "Please enter a valid username";
@@ -59,14 +66,12 @@ function validate (formValues) {
     if(!formValues.email){
         error.email = "Please enter an email";
     }
-    if(!formValues.password){
-        error.password = "Please enter a valid password";
-    }
-    if(formValues.password && (formValues.password.length < 8 || formValues.password.length > 32)){
-        error.password = "Please enter a password that is greater than 8 characters, but less than or equal to 32 characters";
-    }
+    // if(!formValues.password){
+    //     error.password = "Please enter a valid password";
+    // }
 
     checkIfValidEmail (formValues.email, error);
+    checkIfPasswordStartsWithLetter (formValues.password, error);
     checkIfValidPassword (formValues.password, error);
 
     return error;
@@ -84,6 +89,19 @@ function checkIfValidEmail(email, error){
     }
 }
 
+function checkIfPasswordStartsWithLetter (password, error){
+    const regex = /^([a-zA-Z]{1})/g;
+    const testIfStartWithLetter = regex.test(password);
+
+    console.log("ERROR:", error);
+    
+    if(testIfStartWithLetter === true){
+        console.log("your password starts with a letter");
+    }else{
+        error.pwStartWithLetter = "password needs to start with letter"
+    }
+}
+
 function checkIfValidPassword(password, error){
     const regex = /^([a-zA-Z]{1})((?=.*\d)(?=.*[a-z])(?=.*[A-Z])).{6,32}$/g;
     const testPassword = regex.test(password);
@@ -92,7 +110,7 @@ function checkIfValidPassword(password, error){
         console.log('your password was accepted');
     }
     else {
-        error.password = "Please input a password that is between 6 - 32 characters";
+        error.password = "Password must contain at least 1 capital letter, 1 lowercase letter, and 1 number";
     }
 }
 
