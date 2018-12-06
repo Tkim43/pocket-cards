@@ -11,18 +11,13 @@ class Signin extends Component {
             <div className= {`input-field col ${props.size}`}>
                 <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
-                <div className = "red-text">{(props.meta.touched || props.meta.dirty) && props.meta.error}</div>
+                <ul>
+                    {props.meta.error.map ( (item, index) => {
+                        return <li key = {index} className="red-text">{item}</li>
+                    })}
+                </ul>
             </div>
         );
-    }
-    renderPassword1 (props) {
-        console.log("Render password 1 PROPS: ", props);
-        const pwErrors =  this.props.error.map ( (item, index) => {
-            
-            return (
-                <div className="red-text">{item}</div>
-            );
-        });
     }
 
     handleSignIn = (values) => {
@@ -31,8 +26,9 @@ class Signin extends Component {
     }
 
     render () {
-        const { handleSubmit, pwErrors} = this.props;
+        const { handleSubmit} = this.props;
         console.log("sign in error:", this.props);
+        console.log("this is PW ERRORS: ", this.props.pwErrors);
 
         return (
             <div className = "container">
@@ -46,13 +42,13 @@ class Signin extends Component {
                     </div>
                     <div className="row">
                         <Field size = "s12" type = "password" name = "password" label = "password" component = {this.renderInput}/>
-                        {pwErrors}
                     </div>
+                    {/* <div className="row">
+                        {this.renderPassword1()}
+                    </div> */}
                     <div className="row">
                         <div className="col s12 right-align">
                             <button className = "btn green lighten-2">Sign In</button>
-                            {/* <div className = "red-text text-darken-2">{signInError}</div> */}
-                            <div className = "red-text text-darken-2">{}</div>
                         </div>
                     </div>
                 </form>
@@ -64,22 +60,18 @@ class Signin extends Component {
 
 function validate (formValues) {
     const error = {
+        email: [],
+        password: []
     };
 
     // if(!formValues.username){
     //     error.username = "Please enter a valid username";
     // }
 
-    if(!formValues.email){
-        error.email = "Please enter an email";
-    }
-    // if(!formValues.password){
-    //     error.password = "Please enter a valid password";
-    // }
-
     checkIfValidEmail (formValues.email, error);
     checkIfPasswordStartsWithLetter (formValues.password, error);
-    checkIfValidPassword (formValues.password, error);
+    checkIfPasswordHasANum (formValues.password, error);
+    checkIfPasswordIsLongEnough (formValues.password, error);
 
     return error;
 }
@@ -92,12 +84,12 @@ function checkIfValidEmail(email, error){
         console.log("valid email satisfied");
     }
     else {
-        error.email = "Please input an email that ends with @[your-email-provider]";
+        error.email.push( "Please input an email that ends with @[your-email-provider]");
     }
 }
 
 function checkIfPasswordStartsWithLetter (password, error){
-    const regex = /^([a-zA-Z]{1})/g;
+    const regex = /^[a-zA-Z]/g;
     const testIfStartWithLetter = regex.test(password);
 
     console.log("ERROR:", error);
@@ -105,21 +97,32 @@ function checkIfPasswordStartsWithLetter (password, error){
     if(testIfStartWithLetter === true){
         console.log("your password starts with a letter");
     }else{
-        error.pwStartWithLetter = "password needs to start with letter"
+        error.password.push("Password needs to start with letter");
     }
 }
 
-function checkIfValidPassword(password, error){
-    const regex = /^([a-zA-Z]{1})((?=.*\d)(?=.*[a-z])(?=.*[A-Z])).{6,32}$/g;
-    const testPassword = regex.test(password);
-
-    if(testPassword === true) {
-        console.log('your password was accepted');
-    }
-    else {
-        error.password1 = "Password must contain at least 1 capital letter, 1 lowercase letter, and 1 number";
+function checkIfPasswordHasANum (password, error){
+    const regex = /\d/g;
+    const testIfStartWithLetter = regex.test(password);
+    
+    if(testIfStartWithLetter === true){
+        console.log("your password has at least one number");
+    }else{
+        error.password.push("Password needs to have at least one number");
     }
 }
+
+function checkIfPasswordIsLongEnough (password, error){
+    const regex = /[\w]{6,32}/g;
+    const testIfStartWithLetter = regex.test(password);
+    
+    if(testIfStartWithLetter === true){
+        console.log("your password has 6 - 32 chars");
+    }else{
+        error.password.push("Password needs to have between 6 to 32 chars");
+    }
+}
+
 
 Signin = reduxForm ({
     form: 'signin',
