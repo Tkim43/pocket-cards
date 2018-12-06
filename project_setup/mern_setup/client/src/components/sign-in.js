@@ -16,7 +16,13 @@ class Signin extends Component {
         );
     }
     renderPassword1 (props) {
-
+        console.log("Render password 1 PROPS: ", props);
+        const pwErrors =  this.props.error.map ( (item, index) => {
+            
+            return (
+                <div className="red-text">{item}</div>
+            );
+        });
     }
 
     handleSignIn = (values) => {
@@ -25,7 +31,7 @@ class Signin extends Component {
     }
 
     render () {
-        const { handleSubmit} = this.props;
+        const { handleSubmit, pwErrors} = this.props;
         console.log("sign in error:", this.props);
 
         return (
@@ -40,6 +46,7 @@ class Signin extends Component {
                     </div>
                     <div className="row">
                         <Field size = "s12" type = "password" name = "password" label = "password" component = {this.renderInput}/>
+                        {pwErrors}
                     </div>
                     <div className="row">
                         <div className="col s12 right-align">
@@ -110,7 +117,7 @@ function checkIfValidPassword(password, error){
         console.log('your password was accepted');
     }
     else {
-        error.password = "Password must contain at least 1 capital letter, 1 lowercase letter, and 1 number";
+        error.password1 = "Password must contain at least 1 capital letter, 1 lowercase letter, and 1 number";
     }
 }
 
