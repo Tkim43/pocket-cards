@@ -2,18 +2,14 @@ const express = require('express');
 const mysql = require ('mysql');
 const app = express();
 const { resolve } = require('path');
+const { dbConfig } = require('./config');
 // const router = express.Router();
 
 const PORT = process.env.PORT || 3001;
 
-const db = mysql.createConnection({
-        'host': 'localhost',
-        'user': 'root',
-        'password': 'root',
-        'database': 'pocketcards',
-        'port': 3306,
-        insecureAuth: true
-    });
+console.log('DB CONFIG:', dbConfig);
+
+const db = mysql.createConnection(dbConfig);
 
 
 db.connect((err) => {
@@ -42,7 +38,7 @@ function errorHandling(req, res){
 app.get('/api/userhome/:userID', (req, res, next) => {
     let { userID } = req.params;
     let query = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-    let inserts = ['displayName', 'avatar', 'users', 'ID', 2];
+    let inserts = ['displayName', 'avatar', 'users', 'ID', Number(userID)];
 
     let sql = mysql.format(query, inserts);
 
@@ -63,7 +59,7 @@ app.get('/api/userhome/:userID', (req, res, next) => {
 
         //get all categories with userID (DONE)
         let query = 'SELECT * FROM ?? WHERE ?? = ?';
-        let inserts = ['sets', 'userID', userID];
+        let inserts = ['sets', 'userID', Number(userID)];
 
         let sql = mysql.format(query, inserts);
 
@@ -167,7 +163,7 @@ app.post('/api/sign_up', (req, res, next)=>{
 app.post('/api/set_management/create_category', (req, res, next)=>{
     const { userID, category } = req.body;
     let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
-    let inserts = ['sets', 'userID', 'category', userID, category];
+    let inserts = ['sets', 'userID', 'category', Number(userID), category];
 
     let sql = mysql.format(query, inserts);
 
@@ -268,88 +264,88 @@ app.patch('/api/update_cards/:userID', (req, res, next)=>{
 }, errorHandling);
 
 
-//delete displayName, subCategories, and all cards
-// app.delete('', (req, res, next)=>{
-//     const {  } = req.body;
+//delete displayName, subCategories, and all cards (DONE)
+app.delete('/api/set_management/delete_user', (req, res, next)=>{
+    const { ID } = req.body;
     
-//     let query = '';
-//     let inserts = [];
+    let query = 'DELETE FROM ?? WHERE ??.??=?';
+    let inserts = ['users','users','ID',Number(ID)];
 
-//     let sql = mysql.format(query, inserts);
+    let sql = mysql.format(query, inserts);
 
-//     console.log("This is the formated SQL", sql);
+    console.log("This is the formated SQL", sql);
 
-//     const output = {
-//         success: true
-//     };
+    const output = {
+        success: true
+    };
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 
-//delete category, subCategories, and all cards
-// app.delete('', (req, res, next)=>{
-//     const {  } = req.body;
+// delete category, subCategories, and all cards (DONE)
+app.delete('/api/set_management/delete_set', (req, res, next)=>{
+    const { ID, userID } = req.body;
     
-//     let query = '';
-//     let inserts = [];
+    let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
+    let inserts = ['sets','sets','ID',Number(ID),'sets','userID',Number(userID)];
 
-//     let sql = mysql.format(query, inserts);
+    let sql = mysql.format(query, inserts);
 
-//     console.log("This is the formated SQL", sql);
+    console.log("This is the formated SQL", sql);
 
-//     const output = {
-//         success: true
-//     };
+    const output = {
+        success: true
+    };
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 
-//delete subCategory and all cards
-// app.delete('', (req, res, next)=>{
-//     const {  } = req.body;
+// delete subCategory and all cards (DONE)
+app.delete('/api/set_management/delete_subCategory_set', (req, res, next)=>{
+    const { ID, setID } = req.body;
     
-//     let query = '';
-//     let inserts = [];
+    let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
+    let inserts = ['topics','topics','ID',Number(ID),'topics','setID',Number(setID)];
 
-//     let sql = mysql.format(query, inserts);
+    let sql = mysql.format(query, inserts);
 
-//     console.log("This is the formated SQL", sql);
+    console.log("This is the formated SQL", sql);
 
-//     const output = {
-//         success: true
-//     };
+    const output = {
+        success: true
+    };
 
-//     db.query(sql, (err, results)=>{
-//         if(err) {
-//             req.status = 500;
-//         req.error = 'Error getting user data';
-//         return next();
-//         };
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
+        };
 
-//         output.data = results;
-//         res.send(output);
-//     });
-// }, errorHandling);
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 
 //delete card (DONE)

@@ -1,15 +1,16 @@
 
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import '../assets/css/sets.css'
-import auth from '../hoc/auth';
 import { connect } from 'react-redux';
 import {getSetsData} from '../actions';
 
 class Sets extends Component{
     componentDidMount(){
-        this.props.getSetsData();
+
+        console.log('SETS PROPS:', this.props);
+
+        this.props.getSetsData(this.props.match.params.set_id);
     }
 
     render(){
@@ -38,19 +39,21 @@ class Sets extends Component{
             
         console.log('Sets Props:', this.props)
 
-        const userCategory = this.props.data.map ((item, ID) => {
-          return(
-                <div key= {ID} className="row set">
-                    <div className ="btn blue darken-2">{item.category}</div>
-                </div>
-            ) 
-        }
-    );
+    //     const userCategory = this.props.category.map ((item, ID) => {
+    //       return(
+    //             <div key= {ID} className="row set">
+    //                 <div className ="btn blue darken-2">{item.category}</div>
+    //             </div>
+    //         ) 
+    //     }
+    // );
 
-        const userSubCategory = this.props.data.map ((item, index) => {
+        const userCategory = this.props.category;
+
+        const userSubCategory = this.props.sets.map ((item, index) => {
             return(
                 <div key= {index} className="row set">
-                    <Link to="/displayFront" className ="btn blue darken-2">{item.subCategory}</Link>
+                    <Link to="/displayFront" className ="btn blue darken-2">{item}</Link>
                 </div>
             );  
         }
@@ -70,8 +73,11 @@ class Sets extends Component{
 }
 
 function mapStateToProps(state){
+    console.log("this is the state", state)
     return{
-        data:state.sets.all
+        category:state.sets.category,
+        sets:state.sets.sets
+        
     }
 }
 
@@ -79,3 +85,4 @@ function mapStateToProps(state){
 export default connect(mapStateToProps, {
     getSetsData: getSetsData
 })(Sets);
+
