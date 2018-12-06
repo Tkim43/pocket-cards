@@ -2,18 +2,14 @@ const express = require('express');
 const mysql = require ('mysql');
 const app = express();
 const { resolve } = require('path');
+const { dbConfig } = require('./config');
 // const router = express.Router();
 
 const PORT = process.env.PORT || 3001;
 
-const db = mysql.createConnection({
-        'host': 'localhost',
-        'user': 'root',
-        'password': 'root',
-        'database': 'pocketcards',
-        'port': 3306,
-        insecureAuth: true
-    });
+console.log('DB CONFIG:', dbConfig);
+
+const db = mysql.createConnection(dbConfig);
 
 
 db.connect((err) => {
