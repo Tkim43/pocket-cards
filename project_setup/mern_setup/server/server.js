@@ -42,7 +42,7 @@ function errorHandling(req, res){
 app.get('/api/userhome/:userID', (req, res, next) => {
     let { userID } = req.params;
     let query = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-    let inserts = ['displayName', 'avatar', 'users', 'ID', 2];
+    let inserts = ['displayName', 'avatar', 'users', 'ID', Number(userID)];
 
     let sql = mysql.format(query, inserts);
 
@@ -63,7 +63,7 @@ app.get('/api/userhome/:userID', (req, res, next) => {
 
         //get all categories with userID (DONE)
         let query = 'SELECT * FROM ?? WHERE ?? = ?';
-        let inserts = ['sets', 'userID', userID];
+        let inserts = ['sets', 'userID', Number(userID)];
 
         let sql = mysql.format(query, inserts);
 
@@ -167,7 +167,7 @@ app.post('/api/sign_up', (req, res, next)=>{
 app.post('/api/set_management/create_category', (req, res, next)=>{
     const { userID, category } = req.body;
     let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
-    let inserts = ['sets', 'userID', 'category', userID, category];
+    let inserts = ['sets', 'userID', 'category', Number(userID), category];
 
     let sql = mysql.format(query, inserts);
 
