@@ -53,7 +53,7 @@ class Sets extends Component{
         const userSubCategory = this.props.sets.map ((item, index) => {
             return(
                 <div key= {index} className="row set">
-                    <Link to="/displayFront" className ="btn blue darken-2">{item}</Link>
+                    <Link to="/displayCard" className ="btn blue darken-2">{item}</Link>
                 </div>
             );  
         }

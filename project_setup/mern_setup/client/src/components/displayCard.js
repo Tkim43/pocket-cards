@@ -32,7 +32,7 @@ class displayCard extends Component{
                 <div className="row">
                     <h1>{this.state.flipped ? "Front of Card" : "Back of Card"}</h1>
                 </div>
-                <div className={"card center cardflip grey " + (this.state.flipped ? "" : "flipped")}>
+                <div className={"card center cardflip " + (this.state.flipped ? "" : "flipped")}>
                     <div className="front">{front_description}</div>
                     <div className="back">{back_description}</div>
                 </div>
