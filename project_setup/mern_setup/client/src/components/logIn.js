@@ -1,52 +1,11 @@
 
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import axios from 'axios';
-// import dummyData from '../../../server/managingCards';
-=======
->>>>>>> d11b8fde47f0493a047265aa96974909451a03b9
 import kangaroo from '../assets/images/kangaroo_logo_3_edited2.png'
 import "../assets/css/logIn.css";
 
 
 class Login extends Component{
-<<<<<<< HEAD
-    constructor(props){
-        super(props)
-        this.state ={
-            data:[]
-        }
-    }
-    componentDidMount(){
-        this.getUserData();
-    }
-
-    componentDidUpdate() {
-        console.log("State after using set state ", this.state);
-    }
-    // example async call
-    // async getUserData(){
-    //     try{
-    //         // const resp = await axios.get(BASE_URL + API_KEY);
-    //         // const resp = await axios.get(dummyData);
-    //         this.setState({
-    //             data: dummyData,
-                
-    //         });
-    //     }catch(err){
-    //         this.setState({
-    //             error: 'Error getting userData'
-    //         });
-    //     }
-    // }
-    getUserData(){
-        this.setState({
-            // data: dummyData,
-        })
-    }
-=======
->>>>>>> d11b8fde47f0493a047265aa96974909451a03b9
     render(){
         return(
             <div className="center">
