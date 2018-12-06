@@ -19,9 +19,6 @@ db.connect((err) => {
 
 });
 
-// module.exports = db;
-
-
 //middleware 
 app.use(express.static(resolve(__dirname,'client','dist')));
 app.use(express.json());
