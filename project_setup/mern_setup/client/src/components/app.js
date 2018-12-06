@@ -10,23 +10,21 @@ import FlashcardGeneration from './flashcardGeneration';
 import Signup from './sign-up';
 import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
-import displayFront from './displayFront';
-import displayBack from './displayBack';
-import editMode from './editMode';
-import Login from './login';
-import Signin from './sign-in';
-
+import displayCard from './displayCard'
+import editMode from './editMode'
+import Login from './login'
+import Signin from './sign-in'
 import auth from '../hoc/auth';
+
 
 const App = () => (
     <div>
         <Navbar/>
         <Route exact path = "/" component = {Login}/>
+        <Route path = "/displayCard" component= {displayCard}/>
         <Route path = "/sets/:set_id" component = {auth(Sets)}/>
         <Route path = "/profile" component = {auth(Profile)}/>
         <Route path = "/flashcards" component = {auth(Flashcards)}/>
-        <Route path = "/displayFront" component= {displayFront}/>
-        <Route path = "/displayBack" component= {displayBack}/>
         <Route path = "/editMode" component= {editMode}/>
         <Route path = "/createflashcards" component = {InputDefinition}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
