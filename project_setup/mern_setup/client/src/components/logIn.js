@@ -2,7 +2,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import dummyData from '../../../server/managingCards';
+// import dummyData from '../../../server/managingCards';
 import kangaroo from '../assets/images/kangaroo_logo_3_edited2.png'
 import "../assets/css/logIn.css";
 
@@ -38,7 +38,7 @@ class Login extends Component{
     // }
     getUserData(){
         this.setState({
-            data: dummyData,
+            // data: dummyData,
         })
     }
     render(){
