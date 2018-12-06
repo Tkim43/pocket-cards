@@ -1,7 +1,6 @@
 
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import '../assets/css/sets.css'
 import { connect } from 'react-redux';
 import {getSetsData} from '../actions';
