@@ -3,6 +3,5 @@ module.exports = {
     'user': '',
     'password': '',
     'database': '',
-    'port': 0000,
-    insecureAuth: true
+    'port': 0000
 }
