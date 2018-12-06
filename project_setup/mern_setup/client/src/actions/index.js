@@ -117,3 +117,13 @@ export function getAllCardData(){
     }
 }
 
+export function sendCategoryData(){
+    const resp= axios.post(`${BASE_URL}/set_management/create_category`,{userID:1,category:"Fishing"} )
+    console.log("Update Cards Server response:",resp)
+    return{
+        type:types.SEND_CATEGORY_DATA,
+        payload:resp
+    }
+}
+
+

@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 import '../assets/css/modal.css';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {sendCategoryData} from '../actions';
 
 class ButtonModal extends Component {
     state = {
-        isOpen: false
+        isOpen: false,
+        category: ''
     };
+
+
+    updateCategory(){
+        this.setState({
+            category: event.currentTarget.value
+        })
+    }
 
     open = () => this.setState({isOpen: true});
 
     close = () => this.setState({isOpen: false});
 
     render(){
+        console.log("Category Props:", this.props);
 
         if(this.state.isOpen){
             return (
@@ -22,7 +33,7 @@ class ButtonModal extends Component {
                                 <form className="col s12">
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <textarea onChange={ e => this.setState({term: e.target.value})}  className="materialize-textarea" id="textarea1"></textarea>
+                                                <textarea onChange={this.updateCategory} className="materialize-textarea" id="textarea1"></textarea>
                                                 <label htmlFor="textarea1">Create Category</label>
                                             </div>
                                         </div>
@@ -53,4 +64,6 @@ class ButtonModal extends Component {
     }
 }
 
-export default ButtonModal;
+export default connect(null, {
+    sendCategoryData: sendCategoryData
+})(ButtonModal);

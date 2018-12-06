@@ -11,4 +11,5 @@ export default {
     GET_CARD_DATA: 'get_card_data',
     SEND_CARD_DATA: 'send_card_data',
     GET_ALL_CARD_DATA: 'get_all_card_data',
+    SEND_CATEGORY_DATA: 'send_category_data'
 };
