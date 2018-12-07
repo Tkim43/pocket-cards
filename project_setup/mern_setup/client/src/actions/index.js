@@ -117,6 +117,24 @@ export function getAllCardData(){
     }
 }
 
+export function sendCategoryData(updatedCategory){
+    const resp= axios.post(`${BASE_URL}/set_management/create_category`, updatedCategory )
+    console.log("Update Cards Server response:",resp)
+    return{
+        type:types.SEND_CATEGORY_DATA,
+        payload:resp
+    }
+}
+
+export function sendSubCategoryData(updatedSubCategory){
+    const resp= axios.post(`${BASE_URL}/set_management/create_subcategory`,updatedSubCategory )
+    console.log("Update Subcategory Server response:",resp)
+    return{
+        type:types.SEND_SUBCATEGORY_DATA,
+        payload:resp
+    }
+}
+
 export function deleteCardData(ID){
     console.log("action param", ID)
     const resp = axios.post(`${BASE_URL}/set_management/delete_card`, ID);

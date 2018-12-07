@@ -7,46 +7,10 @@ import {getSetsData} from '../actions';
 
 class Sets extends Component{
     componentDidMount(){
-
-        console.log('SETS PROPS:', this.props);
-
         this.props.getSetsData(this.props.match.params.set_id);
     }
 
     render(){
-
-    
-        // if(this.state.loading){
-        //     return (
-        //         <div className="loading-container">
-        //             <div className="preloader-wrapper big active">
-        //                 <div className="spinner-layer spinner-blue-only">
-        //                     <div className="circle-clipper left">
-        //                     <div class="circle"></div>
-        //                     </div>
-        //                     <div className="gap-patch">
-        //                         <div className="circle"></div>
-        //                     </div>
-        //                     <div className="circle-clipper right">
-        //                         <div className="circle"></div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     )
-        // }
-        
-            
-        console.log('Sets Props:', this.props)
-
-    //     const userCategory = this.props.category.map ((item, ID) => {
-    //       return(
-    //             <div key= {ID} className="row set">
-    //                 <div className ="btn blue darken-2">{item.category}</div>
-    //             </div>
-    //         ) 
-    //     }
-    // );
 
         const userCategory = this.props.category;
 
