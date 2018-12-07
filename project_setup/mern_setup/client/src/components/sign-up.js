@@ -12,7 +12,7 @@ class Signup extends Component {
                 <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
                 <ul>
-                    {props.meta.error.map ( (item, index) => {
+                    {(props.meta.touched || props.meta.dirty) && props.meta.error.map ( (item, index) => {
                         return <li key = {index} className="red-text">{item}</li>
                     })}
                 </ul>
@@ -79,7 +79,7 @@ function checkIfValidEmail(email, error){
     }
 }
 
-function checkIfPasswordStartsWithLetter (password, error){
+function checkIfPasswordStartsWithLetter (password = "", error){
     const regex = /^[a-zA-Z]/g;
     const testIfStartWithLetter = regex.test(password);
 
@@ -92,7 +92,7 @@ function checkIfPasswordStartsWithLetter (password, error){
     }
 }
 
-function checkIfPasswordHasANum (password, error){
+function checkIfPasswordHasANum (password = "", error){
     const regex = /\d/g;
     const testIfStartWithLetter = regex.test(password);
     
@@ -103,7 +103,7 @@ function checkIfPasswordHasANum (password, error){
     }
 }
 
-function checkIfPasswordIsLongEnough (password, error){
+function checkIfPasswordIsLongEnough (password = "", error){
     const regex = /[\w]{6,32}/g;
     const testIfStartWithLetter = regex.test(password);
     
