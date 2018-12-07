@@ -12,7 +12,7 @@ class Signin extends Component {
                 <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
                 <ul>
-                    {(props.meta.dirty) || props.meta.error.map ( (item, index) => {
+                    {(props.meta.touched || props.meta.dirty) || props.meta.error.map ( (item, index) => {
                         return <li key = {index} className="red-text">{item}</li>
                     })}
                 </ul>
