@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getAllCardData} from '../actions'
+import {getAllCardData} from '../actions';
+import {deleteCardData} from '../actions';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
         this.props.getAllCardData();
+    }
+    delete = () =>{
+        // console.log("ID for delete", ID);
+        console.log("these are your props", this.props)
+        this.props.deleteCardData({ID: 9, topicID: 1});
     }
     render () {
         console.log("this is your card", this.props.card)
@@ -32,23 +38,20 @@ class FlashcardGeneration extends Component {
         const cardCounter = this.props.card.all_descriptions.length
         const listCards = this.props.card.all_descriptions.map((item,ID) =>{
             return(
-                 <div key = {item.ID} className="row">
+                <div key = {item.ID} className="row">
                     <div className="col s5 card-container">
-                       <Link to = "/editMode" className="card-panel teal lighten-1 white-text card" >
+                        <Link to = "/editMode" className="card-panel teal lighten-1 white-text card" >
                             <div>{item.frontText}</div>
-                       </Link> 
-                   </div>
+                        </Link> 
+                    </div>
                     <div className="col s5 card-container">
-                       <Link to = "/editMode" className="card-panel teal lighten-1 white-text card">
+                        <Link to = "/editMode" className="card-panel teal lighten-1 white-text card">
                             <div>{item.backText}</div>
                         </Link>
-                   </div>
+                    </div>
                     <div className="col s2 card-container">
-                      <div className = "card-panel red lighten-2 white-text center">
-                      Delete
-                          <i className="material-icons right">delete</i>
-                       </div>
-                   </div>
+                        <button className="red btn" onClick={this.delete} >delete</button>
+                    </div>
                 </div>
             )
         })
@@ -59,14 +62,11 @@ class FlashcardGeneration extends Component {
                 <h1 className = "col s12 center">{category}</h1>
                 <h2 className = "col s12 center">Card Counter: {cardCounter}</h2>
                 <div className="row">                    
-                    <div className="col s5 card-container">
+                    <div className="row card-container">
                         <div className="card-panel blue lighten-2 white-text center">Term</div> 
                     </div>
                     <div className="col s5 card-container">
                         <div className="card-panel blue lighten-2 white-text center">Definition</div>
-                    </div>
-                    <div className="col s2 card-container">
-                        <div className="card-panel red lighten-2 white-text center">Delete</div>
                     </div>
                 </div>
                 {listCards}
@@ -94,4 +94,5 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps, {
     getAllCardData,
+    deleteCardData
 })(FlashcardGeneration);

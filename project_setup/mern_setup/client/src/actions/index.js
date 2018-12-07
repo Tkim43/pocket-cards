@@ -72,7 +72,7 @@ export function userSignUp(user){
         } catch (err){
             dispatch ({
                 type: types.SIGN_UP_ERROR,
-                error: "email address already exists"
+                // error: "email address already exists"
             });
         }
     }
@@ -93,7 +93,7 @@ export function userSignIn(user){
         } catch (err){
             dispatch({
                 type: types.SIGN_IN_ERROR,
-                error: "Invalid email and/or password"
+                // error: "Invalid email and/or password"
             });
         }
         
@@ -132,5 +132,14 @@ export function sendSubCategoryData(updatedSubCategory){
     return{
         type:types.SEND_SUBCATEGORY_DATA,
         payload:resp
+    }
+}
+
+export function deleteCardData(ID){
+    console.log("action param", ID)
+    const resp = axios.post(`${BASE_URL}/set_management/delete_card`, ID);
+    return{
+        type: types.DELETE_CARD_DATA,
+        payload: resp
     }
 }

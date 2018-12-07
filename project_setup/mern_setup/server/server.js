@@ -19,9 +19,6 @@ db.connect((err) => {
 
 });
 
-// module.exports = db;
-
-
 //middleware 
 app.use(express.static(resolve(__dirname,'client','dist')));
 app.use(express.json());
@@ -349,7 +346,7 @@ app.delete('/api/set_management/delete_subCategory_set', (req, res, next)=>{
 
 
 //delete card (DONE)
-app.delete('/api/set_management/delete_card', (req, res, next)=>{
+app.post('/api/set_management/delete_card', (req, res, next)=>{
         const { ID, topicID  } = req.body;
         
         let query = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
@@ -380,5 +377,5 @@ app.delete('/api/set_management/delete_card', (req, res, next)=>{
 
 //starts Express server on defined port
 app.listen(PORT, ()=>{
-    console.log("Tiff likes messing with gingers because she secretly loves them!");
+    console.log("Ginger's must stay obedient to their supreme leader!!!");
 });
