@@ -12,6 +12,13 @@ class ButtonModal extends Component {
         subCategory: ''
     };
 
+    async componentDidMount(){
+        this.setState({
+            category: this.props.category,
+            subCategory: this.props.subCategory
+        });
+    }
+
 
     updateCategory = event =>{
         this.setState({
@@ -80,7 +87,15 @@ class ButtonModal extends Component {
     }
 }
 
-export default connect(null, {
+function mapStateToProps(state){
+    console.log("category and subcategory state", state)
+    return{
+        category:state.sets.category,
+        sets:state.sets.sets
+    }
+}
+
+export default connect(mapStateToProps, {
     sendCategoryData: sendCategoryData,
     sendSubCategoryData: sendSubCategoryData 
 })(withRouter(ButtonModal));
