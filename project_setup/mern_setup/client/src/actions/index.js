@@ -118,7 +118,7 @@ export function getAllCardData(){
 }
 
 export function sendCategoryData(){
-    const resp= axios.post(`${BASE_URL}/set_management/create_category`,{userID:1,category:"Fishing"} )
+    const resp= axios.post(`${BASE_URL}/set_management/create_category`,{userID:1,category:"Phone"} )
     console.log("Update Cards Server response:",resp)
     return{
         type:types.SEND_CATEGORY_DATA,
@@ -126,4 +126,11 @@ export function sendCategoryData(){
     }
 }
 
-
+export function sendSubCategoryData(){
+    const resp= axios.post(`${BASE_URL}/set_management/create_subcategory`,{setID:"7",subCategory:"Samsung"} )
+    console.log("Update Subcategory Server response:",resp)
+    return{
+        type:types.SEND_SUBCATEGORY_DATA,
+        payload:resp
+    }
+}

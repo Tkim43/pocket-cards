@@ -8,6 +8,9 @@ import types from '../actions/types';
         case types.SEND_CATEGORY_DATA:
             console.log('Category Reducer:',action);
             return state;
+        case types.SEND_SUBCATEGORY_DATA:
+            console.log('Subcategory Reducer:', action);
+            return state;
         default:
             return state;
     }
