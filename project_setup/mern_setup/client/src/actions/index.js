@@ -117,3 +117,11 @@ export function getAllCardData(){
     }
 }
 
+export function deleteCardData(ID){
+    console.log("action param", ID)
+    const resp = axios.post(`${BASE_URL}/set_management/delete_card`, ID);
+    return{
+        type: types.DELETE_CARD_DATA,
+        payload: resp
+    }
+}

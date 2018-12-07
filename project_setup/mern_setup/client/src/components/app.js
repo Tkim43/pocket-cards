@@ -10,10 +10,10 @@ import FlashcardGeneration from './flashcardGeneration';
 import Signup from './sign-up';
 import InputDefinition from './inputDefinition';
 import { Route } from 'react-router-dom';
-import displayCard from './displayCard'
-import editMode from './editMode'
-import Login from './login'
-import Signin from './sign-in'
+import displayCard from './displayCard';
+import editMode from './editMode';
+import Login from './login';
+import Signin from './sign-in';
 import auth from '../hoc/auth';
 
 
