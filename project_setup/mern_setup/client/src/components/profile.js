@@ -56,7 +56,7 @@ class Profile extends Component {
                 <div className="row category-info" key = {item.ID}>
                     <div className = "col s12 white-text">{this.findTimePassed(item)}</div>
                     <div className="col s12 card-container">
-                        <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center">{item.category}</Link>
+                        <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
                     </div>
                 </div>
             );
@@ -81,12 +81,12 @@ class Profile extends Component {
                 </div>
                 <div className = "sort-row row">
                     <div className="sort col s12 white-text">Sort: 
-                        <button onClick = {this.handleSortByLatestClick} className = "btn-small soft-blue sort-button">Latest</button>
-                        <button onClick = {this.handleAlphabeticalClick} className = "btn-small soft-blue sort-button">Alphabetical</button>
+                        <button onClick = {this.handleSortByLatestClick} className = "btn-small soft-blue sort-button button-bold-text">Latest</button>
+                        <button onClick = {this.handleAlphabeticalClick} className = "btn-small soft-blue sort-button button-bold-text">Alphabetical</button>
                     </div>
                 </div>
                 <div className="row">
-                <div className="col s12 card-container">
+                <div className="col s12 card-container create-category-bold-text">
                         <BasicModal/>
                 </div>
                 </div>
