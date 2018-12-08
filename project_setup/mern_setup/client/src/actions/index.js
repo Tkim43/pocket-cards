@@ -117,21 +117,16 @@ export function getAllCardData(){
     }
 }
 
-export function sendCategoryData(updatedCategory){
-    const resp= axios.post(`${BASE_URL}/set_management/create_category`, updatedCategory )
-    console.log("Update Cards Server response:",resp)
-    return{
-        type:types.SEND_CATEGORY_DATA,
-        payload:resp
-    }
-}
+export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategory){
+    const subcategoryCreationResponse= axios.post(`${BASE_URL}/set_management/create_category`, updatedCategory ).then(categoryCreationResponse => {
+        console.log('category and subcategory response:', categoryCreationResponse);
+        updatedSubCategory.setID = categoryCreationResponse.data.data.insertId;
+        return axios.post(`${BASE_URL}/set_management/create_subcategory`,updatedSubCategory )
 
-export function sendSubCategoryData(updatedSubCategory){
-    const resp= axios.post(`${BASE_URL}/set_management/create_subcategory`,updatedSubCategory )
-    console.log("Update Subcategory Server response:",resp)
+    });
     return{
-        type:types.SEND_SUBCATEGORY_DATA,
-        payload:resp
+        type:types.SEND_CATEGORY_AND_SUBCATEGORY_DATA,
+        payload:subcategoryCreationResponse
     }
 }
 

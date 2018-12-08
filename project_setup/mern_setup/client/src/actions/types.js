@@ -11,7 +11,6 @@ export default {
     GET_CARD_DATA: 'get_card_data',
     SEND_CARD_DATA: 'send_card_data',
     GET_ALL_CARD_DATA: 'get_all_card_data',
-    SEND_CATEGORY_DATA: 'send_category_data',
-    SEND_SUBCATEGORY_DATA: 'send_subcategory_data',
+    SEND_CATEGORY_AND_SUBCATEGORY_DATA:'send_category_and_subcategory_data',
     DELETE_CARD_DATA: 'delete_card_data'
 };

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/modal.css';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {sendCategoryData} from '../actions';
-import {sendSubCategoryData} from '../actions';
+import {sendCategoryAndSubcategoryData} from '../actions';
 
 class ButtonModal extends Component {
     state = {
@@ -34,8 +33,7 @@ class ButtonModal extends Component {
 
     handleClick = async (e) => {
         e.preventDefault();
-        await this.props.sendCategoryData({userID: 1,category: this.state.category});
-        await this.props.sendSubCategoryData({setID: 1,subCategory: this.state.subCategory});
+        await this.props.sendCategoryAndSubcategoryData({userID:1,category: this.state.category},{subCategory:this.state.subCategory});
 
         this.props.history.push('/createflashcards');
     }
@@ -96,6 +94,5 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {
-    sendCategoryData: sendCategoryData,
-    sendSubCategoryData: sendSubCategoryData 
+    sendCategoryAndSubcategoryData
 })(withRouter(ButtonModal));
