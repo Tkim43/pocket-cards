@@ -1,8 +1,9 @@
 /* Flashcard Generation Page */
 
 .card{
-    max-height: 350px;
-    height: 400px;
+    max-height: 500px;
+    height:auto;
+    overflow:scroll;
 }
 
 .row {
@@ -24,4 +25,8 @@
 
 .card-panel > i {
     margin: 0 auto;
+}
+
+.red.btn.delete-btn {
+    width: 100%;
 }
