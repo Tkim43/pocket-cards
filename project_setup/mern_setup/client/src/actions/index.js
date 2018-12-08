@@ -117,6 +117,7 @@ export function getAllCardData(){
     }
 }
 
+//Vienna's
 export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategory){
     const subcategoryCreationResponse= axios.post(`${BASE_URL}/set_management/create_category`, updatedCategory ).then(categoryCreationResponse => {
         console.log('category and subcategory response:', categoryCreationResponse);
@@ -135,6 +136,16 @@ export function deleteCardData(ID){
     const resp = axios.post(`${BASE_URL}/set_management/delete_card`, ID);
     return{
         type: types.DELETE_CARD_DATA,
+        payload: resp
+    }
+}
+
+//Vienna's
+export function sendCreateCardData(createCard){
+    const resp = axios.post(`${BASE_URL}/set_management/create_card`,createCard);
+    console.log("this is the response from axios for card creation", resp);
+    return{
+        type:types.CREATE_CARD_DATA,
         payload: resp
     }
 }

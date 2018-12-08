@@ -6,6 +6,7 @@ import profileReducer from './profile_reducer';
 import setsReducer from './sets_reducer';
 import cardReducer from './card_reducer';
 import modalReducer from './modal_reducer';
+import createCardReducer from './add_card_reducer';
 
 
 const rootReducer = combineReducers ({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers ({
     form: formReducer,
     sets:setsReducer,
     card: cardReducer,
-    modal: modalReducer
+    modal: modalReducer,
+    createCard: createCardReducer
 
 });
 
