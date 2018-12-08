@@ -5,6 +5,11 @@
     height: 350px;
 }
 
+.text-inside-card {
+    max-height: 500px;
+    height: 150px;
+}
+
 .row {
     display: flex;
 }
@@ -29,6 +34,12 @@
 
 .card-panel > i {
     margin: 0 auto;
+}
+
+.card-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .red.btn.delete-btn {
