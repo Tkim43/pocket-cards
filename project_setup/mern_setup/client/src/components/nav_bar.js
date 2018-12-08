@@ -61,7 +61,7 @@ class Navbar extends Component {
             <div>
                 <nav style = {navStyle} className = "nav_bar grey darken-4 ">
                     <div className="nav-wrapper">
-                        <a className="brand-logo">Pocket Cards</a>
+                        <Link to = "/profile" className="brand-logo brand-logo-text">Pocket Cards</Link>
                         <Link to = "#" data-target = "slide-out" className = "sidenav-trigger"> <i className="material-icons">dehaze</i> </Link>
                         <ul className = "left hide-on-med-and-down">
                             {this.renderLinks()}

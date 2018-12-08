@@ -26,18 +26,18 @@ class Profile extends Component {
         }
         else if(result >= 3600000){
             var numOfHours = result / 3600000;
-            return `Updated ${Math.floor(numOfHours)} hours ago`;
+            return `Updated : ${Math.floor(numOfHours)} hours ago`;
         }
         else if(result >= 60000){
             var numOfMinutes = result / 60000;
-            return `Updated ${Math.floor(numOfMinutes)} minutes ago`;
+            return `Updated : ${Math.floor(numOfMinutes)} minutes ago`;
         }
         else if (result >= 1000){
             var numOfSeconds = result / 1000;
-            return `Updated ${Math.floor(numOfSeconds)} seconds ago`;
+            return `Updated : ${Math.floor(numOfSeconds)} seconds ago`;
         }
         else {
-            return "Updated Now";
+            return "Updated : Now";
         }
     }
     
@@ -54,7 +54,7 @@ class Profile extends Component {
             
             return (
                 <div className="row category-info" key = {item.ID}>
-                    <div className = "col s12">{this.findTimePassed(item)}</div>
+                    <div className = "col s12 white-text">{this.findTimePassed(item)}</div>
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center">{item.category}</Link>
                     </div>
@@ -69,18 +69,18 @@ class Profile extends Component {
         return (
         <div className = "container">
             <div className = "profile-container row col s12">
-                <div className="row valign-wrapper profile-section">
+                <div className="profile-section">
                     <div className="col s4">
                         <img src= {profileUserAvatar} alt="" className="circle profile-pic"/>
                     </div>
-                    <div className="col s8">
-                        <div className="black-text avatar-text">
+                    <div className="col s8 avatar-box">
+                        <div className="white-text avatar-text">
                         {profileUserInfo}
                         </div>
                     </div>
                 </div>
                 <div className = "sort-row row">
-                    <div className="sort col s12">Sort: 
+                    <div className="sort col s12 white-text">Sort: 
                         <button onClick = {this.handleSortByLatestClick} className = "btn-small soft-blue sort-button">Latest</button>
                         <button onClick = {this.handleAlphabeticalClick} className = "btn-small soft-blue sort-button">Alphabetical</button>
                     </div>
