@@ -36,7 +36,6 @@ class inputDefinition extends Component {
     }
         
     sendCreateCardDataAdd = async (e) => {
-        debugger;
         e.preventDefault();
         await this.props.sendCreateCardData({topicID:1, frontText:this.state.frontText, backText:this.state.backText});
         this.props.history.push('/createflashcards');
