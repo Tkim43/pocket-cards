@@ -1,20 +1,23 @@
 
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
-import kangaroo from '../assets/images/kangaroo_logo_3_edited2.png'
+import kangaroo from '../assets/images/kangaroo_logo_3.png'
 import "../assets/css/logIn.css";
 
 
 class Login extends Component{
     render(){
         return(
-            <div className="center">
-                <div className="border">Sign Up /Log In Page</div>
+            <div className="center mainContainer">
                 <img src={kangaroo}></img>
-                <blockquote>Welcome to Pocket Cards, our mission is to help students practice and master whatever they are learning. Pocket Cards provides engaging, customizable flashcards with contributions from people everywhere.</blockquote>
+                <div className="divider cyan lighten-3"></div>
+                <div className="container">
+                    <p className="white-text">Welcome to Pocket Cards, our mission is to help students practice and master whatever they are learning. Pocket Cards provides engaging, customizable flashcards with contributions from people everywhere.</p>
+                </div>
+                <div className="divider cyan lighten-3"></div>
                 <div className="row">
-                    <Link to ="/signup" className="btn light blue darken-2">Sign Up</Link>
-                    <Link to ="/signin" className="btn black darken-2">Log In Now</Link>
+                    <Link to ="/signup" className="black-text btn cyan lighten-3">Sign Up</Link>
+                    <Link to ="/signin" className="black-text btn amber lighten-3">Log In</Link>
                 </div>
             </div>
         )

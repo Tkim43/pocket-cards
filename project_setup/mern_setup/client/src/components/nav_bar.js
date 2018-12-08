@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userSignOut } from "../actions/index";
+import '../assets/css/nav_bar.css'
 
 class Navbar extends Component {
 
@@ -53,15 +54,14 @@ class Navbar extends Component {
 
     render() {
         const navStyle = {
-            padding: '0 8px'
+            padding: '0 8px',
         }
-
         console.log('User Auth:', this.props.auth);
-
         return (
             <div>
-                <nav style = {navStyle} className = "lime darken-2 ">
+                <nav style = {navStyle} className = "nav_bar grey darken-4 ">
                     <div className="nav-wrapper">
+                        <a className="brand-logo">Pocket Cards</a>
                         <Link to = "#" data-target = "slide-out" className = "sidenav-trigger"> <i className="material-icons">dehaze</i> </Link>
                         <ul className = "left hide-on-med-and-down">
                             {this.renderLinks()}
