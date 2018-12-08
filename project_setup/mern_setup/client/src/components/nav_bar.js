@@ -48,26 +48,26 @@ class Navbar extends Component {
                     </li>
                 );
             }));
-        
+            linkElements.push(<li className = "nav-item" key="moo">
+                                    <div className="divider" />
+                              </li>);
+            linkElements.push(<li className = "nav-item" key="cow">
+                                    <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
+                              </li>);
         return (
             <Fragment>
-                <nav className = "main-nav">
+                <nav className = "main-nav grey darken-4">
                     <div className="nav-wrapper">
                         <Link className = "brand-logo" to = "/">PocketCards</Link>
                         <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
                         <ul className = "right hide-on-med-and-down"> 
                         {linkElements}
-                            <li className = "nav-item">
-                                <div className="divider" />
-                            </li>
-                            <li className = "nav-item">
-                                <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
-                            </li>
                         </ul>
                     </div>
                 </nav>
 
-                <SideNav setRef = {this.setSideNavRef} links = {linkElements}/>
+                <SideNav setRef = {this.setSideNavRef} links = {linkElements}>
+                </SideNav>
             </Fragment>
         );
 
