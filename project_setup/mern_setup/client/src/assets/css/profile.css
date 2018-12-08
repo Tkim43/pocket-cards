@@ -41,6 +41,7 @@
 .sort-row {
     align-items: center;
     justify-content: flex-start;
+    margin-bottom: 10px;
 }
 
 .sort-button {
@@ -74,4 +75,20 @@
 
 .btn:hover, .btn-large:hover, .btn-small:hover{
     background-color: #6db0cf;
+}
+
+/* For texts  */
+.sets-bold-text {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.button-bold-text {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.create-category-bold-text {
+    font-size: 2rem;
+    font-weight: bold;
 }
