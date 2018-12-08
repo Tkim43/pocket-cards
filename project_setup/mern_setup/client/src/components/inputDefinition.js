@@ -8,52 +8,57 @@ import {sendCreateCardData} from '../actions';
 
 class inputDefinition extends Component {
     state = {
-        term: '',
-        defintion: ''
+        frontText: '',
+        backText: ''
     }
 
     async componentDidMount(){
         this.setState({
-            term:this.props.term,
-            definition:this.props.definition
+            frontText: this.props.frontText,
+            backText: this.props.backText
         });
+    }
+
+    componentDidUpdate() {
+        console.log("This is our current state", this.state);
     }
 
     updateTerm = event => {
         this.setState({
-            term: event.currentTarget.value
+            frontText: event.currentTarget.value
         });
     }
 
     updateDefinition = event => {
         this.setState({
-            definition: event.currentTarget.value
+            backText: event.currentTarget.value
         })
     }
-
+        
     sendCreateCardDataAdd = async (e) => {
+        debugger;
         e.preventDefault();
-        await this.props.sendCreateCardData({topicID:1, frontText:"who is the CSS instructor at LFZ", backText:"Cody"});
+        await this.props.sendCreateCardData({topicID:1, frontText:this.state.frontText, backText:this.state.backText});
         this.props.history.push('/createflashcards');
     }
 
     sendCreateCardDataEdit = async (e) => {
         e.preventDefault();
-        await this.props.sendCreateCardData({topicID:1, frontText:"who is the React instructor at LFZ", backText:"Scott"});
+        await this.props.sendCreateCardData({topicID:1, frontText:this.state.frontText, backText:this.state.backText});
 
         this.props.history.push('/flashcardGeneration');
     }
 
     sendCreateCardDataDone = async (e) => {
         e.preventDefault();
-        await this.props.sendCreateCardData({topicID:1, frontText:"who is the React instructor at LFZ", backText:"Scott"});
+        await this.props.sendCreateCardData({topicID:1, frontText:this.state.frontText, backText:this.state.backText});
 
         this.props.history.push('/sets');
     }
 
     render () {
 
-        const { term, defintion } = this.state;
+        const { frontText, backText } = this.state;
 
         return (
             <div className = "container">
@@ -63,17 +68,17 @@ class inputDefinition extends Component {
                     <form className="col s12">
                         <div className="row">
                             <div className="input-field col s12">
-                                <textarea value={this.term} onChange={this.updateTerm}  className="materialize-textarea" id="textarea1"></textarea>
+                                <textarea value={frontText} onChange={this.updateTerm}  className="materialize-textarea" id="textarea1"></textarea>
                                 <label htmlFor="textarea1">Term</label>
-                                {/* <div className="right-align">{this.term.length}/50</div> */}
+                                {/* <div className="right-align">{this.frontText.length}/50</div> */}
                             </div>
                             
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <textarea value={this.defintion} onChange={this.updateDefinition}  className="materialize-textarea" id="textarea2"></textarea>
+                                <textarea value={backText} onChange={this.updateDefinition}  className="materialize-textarea" id="textarea2"></textarea>
                                 <label htmlFor="textarea2">Definition</label>
-                                {/* <div className="right-align">{defintion.length}/150</div> */}
+                                {/* <div className="right-align">{backText.length}/150</div> */}
                             </div>
                         </div>
                     </form>
@@ -101,7 +106,8 @@ class inputDefinition extends Component {
 function mapStateToProps(state){
     console.log("create card State:", state)
     return{
-
+        frontText: state.card.frontText,
+        backText: state.card.backText
     }
 }
 
