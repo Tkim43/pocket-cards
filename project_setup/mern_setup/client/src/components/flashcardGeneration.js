@@ -39,32 +39,22 @@ class FlashcardGeneration extends Component {
         const listCards = this.props.card.all_descriptions.map((item,ID) =>{
             return(
                 <div key = {item.ID}>
-                    <div className="row">
-                        <div className="col s12 card-container">
-                            <div className="card-panel blue lighten-2 white-text center">Term</div> 
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12 card-container">
+                    <div className="row container flashcard-row">
+                        <div className="col s5 card-container">
                             <Link to = "/editMode" className="card-panel teal lighten-1 white-text card" >
-                                <div className = "center">{item.frontText}</div>
+                                <div>{item.frontText}</div>
                             </Link> 
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12 card-container">
-                            <div className="card-panel orange lighten-2 white-text center">Definition</div> 
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12 card-container">
+                        <div className="col s5 card-container">
                             <Link to = "/editMode" className="card-panel teal lighten-1 white-text card">
-                                <div className = "center">{item.backText}</div>
+                                <div>{item.backText}</div>
                             </Link>
                         </div>
-                    </div>
-                    <div className="col s12 card-container row">
-                        <button className="red btn delete-btn" onClick={this.delete} >delete</button>
+                        <div className="col s2 card-container">
+                            <button className="red lighten-2 btn" onClick={this.delete}>
+                                <i class = "material-icons">delete</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             )
@@ -72,9 +62,20 @@ class FlashcardGeneration extends Component {
         const category = this.props.card.all_descriptions[0].subCategory
         return (
 
-            <div className = "flashcard-container">
+            <div className = "flashcard-container center">
                 <h1 className = "col s12 center">{category}</h1>
                 <h2 className = "col s12 center">Card Counter: {cardCounter}</h2>
+                <div className="row container flashcard-row">                    
+                    <div className="col s5 card-container">
+                        <div className="card-panel blue lighten-2 white-text center">Term</div> 
+                    </div>
+                    <div className="col s5 card-container">
+                        <div className="card-panel blue lighten-2 white-text center">Definition</div>
+                    </div>
+                    <div className="col s2 card-container">
+                        <div className="card-panel red lighten-2 white-text center">Del</div>
+                    </div>
+                </div>
                 {listCards}
                 <div className = "buttonDiv center">
                     <Link className="blue lighten-2 btn waves-effect waves-light btn-large col s6 " to = "/createflashcards" name="action">

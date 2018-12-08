@@ -2,17 +2,21 @@
 
 .card{
     max-height: 500px;
-    height:auto;
-    overflow:scroll;
+    height: 350px;
 }
 
 .row {
     display: flex;
 }
 
+.flashcard-row {
+    margin: auto;
+}
+
 .col.s2.card-container{
     align-items: center;
     display: flex;
+    justify-content: center;
 }
 
 .card-panel.red.lighten-2 {
