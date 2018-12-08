@@ -2,77 +2,86 @@ import React, {Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userSignOut } from "../actions/index";
+import SideNav from './side_nav';
 import '../assets/css/nav_bar.css'
 
 class Navbar extends Component {
 
+    state = {
+        links: [
+            {
+                to: '/profile',
+                text: 'Profile'
+            },
+            {
+                to: '/sets',
+                text: 'My Sets'
+            },
+            {
+                to: '/flashcards',
+                text: 'Flashcards'
+            }
+        ]
+    }
+
     componentDidMount () {
-        var elem = document.querySelector(".sidenav");
-        var instance = M.Sidenav.init(elem, {
-            edge: "left",
-            inDuration: 250
-        });
+        this.sideNav = M.Sidenav.init(this.sideNav);
     }
 
-    renderLinks () {
+    handleLinkClick = () => {
+        if(this.sideNav.isOpen){
+            this.sideNav.close();
+        }
+    }
+
+    setSideNavRef = (element) => {
+        this.sideNav = element;
+    }
+
+    render () {
         const { auth, signOut } = this.props;
-        console.log("this is the props from navbar:",this.props);
-
         if(auth){
-            return (
-                <Fragment>
-                    <li className = "nav-item">
-                        <Link to = "/profile" className = "nav-link"> Profile </Link>
+            const linkElements = this.state.links.map((link => {
+                return (
+                    <li onClick = {this.handleLinkClick} key = {link.to}>
+                        <Link to = {link.to}>{link.text}</Link>
                     </li>
-                    <li className = "nav-item">
-                        <Link to = "/sets" className = "nav-link"> My Sets </Link>
-                    </li>
-                    <li className = "nav-item">
-                        <Link to = "/flashcards" className = "nav-link"> My Flashcards </Link>
-                    </li>
-                    <li className = "nav-item">
-                        <div className="divider" />
-                    </li>
-                    <li className = "nav-item">
-                        <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
-                    </li>
-                </Fragment>
-            );
-        }
-
+                );
+            }));
+            linkElements.push(<li className = "nav-item" key="moo">
+                                    <div className="divider" />
+                              </li>);
+            linkElements.push(<li className = "nav-item" key="cow">
+                                    <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
+                              </li>);
         return (
-        <Fragment>
-            <li className = "nav-item">
-                <Link to = "/signin">Sign In</Link>
-            </li>
-            <li className="nav-item">
-                <Link to = "/signup" >Sign Up</Link>
-            </li>
-        </Fragment>
-        );
-    }
-
-    render() {
-        const navStyle = {
-            padding: '0 8px',
-        }
-        console.log('User Auth:', this.props.auth);
-        return (
-            <div>
-                <nav style = {navStyle} className = "nav_bar grey darken-4 ">
+            <Fragment>
+                <nav className = "main-nav grey darken-4">
                     <div className="nav-wrapper">
-                        <Link to = "/profile" className="brand-logo brand-logo-text">Pocket Cards</Link>
-                        <Link to = "#" data-target = "slide-out" className = "sidenav-trigger"> <i className="material-icons">dehaze</i> </Link>
-                        <ul className = "left hide-on-med-and-down">
-                            {this.renderLinks()}
+                        <Link className = "brand-logo" to = "/">PocketCards</Link>
+                        <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
+                        <ul className = "right hide-on-med-and-down"> 
+                        {linkElements}
                         </ul>
                     </div>
                 </nav>
 
-                <ul id="slide-out" className="sidenav">
-                    {this.renderLinks()}
-                </ul> 
-        </div>
+                <SideNav setRef = {this.setSideNavRef} links = {linkElements}>
+                </SideNav>
+            </Fragment>
+        );
+
+        }
+
+        return (
+            <Fragment>
+                <li className = "nav-item">
+                    <Link to = "/signin">Sign In</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to = "/signup" >Sign Up</Link>
+                </li>
+            </Fragment>
         );
     }
 }
