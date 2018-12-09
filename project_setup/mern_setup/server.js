@@ -1,23 +1,12 @@
 const express = require('express');
-const mysql = require ('mysql');
+const mysql = require('mysql');
+const db = require('./server/db');
 const app = express();
 const { resolve } = require('path');
-const { dbConfig } = require('./config');
 // const router = express.Router();
-
 const PORT = process.env.PORT || 3001;
 
-console.log('DB CONFIG:', dbConfig);
 
-const db = mysql.createConnection(dbConfig);
-
-
-db.connect((err) => {
-    if (err) throw err;
-
-    console.log("Database Connected");
-
-});
 
 //middleware 
 app.use(express.static(resolve(__dirname,'client','dist')));
@@ -28,6 +17,7 @@ function errorHandling(req, res){
     res.status(req.status || 500).send(req.error || 'Server Error');
 }
 
+require('./server/routes')(app);
 
 //Endpoints 
 
@@ -377,5 +367,5 @@ app.post('/api/set_management/delete_card', (req, res, next)=>{
 
 //starts Express server on defined port
 app.listen(PORT, ()=>{
-    console.log("Ginger's must stay obedient to their supreme leader!!!");
+    console.log('Server running on PORT:', PORT);
 });
