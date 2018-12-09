@@ -4,27 +4,6 @@ const db = require('../../db');
 const bcrypt = require('../../services/bcrypt');
 const { jwtConfig } = require('../../config');
 
-function tokenForUser(user) {
-    const timestamp = new Date().getTime();
-    return jwt.encode({ uid: user.id, ts: timestamp }, jwtConfig.secret);
-}
-
-function userDataToSend(user){
-    return {
-        avatar: user.avatar || null,
-        displayName: user.displayName,
-        email: user.email,
-    }
-}
-
-function emailIsValid(email){
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-}
-
-function passwordIsValid(password){
-    return /^[a-zA-Z]{1}[a-zA-Z0-9]{5,31}/g.test(password);
-}
-
 exports.signIn = (req, res) => {
     const { user } = req;
 
@@ -77,9 +56,7 @@ exports.signUp = async (req, res) => {
             }
         }
 
-        const salt = await bcrypt.genSalt(10);
-
-        const hash = await bcrypt.hash(password, salt, null);
+        const hash = await hashPassword(password);
 
         const queryInsertUser = 'INSERT INTO users (??, ??, ??) VALUES (?, ?, ?)';
         const insertsInsertUser = ['displayName', 'email', 'password', displayName, email, hash];
@@ -110,3 +87,29 @@ exports.signUp = async (req, res) => {
     }
 }
 
+async function hashPassword(password){
+    const salt = await bcrypt.genSalt(10);
+
+    return bcrypt.hash(password, salt, null);
+}
+
+function tokenForUser(user) {
+    const timestamp = new Date().getTime();
+    return jwt.encode({ uid: user.id, ts: timestamp }, jwtConfig.secret);
+}
+
+function userDataToSend(user) {
+    return {
+        avatar: user.avatar || null,
+        displayName: user.displayName,
+        email: user.email,
+    }
+}
+
+function emailIsValid(email) {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+}
+
+function passwordIsValid(password) {
+    return /^[a-zA-Z]{1}[a-zA-Z0-9]{5,31}/g.test(password);
+}
