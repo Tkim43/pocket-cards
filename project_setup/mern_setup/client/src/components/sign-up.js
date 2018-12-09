@@ -12,7 +12,7 @@ class Signup extends Component {
                 <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
                 <ul>
-                    {(props.meta.touched || props.meta.dirty) && props.meta.error.map ( (item, index) => {
+                    {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
                         return <li key = {index} className="red-text">{item}</li>
                     })}
                 </ul>
@@ -32,9 +32,9 @@ class Signup extends Component {
             <div className = "container">
                 <h1>this is the signup page</h1>
                 <form onSubmit = {handleSubmit(this.handleSignUp)}>
-                    {/* <div className="row">
-                        <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
-                    </div> */}
+                    <div className="row">
+                        <Field size = "s12" name = "displayName" label = "Username" component = {this.renderInput}/>
+                    </div>
                     <div className="row">
                         <Field size = "s12" name = "email" label = "email" component = {this.renderInput}/>
                     </div>
@@ -54,15 +54,21 @@ class Signup extends Component {
 }
 
 function validate (formValues) {
-    const error = {
-        email: [],
-        password: []
-    };
+    const error = {};
+    const passwordErrors = [];
 
-    checkIfValidEmail (formValues.email, error);
-    checkIfPasswordStartsWithLetter (formValues.password, error);
-    checkIfPasswordHasANum (formValues.password, error);
-    checkIfPasswordIsLongEnough (formValues.password, error);
+    if(!formValues.displayName){
+        error.displayName = ['Please choose a username'];
+    }
+
+    error.email = checkIfValidEmail (formValues.email, error);
+    checkIfPasswordStartsWithLetter (formValues.password, passwordErrors);
+    checkIfPasswordHasANum (formValues.password, passwordErrors);
+    checkIfPasswordIsLongEnough (formValues.password, passwordErrors);
+
+    if(passwordErrors.length){
+        error.password = passwordErrors;
+    }
 
     return error;
 }
@@ -73,10 +79,10 @@ function checkIfValidEmail(email, error){
 
     if(testEmail === true){
         console.log("valid email satisfied");
+        return null
     }
-    else {
-        error.email.push( "Please input an email that ends with @[your-email-provider]");
-    }
+    
+    return [ "Please input an email that ends with @[your-email-provider]"];
 }
 
 function checkIfPasswordStartsWithLetter (password = "", error){
@@ -88,7 +94,7 @@ function checkIfPasswordStartsWithLetter (password = "", error){
     if(testIfStartWithLetter === true){
         console.log("your password starts with a letter");
     }else{
-        error.password.push("Password needs to start with letter");
+        error.push("Password needs to start with letter");
     }
 }
 
@@ -99,7 +105,7 @@ function checkIfPasswordHasANum (password = "", error){
     if(testIfStartWithLetter === true){
         console.log("your password has at least one number");
     }else{
-        error.password.push("Password needs to have at least one number");
+        error.push("Password needs to have at least one number");
     }
 }
 
@@ -110,13 +116,18 @@ function checkIfPasswordIsLongEnough (password = "", error){
     if(testIfStartWithLetter === true){
         console.log("your password has 6 - 32 chars");
     }else{
-        error.password.push("Password needs to have between 6 to 32 chars");
+        error.push("Password needs to have between 6 to 32 chars");
     }
 }
 
 Signup = reduxForm ({
     form: 'sign-up',
-    validate: validate
+    validate: validate,
+    initialValues: {
+        displayName: 'Scoot',
+        email: 'scoot@mail.com',
+        password: 'asdf1234'
+    }
 })(Signup);
 
 function mapStateToProps (state){

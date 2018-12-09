@@ -59,17 +59,18 @@ export function getCardData(){
 export function userSignUp(user){
     return async function (dispatch){
         try {
-            const resp = await axios.post("http://api.reactprototypes.com/signup",user);
+            const resp = await axios.post('/auth/sign-up',user);
 
             console.log("sign up response",resp);
 
-            localStorage.setItem('token', resp.data.token);
+            // localStorage.setItem('token', resp.data.token);
 
-            dispatch({
-                type: types.SIGN_UP
-            });
+            // dispatch({
+            //     type: types.SIGN_UP
+            // });
 
         } catch (err){
+            console.log('Sign Up Error:', err);
             dispatch ({
                 type: types.SIGN_UP_ERROR,
                 // error: "email address already exists"
