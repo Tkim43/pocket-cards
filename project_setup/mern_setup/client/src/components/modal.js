@@ -60,8 +60,8 @@ class ButtonModal extends Component {
                                         </div>
                                         <div className="row"> 
                                             <div className="input-field col s12">
-                                                <textarea onChange={this.updateSubCategory}  className="materialize-textarea" id="textarea1"></textarea>
-                                                <label htmlFor="textarea1">Create Title</label>
+                                                <textarea onChange={this.updateSubCategory}  className="materialize-textarea" id="textarea2"></textarea>
+                                                <label htmlFor="textarea2">Create Title</label>
                                             </div>  
                                         </div>
                                         <div className = "row">
