@@ -15,6 +15,7 @@ class Sets extends Component{
         const userCategory = this.props.category;
 
         const userSubCategory = this.props.sets.map ((item, index) => {
+            console.log('ITEM:', item);
             return(
                 <div key= {index} className="row set">
                     <Link to="/displayCard" className ="btn blue darken-2">{item}</Link>

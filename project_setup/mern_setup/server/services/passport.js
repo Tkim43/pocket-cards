@@ -51,16 +51,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, async function (payload, done) {
     } catch(err){
         done(err);
     }
-
-    // User.findById(payload.sub, function (err, user) {
-    //     if (err) { return done(err, false); }
-
-    //     if (user) {
-    //         done(null, user);
-    //     } else {
-    //         done(null, false);
-    //     }
-    // });
 });
 
 passport.use(jwtLogin);
@@ -73,7 +63,7 @@ module.exports = {
 
 async function comparePassword(candidatePassword, user){
     try {
-        return isMatch = bcrypt.compare(candidatePassword, user.password);
+        return await bcrypt.compare(candidatePassword, user.password);
     } catch (err){
         return false;
     }

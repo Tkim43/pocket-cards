@@ -95,7 +95,7 @@ async function hashPassword(password){
 
 function tokenForUser(user) {
     const timestamp = new Date().getTime();
-    return jwt.encode({ uid: user.id, ts: timestamp }, jwtConfig.secret);
+    return jwt.encode({ uid: user.ID, ts: timestamp }, jwtConfig.secret);
 }
 
 function userDataToSend(user) {

@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const db = require('./server/db');
 const app = express();
 const { resolve } = require('path');
-// const router = express.Router();
+const { requireAuth } = require('./server/services/passport');
 const PORT = process.env.PORT || 3001;
 
 //middleware 
@@ -21,129 +21,91 @@ function errorHandling(req, res){
 require('./server/routes')(app);
 
 //get avatar & username from users (DONE)
-app.get('/api/userhome/:userID', (req, res, next) => {
-    let { userID } = req.params;
-    let query = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-    let inserts = ['displayName', 'avatar', 'users', 'ID', Number(userID)];
-
-    let sql = mysql.format(query, inserts);
-
-    console.log("This is the formated SQL", sql);
-    
-    const output = {
-        success: true
-    };
-
-    db.query(sql, (err, results) => {
-        if (err) {
-            req.status = 500;
-            req.error = 'Error getting user data';
-            return next();
-        };
-
-        output.users = results;
+app.get('/api/userhome', requireAuth, async (req, res, next) => {
+    try {
+        const { user } = req;
 
         //get all categories with userID (DONE)
-        let query = 'SELECT * FROM ?? WHERE ?? = ?';
-        let inserts = ['sets', 'userID', Number(userID)];
+        const query = 'SELECT * FROM ?? WHERE ?? = ?';
+        const inserts = ['sets', 'userID', user.ID];
 
-        let sql = mysql.format(query, inserts);
+        const sql = mysql.format(query, inserts);
 
-        console.log("This is the formated SQL", sql);
+        // console.log("This is the formated SQL:", sql);
 
-        db.query(sql, (err, results)=>{
-            if(err) {
-                req.status = 500;
-            req.error = 'Error getting user data';
-            return next();
-            };
+        const sets = await db.query(sql);
 
-            output.sets = results;
-            res.send(output);
+        res.send({
+            success: true,
+            sets
         });
- 
-    });
+    } catch (err){
+        req.status = 500;
+        req.error = 'Error getting user sets';
+
+        return next();
+    }
+    
 }, errorHandling);
 
 
 // get category and all subcategory data of sets joined to topics based on userID (DONE)
-app.get('/api/set_management/:userID/:setID', (req, res, next)=> {
-    const { userID, setID } = req.params;
-    let query = 'SELECT * FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE ?? = ? AND ?? = ?';
-    let inserts = ['topics', 'sets', 'userID', Number(userID), 'setID', Number(setID)];
+app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
+    const { params: { setID }, user } = req;
 
-    let sql = mysql.format(query, inserts);
+    try {
+        const query = 'SELECT * FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE ?? = ? AND ?? = ?';
+        const inserts = ['topics', 'sets', 'userID', user.ID, 'setID', setID];
 
-    console.log("This is the formatted sql", sql);
+        const sql = mysql.format(query, inserts);
 
-    const output = {
-        success: true
-    };
+        // console.log("This is the formatted sql", sql);
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
+        const sets = await db.query(sql);
+
+        res.send({
+            success: true,
+            sets
+        });
+    } catch(err){
+        req.status = 500;
+        req.error = 'Error getting set topics';
+        
         return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
+    }
+    
 }, errorHandling);
 
 
 //get card front and back joined with setID (DONE)
-app.get('/api/cards/:setID/:topicID', (req, res, next)=>{
+app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=>{
     const { setID, topicID } = req.params;
-    let query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
-    let inserts = ['cards', 'topics', 'setID', Number(setID), 'topicID', Number(topicID)];
 
-    let sql = mysql.format(query, inserts);
+    try {
+        const query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
+        const inserts = ['cards', 'topics', 'setID', Number(setID), 'topicID', Number(topicID)];
 
-    console.log("This is the formated SQL", sql);
+        const sql = mysql.format(query, inserts);
 
-    const output = {
-        success: true
-    };
+        // console.log("This is the formated SQL", sql);
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
+        const card = await db.query(sql);
+
+        res.send({
+            success: true,
+            card
+        });
+    } catch(err) {
+        req.status = 500;
+        req.error = 'Error getting set topic';
+        
         return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
+    }
+    
 }, errorHandling);
 
 // post username and avatar (DONE, but without OATH/Password Fields)
-app.post('/api/sign_up', (req, res, next)=>{
-    const { displayName, avatar } = req.body;
-    let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
-    let inserts = ['users', 'displayName', 'avatar', displayName, avatar];
-
-    let sql = mysql.format(query, inserts);
-
-    console.log("This is the formated SQL", sql);
-
-    const output = {
-        success: true
-    };
-
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
-        return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
-}, errorHandling);
+// Moved to controllers/auth/index.js
 
 // post category (DONE)
 app.post('/api/set_management/create_category', (req, res, next)=>{
