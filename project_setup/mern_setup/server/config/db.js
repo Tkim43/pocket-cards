@@ -4,3 +4,4 @@ module.exports = {
     'password': 'mRN7Us9^7p5YdCwu',
     'database': 'pocketcards'
 }
+
