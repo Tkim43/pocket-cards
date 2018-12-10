@@ -104,111 +104,123 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
     
 }, errorHandling);
 
-// post username and avatar (DONE, but without OATH/Password Fields)
-// Moved to controllers/auth/index.js
+// // post username and avatar (DONE)
+// // Moved to controllers/auth/index.js
 
 // post category (DONE)
-app.post('/api/set_management/create_category', (req, res, next)=>{
-    const { userID, category } = req.body;
-    let query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
-    let inserts = ['sets', 'userID', 'category', Number(userID), category];
+app.post('/api/set_management/create_category/', requireAuth, async (req, res, next)=>{
+    const { category, userID } = req.body;
+    const { user } = req;
 
-    let sql = mysql.format(query, inserts);
+    try {
 
-    console.log("This is the formated SQL", sql);
+        const query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
+        const inserts = ['sets', 'userID', 'category', Number(userID), category];
 
-    const output = {
-        success: true
-    };
+        const sql = mysql.format(query, inserts);
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
+        // console.log("This is the formated SQL", sql);
+
+        const category = await db.query(sql);
+
+        res.send({
+            success: true,
+            category
+        });
+    } catch(err) {
+        req.status = 500;
+        req.error = 'Error posting category';
+
         return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
+    }
 }, errorHandling);
 
-//post sub category (DONE)
-app.post('/api/set_management/create_subcategory',(req, res, next)=>{
-    const { setID, subCategory } = req.body;
-    let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
-    let inserts = ['topics', 'setID', 'subCategory', Number(setID), subCategory];
+// //post sub category (DONE)
+app.post('/api/set_management/create_subcategory/:setID', requireAuth, async (req, res, next)=>{
+    const { setID } = req.params;
+    const {subCategory} = req.body;
+    const {user} = req;
 
-    let sql = mysql.format(query, inserts);
+    try {
+        let query = 'INSERT INTO ??(??, ??) VALUES (?, ?)';
+        let inserts = ['topics', 'setID', 'subCategory', Number(setID), subCategory];
 
-    console.log("This is the formated SQL", sql);
+        let sql = mysql.format(query, inserts);
 
-    const output = {
-        success: true
-    };
+        console.log("This is the formated SQL", sql);
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
+        const subCategory = await db.query(sql);
+
+        res.send({
+            success: true,
+            subCategory
+        });
+    } catch(err) {
+        req.status = 500;
+        req.error = 'Error posting subCategory';
+
         return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
+    }
 }, errorHandling);
 
 //post to front cards and back (DONE)
-app.post('/api/set_management/create_card', (req, res)=>{
-    const { topicID, frontText, backText } = req.body;
-    let query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
-    let inserts = ['cards', 'topicID', 'frontText', 'backText', Number(topicID), frontText, backText];
-    let sql = mysql.format(query, inserts);
+app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (req, res, next)=>{
+    const {topicID} = req.params;
+    const { frontText, backText } = req.body;
+    const {user} = req;
+    
+    try {
+        const query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
+        const inserts = ['cards', 'topicID', 'frontText', 'backText', cards.topicID, frontText, backText];
+        const sql = mysql.format(query, inserts);
 
-    console.log("This is the formated SQL", sql);
+        console.log("This is the formated SQL", sql);
 
-    const output = {
-        success: true
-    };
+        const card = await db.query(sql);
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
+        res.send({
+            success: true,
+            card
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error posting cards';
+
         return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
+    }
 }, errorHandling);
 
 //update front and back of card (DONE)
-app.patch('/api/update_cards/:userID', (req, res, next)=>{
-    const { ID, frontText, backText } = req.body;
-    
-    let query = 'UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?';
-    let inserts = ['cards', 'frontText', frontText, 'backText', backText, 'ID', Number(ID)];
+app.patch('/api/update_card/ID/:ID', async (req, res, next)=>{
+    const {frontText, backText } = req.body;
+    const {ID} =req.params;
+    const {user} = req;
 
-    let sql = mysql.format(query, inserts);
+    try {
+    
+        let query = 'UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?';
+        let inserts = ['cards', 'frontText', frontText, 'backText', backText, 'ID', Number(ID)];
+
+        let sql = mysql.format(query, inserts);
 
     console.log("This is the formated SQL", sql);
 
-    const output = {
-        success: true
-    };
+    const cards = await db.query(sql);
 
-    db.query(sql, (err, results)=>{
-        if(err) {
-            req.status = 500;
-        req.error = 'Error getting user data';
+        res.send({
+            success: true,
+            cards
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error updating card';
+
         return next();
-        };
-
-        output.data = results;
-        res.send(output);
-    });
+    }
 }, errorHandling);
 
 
@@ -241,7 +253,7 @@ app.post('/api/set_management/delete_user', (req, res, next)=>{
 
 
 // delete category, subCategories, and all cards (DONE)
-app.post('/api/set_management/delete_set', (req, res, next)=>{
+app.delete('/api/set_management/ID/:ID/userID/:userID', (req, res, next)=>{
     const { ID, userID } = req.body;
     
     let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
