@@ -209,7 +209,7 @@ app.post('/api/set_management/create_subcategory',(req, res, next)=>{
 }, errorHandling);
 
 //post to front cards and back (DONE)
-app.post('/api/set_management/create_card', (req, res)=>{
+app.post('/api/set_management/create_card', (req, res, next)=>{
     const { topicID, frontText, backText } = req.body;
     let query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
     let inserts = ['cards', 'topicID', 'frontText', 'backText', Number(topicID), frontText, backText];
@@ -224,8 +224,8 @@ app.post('/api/set_management/create_card', (req, res)=>{
     db.query(sql, (err, results)=>{
         if(err) {
             req.status = 500;
-        req.error = 'Error getting user data';
-        return next();
+            req.error = 'Error getting user data';
+            return next();
         };
 
         output.data = results;
