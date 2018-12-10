@@ -1,8 +1,13 @@
 import axios from 'axios';
 import types from './types';
 
-const BASE_URL = '/api';
-// const USER_ID = "?userID=2";
+function authHeaders(){
+    return {
+        headers: {
+            authorization: localStorage.getItem('token')
+        }
+    }
+}
 
 export function userSignOut(){
 
@@ -15,14 +20,14 @@ export function userSignOut(){
 
 
 export function getProfileData () {
-    // const resp = axios.get(BASE_URL + "/userhome/:userID");
-    const resp = axios.get(`${BASE_URL}/userhome/1`);
+    const resp = axios.get('/api/userhome', authHeaders());
+
     console.log("this is the response from axios ", resp);
 }
 
 export function sortAlphabetical () {
-    // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
-    const resp = axios.get(`${BASE_URL}/userhome/1`);
+    const resp = axios.get('/api/userhome', authHeaders());
+    
     return {
         type: types.SORT_ALPHABETICAL,
         payload: resp
@@ -31,8 +36,8 @@ export function sortAlphabetical () {
 
 //Vienna's
 export function getSetsData (id){
-    const resp = axios.get(`${BASE_URL}/set_management/1/${id}`);
-    console.log("this is the response from axios for sets:", resp);
+    const resp = axios.get(`/api/set_management/${id}`, authHeaders());
+    
     return{
         type: types.GET_SETS_DATA,
         payload: resp
@@ -40,8 +45,8 @@ export function getSetsData (id){
 }
 
 export function sortByLatest () {
-    // const resp = axios.get(BASE_URL + "/api/userhome/:userID");
-    const resp = axios.get(`${BASE_URL}/userhome/1`);
+    const resp = axios.get('/api/userhome', authHeaders());
+
     return {
         type: types.SORT_BY_LATEST,
         payload: resp
@@ -49,27 +54,28 @@ export function sortByLatest () {
 }
 
 export function getCardData(){
-    const resp = axios.get(`${BASE_URL}/cards/1/1`);
+    const resp = axios.get(`/api/cards/1/topic/1`, authHeaders());
+
     return{
         type: types.GET_CARD_DATA,
         payload: resp
     }
 }
 
-export function userSignUp(user){
+export function userSignUp(newUser){
     return async function (dispatch){
         try {
-            const resp = await axios.post("http://api.reactprototypes.com/signup",user);
+            const { data: { token, user } } = await axios.post('/auth/sign-up', newUser);
 
-            console.log("sign up response",resp);
-
-            localStorage.setItem('token', resp.data.token);
+            localStorage.setItem('token', token);
 
             dispatch({
-                type: types.SIGN_UP
+                type: types.SIGN_UP,
+                user
             });
 
         } catch (err){
+            console.log('Sign Up Error:', err.response);
             dispatch ({
                 type: types.SIGN_UP_ERROR,
                 // error: "email address already exists"
@@ -78,17 +84,16 @@ export function userSignUp(user){
     }
 }
 
-export function userSignIn(user){
+export function userSignIn(userInfo){
     return async function (dispatch){
         try {
-            const resp = await axios.post("http://api.reactprototypes.com/signin",user);
-
-            console.log("sign in response",resp);
+            const { data: { token, user } } = await axios.post("/auth/sign-in",userInfo);
     
-            localStorage.setItem('token', resp.data.token);
+            localStorage.setItem('token', token);
     
             dispatch({
-                type: types.SIGN_IN
+                type: types.SIGN_IN,
+                user
             });
         } catch (err){
             dispatch({
@@ -100,9 +105,24 @@ export function userSignIn(user){
     }
 }
 
+export const userJwtSignIn = async dispatch => {
+    try {
+        const { data: { user } } = await axios.get('/auth/sign-in', authHeaders());
+
+        dispatch({
+            type: types.SIGN_IN,
+            user
+        });
+    } catch(err){
+        dispatch({
+            type: types.SIGN_IN_ERROR
+        });
+    }
+}
+
 export function sendCardData(updatedFrontDescription){
-    const resp = axios.patch(`${BASE_URL}/update_cards/1`, updatedFrontDescription);
-    console.log("Update Cards Sever response", resp)
+    const resp = axios.patch(`/api/update_cards/1`, updatedFrontDescription);
+    
     return {
         type: types.SEND_CARD_DATA,
         payload: resp
@@ -110,7 +130,8 @@ export function sendCardData(updatedFrontDescription){
 }
 
 export function getAllCardData(){
-    const resp = axios.get(`${BASE_URL}/cards/1/1`);
+    const resp = axios.get(`/api/cards/1/topic/1`, authHeaders());
+
     return{
         type: types.GET_ALL_CARD_DATA,
         payload: resp
@@ -119,21 +140,23 @@ export function getAllCardData(){
 
 //Vienna's
 export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategory){
-    const subcategoryCreationResponse= axios.post(`${BASE_URL}/set_management/create_category`, updatedCategory ).then(categoryCreationResponse => {
-        console.log('category and subcategory response:', categoryCreationResponse);
-        updatedSubCategory.setID = categoryCreationResponse.data.data.insertId;
-        return axios.post(`${BASE_URL}/set_management/create_subcategory`,updatedSubCategory )
+    return async function(dispatch){
+        const subcategoryCreationResponse = axios.post(`/api/set_management/create_category`, updatedCategory).then(categoryCreationResponse => {
+            console.log('category and subcategory response:', categoryCreationResponse);
+            updatedSubCategory.setID = categoryCreationResponse.data.data.insertId;
+            return axios.post(`${BASE_URL}/set_management/create_subcategory`, updatedSubCategory)
 
-    });
-    return{
-        type:types.SEND_CATEGORY_AND_SUBCATEGORY_DATA,
-        payload:subcategoryCreationResponse
+        });
+        return {
+            type: types.SEND_CATEGORY_AND_SUBCATEGORY_DATA,
+            payload: subcategoryCreationResponse
+        }
     }
 }
 
 export function deleteCardData(ID){
     console.log("action param", ID)
-    const resp = axios.post(`${BASE_URL}/set_management/delete_card`, ID);
+    const resp = axios.post(`/api/set_management/delete_card`, ID);
     return{
         type: types.DELETE_CARD_DATA,
         payload: resp
@@ -142,7 +165,7 @@ export function deleteCardData(ID){
 
 //Vienna's
 export function sendCreateCardData(createCard){
-    const resp = axios.post(`${BASE_URL}/set_management/create_card`,createCard);
+    const resp = axios.post(`/api/set_management/create_card`,createCard);
     console.log("this is the response from axios for card creation", resp);
     return{
         type:types.CREATE_CARD_DATA,

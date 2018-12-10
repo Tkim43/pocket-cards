@@ -47,7 +47,7 @@ class FlashcardGeneration extends Component {
             }
             
             return(
-                <div key = {item.ID}>
+                <div key = {ID}>
                     <div className="row container flashcard-row">
                         <div className="col s5 card-container">
                             <Link to = "/editMode" className="card-panel teal lighten-1 white-text text-inside-card" >
