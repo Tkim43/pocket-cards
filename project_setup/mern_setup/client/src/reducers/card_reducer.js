@@ -8,6 +8,9 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, action) => {
     switch (action.type){
+        case types.CREATE_CARD_DATA:
+            console.log('create card reducer:', action);
+            return {...state, front_description: '', back_description: ''}
         case types.GET_ALL_CARD_DATA:
             console.log("get all card data action:", action);
             return {...state, all_descriptions: action.payload.data.card}
