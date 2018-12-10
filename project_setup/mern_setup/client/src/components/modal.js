@@ -33,7 +33,7 @@ class ButtonModal extends Component {
 
     handleClick = async (e) => {
         e.preventDefault();
-        await this.props.sendCategoryAndSubcategoryData({userID:1,category: this.state.category},{subCategory:this.state.subCategory});
+        await this.props.sendCategoryAndSubcategoryData({category: this.state.category},{subCategory: this.state.subCategory});
 
         this.props.history.push('/createflashcards');
     }

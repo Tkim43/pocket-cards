@@ -1,0 +1,3 @@
+module.exports = {
+    secret: 'REPLACE WITH A RANDOM STRING OF CHARACTERS'
+}

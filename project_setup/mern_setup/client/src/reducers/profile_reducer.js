@@ -21,12 +21,17 @@ export default (state = DEFAULT_STATE, action) => {
                     return 0;
                 }
             });
-            return {...state, sets: alphabetical, user: action.payload.data.users[0]};
+            return {...state, sets: alphabetical };
         case types.SORT_BY_LATEST:
             console.log("this is the action", action);
-            const sortByLatest = action.payload.data.sets.slice().sort().reverse();
+            let sortByLatest = [];
+
+            if(action.payload.data && action.payload.data.sets){
+                sortByLatest = action.payload.data.sets.slice().sort().reverse();
+            }
+            
             console.log("sorted list:",sortByLatest)
-            return {...state, sets: sortByLatest, user: action.payload.data.users[0]};     
+            return {...state, sets: sortByLatest };     
         default:
             return state;
     }

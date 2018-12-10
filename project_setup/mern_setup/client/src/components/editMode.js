@@ -31,7 +31,6 @@ class editMode extends Component{
         })
     }
     sendCardData = () =>{
-        debugger;
         this.props.sendCardData({ID: 1, frontText: this.state.frontText, backText: this.state.backText})
     }
     render(){

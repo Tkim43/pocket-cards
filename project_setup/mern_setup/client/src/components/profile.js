@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest } from '../actions';
 import BasicModal from './modal';
+import defaultAvatar from '../assets/images/default_avatar.png';
 
 class Profile extends Component {
 
@@ -64,7 +65,7 @@ class Profile extends Component {
 
         const profileUserInfo = this.props.user.displayName;
 
-        const profileUserAvatar = this.props.user.avatar;
+        const profileUserAvatar = this.props.user.avatar || defaultAvatar;
 
         return (
         <div className = "container">
@@ -101,7 +102,7 @@ function mapStateToProps(state){
     console.log("this is the state", state);
     return {
         sets: state.profile.sets,
-        user: state.profile.user
+        user: state.user.info
     }
 }
 
