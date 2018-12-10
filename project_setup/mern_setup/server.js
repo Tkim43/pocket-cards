@@ -164,6 +164,7 @@ app.post('/api/set_management/create_subcategory/:setID', requireAuth, async (re
 }, errorHandling);
 
 //post to front cards and back (DONE)
+
 app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (req, res, next)=>{
     const {topicID} = req.params;
     const { frontText, backText } = req.body;
@@ -173,6 +174,7 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
         const query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
         const inserts = ['cards', 'topicID', 'frontText', 'backText', cards.topicID, frontText, backText];
         const sql = mysql.format(query, inserts);
+
 
         console.log("This is the formated SQL", sql);
 
