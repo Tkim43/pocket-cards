@@ -1,13 +1,13 @@
 {
-  "name": "mern_setup",
+  "name": "pocket_cards",
   "version": "1.0.0",
-  "description": "setting up a nodeJS with ReactJS frontend",
+  "description": "Flash card app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:client": "npm start --prefix client",
-    "dev:server": "nodemon index.js",
+    "dev:server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,9 +21,14 @@
   },
   "homepage": "https://github.com/Learning-Fuze/c918_uberquizlet#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "redux-form": "^7.4.2"
+    "jwt-simple": "^0.5.5",
+    "mysql": "^2.16.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.6",
