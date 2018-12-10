@@ -262,7 +262,7 @@ app.patch('/api/update_cards/:userID', (req, res, next)=>{
 
 
 //delete displayName, subCategories, and all cards (DONE)
-app.delete('/api/set_management/delete_user', (req, res, next)=>{
+app.post('/api/set_management/delete_user', (req, res, next)=>{
     const { ID } = req.body;
     
     let query = 'DELETE FROM ?? WHERE ??.??=?';
@@ -290,7 +290,7 @@ app.delete('/api/set_management/delete_user', (req, res, next)=>{
 
 
 // delete category, subCategories, and all cards (DONE)
-app.delete('/api/set_management/delete_set', (req, res, next)=>{
+app.post('/api/set_management/delete_set', (req, res, next)=>{
     const { ID, userID } = req.body;
     
     let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
@@ -318,7 +318,7 @@ app.delete('/api/set_management/delete_set', (req, res, next)=>{
 
 
 // delete subCategory and all cards (DONE)
-app.delete('/api/set_management/delete_subCategory_set', (req, res, next)=>{
+app.post('/api/set_management/delete_subCategory_set', (req, res, next)=>{
     const { ID, setID } = req.body;
     
     let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
