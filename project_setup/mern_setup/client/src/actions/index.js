@@ -2,7 +2,14 @@ import axios from 'axios';
 import types from './types';
 
 const BASE_URL = '/api';
-// const USER_ID = "?userID=2";
+
+function authHeaders(){
+    return {
+        headers: {
+            authorization: localStorage.getItem('token')
+        }
+    }
+}
 
 export function userSignOut(){
 
@@ -56,21 +63,20 @@ export function getCardData(){
     }
 }
 
-export function userSignUp(user){
+export function userSignUp(newUser){
     return async function (dispatch){
         try {
-            const resp = await axios.post('/auth/sign-up',user);
+            const { data: { token, user } } = await axios.post('/auth/sign-up', newUser);
 
-            console.log("sign up response",resp);
+            localStorage.setItem('token', token);
 
-            // localStorage.setItem('token', resp.data.token);
-
-            // dispatch({
-            //     type: types.SIGN_UP
-            // });
+            dispatch({
+                type: types.SIGN_UP,
+                user
+            });
 
         } catch (err){
-            console.log('Sign Up Error:', err);
+            console.log('Sign Up Error:', err.response);
             dispatch ({
                 type: types.SIGN_UP_ERROR,
                 // error: "email address already exists"
@@ -98,6 +104,21 @@ export function userSignIn(user){
             });
         }
         
+    }
+}
+
+export const userJwtSignIn = async dispatch => {
+    try {
+        const { data: { user } } = await axios.get('/auth/sign-in', authHeaders());
+
+        dispatch({
+            type: types.SIGN_IN,
+            user
+        });
+    } catch(err){
+        dispatch({
+            type: types.SIGN_IN_ERROR
+        });
     }
 }
 

@@ -6,7 +6,6 @@ import { userSignUp } from '../actions';
 
 class Signup extends Component {
     renderInput (props) {
-        console.log("THIS IS THE PROPS: ", props);
         return (
             <div className= {`input-field col ${props.size}`}>
                 <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
@@ -21,7 +20,6 @@ class Signup extends Component {
     }
 
     handleSignUp = (values) => {
-        console.log('Form values: ', values);
         this.props.userSignUp(values);
     }
 
@@ -73,12 +71,11 @@ function validate (formValues) {
     return error;
 }
 
-function checkIfValidEmail(email, error){
+function checkIfValidEmail(email){
     const regex = /^(\w)*[@]{1}(\w)+[.]{1}(\w)+$/g;
     const testEmail = regex.test(email);
 
-    if(testEmail === true){
-        console.log("valid email satisfied");
+    if(testEmail){
         return null
     }
     
@@ -88,12 +85,8 @@ function checkIfValidEmail(email, error){
 function checkIfPasswordStartsWithLetter (password = "", error){
     const regex = /^[a-zA-Z]/g;
     const testIfStartWithLetter = regex.test(password);
-
-    console.log("ERROR:", error);
     
-    if(testIfStartWithLetter === true){
-        console.log("your password starts with a letter");
-    }else{
+    if(!testIfStartWithLetter){
         error.push("Password needs to start with letter");
     }
 }
@@ -102,9 +95,7 @@ function checkIfPasswordHasANum (password = "", error){
     const regex = /\d/g;
     const testIfStartWithLetter = regex.test(password);
     
-    if(testIfStartWithLetter === true){
-        console.log("your password has at least one number");
-    }else{
+    if(!testIfStartWithLetter){
         error.push("Password needs to have at least one number");
     }
 }
@@ -113,9 +104,7 @@ function checkIfPasswordIsLongEnough (password = "", error){
     const regex = /[\w]{6,32}/g;
     const testIfStartWithLetter = regex.test(password);
     
-    if(testIfStartWithLetter === true){
-        console.log("your password has 6 - 32 chars");
-    }else{
+    if(!testIfStartWithLetter){
         error.push("Password needs to have between 6 to 32 chars");
     }
 }

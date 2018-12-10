@@ -6,8 +6,6 @@ const { resolve } = require('path');
 // const router = express.Router();
 const PORT = process.env.PORT || 3001;
 
-
-
 //middleware 
 app.use(express.static(resolve(__dirname,'client','dist')));
 app.use(express.json());
@@ -17,9 +15,10 @@ function errorHandling(req, res){
     res.status(req.status || 500).send(req.error || 'Server Error');
 }
 
-require('./server/routes')(app);
+//Endpoints
 
-//Endpoints 
+// Auth routes
+require('./server/routes')(app);
 
 //get avatar & username from users (DONE)
 app.get('/api/userhome/:userID', (req, res, next) => {

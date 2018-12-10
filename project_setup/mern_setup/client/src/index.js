@@ -7,6 +7,7 @@ import reduxPromise from 'redux-promise';
 import think from './middleware/think';
 import rootReducer from './reducers';
 import types from './actions/types';
+import { userJwtSignIn } from './actions';
 
 import App from './components/app';
 
@@ -16,6 +17,8 @@ if(localStorage.getItem('token')){
     store.dispatch({
         type: types.SIGN_IN
     });
+
+    userJwtSignIn(store.dispatch);
 }
 
 ReactDOM.render(
