@@ -1,10 +1,3 @@
-// module.exports = {
-//     'host': 'localhost',
-//     'user': 'root',
-//     'password': 'root',
-//     'database': 'pocketcards'
-// }
-
 module.exports = {
     'host': 'tiffanyykim.com',
     'user': 'pocket_cards',

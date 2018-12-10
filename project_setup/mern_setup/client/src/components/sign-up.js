@@ -111,12 +111,7 @@ function checkIfPasswordIsLongEnough (password = "", error){
 
 Signup = reduxForm ({
     form: 'sign-up',
-    validate: validate,
-    initialValues: {
-        displayName: 'Scoot',
-        email: 'scoot@mail.com',
-        password: 'asdf1234'
-    }
+    validate: validate
 })(Signup);
 
 function mapStateToProps (state){
