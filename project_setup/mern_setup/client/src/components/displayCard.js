@@ -14,7 +14,7 @@ class displayCard extends Component{
     componentDidMount(){
         // make sure to initialize the function ()
         console.log('URL PARAMS:', this.props.match.params);
-        this.props.getCardData();
+        this.props.getCardData(this.props.match.params.set_id, this.props.match.params.topic_id);
     }
     flipCard =()=>{
         const { flipped } = this.state;
@@ -55,8 +55,8 @@ class displayCard extends Component{
 function mapStateToProps(state){
     console.log("this is the state", state)
     return {
-        front_description: state.card.front_description,
-        back_description: state.card.back_description
+        front_description: state.sets.front_description,
+        back_description: state.sets.back_description
     }
 }
 

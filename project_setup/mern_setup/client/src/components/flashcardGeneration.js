@@ -7,6 +7,7 @@ import {deleteCardData} from '../actions';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
+        console.log("this is your props", this.props)
         this.props.getAllCardData();
     }
     delete = () =>{
