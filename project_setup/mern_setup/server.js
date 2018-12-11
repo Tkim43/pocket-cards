@@ -59,7 +59,7 @@ app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
 
         const sql = mysql.format(query, inserts);
 
-        // console.log("This is the formatted sql", sql);
+        console.log("This is the formatted sql", sql)   ;
 
         const sets = await db.query(sql);
 
@@ -108,24 +108,24 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
 // // Moved to controllers/auth/index.js
 
 // post category (DONE)
-app.post('/api/set_management/create_category/', requireAuth, async (req, res, next)=>{
+app.post('/api/set_management/create_category', requireAuth, async (req, res, next)=>{
     const { category, userID } = req.body;
     const { user } = req;
 
     try {
 
         const query = 'INSERT INTO ?? (??, ??) VALUES (?, ?)';
-        const inserts = ['sets', 'userID', 'category', Number(userID), category];
+        const inserts = ['sets', 'userID', 'category', Number(user.ID), category];
 
         const sql = mysql.format(query, inserts);
 
         // console.log("This is the formated SQL", sql);
 
-        const category = await db.query(sql);
+        const results = await db.query(sql);
 
         res.send({
             success: true,
-            category
+            categoryId: results.insertId
         });
     } catch(err) {
         req.status = 500;
@@ -149,11 +149,11 @@ app.post('/api/set_management/create_subcategory/:setID', requireAuth, async (re
 
         console.log("This is the formated SQL", sql);
 
-        const subCategory = await db.query(sql);
+        const results = await db.query(sql);
 
         res.send({
             success: true,
-            subCategory
+            subCategoryId: results.insertId
         });
     } catch(err) {
         req.status = 500;
@@ -172,7 +172,7 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
     
     try {
         const query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
-        const inserts = ['cards', 'topicID', 'frontText', 'backText', cards.topicID, frontText, backText];
+        const inserts = ['cards', 'topicID', 'frontText', 'backText', topicID, frontText, backText];
         const sql = mysql.format(query, inserts);
 
 

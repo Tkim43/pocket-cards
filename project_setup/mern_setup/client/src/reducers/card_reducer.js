@@ -15,9 +15,10 @@ export default (state = DEFAULT_STATE, action) => {
             console.log("get all card data action:", action);
             return {...state, all_descriptions: action.payload.data.card}
         case types.GET_CARD_DATA:
-            return {...state, front_description: action.payload.data.card[0].frontText, back_description: action.payload.data.card[0].backText}
+            // return {...state, front_description: 'action.payload.data.card[0].frontText', back_description: action.payload.data.card[0].backText}
+            return {...state, front_description: '', back_description: ''}
         case types.SEND_CARD_DATA:
-            return{...state, front_description: '', back_description: ''}
+            return{...state, front_description: '',back_description: ''}
         default:
             return state;
     }

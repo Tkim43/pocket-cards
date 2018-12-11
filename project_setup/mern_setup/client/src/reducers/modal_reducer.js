@@ -1,7 +1,7 @@
 import types from '../actions/types';
  const DEFAULT_STATE = {
     category:'',
-    subCategory: []
+    subCategory: [  ]
 };
  export default (state = DEFAULT_STATE, action) => {
     switch (action.type){

@@ -93,7 +93,7 @@ export function getSetsData (id){
 }
 
 export function getCardData(){
-    const resp = axios.get(`/api/cards/1/topic/1`, authHeaders());
+    const resp = axios.get(`/api/cards/:setID/topic/:topicID`, authHeaders());
 
     return{
         type: types.GET_CARD_DATA,
@@ -160,7 +160,7 @@ export const userJwtSignIn = async dispatch => {
 }
 
 export function sendCardData(updatedFrontDescription){
-    const resp = axios.patch(`/api/update_cards/1`, updatedFrontDescription);
+    const resp = axios.patch(`/api/update_cards/:userID`, updatedFrontDescription);
     
     return {
         type: types.SEND_CARD_DATA,
@@ -169,7 +169,7 @@ export function sendCardData(updatedFrontDescription){
 }
 
 export function getAllCardData(){
-    const resp = axios.get(`/api/cards/1/topic/1`, authHeaders());
+    const resp = axios.get(`/api/cards/:setID/topic/:topicID`, authHeaders());
 
     return{
         type: types.GET_ALL_CARD_DATA,
@@ -180,12 +180,17 @@ export function getAllCardData(){
 //Vienna's
 export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategory){
     return async function(dispatch){
-        const subcategoryCreationResponse = axios.post(`/api/set_management/create_category`, updatedCategory).then(categoryCreationResponse => {
-            console.log('category and subcategory response:', categoryCreationResponse);
-            updatedSubCategory.setID = categoryCreationResponse.data.data.insertId;
-            return axios.post(`${BASE_URL}/set_management/create_subcategory`, updatedSubCategory)
+        const categoryCreationResponse = await axios.post(`/api/set_management/create_category`, updatedCategory, authHeaders());
+        
+        const { categoryId } = categoryCreationResponse.data;
+        const subcategoryCreationResponse = await axios.post(`/api/set_management/create_subcategory/${categoryId}`, updatedSubCategory, authHeaders());
+        
+        // .then(categoryCreationResponse => {
+        //     console.log('category and subcategory response:', categoryCreationResponse);
+        //     updatedSubCategory.setID = categoryCreationResponse.data.data.insertId;
+        //     return 
 
-        });
+        // });
         return {
             type: types.SEND_CATEGORY_AND_SUBCATEGORY_DATA,
             payload: subcategoryCreationResponse
@@ -195,7 +200,7 @@ export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategor
 
 export function deleteCardData(ID){
     console.log("action param", ID)
-    const resp = axios.post(`/api/set_management/delete_card`, ID);
+    const resp = axios.post(`/api/set_management/delete_set`, ID);
     return{
         type: types.DELETE_CARD_DATA,
         payload: resp
@@ -204,7 +209,9 @@ export function deleteCardData(ID){
 
 //Vienna's
 export function sendCreateCardData(createCard){
-    const resp = axios.post(`/api/set_management/create_card`,createCard);
+    const { topicID } = createCard;
+
+    const resp = axios.post(`/api/set_management/create_card/topics/${topicID}`,createCard, authHeaders());
     console.log("this is the response from axios for card creation", resp);
     return{
         type:types.CREATE_CARD_DATA,
