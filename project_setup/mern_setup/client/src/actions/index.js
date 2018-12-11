@@ -205,3 +205,4 @@ export function sendCreateCardData(createCard){
         payload: {frontText, backText}
     }
 }
+
