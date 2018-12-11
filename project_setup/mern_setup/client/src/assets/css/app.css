@@ -55,3 +55,13 @@ textarea.materialize-textarea:focus:not([readonly]) {
 textarea.materialize-textarea:focus:not([readonly])+label{
     color: #ffb74d;
 }
+
+input[type=text]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid #ffb74d;
+    -webkit-box-shadow: 0 1px 0 0 #ffb74d;
+    box-shadow: 0 1px 0 0 #ffb74d;
+} 
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label{
+    color: #ffb74d;
+}
