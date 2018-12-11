@@ -1,5 +1,6 @@
 import axios from 'axios';
 import types from './types';
+import { create } from 'domain';
 
 function authHeaders(){
     return {
@@ -196,6 +197,7 @@ export function deleteCardData(ID){
 
 //Vienna's
 export function sendCreateCardData(createCard){
+    console.log("THIS IS CREATECARD: ", createCard);
     const { topicID, frontText, backText } = createCard;
     const createdCard = axios.post(`/api/set_management/create_card/topics/${topicID}`,createCard, authHeaders());
     dispatch({
