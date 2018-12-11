@@ -3,11 +3,12 @@ import types from '../actions/types';
  const DEFAULT_STATE = {
     category: "",
     categories: [],
+    subCategory: [],
     sets: [],
     topics: [],
     card: [],
     front_description: '',
-    back_description: '',
+    back_description: ''
 };
  export default (state = DEFAULT_STATE, action) => {
     switch(action.type){
@@ -28,7 +29,10 @@ import types from '../actions/types';
         case types.SORT_ALPHABETICAL:
             return {...state, categories: action.payload };
         case types.SORT_BY_LATEST:
-            return {...state, categories: action.payload };  
+            return {...state, categories: action.payload };
+        case types.SEND_CATEGORY_AND_SUBCATEGORY_DATA:
+            console.log('Category and SubCategory Reducer:', action);
+            return {...state, category: '', subCategory:[]};  
         default:
             return state;
     }
