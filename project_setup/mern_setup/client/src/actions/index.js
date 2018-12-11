@@ -25,14 +25,62 @@ export function getProfileData () {
     console.log("this is the response from axios ", resp);
 }
 
-export function sortAlphabetical () {
-    const resp = axios.get('/api/userhome', authHeaders());
+// export function sortAlphabetical () {
+//     const resp = axios.get('/api/userhome', authHeaders());
+    
+//     return {
+//         type: types.SORT_ALPHABETICAL,
+//         payload: resp
+//     }
+// }
+
+
+// export function sortByLatest () {
+//     const resp = axios.get('/api/userhome', authHeaders());
+
+//     return {
+//         type: types.SORT_BY_LATEST,
+//         payload: resp
+//     }
+// }
+
+export async function sortAlphabetical () {
+    const resp = await axios.get('/api/userhome', authHeaders());
+
+    const alphabetical = resp.data.sets.slice().sort(function(a, b) {
+        var categoryA = a.category.toLowerCase(), categoryB = b.category.toLowerCase()
+        if (categoryA > categoryB){
+            return 1;
+        }
+        else if (categoryA < categoryB){
+            return -1;
+        }
+        else if (categoryA === categoryB){
+            return 0;
+        }
+    });
     
     return {
         type: types.SORT_ALPHABETICAL,
-        payload: resp
+        payload: alphabetical
     }
 }
+
+export async function sortByLatest () {
+    const resp = await axios.get('/api/userhome', authHeaders());
+
+    let sortByLatest = [];
+
+    if(resp.data && resp.data.sets){
+        sortByLatest = resp.data.sets.slice().sort().reverse();
+    }
+
+    return {
+        type: types.SORT_BY_LATEST,
+        payload: sortByLatest
+    }
+}
+
 
 //Vienna's
 export function getSetsData (id){
@@ -40,15 +88,6 @@ export function getSetsData (id){
     
     return{
         type: types.GET_SETS_DATA,
-        payload: resp
-    }
-}
-
-export function sortByLatest () {
-    const resp = axios.get('/api/userhome', authHeaders());
-
-    return {
-        type: types.SORT_BY_LATEST,
         payload: resp
     }
 }
