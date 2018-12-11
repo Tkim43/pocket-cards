@@ -64,11 +64,19 @@ export async function sortByLatest () {
 
 //Vienna's
 export function getSetsData (id){
-    const resp = axios.get(`/api/set_management/${id}`, authHeaders());
-    
-    return{
-        type: types.GET_SETS_DATA,
-        payload: resp
+    return async function(dispatch){
+        try {
+            const { data: { sets } } = await axios.get(`/api/set_management/${id}`, authHeaders());
+
+            console.log('======== Get Sets Data ==========:', sets);
+
+            dispatch({
+                type: types.GET_SETS_DATA,
+                sets
+            });
+        } catch(err){
+            console.log('Error getting set data');
+        }
     }
 }
 

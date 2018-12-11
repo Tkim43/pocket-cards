@@ -13,6 +13,7 @@ class displayCard extends Component{
     }
     componentDidMount(){
         // make sure to initialize the function ()
+        console.log('URL PARAMS:', this.props.match.params);
         this.props.getCardData();
     }
     flipCard =()=>{
