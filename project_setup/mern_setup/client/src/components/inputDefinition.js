@@ -7,57 +7,60 @@ import {sendCreateCardData} from '../actions';
 
 
 class inputDefinition extends Component {
-    state = {
-        frontText: '',
-        backText: ''
-    }
+    // state = {
+    //     frontText: '',
+    //     backText: ''
+    // }
+    // componentDidMount(){
+    //     this.props.sendCreateCardData();
+    // }
+    // async componentDidMount(){
+    //     // this.setState({
+    //     //     frontText: this.props.frontText,
+    //     //     backText: this.props.backText
+    //     // });
+    // }
 
-    async componentDidMount(){
-        this.setState({
-            frontText: this.props.frontText,
-            backText: this.props.backText
-        });
-    }
+    // componentDidUpdate() {
+    //     console.log("This is our current state", this.state);
+    // }
 
-    componentDidUpdate() {
-        console.log("This is our current state", this.state);
-    }
+    // updateTerm = event => {
+    //     this.setState({
+    //         frontText: event.currentTarget.value
+    //     });
+    // }
 
-    updateTerm = event => {
-        this.setState({
-            frontText: event.currentTarget.value
-        });
-    }
-
-    updateDefinition = event => {
-        this.setState({
-            backText: event.currentTarget.value
-        })
-    }
+    // updateDefinition = event => {
+    //     this.setState({
+    //         backText: event.currentTarget.value
+    //     })
+    // }
         
     sendCreateCardDataAdd = async (e) => {
         e.preventDefault();
-        await this.props.sendCreateCardData({topicID:1, frontText:this.state.frontText, backText:this.state.backText});
+        await this.props.sendCreateCardData({topicID:1, frontText:'font text', backText:'back text'});
         this.props.history.push('/createflashcards');
     }
 
     sendCreateCardDataEdit = async (e) => {
         e.preventDefault();
-        await this.props.sendCreateCardData({topicID:1, frontText:this.state.frontText, backText:this.state.backText});
+        await this.props.sendCreateCardData({topicID:1, frontText:'this.state.frontText', backText:'hello'});
 
         this.props.history.push('/flashcardGeneration');
     }
 
     sendCreateCardDataDone = async (e) => {
         e.preventDefault();
-        await this.props.sendCreateCardData({topicID:1, frontText:this.state.frontText, backText:this.state.backText});
+        await this.props.sendCreateCardData({topicID:1, frontText:'this.state.frontText', backText:'hello'});
 
         this.props.history.push('/sets');
     }
 
     render () {
 
-        const { frontText, backText } = this.state;
+        // const { frontText, backText } = this.state;
+        console.log("this is your props", this.props);
 
         return (
             <div className = "container">
@@ -67,7 +70,7 @@ class inputDefinition extends Component {
                     <form className="col s12">
                         <div className="row">
                             <div className="input-field col s12">
-                                <textarea value={frontText} onChange={this.updateTerm}  className="materialize-textarea" id="modal-textarea1"></textarea>
+                                <textarea value={this.props.front_description} onChange={this.updateTerm}  className="materialize-textarea" id="modal-textarea1"></textarea>
                                 <label htmlFor="modal-textarea1">Enter Term</label>
                                 {/* <div className="right-align">{this.frontText.length}/50</div> */}
                             </div>
@@ -75,7 +78,7 @@ class inputDefinition extends Component {
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <textarea value={backText} onChange={this.updateDefinition}  className="materialize-textarea" id="modal-textarea2"></textarea>
+                                <textarea value={this.props.back_description} onChange={this.updateDefinition}  className="materialize-textarea" id="modal-textarea2"></textarea>
                                 <label htmlFor="modal-textarea2">Enter Definition</label>
                                 {/* <div className="right-align">{backText.length}/150</div> */}
                             </div>
@@ -105,8 +108,8 @@ class inputDefinition extends Component {
 function mapStateToProps(state){
     console.log("create card State:", state)
     return{
-        frontText: state.card.frontText,
-        backText: state.card.backText
+        frontText: state.sets.front_description,
+        backText: state.sets.back_description
     }
 }
 
