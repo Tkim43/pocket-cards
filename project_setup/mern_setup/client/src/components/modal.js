@@ -89,10 +89,10 @@ function mapStateToProps(state){
     console.log("category and subcategory state", state)
     return{
         category:state.sets.category,
-        sets:state.sets.sets
+        subCategory:state.sets.subCategory
     }
 }
 
-export default connect(mapStateToProps, {
+export default connect(null, {
     sendCategoryAndSubcategoryData
 })(withRouter(ButtonModal));
