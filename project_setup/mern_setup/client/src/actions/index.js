@@ -54,7 +54,7 @@ export function sortByLatest () {
 }
 
 export function getCardData(){
-    const resp = axios.get(`/api/cards/1/topic/1`, authHeaders());
+    const resp = axios.get(`/api/cards/:setID/topic/:topicID`, authHeaders());
 
     return{
         type: types.GET_CARD_DATA,
@@ -121,7 +121,7 @@ export const userJwtSignIn = async dispatch => {
 }
 
 export function sendCardData(updatedFrontDescription){
-    const resp = axios.patch(`/api/update_cards/1`, updatedFrontDescription);
+    const resp = axios.patch(`/api/update_cards/:userID`, updatedFrontDescription);
     
     return {
         type: types.SEND_CARD_DATA,
@@ -130,7 +130,7 @@ export function sendCardData(updatedFrontDescription){
 }
 
 export function getAllCardData(){
-    const resp = axios.get(`/api/cards/1/topic/1`, authHeaders());
+    const resp = axios.get(`/api/cards/:setID/topic/:topicID`, authHeaders());
 
     return{
         type: types.GET_ALL_CARD_DATA,
@@ -140,11 +140,14 @@ export function getAllCardData(){
 
 //Vienna's
 export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategory){
+    debugger;
+    
+
     return async function(dispatch){
-        const subcategoryCreationResponse = axios.post(`/api/set_management/create_category`, updatedCategory).then(categoryCreationResponse => {
+        const subcategoryCreationResponse = axios.post(`/api/set_management/create_category`, authHeaders(), updatedCategory).then(categoryCreationResponse => {
             console.log('category and subcategory response:', categoryCreationResponse);
             updatedSubCategory.setID = categoryCreationResponse.data.data.insertId;
-            return axios.post(`${BASE_URL}/set_management/create_subcategory`, updatedSubCategory)
+            return axios.post(`/api/set_management/create_subcategory`, authHeaders(), updatedSubCategory)
 
         });
         return {
@@ -156,7 +159,7 @@ export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategor
 
 export function deleteCardData(ID){
     console.log("action param", ID)
-    const resp = axios.post(`/api/set_management/delete_card`, ID);
+    const resp = axios.post(`/api/set_management/delete_set`, ID);
     return{
         type: types.DELETE_CARD_DATA,
         payload: resp

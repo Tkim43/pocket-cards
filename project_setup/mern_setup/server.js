@@ -59,7 +59,7 @@ app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
 
         const sql = mysql.format(query, inserts);
 
-        // console.log("This is the formatted sql", sql);
+        console.log("This is the formatted sql", sql)   ;
 
         const sets = await db.query(sql);
 
