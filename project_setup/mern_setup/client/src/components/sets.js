@@ -12,17 +12,16 @@ class Sets extends Component{
 
     render(){
 
-        console.log('SETS PROPS:', this.props);
         const userCategory = this.props.category;
 
-        
+        console.log('SETS PROPS:', this.props);
 
 
         const userSubCategory = this.props.topics.map ((item, index) => {
             console.log('ITEM:', item);
             return(
                 <div key= {item.ID} className="row set">
-                    <Link to={`/displayCard/${item.setID}/topic/${item.ID}`} className ="btn blue darken-2">{item.subCategory}</Link>
+                    <Link to={`/displayCard/${item.setID}/topic/${item.ID}`} className ="btn blue darken-3">{item.subCategory}</Link>
                 </div>
             );  
         });
@@ -32,8 +31,8 @@ class Sets extends Component{
                 <div className="border">{userCategory}</div>
                 <div>{userSubCategory}</div>
                 <div className="row">
-                    <Link to ="/flashcardGeneration" className="btn blue darken-2">Edit sets</Link>
-                    <Link to ="/profile" className="btn grey darken-2">Home</Link>
+                    <Link to ="/flashcardGeneration" className="btn green lighten-2">Edit sets</Link>
+                    <Link to ="/profile" className="btn yellow darken-2">Home</Link>
                 </div>
             </div>
         );
