@@ -91,6 +91,13 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
 
         const card = await db.query(sql);
 
+        const query1 = 'SELECT * FROM ?? WHERE ?? = ?';
+        const inserts1 = ['topics', 'setID', topics.setID];
+        const sql1 = mysql.format(query1,inserts1);
+
+        const topics = await db.query(sql1);
+
+
         res.send({
             success: true,
             card
