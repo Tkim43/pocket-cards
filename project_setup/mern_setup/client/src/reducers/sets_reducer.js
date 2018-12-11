@@ -6,11 +6,16 @@ import types from '../actions/types';
     sets: [],
     topics: [],
     card: [],
+    // categoryId: {},
+    // subCategoryId: {},
     front_description: '',
     back_description: '',
 };
  export default (state = DEFAULT_STATE, action) => {
     switch(action.type){
+        case types.SEND_CATEGORY_AND_SUBCATEGORY_DATA:
+            console.log('Category and SubCategory Reducer:', action);
+            return {...state, categoryId: action.payload.categoryId, subCategoryId: action.payload.subCategoryId};
         case types.SEND_CREATE_CARD_DATA:
             console.log('create card reducer:', action);
             return {...state, front_description: action.payload.frontText, back_description: action.payload.backText}

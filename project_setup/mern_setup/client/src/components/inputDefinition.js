@@ -20,7 +20,7 @@ class InputDefinition extends Component {
         handleAddDefinition = (values) => {
             console.log("THIS IS THIS.PROPS: ", this.props);
             console.log("THIS IS THE VALUES", values);
-            values.topicID = 1;
+            values.subcategoryId = subcategoryId;
             this.props.sendCreateCardData(values);
         }
 
@@ -180,10 +180,12 @@ class InputDefinition extends Component {
 // }
 
 function mapStateToProps(state){
-    // console.log("create card State:", state)
+    console.log("====NEW PROPS CAT ID, SUB ID====:", state);
     return{
         frontText: state.sets.front_description,
-        backText: state.sets.back_description
+        backText: state.sets.back_description,
+        categoryId: state.sets.categoryId,
+        subcategoryId: state.sets.subCategoryId
     }
 }
 
