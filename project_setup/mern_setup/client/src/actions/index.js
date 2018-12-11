@@ -18,31 +18,11 @@ export function userSignOut(){
     }
 }
 
-
 export function getProfileData () {
     const resp = axios.get('/api/userhome', authHeaders());
 
     console.log("this is the response from axios ", resp);
 }
-
-// export function sortAlphabetical () {
-//     const resp = axios.get('/api/userhome', authHeaders());
-    
-//     return {
-//         type: types.SORT_ALPHABETICAL,
-//         payload: resp
-//     }
-// }
-
-
-// export function sortByLatest () {
-//     const resp = axios.get('/api/userhome', authHeaders());
-
-//     return {
-//         type: types.SORT_BY_LATEST,
-//         payload: resp
-//     }
-// }
 
 export async function sortAlphabetical () {
     const resp = await axios.get('/api/userhome', authHeaders());
@@ -84,11 +64,19 @@ export async function sortByLatest () {
 
 //Vienna's
 export function getSetsData (id){
-    const resp = axios.get(`/api/set_management/${id}`, authHeaders());
-    
-    return{
-        type: types.GET_SETS_DATA,
-        payload: resp
+    return async function(dispatch){
+        try {
+            const { data: { sets } } = await axios.get(`/api/set_management/${id}`, authHeaders());
+
+            console.log('======== Get Sets Data ==========:', sets);
+
+            dispatch({
+                type: types.GET_SETS_DATA,
+                sets
+            });
+        } catch(err){
+            console.log('Error getting set data');
+        }
     }
 }
 
@@ -117,7 +105,6 @@ export function userSignUp(newUser){
             console.log('Sign Up Error:', err.response);
             dispatch ({
                 type: types.SIGN_UP_ERROR,
-                // error: "email address already exists"
             });
         }
     }
@@ -137,7 +124,6 @@ export function userSignIn(userInfo){
         } catch (err){
             dispatch({
                 type: types.SIGN_IN_ERROR,
-                // error: "Invalid email and/or password"
             });
         }
         

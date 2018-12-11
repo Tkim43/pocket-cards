@@ -14,15 +14,17 @@ class Sets extends Component{
 
         const userCategory = this.props.category;
 
-        const userSubCategory = this.props.sets.map ((item, index) => {
+        console.log('SETS PROPS:', this.props);
+
+
+        const userSubCategory = this.props.topics.map ((item, index) => {
             console.log('ITEM:', item);
             return(
-                <div key= {index} className="row set">
-                    <Link to="/displayCard" className ="btn blue darken-2">{item}</Link>
+                <div key= {item.ID} className="row set">
+                    <Link to={`/displayCard/${item.setID}/topic/${item.ID}`} className ="btn blue darken-2">{item.subCategory}</Link>
                 </div>
             );  
-        }
-    );
+        });
 
         return(
             <div className="center">
@@ -40,8 +42,8 @@ class Sets extends Component{
 function mapStateToProps(state){
     console.log("this is the state", state)
     return{
-        category:state.sets.category,
-        sets:state.sets.sets
+        category: state.sets.category,
+        topics: state.sets.topics
         
     }
 }
