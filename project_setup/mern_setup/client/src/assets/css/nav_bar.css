@@ -1,3 +1,7 @@
 .nav_bar{
     font-family: 'Gochi Hand', cursive;
 }
+
+.main-nav {
+    padding: 0 12px;
+}

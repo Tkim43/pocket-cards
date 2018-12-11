@@ -18,31 +18,11 @@ export function userSignOut(){
     }
 }
 
-
 export function getProfileData () {
     const resp = axios.get('/api/userhome', authHeaders());
 
     console.log("this is the response from axios ", resp);
 }
-
-// export function sortAlphabetical () {
-//     const resp = axios.get('/api/userhome', authHeaders());
-    
-//     return {
-//         type: types.SORT_ALPHABETICAL,
-//         payload: resp
-//     }
-// }
-
-
-// export function sortByLatest () {
-//     const resp = axios.get('/api/userhome', authHeaders());
-
-//     return {
-//         type: types.SORT_BY_LATEST,
-//         payload: resp
-//     }
-// }
 
 export async function sortAlphabetical () {
     const resp = await axios.get('/api/userhome', authHeaders());
@@ -117,7 +97,6 @@ export function userSignUp(newUser){
             console.log('Sign Up Error:', err.response);
             dispatch ({
                 type: types.SIGN_UP_ERROR,
-                // error: "email address already exists"
             });
         }
     }
@@ -137,7 +116,6 @@ export function userSignIn(userInfo){
         } catch (err){
             dispatch({
                 type: types.SIGN_IN_ERROR,
-                // error: "Invalid email and/or password"
             });
         }
         

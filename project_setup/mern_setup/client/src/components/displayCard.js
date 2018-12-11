@@ -37,7 +37,9 @@ class displayCard extends Component{
                     <div className="back">{back_description}</div>
                 </div>
                 <div className="row down">
+                    <i className="large material-icons white-text">arrow_back</i>
                     <button className="btn green darken-2 flip-btn" onClick={this.flipCard}>{this.state.flipped ? "Flip to Back" : "Flip to Front"}</button>
+                    <i className="large material-icons white-text">arrow_forward</i>
                 </div>
                 <div className="row down">
                     <Link to ="/flashcardGeneration" className="btn green darken-2 edit-btn">Edit Cards</Link>
