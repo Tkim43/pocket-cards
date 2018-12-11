@@ -197,9 +197,6 @@ export function deleteCardData(ID){
 //Vienna's
 export function sendCreateCardData(createCard){
     const { topicID, frontText, backText } = createCard;
-    console.log("create card", createCard)
-    console.log('topic ID', topicID)
-    console.log("this is your front Text", frontText)
     const createdCard = axios.post(`/api/set_management/create_card/topics/${topicID}`,createCard, authHeaders());
     dispatch({
         type:types.SEND_CREATE_CARD_DATA,

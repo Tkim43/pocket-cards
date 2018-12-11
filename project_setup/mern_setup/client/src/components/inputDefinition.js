@@ -5,8 +5,16 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {sendCreateCardData} from '../actions';
 
-
 class InputDefinition extends Component {
+  
+        state = {
+              card_count: 0
+          }
+          cardCounter = () =>{
+              this.setState={
+                  card_count: this.state.card_count++
+              };
+          }
 
         renderInput (props) {
             return (
@@ -48,7 +56,7 @@ class InputDefinition extends Component {
             return (
                 <Fragment>
                     <div className = "container">
-                        <h1 className = "center">Add Term and Definition</h1>
+                        <h1>Cards Created: {this.state.card_count}</h1>
         
                         <form onSubmit = {handleSubmit(this.handleAddDefinition)}>
                             <div className="row">
@@ -109,8 +117,6 @@ class InputDefinition extends Component {
     // }
 
 //     handleAddTerm () {
-
-//     }
         
     // sendCreateCardDataAdd = async (e) => {
     //     e.preventDefault();
@@ -178,6 +184,7 @@ class InputDefinition extends Component {
 //         );
 //     }
 // }
+
 
 function mapStateToProps(state){
     console.log("====NEW PROPS CAT ID, SUB ID====:", state);
