@@ -54,8 +54,11 @@ app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
     const { params: { setID }, user } = req;
 
     try {
-        const query = 'SELECT * FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE ?? = ? AND ?? = ?';
-        const inserts = ['topics', 'sets', 'userID', user.ID, 'setID', setID];
+        // topics.ID, setID, sets.category, subCategory, topics.created, topics.status, topics.updated
+        const query = 'SELECT topics.ID as topicID, ??, ??, ??, ??, ??, ?? FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE ?? = ? and ?? = ?';
+        const inserts = ['setID', 'sets.category', 'subCategory', 'topics.created', 'topics.status', 'topics.updated', 'topics', 'sets', 'userID', user.ID, 'setID', setID];
+        // OLD const query = 'SELECT * FROM ?? INNER JOIN ?? ON sets.ID = topics.setID WHERE ?? = ? AND ?? = ?';
+        // OLD const inserts = ['topics', 'sets', 'userID', user.ID, 'setID', setID];
 
         const sql = mysql.format(query, inserts);
 
@@ -92,10 +95,14 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
         const card = await db.query(sql);
 
         const query1 = 'SELECT * FROM ?? WHERE ?? = ?';
-        const inserts1 = ['topics', 'setID', Number(setID)];
+
+        const inserts1 = ['topics', 'setID', topicID.setID];
+//         const inserts1 = ['topics', 'setID', Number(setID)];
         const sql1 = mysql.format(query1,inserts1);
 
         const topics = await db.query(sql1);
+
+       
 
 
         res.send({
@@ -104,6 +111,7 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
             topics
         });
     } catch(err) {
+        console.log("ourthing" ,err)
         req.status = 500;
         req.error = 'Error getting set topic';
         

@@ -80,8 +80,8 @@ export function getSetsData (id){
     }
 }
 
-export function getCardData(){
-    const resp = axios.get(`/api/cards/:setID/topic/:topicID`, authHeaders());
+export function getCardData(setId, topicId){
+    const resp = axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
 
     return{
         type: types.GET_CARD_DATA,
@@ -154,8 +154,8 @@ export function sendCardData(updatedFrontDescription){
     }
 }
 
-export function getAllCardData(){
-    const resp = axios.get(`/api/cards/:setID/topic/:topicID`, authHeaders());
+export function getAllCardData(setID, topicID){
+    const resp = axios.get(`/api/cards/${setID}/topic/${topicID}`, authHeaders());
 
     return{
         type: types.GET_ALL_CARD_DATA,
