@@ -93,6 +93,6 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(null, {
+export default connect(mapStateToProps, {
     sendCategoryAndSubcategoryData
 })(withRouter(ButtonModal));

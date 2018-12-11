@@ -197,12 +197,14 @@ export function deleteCardData(ID){
 
 //Vienna's
 export function sendCreateCardData(createCard){
-    console.log("THIS IS CREATECARD: ", createCard);
-    const { topicID, frontText, backText } = createCard;
-    const createdCard = axios.post(`/api/set_management/create_card/topics/${topicID}`,createCard, authHeaders());
+    return async function(dispatch){
+        console.log("THIS IS CREATECARD: ", createCard);
+        const { subCategoryId, frontText, backText } = createCard;
+        const createdCard = axios.post(`/api/set_management/create_card/topics/${subCategoryId}`,createCard, authHeaders());
     dispatch({
         type:types.SEND_CREATE_CARD_DATA,
-        payload: {front_description: frontText, back_description: backText, subcategoryId: topicID}
-    });
+        payload: {front_description: frontText, back_description: backText, subCategoryId: subCategoryId}
+        });
+    }
 }
 

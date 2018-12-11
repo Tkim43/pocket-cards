@@ -3,7 +3,7 @@ import "../assets/css/inputDefinition.css";
 import { Field, reduxForm} from 'redux-form'; 
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {sendCreateCardData} from '../actions';
+import {sendCreateCardData, sendCategoryAndSubcategoryData} from '../actions';
 
 class InputDefinition extends Component {
   
@@ -28,7 +28,7 @@ class InputDefinition extends Component {
         handleAddDefinition = (values) => {
             console.log("THIS IS THIS.PROPS: ", this.props);
             console.log("THIS IS THE VALUES", values);
-            values.subcategoryId = subcategoryId;
+            values.subCategoryId = this.props.subCategoryId;
             this.props.sendCreateCardData(values);
         }
 
@@ -192,7 +192,7 @@ function mapStateToProps(state){
         frontText: state.sets.front_description,
         backText: state.sets.back_description,
         categoryId: state.sets.categoryId,
-        subcategoryId: state.sets.subCategoryId
+        subCategoryId: state.sets.subCategoryId
     }
 }
 
@@ -201,5 +201,6 @@ InputDefinition = reduxForm ({
 })(InputDefinition);
 
 export default connect(mapStateToProps,{
-    sendCreateCardData
+    sendCreateCardData,
+    sendCategoryAndSubcategoryData
 })(withRouter(InputDefinition));
