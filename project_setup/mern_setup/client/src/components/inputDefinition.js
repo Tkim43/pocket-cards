@@ -67,16 +67,16 @@ class inputDefinition extends Component {
                     <form className="col s12">
                         <div className="row">
                             <div className="input-field col s12">
-                                <textarea value={frontText} onChange={this.updateTerm}  className="materialize-textarea" id="textarea1"></textarea>
-                                <label htmlFor="textarea1">Term</label>
+                                <textarea value={frontText} onChange={this.updateTerm}  className="materialize-textarea" id="modal-textarea1"></textarea>
+                                <label htmlFor="modal-textarea1">Enter Term</label>
                                 {/* <div className="right-align">{this.frontText.length}/50</div> */}
                             </div>
                             
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <textarea value={backText} onChange={this.updateDefinition}  className="materialize-textarea" id="textarea2"></textarea>
-                                <label htmlFor="textarea2">Definition</label>
+                                <textarea value={backText} onChange={this.updateDefinition}  className="materialize-textarea" id="modal-textarea2"></textarea>
+                                <label htmlFor="modal-textarea2">Enter Definition</label>
                                 {/* <div className="right-align">{backText.length}/150</div> */}
                             </div>
                         </div>

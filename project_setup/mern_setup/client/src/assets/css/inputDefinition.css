@@ -1,4 +1,11 @@
 /* inputDefinition Component CSS */
+.container h1 {
+    color:white;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+}
+
 
 .buttonDiv {
     display: flex;
@@ -6,8 +13,13 @@
     justify-content: center;
 }
 
-button {
+.buttonDiv .btn-large  {
     display: flex;
-    /* width: 100%; */
+    justify-content: center;
+    width: 100%;
     max-width: 450px;
+}
+
+#modal-textarea1, #modal-textarea2 {
+    color:white;
 }
