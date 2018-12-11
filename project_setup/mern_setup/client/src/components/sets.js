@@ -12,9 +12,10 @@ class Sets extends Component{
 
     render(){
 
+        console.log('SETS PROPS:', this.props);
         const userCategory = this.props.category;
 
-        console.log('SETS PROPS:', this.props);
+        
 
 
         const userSubCategory = this.props.topics.map ((item, index) => {

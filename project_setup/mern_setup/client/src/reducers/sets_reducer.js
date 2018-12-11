@@ -11,7 +11,7 @@ import types from '../actions/types';
         case types.GET_SETS_DATA:
             console.log('Sets Reducer: ', action);
         
-            return {...state, topics: action.sets};
+            return {...state, category: action.sets[0].category, topics: action.sets};
         case types.SORT_ALPHABETICAL:
             return {...state, categories: action.payload };
         case types.SORT_BY_LATEST:
