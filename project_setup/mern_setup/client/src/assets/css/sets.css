@@ -6,3 +6,9 @@
 .preloader-wrapper{
     margin:auto;
 }
+
+.center .border {
+    color:white;
+    font-size: 3em;
+    background-color: blue;
+}
