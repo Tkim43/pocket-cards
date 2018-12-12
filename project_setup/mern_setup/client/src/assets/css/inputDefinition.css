@@ -20,6 +20,8 @@
     max-width: 450px;
 }
 
-#modal-textarea1, #modal-textarea2 {
-    color:white;
+input [name=backText] {
+    color:white; 
 }
+
+
