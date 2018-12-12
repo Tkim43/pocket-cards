@@ -46,8 +46,8 @@ class InputDefinition extends Component {
             cardElements = cards.map((card, i) => {
                 return (
                     <div className="row center grey-text" key={i}>
-                        <div className="col s6">{card.frontText}</div>
-                        <div className="col s6">{card.backText}</div>
+                        <div className="col s6">{card.frontText.substring(0,20) + "..."}</div>
+                        <div className="col s6">{card.backText.substring(0,20) + "..."}</div>
                     </div>
                 );
             });
@@ -85,6 +85,7 @@ class InputDefinition extends Component {
                             </Link>
                         </div>
                     </form>
+                    <div className="center white-text">Previous Cards:</div>
                     <div className="row center white-text">
                         <div className="col s6">Card Front</div>
                         <div className="col s6">Card Back</div>
