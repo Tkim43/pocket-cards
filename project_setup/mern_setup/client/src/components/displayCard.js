@@ -24,18 +24,15 @@ class displayCard extends Component{
         })
     }
     render(){
-        console.log("displayfront", this.props)
-        console.log("what is the state", this.state)
-        const front_description = this.props.front_description
-        const back_description = this.props.back_description
+        console.log("this is your props", this.props);
         return(
             <div className="container">
                 <div className="row">
                     <h3 className = "white-text">{this.state.flipped ? "Front of Card" : "Back of Card"}</h3>
                 </div>
                 <div className={"card center cardflip " + (this.state.flipped ? "" : "flipped")}>
-                    <div className="front">{front_description}</div>
-                    <div className="back">{back_description}</div>
+                    <div className="front">{this.props.front_description}</div>
+                    <div className="back">{this.props.back_description}</div>
                 </div>
                 <div className="row down">
                     <i className="large material-icons white-text">arrow_back</i>

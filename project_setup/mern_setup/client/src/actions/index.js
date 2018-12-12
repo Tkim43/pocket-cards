@@ -83,17 +83,12 @@ export function getSetsData (id){
 }
 
 export function getCardData(setId, topicId){
-    return async function(dispatch){
-        try{
-            const {data:{card}} = await axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
-            dispatch({
-                type: types.GET_CARD_DATA,
-                card
-            })
-        }catch(err){
-            console.log("this is the error for get card data");
+        const resp = axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
+        return{
+            type: types.GET_CARD_DATA,
+                payload: resp
         }
-    }
+      
     
 }
 
