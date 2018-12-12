@@ -16,7 +16,7 @@ class Sets extends Component{
 
         console.log('SETS PROPS:', this.props);
 
-
+        console.log("this.props.topics: ", this.props.topics);
         const userSubCategory = this.props.topics.map ((item, index) => {
             console.log('ITEM:', item);
             debugger;

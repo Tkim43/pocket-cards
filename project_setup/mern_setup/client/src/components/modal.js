@@ -33,9 +33,10 @@ class ButtonModal extends Component {
 
     handleClick = async (e) => {
         e.preventDefault();
-        await this.props.sendCategoryAndSubcategoryData({category: this.state.category},{subCategory: this.state.subCategory});
+        const { categoryId, subCategoryId } = await this.props.sendCategoryAndSubcategoryData({category: this.state.category},{subCategory: this.state.subCategory});
 
-        this.props.history.push('/createflashcards');
+
+        this.props.history.push(`/createflashcards/${categoryId}/subcategory/${subCategoryId}`);
     }
 
     open = () => this.setState({isOpen: true});
@@ -93,6 +94,6 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(null, {
+export default connect(mapStateToProps, {
     sendCategoryAndSubcategoryData
 })(withRouter(ButtonModal));

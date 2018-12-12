@@ -26,7 +26,7 @@ const App = () => (
         <Route path = "/profile" component = {auth(Profile)}/>
         <Route path = "/flashcards" component = {auth(Flashcards)}/>
         <Route path = "/editMode" component= {editMode}/>
-        <Route path = "/createflashcards" component = {InputDefinition}/>
+        <Route path = "/createflashcards/:category_id/subcategory/:sub_category_id" component = {InputDefinition}/>
         <Route path = "/flashcardGeneration" component = {FlashcardGeneration}/>
         <Route path = "/signup" component = {auth(Signup, '/profile', false)}/>
         <Route path = "/signin" component = {auth(Signin, '/profile', false)}/>
