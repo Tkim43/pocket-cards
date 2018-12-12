@@ -218,3 +218,9 @@ export function sendCreateCardData(topicId, cardData){
     }
 }
 
+// export function updateTime (){
+//     return {
+//         type: "UPDATE_TIME",
+//         payload: new Date ().toLocaleTimeString
+//     }
+// }
