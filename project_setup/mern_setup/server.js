@@ -86,21 +86,21 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
 
     try {
         const query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
-        const inserts = ['cards', 'topics', 'setID', Number(setID), 'topicID', Number(topicID)];
+        const inserts = ['cards', 'topics', 'setID', setID, 'topicID', topicID];
 
         const sql = mysql.format(query, inserts);
-
+        console.log("sql", sql);
         // console.log("This is the formated SQL", sql);
 
         const card = await db.query(sql);
-
+        console.log("card", card);
         const query1 = 'SELECT * FROM ?? WHERE ?? = ?';
 
-        const inserts1 = ['topics', 'setID', topicID.setID];
-//         const inserts1 = ['topics', 'setID', Number(setID)];
+        const inserts1 = ['topics', 'setID', setID];
         const sql1 = mysql.format(query1,inserts1);
-
+        console.log("sql1", sql1)
         const topics = await db.query(sql1);
+        console.log("topics", topics);
 
        
 

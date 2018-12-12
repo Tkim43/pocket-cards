@@ -1,5 +1,6 @@
 import axios from 'axios';
 import types from './types';
+import { create } from 'domain';
 
 function authHeaders(){
     return {
@@ -66,6 +67,7 @@ export async function sortByLatest () {
 export function getSetsData (id){
     return async function(dispatch){
         try {
+            console.log("====ID====: ", id);
             const { data: { sets } } = await axios.get(`/api/set_management/${id}`, authHeaders());
 
             console.log('======== Get Sets Data ==========:', sets);
@@ -81,12 +83,13 @@ export function getSetsData (id){
 }
 
 export function getCardData(setId, topicId){
-    const resp = axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
-
-    return{
-        type: types.GET_CARD_DATA,
-        payload: resp
-    }
+        const resp = axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
+        return{
+            type: types.GET_CARD_DATA,
+                payload: resp
+        }
+      
+    
 }
 
 export function userSignUp(newUser){
@@ -170,6 +173,8 @@ export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategor
         
         const { categoryId } = categoryCreationResponse.data;
         const subcategoryCreationResponse = await axios.post(`/api/set_management/create_subcategory/${categoryId}`, updatedSubCategory, authHeaders());
+
+        console.log('Sub Cat Create Resp:', subcategoryCreationResponse);
         
         const { subCategoryId } = subcategoryCreationResponse.data;
         // .then(categoryCreationResponse => {
@@ -178,10 +183,10 @@ export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategor
         //     return 
 
         // });
-        dispatch({
-            type: types.SEND_CATEGORY_AND_SUBCATEGORY_DATA,
-            payload: {categoryId: categoryId, subCategoryId: subCategoryId}
-        });
+        return {
+            categoryId: categoryId,
+            subCategoryId: subCategoryId
+        };
     }
 }
 
@@ -196,11 +201,21 @@ export function deleteCardData(ID){
 
 //Vienna's
 export function sendCreateCardData(createCard){
-    const { topicID, frontText, backText } = createCard;
-    const createdCard = axios.post(`/api/set_management/create_card/topics/${topicID}`,createCard, authHeaders());
-    dispatch({
-        type:types.SEND_CREATE_CARD_DATA,
-        payload: {front_description: frontText, back_description: backText, subcategoryId: topicID}
-    });
+    return async function(dispatch){
+        console.log("THIS IS CREATECARD: ", createCard);
+        const { subCategoryId, frontText, backText } = createCard;
+
+        console.log('Sub Cat ID:', subCategoryId);
+
+        // const createdCard = await axios.post(`/api/set_management/create_card/topics/${subCategoryId}`,createCard, authHeaders());
+
+
+        // console.log('Created Card:', createdCard);
+
+    // dispatch({
+    //     type:types.SEND_CREATE_CARD_DATA,
+    //     payload: {front_description: frontText, back_description: backText, subCategoryId: subCategoryId}
+    //     });
+    }
 }
 

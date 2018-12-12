@@ -16,13 +16,13 @@ class Sets extends Component{
 
         console.log('SETS PROPS:', this.props);
 
-
+        console.log("this.props.topics: ", this.props.topics);
         const userSubCategory = this.props.topics.map ((item, index) => {
             console.log('ITEM:', item);
             return(
 
-                <div key= {item.ID} className="row set">
-                    <Link to={`/displayCard/${item.setID}/topic/${item.ID}`} className ="btn blue darken-3 ">{item.subCategory}</Link>
+                <div key= {item.setID} className="row set">
+                    <Link to={`/displayCard/${item.setID}/topic/${item.topicID}`} className ="btn blue darken-3 ">{item.subCategory}</Link>
 
                 </div>
             );  
