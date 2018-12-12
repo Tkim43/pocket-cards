@@ -83,12 +83,18 @@ export function getSetsData (id){
 }
 
 export function getCardData(setId, topicId){
-    const resp = axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
-    console.log("this is your response", resp);
-    return{
-        type: types.GET_CARD_DATA,
-        payload: resp
+    return async function(dispatch){
+        try{
+            const {data:{card}} = await axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
+            dispatch({
+                type: types.GET_CARD_DATA,
+                card
+            })
+        }catch(err){
+            console.log("this is the error for get card data");
+        }
     }
+    
 }
 
 export function userSignUp(newUser){
