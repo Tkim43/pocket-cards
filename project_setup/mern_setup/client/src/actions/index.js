@@ -82,7 +82,7 @@ export function getSetsData (id){
 
 export function getCardData(setId, topicId){
     const resp = axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
-
+    console.log("this is your response", resp);
     return{
         type: types.GET_CARD_DATA,
         payload: resp

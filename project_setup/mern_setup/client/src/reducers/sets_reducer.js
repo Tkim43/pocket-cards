@@ -25,7 +25,7 @@ import types from '../actions/types';
             return {...state, card: action.payload.data.card}
         case types.GET_CARD_DATA:
             console.log("get_card_data", action);
-            return {...state}
+            return {...state, card: action.payload}
         case types.SEND_CARD_DATA:
             return{...state, front_description: '',back_description: ''}
         case types.GET_SETS_DATA:
