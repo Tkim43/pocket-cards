@@ -29,7 +29,7 @@ class Sets extends Component{
 
         return(
             <div className="center set-container">
-                <div className="border">{category}</div>
+                <h3 className="white-text">{category}</h3>
                 <div className="col s12">
                     {userSubCategories}
                 </div>

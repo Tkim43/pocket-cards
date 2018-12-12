@@ -68,3 +68,5 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label{
 input[type=text]:not(.browser-default) {
     color:white; 
 }
+
+@import url('https://fonts.googleapis.com/css?family=Fascinate');
