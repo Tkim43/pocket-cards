@@ -19,6 +19,7 @@ import types from '../actions/types';
             return {...state, categoryId: action.payload.categoryId, subCategoryId: action.payload.subCategoryId};
         case types.SEND_CREATE_CARD_DATA:
             console.log('create card reducer:', action);
+            debugger;
             return {...state, front_description: action.payload.frontText, back_description: action.payload.backText}
         case types.GET_ALL_CARD_DATA:
             // console.log("get all card data action:", action);
