@@ -19,7 +19,6 @@ class Sets extends Component{
 
         const userSubCategory = this.props.topics.map ((item, index) => {
             console.log('ITEM:', item);
-            debugger;
             return(
 
                 <div key= {item.ID} className="row set">
