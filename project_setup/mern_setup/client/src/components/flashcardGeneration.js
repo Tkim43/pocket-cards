@@ -2,50 +2,52 @@ import React, {Component} from 'react';
 import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getAllCardData} from '../actions';
-import {deleteCardData} from '../actions';
+import {getCardData} from '../actions';
+// import {deleteCardData} from '../actions';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
-        console.log("this is your props", this.props)
-        this.props.getAllCardData();
+        console.log("this is your props params", this.props.match.params)
+        this.props.getCardData(this.props.match.params.set_id, this.props.match.params.topic_id);
     }
-    delete = () =>{
-        // console.log("ID for delete", ID);
-        console.log("these are your props", this.props)
-        this.props.deleteCardData({ID: 9, topicID: 1});
-    }
+    // delete = () =>{
+    //     // console.log("ID for delete", ID);
+    //     console.log("these are your props", this.props)
+    //     this.props.deleteCardData({ID: 9, topicID: 1});
+    // }
     render () {
-        console.log("this is your card", this.props.card)
-        if(!this.props.card.all_descriptions[0]){
-            return(
-                <div className="loading-container">
-                    <div className="preloader-wrapper big active">
-                        <div className="spinner-layer spinner-blue-only">
-                            <div className="circle-clipper left">
-                            <div className="circle"></div>
-                            </div>
-                            <div className="gap-patch">
-                                <div className="circle"></div>
-                            </div>
-                            <div className="circle-clipper right">
-                                <div className="circle"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
-        const cardCounter = this.props.card.all_descriptions.length
-        const listCards = this.props.card.all_descriptions.map((item,ID) =>{
-            var frontText = item.frontText;
-            var backText = item.backText;
+        console.log("this is your card", this.props)
+        // if(!this.props.card.all_descriptions[0]){
+        //     return(
+        //         <div className="loading-container">
+        //             <div className="preloader-wrapper big active">
+        //                 <div className="spinner-layer spinner-blue-only">
+        //                     <div className="circle-clipper left">
+        //                     <div className="circle"></div>
+        //                     </div>
+        //                     <div className="gap-patch">
+        //                         <div className="circle"></div>
+        //                     </div>
+        //                     <div className="circle-clipper right">
+        //                         <div className="circle"></div>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     )
+        // }
+        // const cardCounter = this.props.card.all_descriptions.length
+        const listCards = this.props.sets.card.map((item,ID) =>{
+            var frontText = item.front_description;
+            var backText = item.back_description;
             if(item.frontText.length > 20){
                 frontText = item.frontText.substring(0,20) + "...";
             }
+            frontText = item.frontText;
             if(item.backText.length > 20){
                 backText = item.backText.substring(0,20) + "...";
             }
+            backText = item.backText;
             
             return(
                 <div key = {ID}>
@@ -61,7 +63,7 @@ class FlashcardGeneration extends Component {
                             </Link>
                         </div>
                         <div className="col s2 card-container">
-                            <button className="red lighten-2 btn" onClick={this.delete}>
+                            <button className="red lighten-2 btn">
                                 <i className = "material-icons">delete</i>
                             </button>
                         </div>
@@ -69,12 +71,12 @@ class FlashcardGeneration extends Component {
                 </div>
             )
         })
-        const category = this.props.card.all_descriptions[0].subCategory
+
         return (
 
             <div className = "flashcard-container center">
-                <h2 className = "col s12 center white-text">{category}</h2>
-                <h3 className = "col s12 center white-text">Card Counter: {cardCounter}</h3>
+                <h2 className = "col s12 center white-text">category</h2>
+                <h3 className = "col s12 center white-text">Card Counter: </h3>
                 <div className="row container flashcard-row">                    
                     <div className="col s5 card-container">
                         <div className="card-panel blue lighten-2 white-text center">Term</div> 
@@ -110,6 +112,6 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {
-    getAllCardData,
-    deleteCardData
+    getCardData,
+    // deleteCardData
 })(FlashcardGeneration);

@@ -20,12 +20,10 @@ import types from '../actions/types';
         case types.SEND_CREATE_CARD_DATA:
             console.log('create card reducer:', action);
             debugger;
-            return {...state, front_description: action.payload.frontText, back_description: action.payload.backText}
-        case types.GET_ALL_CARD_DATA:
-            return {...state, card: action.payload.data.card[0]}
+            return {...state, front_description: action.payload.frontText, back_description: action.payload.backText};
         case types.GET_CARD_DATA:
-            console.log("get_card_data", action.payload.data.card);
-            return {...state, front_description: action.payload.data.card[0].frontText, back_description: action.payload.data.card[0].backText}
+            console.log("get_card_data", action.payload.card);
+            return {...state, card:action.payload.card, front_description: action.payload.card[0].frontText, back_description: action.payload.card[0].backText}
         case types.SEND_CARD_DATA:
             return{...state, front_description: '',back_description: ''}
         case types.GET_SETS_DATA:
