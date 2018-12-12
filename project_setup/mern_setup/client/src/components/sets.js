@@ -18,7 +18,7 @@ class Sets extends Component{
 
         console.log("this.props.topics: ", this.props.topics);
         const userSubCategories = this.props.topics.map ((item, index) => {
-            console.log('ITEM:', item);
+            
             return(
 
                 <div key= {item.setID} className="row set">
@@ -34,13 +34,7 @@ class Sets extends Component{
                     {userSubCategories}
                 </div>
                 <div className="row">
-                    <div className="col s6">
-                        {
-
-                        }
-                        <Link to="/flashcardGeneration" className="btn green lighten-2 wide-btn">Edit sets</Link>
-                    </div>
-                    <div className="col s6">
+                    <div className="col s12 center">
                         <Link to="/profile" className="btn yellow darken-2 wide-btn">Home</Link>
                     </div>
                 </div>

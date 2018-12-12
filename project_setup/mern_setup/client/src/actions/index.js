@@ -1,6 +1,5 @@
 import axios from 'axios';
 import types from './types';
-import { create } from 'domain';
 
 function authHeaders(){
     return {
@@ -8,6 +7,20 @@ function authHeaders(){
             authorization: localStorage.getItem('token')
         }
     }
+}
+
+export const getCardData = (topicId, cardId) => async dispatch => {
+    try {
+        const { data: { card } } = await axios.get(`/api/topic/${topicId}/card/${cardId}`);
+
+        dispatch({
+            type: types.GET_CARD_DATA,
+            card
+        });
+    } catch(err){
+        console.log('Error Getting Card:', err);
+    }
+    
 }
 
 export function userSignOut(){
@@ -155,12 +168,11 @@ export const userJwtSignIn = async dispatch => {
     }
 }
 
-export function sendCardData(updatedFrontDescription){
-    const resp = axios.patch(`/api/update_cards/:userID`, updatedFrontDescription);
-    
-    return {
-        type: types.SEND_CARD_DATA,
-        payload: resp
+export function sendCardData(cardId, card){
+    return async function(dispatch){
+        await axios.patch(`/api/update_card/${cardId}`, card, authHeaders());
+
+        return true;
     }
 }
 

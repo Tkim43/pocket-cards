@@ -17,7 +17,6 @@ class FlashcardGeneration extends Component {
     //     this.props.deleteCardData({ID: 9, topicID: 1});
     // }
     render () {
-        console.log("this is your card", this.props)
         // if(!this.props.card.all_descriptions[0]){
         //     return(
         //         <div className="loading-container">
@@ -42,27 +41,28 @@ class FlashcardGeneration extends Component {
         const { cardCount, cards, match: { params }, topic } = this.props;
 
         const listCards = cards.map((item,ID) =>{
-            var frontText = item.front_description;
-            var backText = item.back_description;
-            if(item.frontText.length > 20){
+            let frontText = item.frontText;
+            let backText = item.backText;
+
+            if(frontText.length > 20){
                 frontText = item.frontText.substring(0,20) + "...";
             }
-            frontText = item.frontText;
-            if(item.backText.length > 20){
+            if(backText.length > 20){
                 backText = item.backText.substring(0,20) + "...";
             }
-            backText = item.backText;
+
+            const path = `/editMode/${params.set_id}/topic/${params.topic_id}/card/${item.ID}`;
             
             return(
-                <div key = {ID}>
+                <div key = {item.ID}>
                     <div className="row container flashcard-row">
                         <div className="col s5 card-container">
-                            <Link to = "/editMode" className="card-panel teal lighten-1 white-text text-inside-card" >
+                            <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
                                 <div>{frontText}</div>
                             </Link> 
                         </div>
                         <div className="col s5 card-container">
-                            <Link to = "/editMode" className="card-panel teal lighten-1 white-text text-inside-card">
+                            <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
                                 <div>{backText}</div>
                             </Link>
                         </div>
@@ -79,7 +79,7 @@ class FlashcardGeneration extends Component {
         return (
 
             <div className = "flashcard-container center">
-                <h2 className = "col s12 center white-text">{topic && topic.subCategory || 'Category'}</h2>
+                <h2 style={{textTransform: 'capitalize'}} className = "col s12 center white-text">{topic && topic.subCategory || 'Category'}</h2>
                 <h3 className = "col s12 center white-text">Cards In Set: {cardCount || '...'}</h3>
                 <div className="row container flashcard-row">                    
                     <div className="col s5 card-container">
@@ -111,8 +111,8 @@ class FlashcardGeneration extends Component {
 }
 
 function mapStateToProps(state){
-    console.log("this is the state", state)
     const { sets } = state;
+
     return {
         topic: sets.currentTopic,
         cards: sets.topicsCards,

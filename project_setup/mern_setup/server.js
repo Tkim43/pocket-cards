@@ -80,12 +80,12 @@ app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
 }, errorHandling);
 
 
-//get card front and back joined with setID (DONE)
+//get all cards front and back joined with setID for given topic (DONE)
 app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=>{
     const { setID, topicID } = req.params;
 
     try {
-        const cardsQuery = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
+        const cardsQuery = 'SELECT cards.ID, cards.frontText, cards.backText FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
         const cardsInserts = ['cards', 'topics', 'setID', setID, 'topicID', topicID];
         const cardsSql = mysql.format(cardsQuery, cardsInserts);
         
@@ -203,11 +203,33 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
     }
 }, errorHandling);
 
+//Get single card data
+app.get('/api/topic/:topicId/card/:cardId', async (req, res, next) => {
+    const { topicId, cardId } = req.params; 
+
+    try {
+        const cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
+        const cardInserts = ['cards', 'topics', 'cards.ID', cardId, 'topicID', topicId];
+        const cardSql = mysql.format(cardQuery, cardInserts);
+
+        const [card] = await db.query(cardSql);
+
+        res.send({
+            success: true,
+            card
+        });
+    } catch(err){
+        req.status = 500;
+        req.error = 'Error getting card';
+
+        return next();
+    }
+}, errorHandling);
+
 //update front and back of card (DONE)
-app.patch('/api/update_card/ID/:ID', async (req, res, next)=>{
+app.patch('/api/update_card/:ID', async (req, res, next)=>{
     const {frontText, backText } = req.body;
     const {ID} =req.params;
-    const {user} = req;
 
     try {
     
@@ -216,13 +238,13 @@ app.patch('/api/update_card/ID/:ID', async (req, res, next)=>{
 
         let sql = mysql.format(query, inserts);
 
-    console.log("This is the formated SQL", sql);
+        console.log("This is the formated SQL", sql);
 
-    const cards = await db.query(sql);
+        const cards = await db.query(sql);
 
         res.send({
             success: true,
-            cards
+            message: 'Card updated'
         });
         
     } catch(err) {
