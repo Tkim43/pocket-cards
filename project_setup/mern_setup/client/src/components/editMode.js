@@ -10,16 +10,22 @@ class editMode extends Component{
         backText: ''
     }
     async componentDidMount(){
-        console.log("this is your props", this.props.match.params)
-        await this.props.getCardData(this.props.match.params.set_id, this.props.match.params.topic_id);
-        this.setState({
-            frontText: this.props.front_description,
-            backText: this.props.back_description
-        })
+        const { getCardData, match: { params } } = this.props;
+        
+        getCardData(params.topic_id, params.card_id);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate({card: prevCard}) {
         console.log("hellooooooo" ,this.props);
+        const { card } = this.props;
+        const { frontText, backText } = this.state;
+
+        if((!frontText || !backText) && (prevCard.frontText !== card.frontText || prevCard.backText !== card.backText)){
+            this.setState({
+                backText: card.backText,
+                frontText: card.frontText
+            });
+        }
     }
     updateFrontValue = event => {
         this.setState({
@@ -31,10 +37,17 @@ class editMode extends Component{
             backText: event.currentTarget.value
         })
     }
-    sendCardData = () =>{
-        this.props.sendCardData({ID: 1, frontText: this.state.frontText, backText: this.state.backText})
+    sendCardData = async () =>{
+        const { card, history, match: { params }, sendCardData} = this.props;
+        const { backText, frontText } = this.state;
+
+        await sendCardData(card.ID, { frontText, backText });
+
+        history.push(`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`);
     }
     render(){
+        const { match: { params } } = this.props;
+
         if(this.state.frontText === undefined){
             return (
                 <div className="loading-container">
@@ -72,8 +85,8 @@ class editMode extends Component{
                     <label>Back</label>
                 </div>
                 <div className="row">
-                    <Link to ="/displayCard" className="btn grey darken-2" onClick = {this.sendCardData}>Done</Link>
-                    <Link to ="/flashcardGeneration" className="btn green darken-2">Edit More Cards</Link>
+                    <button className="btn grey darken-2" onClick = {this.sendCardData}>Save</button>
+                    <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="btn green darken-2">Edit More Cards</Link>
                 </div>
                 
             </div>
@@ -82,9 +95,9 @@ class editMode extends Component{
 }
 
 function mapStateToProps(state){
+    const { singleCard } = state.sets;
     return{
-        front_description: state.sets.front_description,
-        back_description: state.sets.back_description
+        card: singleCard
     }
 }
 
