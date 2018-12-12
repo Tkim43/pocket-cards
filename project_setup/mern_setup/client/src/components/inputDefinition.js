@@ -4,18 +4,18 @@ import { Field, reduxForm} from 'redux-form';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import {sendCreateCardData, sendCategoryAndSubcategoryData} from '../actions';
+import { getTopicsCards, sendCreateCardData, sendCategoryAndSubcategoryData} from '../actions';
 
 class InputDefinition extends Component {
-  
-    state = {
-        card_count: 0
+
+    componentDidMount(){
+        this.updateCards();
     }
-    
-    cardCounter = () =>{
-        this.setState={
-            card_count: this.state.card_count++
-        };
+
+    updateCards(){
+        const { getTopicsCards, match: { params } } = this.props;
+
+        getTopicsCards(params.set_id, params.topic_id);
     }
 
     renderInput (props) {
@@ -27,23 +27,37 @@ class InputDefinition extends Component {
         );
     }
 
-    handleAddDefinition = (values) => {
-        console.log("THIS IS THIS PROPS: ", this.props);
-        console.log("THIS IS THE VALUES", values);
-        values.subCategoryId = this.props.match.params.sub_category_id;
-        this.props.sendCreateCardData(values);
+    handleAddDefinition = async (values) => {
+        const { match: { params }, reset, sendCreateCardData } = this.props;
+        
+        await sendCreateCardData(params.topic_id, values);
+
+        this.updateCards();
+        
+        reset();
     }
     
     render () {
+        const { cardCount, cards, handleSubmit, match: { params }, reset, topic = {} } = this.props;
 
-        console.log("=====PROPS====: ", this.props);
+        let cardElements = <h4 className="center grey-text">No Cards</h4>;
 
-        const { handleSubmit, reset } = this.props;
+        if(cards && cards.length){
+            cardElements = cards.map((card, i) => {
+                return (
+                    <div className="row center grey-text" key={i}>
+                        <div className="col s6">{card.frontText}</div>
+                        <div className="col s6">{card.backText}</div>
+                    </div>
+                );
+            });
+        }
 
         return (
             <Fragment>
-                <div className = "container">
-                    <h1>Cards Created: {this.state.card_count}</h1>
+                <div className = "add-card container">
+                    <h5 style={{textTransform: 'capitalize'}} className="center white-text">{topic.subCategory || 'Category'}</h5>
+                    <h1>Cards Created: {cardCount || '...'}</h1>
     
                     <form onSubmit = {handleSubmit(this.handleAddDefinition)}>
                         <div className="row">
@@ -66,11 +80,16 @@ class InputDefinition extends Component {
                             </button>
                         </div> */}
                         <div className = "buttonDiv">
-                            <Link to = "/profile" className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
+                            <Link to = {`/flashCardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
                                 <i className="material-icons right">done</i>
                             </Link>
                         </div>
                     </form>
+                    <div className="row center white-text">
+                        <div className="col s6">Card Front</div>
+                        <div className="col s6">Card Back</div>
+                    </div>
+                    {cardElements}
                 </div>
             </Fragment>
         ); 
@@ -79,12 +98,11 @@ class InputDefinition extends Component {
 
 
 function mapStateToProps(state){
-    console.log("====NEW PROPS CAT ID, SUB ID====:", state);
-    return{
-        frontText: state.sets.front_description,
-        backText: state.sets.back_description,
-        categoryId: state.sets.categoryId,
-        subCategoryId: state.sets.subCategoryId
+    const { sets } = state;
+    return {
+        topic: sets.currentTopic || {},
+        cards: sets.topicsCards,
+        cardCount: sets.topicsCardCount
     }
 }
 
@@ -93,6 +111,7 @@ InputDefinition = reduxForm ({
 })(InputDefinition);
 
 export default connect(mapStateToProps,{
+    getTopicsCards,
     sendCreateCardData,
     sendCategoryAndSubcategoryData
 })(withRouter(InputDefinition));

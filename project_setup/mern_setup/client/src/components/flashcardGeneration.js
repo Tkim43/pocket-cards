@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getCardData} from '../actions';
+import {getTopicsCards} from '../actions';
 // import {deleteCardData} from '../actions';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
-        console.log("this is your props params", this.props.match.params)
-        this.props.getCardData(this.props.match.params.set_id, this.props.match.params.topic_id);
+        const { getTopicsCards, match: { params } } = this.props;
+        
+        getTopicsCards(params.set_id, params.topic_id);
     }
     // delete = () =>{
     //     // console.log("ID for delete", ID);
@@ -37,7 +38,10 @@ class FlashcardGeneration extends Component {
         //     )
         // }
         // const cardCounter = this.props.card.all_descriptions.length
-        const listCards = this.props.sets.card.map((item,ID) =>{
+
+        const { cardCount, cards, match: { params }, topic } = this.props;
+
+        const listCards = cards.map((item,ID) =>{
             var frontText = item.front_description;
             var backText = item.back_description;
             if(item.frontText.length > 20){
@@ -75,8 +79,8 @@ class FlashcardGeneration extends Component {
         return (
 
             <div className = "flashcard-container center">
-                <h2 className = "col s12 center white-text">category</h2>
-                <h3 className = "col s12 center white-text">Card Counter: </h3>
+                <h2 className = "col s12 center white-text">{topic && topic.subCategory || 'Category'}</h2>
+                <h3 className = "col s12 center white-text">Cards In Set: {cardCount || '...'}</h3>
                 <div className="row container flashcard-row">                    
                     <div className="col s5 card-container">
                         <div className="card-panel blue lighten-2 white-text center">Term</div> 
@@ -90,7 +94,7 @@ class FlashcardGeneration extends Component {
                 </div>
                 {listCards}
                 <div className = "buttonDiv center">
-                    <Link className="blue lighten-2 btn waves-effect waves-light btn-large col s6 " to = "/createflashcards" name="action">
+                    <Link className="blue lighten-2 btn waves-effect waves-light btn-large col s6 " to = {`/createflashcards/${params.set_id}/subcategory/${params.topic_id}`} name="action">
                         <i className="material-icons right">add</i>
                         Add Card
                     </Link>
@@ -108,10 +112,15 @@ class FlashcardGeneration extends Component {
 
 function mapStateToProps(state){
     console.log("this is the state", state)
-    return state
+    const { sets } = state;
+    return {
+        topic: sets.currentTopic,
+        cards: sets.topicsCards,
+        cardCount: sets.topicsCardCount
+    }
 }
 
 export default connect(mapStateToProps, {
-    getCardData,
+    getTopicsCards,
     // deleteCardData
 })(FlashcardGeneration);

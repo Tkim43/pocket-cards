@@ -82,16 +82,17 @@ export function getSetsData (id){
     }
 }
 
-export function getCardData(setId, topicId){
+export function getTopicsCards(setId, topicId){
     return async function(dispatch){
         try{
-            const{data:{card}} = await axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
+            const { data: { success, ...cardsData }} = await axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
+
             dispatch({
-                type: types.GET_CARD_DATA,
-                payload: {card}
-            })
+                type: types.GET_TOPICS_CARDS,
+                ...cardsData
+            });
         } catch(err){
-            console.log('Error getting card data');
+            console.log('Error getting topic\'s cards data');
         }
     }
       
@@ -197,22 +198,11 @@ export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategor
 // }
 
 //Vienna's
-export function sendCreateCardData(createCard){
+export function sendCreateCardData(topicId, cardData){
     return async function(dispatch){
-        console.log("THIS IS CREATECARD: ", createCard);
-        const { subCategoryId, frontText, backText } = createCard;
+        await axios.post(`/api/set_management/create_card/topics/${topicId}`, cardData, authHeaders());
 
-        console.log('Sub Cat ID:', subCategoryId);
-
-        const createdCard = await axios.post(`/api/set_management/create_card/topics/${subCategoryId}`,createCard, authHeaders());
-
-
-        // console.log('Created Card:', createdCard);
-
-    dispatch({
-        type:types.SEND_CREATE_CARD_DATA,
-        payload: {front_description: frontText, back_description: backText, subCategoryId: subCategoryId}
-        });
+        return true;
     }
 }
 

@@ -15,7 +15,7 @@
     
 }
 
-.row > .blue.darken-3 {
+.set > .blue.darken-3 {
     width:90%;
     height: 50px;
     font-size: 1.5em;
@@ -25,3 +25,6 @@
     justify-content: center;
 }
 
+.set-container .wide-btn{
+    width: 50%;
+}

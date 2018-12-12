@@ -85,30 +85,23 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
     const { setID, topicID } = req.params;
 
     try {
-        const query = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
-        const inserts = ['cards', 'topics', 'setID', setID, 'topicID', topicID];
-
-        const sql = mysql.format(query, inserts);
-        console.log("sql", sql);
-        // console.log("This is the formated SQL", sql);
-
-        const card = await db.query(sql);
-        console.log("card", card);
-        const query1 = 'SELECT * FROM ?? WHERE ?? = ?';
-
-        const inserts1 = ['topics', 'setID', setID];
-        const sql1 = mysql.format(query1,inserts1);
-        console.log("sql1", sql1)
-        const topics = await db.query(sql1);
-        console.log("topics", topics);
-
-       
-
+        const cardsQuery = 'SELECT * FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
+        const cardsInserts = ['cards', 'topics', 'setID', setID, 'topicID', topicID];
+        const cardsSql = mysql.format(cardsQuery, cardsInserts);
+        
+        const cards = await db.query(cardsSql);
+        
+        const topicQuery = 'SELECT * FROM ?? WHERE ?? = ? LIMIT 1';
+        const topicInserts = ['topics', 'setID', setID];
+        const topicSql = mysql.format(topicQuery, topicInserts);
+        
+        const [topic] = await db.query(topicSql);
 
         res.send({
             success: true,
-            card,
-            topics
+            cardCount: cards.length || 0,
+            cards,
+            topic
         });
     } catch(err) {
         console.log("ourthing" ,err)
