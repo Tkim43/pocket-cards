@@ -1,8 +1,0 @@
-node_modules
-
-.idea
-.vscode
-.DS_Store
-
-server/config/*.js
-!server/config/index.js
