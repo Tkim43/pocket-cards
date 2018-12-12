@@ -200,14 +200,26 @@ export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategor
     }
 }
 
-// export function deleteCardData(ID){
-//     console.log("action param", ID)
-//     const resp = axios.post(`/api/set_management/delete_set`, ID);
-//     return{
-//         type: types.DELETE_CARD_DATA,
-//         payload: resp
-//     }
-// }
+export function deleteCard(ID, topicID){
+    return async function(dispatch) {
+        try{
+            const resp = await axios.post(`/api/set_management/delete_card`, {ID, topicID}, authHeaders());
+            console.log("this is your delete response", resp);
+            // return{
+            //     type:types.DElETE_CARD,
+            //     payload: resp
+            // }
+        }catch(err){
+            console.log("this is the error from the delete");
+        }
+    }
+        
+    // i dont need to return anything since im deleting and since theres no :setID or :topicID in the URL do i still end the setID and the topicID?
+    // return{
+    //     type: types.DELETE_CARD,
+    //     payload: resp
+    // }
+}
 
 //Vienna's
 export function sendCreateCardData(topicId, cardData){
