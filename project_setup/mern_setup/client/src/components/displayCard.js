@@ -25,6 +25,7 @@ class displayCard extends Component{
     }
     render(){
         console.log("this is your props", this.props);
+        const {set_id, topic_id} = this.props.match.params
         return(
             <div className="container">
                 <div className="row">
@@ -40,7 +41,7 @@ class displayCard extends Component{
                     <i className="large material-icons white-text">arrow_forward</i>
                 </div>
                 <div className="row down">
-                    <Link to ="/flashcardGeneration" className="btn green darken-2 edit-btn">Edit Cards</Link>
+                    <Link to ={`/flashcardGeneration/${set_id}/topic/${topic_id}`} className="btn green darken-2 edit-btn">Edit Cards</Link>
                     <Link to ="/sets" className="btn green darken-2 edit-btn">Return to Sets</Link>
                 </div>
             </div>

@@ -83,11 +83,17 @@ export function getSetsData (id){
 }
 
 export function getCardData(setId, topicId){
-        const resp = axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
-        return{
-            type: types.GET_CARD_DATA,
-                payload: resp
+    return async function(dispatch){
+        try{
+            const{data:{card}} = await axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
+            dispatch({
+                type: types.GET_CARD_DATA,
+                payload: {card}
+            })
+        } catch(err){
+            console.log('Error getting card data');
         }
+    }
       
     
 }
@@ -157,15 +163,6 @@ export function sendCardData(updatedFrontDescription){
     }
 }
 
-export function getAllCardData(setID, topicID){
-    const resp = axios.get(`/api/cards/${setID}/topic/${topicID}`, authHeaders());
-
-    return{
-        type: types.GET_ALL_CARD_DATA,
-        payload: resp
-    }
-}
-
 //Vienna's
 export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategory){
     return async function(dispatch){
@@ -190,14 +187,14 @@ export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategor
     }
 }
 
-export function deleteCardData(ID){
-    console.log("action param", ID)
-    const resp = axios.post(`/api/set_management/delete_set`, ID);
-    return{
-        type: types.DELETE_CARD_DATA,
-        payload: resp
-    }
-}
+// export function deleteCardData(ID){
+//     console.log("action param", ID)
+//     const resp = axios.post(`/api/set_management/delete_set`, ID);
+//     return{
+//         type: types.DELETE_CARD_DATA,
+//         payload: resp
+//     }
+// }
 
 //Vienna's
 export function sendCreateCardData(createCard){

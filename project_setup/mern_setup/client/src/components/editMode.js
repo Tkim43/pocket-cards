@@ -10,7 +10,8 @@ class editMode extends Component{
         backText: ''
     }
     async componentDidMount(){
-        await this.props.getCardData();
+        console.log("this is your props", this.props.match.params)
+        await this.props.getCardData(this.props.match.params.set_id, this.props.match.params.topic_id);
         this.setState({
             frontText: this.props.front_description,
             backText: this.props.back_description
@@ -82,8 +83,8 @@ class editMode extends Component{
 
 function mapStateToProps(state){
     return{
-        front_description: state.card.front_description,
-        back_description: state.card.back_description
+        front_description: state.sets.front_description,
+        back_description: state.sets.back_description
     }
 }
 
