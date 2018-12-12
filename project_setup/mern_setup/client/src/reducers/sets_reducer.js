@@ -22,11 +22,10 @@ import types from '../actions/types';
             debugger;
             return {...state, front_description: action.payload.frontText, back_description: action.payload.backText}
         case types.GET_ALL_CARD_DATA:
-            // console.log("get all card data action:", action);
-            return {...state, card: action.payload.data.card}
+            return {...state, card: action.payload.data.card[0]}
         case types.GET_CARD_DATA:
-            console.log("get_card_data", action);
-            return {...state, card: action.payload}
+            console.log("get_card_data", action.payload.data.card);
+            return {...state, front_description: action.payload.data.card[0].frontText, back_description: action.payload.data.card[0].backText}
         case types.SEND_CARD_DATA:
             return{...state, front_description: '',back_description: ''}
         case types.GET_SETS_DATA:
