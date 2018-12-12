@@ -30,7 +30,7 @@ class InputDefinition extends Component {
     handleAddDefinition = (values) => {
         console.log("THIS IS THIS PROPS: ", this.props);
         console.log("THIS IS THE VALUES", values);
-        values.subCategoryId = this.props.subCategoryId;
+        values.subCategoryId = this.props.match.params.sub_category_id;
         this.props.sendCreateCardData(values);
     }
     

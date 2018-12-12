@@ -41,7 +41,7 @@ class displayCard extends Component{
                 </div>
                 <div className="row down">
                     <Link to ="/flashcardGeneration" className="btn green darken-2 edit-btn">Edit Cards</Link>
-                    <Link to ="/sets" className="btn green darken-2 edit-btn">Return to Sets</Link>
+                    <Link to = {`/sets/${this.props.match.params.set_id}`} className="btn green darken-2 edit-btn">Return to Sets</Link>
                 </div>
             </div>
         )
