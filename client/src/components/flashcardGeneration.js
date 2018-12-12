@@ -3,41 +3,33 @@ import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getTopicsCards} from '../actions';
-// import {deleteCardData} from '../actions';
+import {deleteCard} from '../actions';
+import Axios from 'axios';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
         const { getTopicsCards, match: { params } } = this.props;
-        
         getTopicsCards(params.set_id, params.topic_id);
     }
-    // delete = () =>{
-    //     // console.log("ID for delete", ID);
-    //     console.log("these are your props", this.props)
-    //     this.props.deleteCardData({ID: 9, topicID: 1});
-    // }
+    delete = async (cardId) =>{
+        console.log("these are your props", this.props)
+        const { match: { params } } = this.props;
+        // deletes the card
+        await this.props.deleteCard(cardId, params.topic_id);
+        // then updates the card list by calling the server 
+        this.updateCardList();
+    }
+    async updateCardList(){
+        try{
+            const { getTopicsCards, match: { params } } = this.props;
+            // calls the server to get the new list
+            // we are calling the function to get the response 
+            getTopicsCards(params.set_id, params.topic_id);
+        }catch(err){
+            console.log("error getting list data")
+        }
+    }
     render () {
-        // if(!this.props.card.all_descriptions[0]){
-        //     return(
-        //         <div className="loading-container">
-        //             <div className="preloader-wrapper big active">
-        //                 <div className="spinner-layer spinner-blue-only">
-        //                     <div className="circle-clipper left">
-        //                     <div className="circle"></div>
-        //                     </div>
-        //                     <div className="gap-patch">
-        //                         <div className="circle"></div>
-        //                     </div>
-        //                     <div className="circle-clipper right">
-        //                         <div className="circle"></div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     )
-        // }
-        // const cardCounter = this.props.card.all_descriptions.length
-
         const { cardCount, cards, match: { params }, topic } = this.props;
 
         const listCards = cards.map((item,ID) =>{
@@ -67,7 +59,7 @@ class FlashcardGeneration extends Component {
                             </Link>
                         </div>
                         <div className="col s2 card-container">
-                            <button className="red lighten-2 btn">
+                            <button className="red lighten-2 btn" onClick={() => this.delete(item.ID)}>
                                 <i className = "material-icons">delete</i>
                             </button>
                         </div>
@@ -122,5 +114,5 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps, {
     getTopicsCards,
-    // deleteCardData
+    deleteCard
 })(FlashcardGeneration);
