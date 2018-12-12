@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { userSignOut } from "../actions/index";
 import SideNav from './side_nav';
 import '../assets/css/nav_bar.css'
+import logo from '../assets/images/kangaroo_smaller_logo.png'
 
 class Navbar extends Component {
 
@@ -58,8 +59,10 @@ class Navbar extends Component {
             <Fragment>
                 <nav className = "main-nav grey darken-4">
                     <div className="nav-wrapper">
-                        <Link className = "brand-logo" to = "/profile">Pocket Cards</Link>
+                        <Link className = "brand-logo" to = "/profile"><div>Pocket Cards<img className ="logo" src={logo} /></div></Link>
+                        
                         <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
+                        
                         <ul className = "right hide-on-med-and-down"> 
                         {linkElements}
                         </ul>

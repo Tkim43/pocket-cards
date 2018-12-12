@@ -30,46 +30,9 @@ class InputDefinition extends Component {
     handleAddDefinition = (values) => {
         console.log("THIS IS THIS PROPS: ", this.props);
         console.log("THIS IS THE VALUES", values);
-        values.subCategoryId = this.props.subCategoryId;
+        values.subCategoryId = this.props.match.params.sub_category_id;
         this.props.sendCreateCardData(values);
     }
-
-        // resetDefinitionForm = (data) => {
-        //     const { createRecord, resetForm } = this.props;
-        //     return createRecord(data).then(() => {
-        //         resetForm();
-        //     });   
-        // }
-
-        // handleEditClick (event) {
-        //     event.preventDefault();
-        //     console.log("props: ", props);
-        //     this.props.history.push('/flashcardGeneration');
-        // }
-
-        // handleDoneClick (event) {
-        //     event.preventDefault();
-        //     this.props.history.push('/profile');
-        // }
-
-        // sendCreateCardDataAdd = async (e) => {
-        //     e.preventDefault();
-        //     await this.props.sendCreateCardData({subCategoryId:this.props.subCategoryId, frontText:'font text', backText:'back text'});
-        //     this.props.history.push('/createflashcards');
-        // }
-    
-        // sendCreateCardDataEdit = async (e) => {
-        //     e.preventDefault();
-        //     await this.props.sendCreateCardData({subCategoryId:this.props.subCategoryId, frontText:'this.state.frontText', backText:'hello'});
-    
-        //     this.props.history.push('/flashcardGeneration');
-        // }
-    
-        // sendCreateCardDataDone = async (e) => {
-        //     e.preventDefault();
-        //     await this.props.sendCreateCardData({subCategoryId:this.props.subCategoryId, frontText:'this.state.frontText', backText:'hello'});
-        //     this.props.history.push('/sets');
-        // }
     
     render () {
 
@@ -113,87 +76,6 @@ class InputDefinition extends Component {
         ); 
     }
 }
-    // state = {
-    //     frontText: '',
-    //     backText: ''
-    // }
-    // componentDidMount(){
-    //     this.props.sendCreateCardData();
-    // }
-    // async componentDidMount(){
-    //     // this.setState({
-    //     //     frontText: this.props.frontText,
-    //     //     backText: this.props.backText
-    //     // });
-    // }
-
-    // componentDidUpdate() {
-    //     console.log("This is our current state", this.state);
-    // }
-
-    // updateTerm = event => {
-    //     this.setState({
-    //         frontText: event.currentTarget.value
-    //     });
-    // }
-
-    // updateDefinition = event => {
-    //     this.setState({
-    //         backText: event.currentTarget.value
-    //     })
-    // }
-
-//     handleAddTerm () {
-        
-
-
-//     render () {
-//         const { handleSubmit, updateDefinition, updateTerm } = this.props;
-//         // const { frontText, backText } = this.state;
-//         console.log("this is your props", this.props);
-
-//         return (
-//             <div className = "container">
-//                 <h1>Cards Created: 10</h1>
-
-//                 <div className="row">
-//                     <form className="col s12">
-//                         <div className="row">
-//                             <div className="input-field col s12">
-//                                 <textarea value={this.props.front_description} onSubmit={this.updateTerm}  className="materialize-textarea" id="modal-textarea1"></textarea>
-//                                 <label htmlFor="modal-textarea1">Enter Term</label>
-//                                 {/* <div className="right-align">{this.frontText.length}/50</div> */}
-//                             </div>
-                            
-//                         </div>
-//                         <div className="row">
-//                             <div className="input-field col s12">
-//                                 <textarea value={this.props.back_description} onSubmit={this.updateDefinition}  className="materialize-textarea" id="modal-textarea2"></textarea>
-//                                 <label htmlFor="modal-textarea2">Enter Definition</label>
-//                                 {/* <div className="right-align">{backText.length}/150</div> */}
-//                             </div>
-//                         </div>
-//                     </form>
-//                 </div>
-//                 <div className = "buttonDiv">
-//                     <button onClick={this.sendCreateCardDataAdd} className="blue lighten-2 btn waves-effect waves-light btn-large" name="action">Add Card
-//                         <i className="material-icons right">add</i>
-//                     </button>
-//                 </div>
-//                 <div className = "buttonDiv">
-//                     <button onClick={this.sendCreateCardDataEdit}  className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
-//                         <i className="material-icons right">create</i>
-//                     </button>
-//                 </div>
-//                 <div className = "buttonDiv">
-//                     <button onClick={this.sendCreateCardDataDone} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
-//                         <i className="material-icons right">done</i>
-//                     </button>
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
 
 
 function mapStateToProps(state){

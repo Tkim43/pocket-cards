@@ -204,15 +204,15 @@ export function sendCreateCardData(createCard){
 
         console.log('Sub Cat ID:', subCategoryId);
 
-        // const createdCard = await axios.post(`/api/set_management/create_card/topics/${subCategoryId}`,createCard, authHeaders());
+        const createdCard = await axios.post(`/api/set_management/create_card/topics/${subCategoryId}`,createCard, authHeaders());
 
 
         // console.log('Created Card:', createdCard);
 
-    // dispatch({
-    //     type:types.SEND_CREATE_CARD_DATA,
-    //     payload: {front_description: frontText, back_description: backText, subCategoryId: subCategoryId}
-    //     });
+    dispatch({
+        type:types.SEND_CREATE_CARD_DATA,
+        payload: {front_description: frontText, back_description: backText, subCategoryId: subCategoryId}
+        });
     }
 }
 
