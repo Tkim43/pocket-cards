@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../assets/css/modal.css';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {sendCategoryAndSubcategoryData} from '../actions';
+import { sendCategoryAndSubcategoryData } from '../actions';
 
 class ButtonModal extends Component {
     state = {
@@ -44,7 +44,6 @@ class ButtonModal extends Component {
     close = () => this.setState({isOpen: false});
 
     render(){
-        console.log("Category Props:", this.props);
 
         if(this.state.isOpen){
             return (
@@ -87,7 +86,6 @@ class ButtonModal extends Component {
 }
 
 function mapStateToProps(state){
-    console.log("category and subcategory state", state)
     return{
         category:state.sets.category,
         subCategory:state.sets.subCategory

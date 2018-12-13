@@ -49,8 +49,6 @@ export function userSignOut(){
 
 export function getProfileData () {
     const resp = axios.get('/api/userhome', authHeaders());
-
-    console.log("this is the response from axios ", resp);
 }
 
 export async function sortAlphabetical () {
@@ -91,14 +89,10 @@ export async function sortByLatest () {
 }
 
 
-//Vienna's
 export function getSetsData (id){
     return async function(dispatch){
         try {
-            console.log("====ID====: ", id);
             const { data: { sets } } = await axios.get(`/api/set_management/${id}`, authHeaders());
-
-            console.log('======== Get Sets Data ==========:', sets);
 
             dispatch({
                 type: types.GET_SETS_DATA,
@@ -140,7 +134,6 @@ export function userSignUp(newUser){
             });
 
         } catch (err){
-            console.log('Sign Up Error:', err.response);
             dispatch ({
                 type: types.SIGN_UP_ERROR,
             });
@@ -191,23 +184,15 @@ export function sendCardData(cardId, card){
     }
 }
 
-//Vienna's
 export function sendCategoryAndSubcategoryData(updatedCategory,updatedSubCategory){
     return async function(dispatch){
         const categoryCreationResponse = await axios.post(`/api/set_management/create_category`, updatedCategory, authHeaders());
         
         const { categoryId } = categoryCreationResponse.data;
         const subcategoryCreationResponse = await axios.post(`/api/set_management/create_subcategory/${categoryId}`, updatedSubCategory, authHeaders());
-
-        console.log('Sub Cat Create Resp:', subcategoryCreationResponse);
         
         const { subCategoryId } = subcategoryCreationResponse.data;
-        // .then(categoryCreationResponse => {
-        //     console.log('category and subcategory response:', categoryCreationResponse);
-        //     updatedSubCategory.setID = categoryCreationResponse.data.data.insertId;
-        //     return 
-
-        // });
+ 
         return {
             categoryId: categoryId,
             subCategoryId: subCategoryId
@@ -219,24 +204,13 @@ export function deleteCard(ID, topicID){
     return async function(dispatch) {
         try{
             const resp = await axios.post(`/api/set_management/delete_card`, {ID, topicID}, authHeaders());
-            console.log("this is your delete response", resp);
-            // return{
-            //     type:types.DElETE_CARD,
-            //     payload: resp
-            // }
+
         }catch(err){
             console.log("this is the error from the delete");
         }
     }
-        
-    // i dont need to return anything since im deleting and since theres no :setID or :topicID in the URL do i still end the setID and the topicID?
-    // return{
-    //     type: types.DELETE_CARD,
-    //     payload: resp
-    // }
 }
 
-//Vienna's
 export function sendCreateCardData(topicId, cardData){
     return async function(dispatch){
         await axios.post(`/api/set_management/create_card/topics/${topicId}`, cardData, authHeaders());
@@ -244,10 +218,3 @@ export function sendCreateCardData(topicId, cardData){
         return true;
     }
 }
-
-// export function updateTime (){
-//     return {
-//         type: "UPDATE_TIME",
-//         payload: new Date ().toLocaleTimeString
-//     }
-// }
