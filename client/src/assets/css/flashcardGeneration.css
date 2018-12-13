@@ -45,3 +45,11 @@
 .red.btn.delete-btn {
     width: 100%;
 }
+
+.btn-large{
+    padding: 0 5px;
+}
+
+.card-container .btn-large i{
+    font-size: 3.5rem;
+}
