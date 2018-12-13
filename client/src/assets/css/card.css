@@ -53,3 +53,7 @@
     font-size: 0.8rem;
     font-weight: bold;
 }
+
+.nav-btn {
+    cursor: pointer;
+}

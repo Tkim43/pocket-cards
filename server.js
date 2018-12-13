@@ -31,8 +31,6 @@ app.get('/api/userhome', requireAuth, async (req, res, next) => {
 
         const sql = mysql.format(query, inserts);
 
-        // console.log("This is the formated SQL:", sql);
-
         const sets = await db.query(sql);
 
         res.send({
@@ -61,8 +59,6 @@ app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
         // OLD const inserts = ['topics', 'sets', 'userID', user.ID, 'setID', setID];
 
         const sql = mysql.format(query, inserts);
-
-        console.log("This is the formatted sql", sql)   ;
 
         const sets = await db.query(sql);
 
@@ -104,7 +100,6 @@ app.get('/api/cards/:setID/topic/:topicID', requireAuth, async (req, res, next)=
             topic
         });
     } catch(err) {
-        console.log("ourthing" ,err)
         req.status = 500;
         req.error = 'Error getting set topic';
         
@@ -127,8 +122,6 @@ app.post('/api/set_management/create_category', requireAuth, async (req, res, ne
         const inserts = ['sets', 'userID', 'category', Number(user.ID), category];
 
         const sql = mysql.format(query, inserts);
-
-        // console.log("This is the formated SQL", sql);
 
         const results = await db.query(sql);
 
@@ -156,8 +149,6 @@ app.post('/api/set_management/create_subcategory/:setID', requireAuth, async (re
 
         let sql = mysql.format(query, inserts);
 
-        console.log("This is the formated SQL", sql);
-
         const results = await db.query(sql);
 
         res.send({
@@ -184,9 +175,6 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
         const inserts = ['cards', 'topicID', 'frontText', 'backText', topicID, frontText, backText];
         const sql = mysql.format(query, inserts);
 
-
-        console.log("This is the formated SQL", sql);
-
         const card = await db.query(sql);
 
         res.send({
@@ -208,17 +196,71 @@ app.get('/api/topic/:topicId/card/:cardId', async (req, res, next) => {
     const { topicId, cardId } = req.params; 
 
     try {
-        const cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?'
-        const cardInserts = ['cards', 'topics', 'cards.ID', cardId, 'topicID', topicId];
+        let cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?';
+        let cardInserts = ['cards', 'topics', 'cards.ID', cardId, 'topicID', topicId];
+        
+        if(cardId === '0' || isNaN(cardId)){
+            cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? ORDER BY cards.created';
+            cardInserts = ['cards', 'topics', 'topicID', topicId];
+        }
+
         const cardSql = mysql.format(cardQuery, cardInserts);
 
         const [card] = await db.query(cardSql);
 
         res.send({
             success: true,
-            card
+            card: card || {}
         });
     } catch(err){
+        req.status = 500;
+        req.error = 'Error getting card';
+
+        return next();
+    }
+}, errorHandling);
+
+//Get single next or previous card data
+app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) => {
+    const { topicId, cardId, direction } = req.params;
+
+    try {
+        const cardsQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? ORDER BY cards.created';
+        const cardsInserts = ['cards', 'topics', 'topicID', topicId];
+
+        const cardsSql = mysql.format(cardsQuery, cardsInserts);
+
+        const cards = await db.query(cardsSql);
+
+        let card = {};
+        
+        const count = cards.length;
+
+        for(let i = 0; i < count; i++){
+            if(cards[i].ID == cardId){
+                if(direction === 'previous'){
+                    if(i === 0){
+                        card = cards[count - 1];
+                    } else {
+                        card = cards[i - 1];
+                    }
+                    break;
+                } else {
+                    if(i === count - 1){
+                        card = cards[0];
+                    } else {
+                        card = cards[i + 1];
+                    }
+                    break;
+                }
+            }
+        }
+
+        res.send({
+            success: true,
+            card: card || {}
+        });
+    } catch (err) {
         req.status = 500;
         req.error = 'Error getting card';
 
@@ -237,8 +279,6 @@ app.patch('/api/update_card/:ID', async (req, res, next)=>{
         let inserts = ['cards', 'frontText', frontText, 'backText', backText, 'ID', Number(ID)];
 
         let sql = mysql.format(query, inserts);
-
-        console.log("This is the formated SQL", sql);
 
         const cards = await db.query(sql);
 
@@ -266,8 +306,6 @@ app.post('/api/set_management/delete_user', (req, res, next)=>{
 
     let sql = mysql.format(query, inserts);
 
-    console.log("This is the formated SQL", sql);
-
     const output = {
         success: true
     };
@@ -293,8 +331,6 @@ app.delete('/api/set_management/ID/:ID/userID/:userID', (req, res, next)=>{
     let inserts = ['sets','sets','ID',Number(ID),'sets','userID',Number(userID)];
 
     let sql = mysql.format(query, inserts);
-
-    console.log("This is the formated SQL", sql);
 
     const output = {
         success: true
@@ -322,8 +358,6 @@ app.post('/api/set_management/delete_subCategory_set', (req, res, next)=>{
 
     let sql = mysql.format(query, inserts);
 
-    console.log("This is the formated SQL", sql);
-
     const output = {
         success: true
     };
@@ -349,8 +383,6 @@ app.post('/api/set_management/delete_card', (req, res, next)=>{
         let inserts = ['cards','ID',Number(ID), 'topicID', Number(topicID)];
     
         let sql = mysql.format(query, inserts);
-    
-        console.log("This is the formated SQL", sql);
     
         const output = {
             success: true
