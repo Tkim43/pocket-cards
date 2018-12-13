@@ -5,7 +5,7 @@ import React from 'react';
 import Navbar from './nav_bar';
 import Profile from './profile';
 import Sets from './sets';
-import Flashcards from './flashcards';
+import About from './about';
 import FlashcardGeneration from './flashcardGeneration';
 import Signup from './sign-up';
 import InputDefinition from './inputDefinition';
@@ -24,7 +24,7 @@ const App = () => (
         <Route path = "/displayCard/:set_id/topic/:topic_id/card/:card_id" component= {displayCard}/>
         <Route path = "/sets/:set_id" component = {auth(Sets)}/>
         <Route path = "/profile" component = {auth(Profile)}/>
-        <Route path = "/flashcards" component = {auth(Flashcards)}/>
+        <Route path = "/about" component = {auth(About)}/>
         <Route path = "/editMode/:set_id/topic/:topic_id/card/:card_id" component= {editMode}/>
         <Route path = "/createflashcards/:set_id/subcategory/:topic_id" component = {InputDefinition}/>
         <Route path = "/flashcardGeneration/:set_id/topic/:topic_id" component = {FlashcardGeneration}/>

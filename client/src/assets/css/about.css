@@ -1,0 +1,30 @@
+.main-title{
+    font-size: 3.5rem;
+    text-align: center;
+}
+
+img.developer{
+    width: 20%;
+    height:0%;
+    left: 40%;
+    position: relative;
+}
+
+img.icon{
+    width: 10%;
+    height:0%;
+    margin:10px;
+    color:white;
+}
+
+.name{
+    text-align:center;
+}
+
+.iconDiv{
+    text-align:center;
+}
+
+.description{
+    text-align:center;
+}
