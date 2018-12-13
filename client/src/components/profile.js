@@ -31,20 +31,11 @@ class Profile extends Component {
         const profileCategories =  this.props.sets.map ( (item, ID) => {
 
             const created = new Date(item.created).getTime();
-            
             const ms = created - timeZoneOffset;
-
             const diff = new Date().getTime() - ms;
-
-            console.log('TZ OFFSET:', timeZoneOffset);
-            console.log('CREATED:', created);
-            console.log('Diff:', diff);
-
-            console.log('ID:', item.ID,  'Created:', new Date(ms));
 
             return (
                 <div className="row category-info" key = {item.ID}>
-                    {/* <div className = "col s12 white-text">{this.findTimePassed(item)}</div> */}
                     <FindTimePassed created={diff}/>
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
