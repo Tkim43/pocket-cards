@@ -81,7 +81,7 @@ class FlashcardGeneration extends Component {
                         <div className="card-panel blue lighten-2 white-text center">Definition</div>
                     </div>
                     <div className="col s2 card-container">
-                        <div className="card-panel red lighten-2 white-text center">Del</div>
+                        <div className="card-panel red lighten-2 white-text center">Delete</div>
                     </div>
                 </div>
                 {listCards}
@@ -90,7 +90,7 @@ class FlashcardGeneration extends Component {
                         <i className="material-icons right">add</i>
                         Add Card
                     </Link>
-                    <Link className="green lighten-2 btn waves-effect waves-light btn-large col s6 " to = "/sets" name="action">
+                    <Link className="green lighten-2 btn waves-effect waves-light btn-large col s6 " to = {`/sets/${params.set_id}`} name="action">
                         <i className="material-icons right">done</i>
                         Done
                     </Link>
