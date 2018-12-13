@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import "../assets/css/profile.css";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest } from '../actions';
 import BasicModal from './modal';
@@ -91,5 +91,4 @@ function mapStateToProps(state){
 export default connect(mapStateToProps, {
     sortAlphabetical : sortAlphabetical,
     sortByLatest: sortByLatest,
-    // update
 })(Profile);

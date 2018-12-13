@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getCardData} from '../actions'; 
-import {sendCardData} from '../actions';
+import { connect } from 'react-redux';
+import { getCardData } from '../actions'; 
+import { sendCardData } from '../actions';
 
 class editMode extends Component{
     state = {

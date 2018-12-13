@@ -1,9 +1,9 @@
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import '../assets/css/sets.css'
 import { connect } from 'react-redux';
-import {getSetsData} from '../actions';
+import { getSetsData } from '../actions';
 
 class Sets extends Component{
     componentDidMount(){
@@ -11,12 +11,7 @@ class Sets extends Component{
     }
 
     render(){
-
         const { category } = this.props;
-
-        console.log('SETS PROPS:', this.props);
-
-        console.log("this.props.topics: ", this.props.topics);
         const userSubCategories = this.props.topics.map ((item, index) => {
             
             return(
@@ -52,7 +47,6 @@ function mapStateToProps(state){
     }
 }
 
-// export default auth(Sets);
 export default connect(mapStateToProps, {
     getSetsData
 })(Sets);
