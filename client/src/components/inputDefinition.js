@@ -70,7 +70,7 @@ class InputDefinition extends Component {
                             
                         </div>
                         <div className = "buttonDiv">
-                            <button className="blue lighten-2 btn waves-effect waves-light btn-large" name="action">Add Card
+                            <button className="blue lighten-2 btn btn-large" name="action">Add Card
                                 <i className="material-icons right">add</i>
                             </button>
                         </div>
@@ -80,7 +80,7 @@ class InputDefinition extends Component {
                             </button>
                         </div> */}
                         <div className = "buttonDiv">
-                            <Link to = {`/flashCardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Done
+                            <Link to = {`/flashCardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn btn-large" type="done" name="action">Done
                                 <i className="material-icons right">done</i>
                             </Link>
                         </div>

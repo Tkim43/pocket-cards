@@ -85,8 +85,8 @@ class editMode extends Component{
                     <label>Back</label>
                 </div>
                 <div className="row">
-                    <button className="btn grey darken-2" onClick = {this.sendCardData}>Save</button>
-                    <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="btn green darken-2">Edit More Cards</Link>
+                    <button className="btn green darken-2" onClick = {this.sendCardData}>Save</button>
+                    {/* <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="btn green darken-2">Edit More Cards</Link> */}
                 </div>
                 
             </div>
