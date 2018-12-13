@@ -98,7 +98,7 @@ class FlashcardGeneration extends Component {
                         <i className="material-icons right">add</i>
                         Add Card
                     </Link>
-                    <Link className="green lighten-2 btn waves-effect waves-light btn-large col s6 " to = "/sets" name="action">
+                    <Link className="green lighten-2 btn waves-effect waves-light btn-large col s6 " to={`/sets/${params.set_id}`} name="action">
                         <i className="material-icons right">done</i>
                         Done
                     </Link>
