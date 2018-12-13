@@ -86,12 +86,25 @@ class Navbar extends Component {
 
         return (
             <Fragment>
-                <li className = "nav-item">
-                    <Link to = "/signin">Sign In</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to = "/signup" >Sign Up</Link>
-                </li>
+                <nav className="main-nav">
+                    <div className="nav-wrapper">
+                        <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
+                        <ul className = "right hide-on-med-and-down"> 
+                            <li>
+                                <Link to = "/signin">Sign In</Link>
+                            </li>
+                            <li>
+                                <Link to = "/signup">Sign Up</Link>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <SideNav setRef = {this.setSideNavRef} links = {<li onClick = {this.handleLinkClick}>
+                        <Link to = "/signin">Sign In</Link>
+                        <Link to = "/signup">Sign Up</Link>
+                    </li>}>
+                </SideNav>
             </Fragment>
         );
     }
