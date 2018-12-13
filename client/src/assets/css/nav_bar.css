@@ -6,6 +6,15 @@
     padding: 0 12px;
 }
 
+/* nav .brand-logo {
+    position: relative;
+} */
+
+.nav-links {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
 .logo{
     width:15%;
