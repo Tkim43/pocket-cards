@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import kangaroo from '../assets/images/kangaroo_logo_3.png'
 import "../assets/css/logIn.css";
@@ -17,7 +17,7 @@ class Login extends Component{
                 <div className="divider cyan lighten-3"></div>
                 <div className="row">
                     <Link to ="/signup" className="black-text btn cyan lighten-3">Sign Up</Link>
-                    <Link to ="/signin" className="black-text btn amber lighten-3">Log In</Link>
+                    <Link to ="/signin" className="black-text btn amber lighten-3">Sign In</Link>
                 </div>
             </div>
         )

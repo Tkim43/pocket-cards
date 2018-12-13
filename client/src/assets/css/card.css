@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
 }
+
 .cardflip{
     transform-style: preserve-3d;
     transition-duration: 1s;
@@ -33,12 +34,15 @@
     border-radius: 2px;
     justify-content: center;
 }
+
 .front{
     z-index: 2;
 }
+
 .back{
     transform: rotateY(180deg);
 }
+
 .flipped {
     transform: rotateY(180deg);
 }

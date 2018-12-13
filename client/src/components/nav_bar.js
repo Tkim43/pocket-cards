@@ -15,10 +15,6 @@ class Navbar extends Component {
                 text: 'Profile'
             },
             {
-                to: '/sets',
-                text: 'My Sets'
-            },
-            {
                 to: '/flashcards',
                 text: 'Flashcards'
             }
@@ -53,21 +49,17 @@ class Navbar extends Component {
                                     <div className="divider" />
                               </li>);
             linkElements.push(<li className = "nav-item" key="/signin">
-                                    {/* <Link to = "/"></Link> */}
                                     <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
                               </li>);
         return (
             <Fragment>
                 <nav className = "main-nav">
                     <div className="nav-wrapper">
-                        <Link className = "brand-logo" to = "/profile">
-                            {/* <div> */}
-                                
+                        <Link className = "brand-logo" to = "/profile">                                
                                 <img className ="logo-large hide-on-med-and-down" src={logo} />
                                 <span>Pocket Cards</span>
                                 <img className ="logo-large hide-on-med-and-down" src={logo} />
                                 <img className ="logo hide-on-med-and-up" src={logo} />
-                            {/* </div> */}
                         </Link>
                         
                         <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
