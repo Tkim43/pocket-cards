@@ -42,7 +42,7 @@ class displayCard extends Component{
                 </div>
                 <div className="row down">
                     <Link to ={`/flashcardGeneration/${set_id}/topic/${topic_id}`} className="btn green darken-2 edit-btn">Edit Cards</Link>
-                    <Link to ="/sets" className="btn green darken-2 edit-btn">Return to Sets</Link>
+                    <Link to = {`/sets/${set_id}`} className="btn green darken-2 edit-btn">Return to Sets</Link>
                 </div>
             </div>
         )

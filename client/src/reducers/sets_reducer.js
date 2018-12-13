@@ -18,6 +18,8 @@ import types from '../actions/types';
 };
  export default (state = DEFAULT_STATE, action) => {
     switch(action.type){
+        // case types.UPDATE_FIND_TIME_PASSED:
+        //     return state;
         case types.SEND_CATEGORY_AND_SUBCATEGORY_DATA:
             return {...state, categoryId: action.payload.categoryId, subCategoryId: action.payload.subCategoryId};
         case types.SEND_CREATE_CARD_DATA:

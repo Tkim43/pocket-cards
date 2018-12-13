@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest } from '../actions';
 import BasicModal from './modal';
+import FindTimePassed from './findTimePassed';
 import defaultAvatar from '../assets/images/default_avatar.png';
 
 class Profile extends Component {
@@ -15,32 +16,6 @@ class Profile extends Component {
     handleSortByLatestClick = () => {
         this.props.sortByLatest ();
     }
-
-    findTimePassed = item => {
-        var timeCreated = new Date (item.created);
-        var date = new Date();
-        var now = date.getTime();
-        var result = now - timeCreated.getTime();
-        if(result >= 86400000){
-            var numOfDays = result / 86400000;
-            return `Updated : ${Math.floor(numOfDays)} days ago`;
-        }
-        else if(result >= 3600000){
-            var numOfHours = result / 3600000;
-            return `Updated : ${Math.floor(numOfHours)} hours ago`;
-        }
-        else if(result >= 60000){
-            var numOfMinutes = result / 60000;
-            return `Updated : ${Math.floor(numOfMinutes)} minutes ago`;
-        }
-        else if (result >= 1000){
-            var numOfSeconds = result / 1000;
-            return `Updated : ${Math.floor(numOfSeconds)} seconds ago`;
-        }
-        else {
-            return "Updated : Now";
-        }
-    }
     
     componentDidMount () {
         this.props.sortByLatest ();
@@ -51,11 +26,17 @@ class Profile extends Component {
             return <h1>loading spinner</h1>
         }
 
+        const timeZoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
+
         const profileCategories =  this.props.sets.map ( (item, ID) => {
-            
+
+            const created = new Date(item.created).getTime();
+            const ms = created - timeZoneOffset;
+            const diff = new Date().getTime() - ms;
+
             return (
                 <div className="row category-info" key = {item.ID}>
-                    <div className = "col s12 white-text">{this.findTimePassed(item)}</div>
+                    <FindTimePassed created={diff}/>
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
                     </div>
@@ -110,4 +91,5 @@ function mapStateToProps(state){
 export default connect(mapStateToProps, {
     sortAlphabetical : sortAlphabetical,
     sortByLatest: sortByLatest,
+    // update
 })(Profile);
