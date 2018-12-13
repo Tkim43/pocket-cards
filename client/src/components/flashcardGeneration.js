@@ -59,8 +59,8 @@ class FlashcardGeneration extends Component {
                             </Link>
                         </div>
                         <div className="col s2 card-container">
-                            <button className="red lighten-2 btn" onClick={() => this.delete(item.ID)}>
-                                <i className = "material-icons">delete</i>
+                            <button className="red lighten-2 btn-large" onClick={() => this.delete(item.ID)}>
+                                <i className = "large material-icons">delete</i>
                             </button>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ class FlashcardGeneration extends Component {
                         <div className="card-panel blue lighten-2 white-text center">Definition</div>
                     </div>
                     <div className="col s2 card-container">
-                        <div className="card-panel red lighten-2 white-text center">Delete</div>
+                        {/* <div className="card-panel red lighten-2 white-text center">Delete</div> */}
                     </div>
                 </div>
                 {listCards}
