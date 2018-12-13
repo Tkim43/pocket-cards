@@ -32,7 +32,7 @@ class Signin extends Component {
 
         return (
             <div className = "container">
-                <h1>this is the log in page</h1>
+                <h1>Log In</h1>
                 <form onSubmit = {handleSubmit(this.handleSignIn)}>
                     {/* <div className="row">
                         <Field size = "s12" name = "username" label = "username" component = {this.renderInput}/>
