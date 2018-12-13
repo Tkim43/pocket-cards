@@ -20,6 +20,12 @@
     max-width: 450px;
 }
 
+.grey-text .col.s6 {
+    margin: 5px;
+    height: 55px;
+    background-color:#fff9c4 ; 
+}
+
 
 
 

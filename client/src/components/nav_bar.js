@@ -57,9 +57,17 @@ class Navbar extends Component {
                               </li>);
         return (
             <Fragment>
-                <nav className = "main-nav grey darken-4">
+                <nav className = "main-nav">
                     <div className="nav-wrapper">
-                        <Link className = "brand-logo" to = "/profile"><div>Pocket Cards<img className ="logo" src={logo} /></div></Link>
+                        <Link className = "brand-logo" to = "/profile">
+                            <div>
+                                
+                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                                <span>Pocket Cards</span>
+                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                                <img className ="logo hide-on-med-and-up" src={logo} />
+                            </div>
+                        </Link>
                         
                         <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
                         
