@@ -1,0 +1,94 @@
+/* Inside Profile Container */
+
+.profile-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section {
+    max-height: 200px;
+    margin: 1em 0;
+    display: flex;
+}
+
+.profile-pic{
+    height: 100px;
+    width: 100px;
+}
+
+.avatar-text {
+    font-size: 2em;
+    align-items: center;
+}
+
+.avatar-box {
+    display: flex;
+    align-items: center;
+}
+
+.row > .btn {
+    width: 44%;
+    margin: 10px;
+}
+
+.row {
+    margin: 0;
+    justify-content: center;
+}
+
+/* Inside Sort Row */
+
+.sort-row {
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.sort-button {
+    margin: 0 10px;
+}
+
+/* Inside Card Container */
+
+.card-container > * {
+    display: block;
+}
+
+/* Inside Category section */
+
+.category-info {
+    flex-direction: column;
+}
+
+/* Getting the button to change color */
+
+.button.btn-small.soft-blue.sort-button:active {
+    background-color: #6db0cf;
+}
+
+.soft-blue {
+    background-color: #81d4fa;
+}
+.btn:focus, .btn-large:focus, .btn-small:focus, .btn-floating:focus{
+    background-color: #6db0cf;
+}
+
+.btn:hover, .btn-large:hover, .btn-small:hover{
+    background-color: #6db0cf;
+}
+
+/* For texts  */
+.sets-bold-text {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.button-bold-text {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.create-category-bold-text {
+    font-size: 2rem;
+    font-weight: bold;
+}

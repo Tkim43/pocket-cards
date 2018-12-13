@@ -1,0 +1,29 @@
+.nav_bar{
+    font-family: 'Gochi Hand', cursive;
+}
+
+.main-nav {
+    padding: 0 12px;
+}
+
+
+.logo{
+    width:15%;
+    height:0%;
+}
+
+.logo-large{
+    width:4%;
+    height:0%;
+}
+
+span{
+    font-family: 'Baloo Chettan', cursive;
+    color:white;
+    font-size: 85%;
+    vertical-align:top;
+}
+
+.main-nav{
+    background-image: linear-gradient(#212121, #263238);
+}

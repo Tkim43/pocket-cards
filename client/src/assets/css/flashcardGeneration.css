@@ -1,0 +1,47 @@
+/* Flashcard Generation Page */
+
+.card{
+    max-height: 500px;
+    height: 350px;
+}
+
+.text-inside-card {
+    max-height: 500px;
+    height: 150px;
+}
+
+.row {
+    display: flex;
+}
+
+.flashcard-row {
+    margin: auto;
+}
+
+.col.s2.card-container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.card-panel.red.lighten-2 {
+    width: 100%;
+}
+
+.buttonDiv > *{
+    margin: 0 10px;
+}
+
+.card-panel > i {
+    margin: 0 auto;
+}
+
+.card-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.red.btn.delete-btn {
+    width: 100%;
+}

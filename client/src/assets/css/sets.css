@@ -1,0 +1,22 @@
+.loading-container{
+    display: flex;
+    height: 50vh;
+
+}
+.preloader-wrapper{
+    margin:auto;
+}
+
+.set > .blue.darken-3 {
+    width:90%;
+    height: 50px;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.set-container .wide-btn{
+    width: 50%;
+}
+ 
