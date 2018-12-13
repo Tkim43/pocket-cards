@@ -20,4 +20,10 @@
 .set-container .wide-btn{
     width: 50%;
 }
+
+.row.set {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
  
