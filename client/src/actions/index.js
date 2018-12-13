@@ -9,6 +9,20 @@ function authHeaders(){
     }
 }
 
+export const getNextOrPrevCard = (direction = 'next', topicId, currentCardId) => async dispatch => {
+    try {
+        const { data: { card } } = await axios.get(`/api/topic/${topicId}/card/${currentCardId}/${direction}`);
+
+        dispatch({
+            type: types.GET_CARD_DATA,
+            card
+        });
+        return card.ID;
+    } catch(err){
+        console.log(`Error getting ${direction} card`);
+    }
+}
+
 export const getCardData = (topicId, cardId) => async dispatch => {
     try {
         const { data: { card } } = await axios.get(`/api/topic/${topicId}/card/${cardId}`);
@@ -17,6 +31,7 @@ export const getCardData = (topicId, cardId) => async dispatch => {
             type: types.GET_CARD_DATA,
             card
         });
+        return card.ID;
     } catch(err){
         console.log('Error Getting Card:', err);
     }

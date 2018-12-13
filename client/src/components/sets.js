@@ -22,7 +22,7 @@ class Sets extends Component{
             return(
 
                 <div key= {item.setID} className="row set">
-                    <Link to={`/displayCard/${item.setID}/topic/${item.topicID}`} className ="btn blue darken-3 ">{item.subCategory}</Link>
+                    <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
                 </div>
             );  
         });
