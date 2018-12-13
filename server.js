@@ -377,31 +377,35 @@ app.post('/api/set_management/delete_subCategory_set', (req, res, next)=>{
 
 //delete card (DONE)
 app.post('/api/set_management/delete_card', (req, res, next)=>{
-        const { ID, topicID  } = req.body;
-        
-        let query = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
-        let inserts = ['cards','ID',Number(ID), 'topicID', Number(topicID)];
+    const { ID, topicID  } = req.body;
     
-        let sql = mysql.format(query, inserts);
-    
-        const output = {
-            success: true
+    let query = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
+    let inserts = ['cards','ID',Number(ID), 'topicID', Number(topicID)];
+
+    let sql = mysql.format(query, inserts);
+
+    const output = {
+        success: true
+    };
+
+    db.query(sql, (err, results)=>{
+        if(err) {
+            req.status = 500;
+        req.error = 'Error getting user data';
+        return next();
         };
-    
-        db.query(sql, (err, results)=>{
-            if(err) {
-                req.status = 500;
-            req.error = 'Error getting user data';
-            return next();
-            };
-    
-            output.data = results;
-            res.send(output);
-        });
-    }, errorHandling);
+
+        output.data = results;
+        res.send(output);
+    });
+}, errorHandling);
 
 // add routes to express app
 // routes(app);
+
+app.get('*', (req, res) => {
+    res.sendFile(resolve(__dirname, 'client', 'dist', 'index.html'));
+});
 
 //starts Express server on defined port
 app.listen(PORT, ()=>{
