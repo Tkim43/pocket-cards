@@ -36,7 +36,7 @@ class Profile extends Component {
 
             return (
                 <div className="row category-info" key = {item.ID}>
-                    <FindTimePassed created={diff}/>
+                    {/* <FindTimePassed created={diff}/> */}
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
                     </div>
