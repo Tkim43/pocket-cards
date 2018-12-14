@@ -1,10 +1,10 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import "../assets/css/inputDefinition.css";
-import { Field, reduxForm} from 'redux-form'; 
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { Field, reduxForm } from 'redux-form'; 
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getTopicsCards, sendCreateCardData, sendCategoryAndSubcategoryData} from '../actions';
+import { getTopicsCards, sendCreateCardData, sendCategoryAndSubcategoryData } from '../actions';
 
 class InputDefinition extends Component {
 
@@ -74,11 +74,6 @@ class InputDefinition extends Component {
                                 <i className="material-icons right">add</i>
                             </button>
                         </div>
-                        {/* <div className = "buttonDiv">
-                            <button onClick={this.handleEditClick}  className="red lighten-2 btn waves-effect waves-light btn-large" name="action">Edit Cards
-                                <i className="material-icons right">create</i>
-                            </button>
-                        </div> */}
                         <div className = "buttonDiv">
                             <Link to = {`/flashCardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn btn-large" type="done" name="action">Done
                                 <i className="material-icons right">done</i>

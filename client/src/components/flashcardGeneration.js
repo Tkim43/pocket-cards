@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getTopicsCards} from '../actions';
-import {deleteCard} from '../actions';
-import Axios from 'axios';
+import { connect } from 'react-redux';
+import { getTopicsCards } from '../actions';
+import { deleteCard } from '../actions';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
@@ -12,18 +11,14 @@ class FlashcardGeneration extends Component {
         getTopicsCards(params.set_id, params.topic_id);
     }
     delete = async (cardId) =>{
-        console.log("these are your props", this.props)
         const { match: { params } } = this.props;
-        // deletes the card
         await this.props.deleteCard(cardId, params.topic_id);
-        // then updates the card list by calling the server 
         this.updateCardList();
     }
     async updateCardList(){
         try{
             const { getTopicsCards, match: { params } } = this.props;
-            // calls the server to get the new list
-            // we are calling the function to get the response 
+
             getTopicsCards(params.set_id, params.topic_id);
         }catch(err){
             console.log("error getting list data")

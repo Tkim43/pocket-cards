@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import '../assets/css/card.css';
-import {connect} from 'react-redux';
-import {getCardData, getNextOrPrevCard} from '../actions';
+import { connect } from 'react-redux';
+import { getCardData, getNextOrPrevCard } from '../actions';
+import '../assets/css/card.css'
 
 class displayCard extends Component{
     state = {
@@ -66,7 +66,6 @@ class displayCard extends Component{
     }
 }
 
-// anytime you're pulling anything from redux use mapstate to props
 function mapStateToProps(state){
     const { sets } = state;
     return {
@@ -74,7 +73,6 @@ function mapStateToProps(state){
     }
 }
 
-// then connect it 
 export default connect(mapStateToProps,{
     getCardData,
     getNextOrPrevCard

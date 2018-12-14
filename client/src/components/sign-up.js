@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { userSignUp } from '../actions';
@@ -28,7 +28,7 @@ class Signup extends Component {
 
         return (
             <div className = "container">
-                <h1>this is the signup page</h1>
+                <h1>Sign Up</h1>
                 <form onSubmit = {handleSubmit(this.handleSignUp)}>
                     <div className="row">
                         <Field size = "s12" name = "displayName" label = "Username" component = {this.renderInput}/>
