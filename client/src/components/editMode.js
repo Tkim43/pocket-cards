@@ -86,13 +86,13 @@ class editMode extends Component{
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">mode_edit</i>
-                    <textarea id="front" className="center materialize-textarea" onChange={this.updateFrontValue} value={this.state.frontText}></textarea>
-                    <label className={autoFill ? 'active' : ''} htmlFor="front">Back</label>
+                    <textarea id="front" className="center materialize-textarea white-text" onChange={this.updateFrontValue} value={this.state.frontText}></textarea>
+                    <label className={autoFill ? 'active' : ''} htmlFor="front">Term</label>
                 </div>
                 <div className ="input-field col s12">
                     <i className="material-icons prefix">mode_edit</i>
-                    <textarea id="back" className="center materialize-textarea s6" onChange={this.updateBackValue} value={this.state.backText}></textarea>
-                    <label className={autoFill ? 'active' : ''} htmlFor="back">Back</label>
+                    <textarea id="back" className="center materialize-textarea s6 white-text" onChange={this.updateBackValue} value={this.state.backText}></textarea>
+                    <label className={autoFill ? 'active' : ''} htmlFor="back">Definition</label>
                 </div>
                 <div className="row">
                     <button className="btn green darken-2" onClick = {this.sendCardData}>Save</button>
