@@ -15,12 +15,8 @@ class Navbar extends Component {
                 text: 'Profile'
             },
             {
-                to: '/sets',
-                text: 'My Sets'
-            },
-            {
-                to: '/flashcards',
-                text: 'Flashcards'
+                to: '/about',
+                text: 'Meet The Team'
             }
         ]
     }
@@ -49,29 +45,26 @@ class Navbar extends Component {
                     </li>
                 );
             }));
-            linkElements.push(<li className = "nav-item" key="moo">
+            linkElements.push(<li className = "nav-item" key="divider">
                                     <div className="divider" />
                               </li>);
-            linkElements.push(<li className = "nav-item" key="cow">
+            linkElements.push(<li className = "nav-item" key="/signin">
                                     <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
                               </li>);
         return (
             <Fragment>
                 <nav className = "main-nav">
                     <div className="nav-wrapper">
-                        <Link className = "brand-logo" to = "/profile">
-                            <div>
-                                
+                        <Link className = "brand-logo" to = "/profile">                                
                                 <img className ="logo-large hide-on-med-and-down" src={logo} />
                                 <span>Pocket Cards</span>
                                 <img className ="logo-large hide-on-med-and-down" src={logo} />
                                 <img className ="logo hide-on-med-and-up" src={logo} />
-                            </div>
                         </Link>
                         
                         <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
                         
-                        <ul className = "right hide-on-med-and-down"> 
+                        <ul className = "nav-links right hide-on-med-and-down"> 
                         {linkElements}
                         </ul>
                     </div>
@@ -86,12 +79,35 @@ class Navbar extends Component {
 
         return (
             <Fragment>
-                <li className = "nav-item">
-                    <Link to = "/signin">Sign In</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to = "/signup" >Sign Up</Link>
-                </li>
+                <nav className="main-nav">
+                    <div className="nav-wrapper">
+                        <Link className = "brand-logo" to = "/profile">
+                            <div>
+                                
+                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                                <span>Pocket Cards</span>
+                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                                <img className ="logo hide-on-med-and-up" src={logo} />
+                            </div>
+                        </Link>
+
+                        <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
+                        <ul className = "nav-links right hide-on-med-and-down"> 
+                            <li>
+                                <Link to = "/signin">Sign In</Link>
+                            </li>
+                            <li>
+                                <Link to = "/signup">Sign Up</Link>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <SideNav setRef = {this.setSideNavRef} links = {<li onClick = {this.handleLinkClick}>
+                        <Link to = "/signin">Sign In</Link>
+                        <Link to = "/signup">Sign Up</Link>
+                    </li>}>
+                </SideNav>
             </Fragment>
         );
     }

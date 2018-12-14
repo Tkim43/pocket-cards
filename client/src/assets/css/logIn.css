@@ -2,19 +2,26 @@ img{
     height: 400px;
     width: 400px;
 }
+
 .mainContainer{
     height: 100%;
     width: 100%;
     background-color:#314256
 }
+
 p{
     font-family: 'Cabin Sketch', cursive;
     font-size: 1.2em;
     margin: 15 0px;
 }
+
 body{
     background-color:#314256;
     width: 100vw;
     height: 100vh;
     margin: 0px;
+}
+
+input[type=password]:not(.browser-default){
+    color: white;
 }

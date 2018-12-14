@@ -1,32 +1,42 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getCardData} from '../actions'; 
-import {sendCardData} from '../actions';
+import { connect } from 'react-redux';
+import { getCardData } from '../actions'; 
+import { sendCardData } from '../actions';
 
 class editMode extends Component{
     state = {
         frontText: '',
-        backText: ''
+        backText: '',
+        autoFill: false
     }
     async componentDidMount(){
-        const { getCardData, match: { params } } = this.props;
-        
-        getCardData(params.topic_id, params.card_id);
-    }
+        const { card: {frontText, backText}, getCardData, match: { params } } = this.props;
 
+        if(frontText && backText){
+            this.setState({
+                frontText,
+                backText,
+                autoFill: true
+            });
+        }
+
+        await getCardData(params.topic_id, params.card_id);
+    }
+    
     componentDidUpdate({card: prevCard}) {
-        console.log("hellooooooo" ,this.props);
         const { card } = this.props;
         const { frontText, backText } = this.state;
 
-        if((!frontText || !backText) && (prevCard.frontText !== card.frontText || prevCard.backText !== card.backText)){
+        if((prevCard.frontText !== card.frontText || prevCard.backText !== card.backText)){
             this.setState({
                 backText: card.backText,
-                frontText: card.frontText
+                frontText: card.frontText,
+                autoFill: true
             });
         }
     }
+
     updateFrontValue = event => {
         this.setState({
             frontText: event.currentTarget.value
@@ -47,6 +57,7 @@ class editMode extends Component{
     }
     render(){
         const { match: { params } } = this.props;
+        const { autoFill } = this.state;
 
         if(this.state.frontText === undefined){
             return (
@@ -67,8 +78,7 @@ class editMode extends Component{
                 </div>
             )
         }
-        const back_description = this.props.backText
-        console.log("back", back_description)
+        
         return(
             <div className="container">
                 <div className="row">
@@ -76,17 +86,16 @@ class editMode extends Component{
                 </div>
                 <div className="input-field col s12">
                     <i className="material-icons prefix">mode_edit</i>
-                    <textarea className="center active materialize-textarea s6" onChange={this.updateFrontValue} value={this.state.frontText}></textarea>
-                    <label>Front</label>
+                    <textarea id="front" className="center materialize-textarea white-text" onChange={this.updateFrontValue} value={this.state.frontText}></textarea>
+                    <label className={autoFill ? 'active' : ''} htmlFor="front">Term</label>
                 </div>
                 <div className ="input-field col s12">
                     <i className="material-icons prefix">mode_edit</i>
-                    <textarea className="center active materialize-textarea s6" onChange={this.updateBackValue} value={this.state.backText}></textarea>
-                    <label>Back</label>
+                    <textarea id="back" className="center materialize-textarea s6 white-text" onChange={this.updateBackValue} value={this.state.backText}></textarea>
+                    <label className={autoFill ? 'active' : ''} htmlFor="back">Definition</label>
                 </div>
                 <div className="row">
-                    <button className="btn grey darken-2" onClick = {this.sendCardData}>Save</button>
-                    <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="btn green darken-2">Edit More Cards</Link>
+                    <button className="btn green darken-2" onClick = {this.sendCardData}>Save</button>
                 </div>
                 
             </div>

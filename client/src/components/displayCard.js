@@ -1,10 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import '../assets/css/card.css'
-// whenver you're using redux use connect
-import {connect} from 'react-redux';
-// import your actions
-import {getCardData, getNextOrPrevCard} from '../actions';
+import { connect } from 'react-redux';
+import { getCardData, getNextOrPrevCard } from '../actions';
 import '../assets/css/card.css'
 
 class displayCard extends Component{
@@ -48,14 +45,14 @@ class displayCard extends Component{
                 <div className="row">
                     <h4 style={{ textTransform: 'capitalize' }} className="center grey-text text-lighten-1">{card.subCategory}</h4>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     <h3 className = "white-text">{flipped ? "Front of Card" : "Back of Card"}</h3>
+                </div> */}
+                <div className={"cardBox flow-text center cardflip " + (flipped ? "" : "flipped")}>
+                    <p id ="cardFont" className="front flow-text">{card.frontText}</p>
+                    <p id ="cardFont" className="back flow-text">{isLoading ? '' : card.backText}</p>
                 </div>
-                <div className={"cardBox center cardflip " + (flipped ? "" : "flipped")}>
-                    <div className="front">{card.frontText}</div>
-                    <div className="back">{isLoading ? '' : card.backText}</div>
-                </div>
-                <div className="row down">
+                <div className="row col s12">
                     <i className="nav-btn large material-icons white-text" onClick={() => this.nextPrevCard('previous')}>arrow_back</i>
                     <button className="btn green darken-2 flip-btn" onClick={this.flipCard}>{flipped ? "Flip to Back" : "Flip to Front"}</button>
                     <i className="nav-btn large material-icons white-text" onClick={() => this.nextPrevCard('next')}>arrow_forward</i>
@@ -69,7 +66,6 @@ class displayCard extends Component{
     }
 }
 
-// anytime you're pulling anything from redux use mapstate to props
 function mapStateToProps(state){
     const { sets } = state;
     return {
@@ -77,7 +73,6 @@ function mapStateToProps(state){
     }
 }
 
-// then connect it 
 export default connect(mapStateToProps,{
     getCardData,
     getNextOrPrevCard
