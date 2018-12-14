@@ -11,15 +11,21 @@ class editMode extends Component{
     }
     async componentDidMount(){
         const { getCardData, match: { params } } = this.props;
-        
-        getCardData(params.topic_id, params.card_id);
+        await getCardData(params.topic_id, params.card_id);
     }
-
+    // componentWillUnmount(){
+    //     this.state = {
+    //         frontText: '',
+    //         backText: ''
+    //     }
+    // }
     componentDidUpdate({card: prevCard}) {
         console.log("hellooooooo" ,this.props);
         const { card } = this.props;
         const { frontText, backText } = this.state;
-
+        // this portion doesnt trigger because the old state is still there and its not empty
+        // so we have to remove the previous state 
+        // use component will unmount
         if((!frontText || !backText) && (prevCard.frontText !== card.frontText || prevCard.backText !== card.backText)){
             this.setState({
                 backText: card.backText,
@@ -27,6 +33,16 @@ class editMode extends Component{
             });
         }
     }
+
+    // componentWillReceiveProps(newProps){
+    //     if (newProps.card.frontText !== this.props.card.frontText || newProps.card.backText !== this.props.card.backText){
+    //         this.setState({
+    //             backText: newProps.card.backText,
+    //             frontText: newProps.card.frontText
+    //         })
+    //     }
+    // }
+
     updateFrontValue = event => {
         this.setState({
             frontText: event.currentTarget.value
@@ -67,8 +83,7 @@ class editMode extends Component{
                 </div>
             )
         }
-        const back_description = this.props.backText
-        console.log("back", back_description)
+        // const back_description = this.props.backText
         return(
             <div className="container">
                 <div className="row">
@@ -85,8 +100,8 @@ class editMode extends Component{
                     <label>Back</label>
                 </div>
                 <div className="row">
-                    <button className="btn grey darken-2" onClick = {this.sendCardData}>Save</button>
-                    <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="btn green darken-2">Edit More Cards</Link>
+                    <button className="btn green darken-2" onClick = {this.sendCardData}>Save</button>
+                    {/* <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="btn green darken-2">Edit More Cards</Link> */}
                 </div>
                 
             </div>

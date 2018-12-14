@@ -67,7 +67,7 @@ class FlashcardGeneration extends Component {
 
             <div className = "flashcard-container center">
                 <h2 style={{textTransform: 'capitalize'}} className = "col s12 center white-text">{topic && topic.subCategory || 'Category'}</h2>
-                <h3 className = "col s12 center white-text">Cards In Set: {cardCount || '...'}</h3>
+                <h3 className = "col s12 center white-text">Cards: {cardCount || '...'}</h3>
                 <div className="row container flashcard-row">                    
                     <div className="col s5 card-container">
                         <div className="card-panel blue lighten-2 white-text center">Term</div> 
@@ -81,11 +81,11 @@ class FlashcardGeneration extends Component {
                 </div>
                 {listCards}
                 <div className = "buttonDiv center">
-                    <Link className="blue lighten-2 btn waves-effect waves-light btn-large col s6 " to = {`/createflashcards/${params.set_id}/subcategory/${params.topic_id}`} name="action">
+                    <Link className="blue lighten-2 btn btn-large col s6" to = {`/createflashcards/${params.set_id}/subcategory/${params.topic_id}`} name="action">
                         <i className="material-icons right">add</i>
                         Add Card
                     </Link>
-                    <Link className="green lighten-2 btn waves-effect waves-light btn-large col s6 " to={`/sets/${params.set_id}`} name="action">
+                    <Link className="green lighten-2 btn btn-large col s6" to={`/sets/${params.set_id}`} name="action">
                         <i className="material-icons right">done</i>
                         Done
                     </Link>

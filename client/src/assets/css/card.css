@@ -3,7 +3,10 @@
     max-height: 500px;
     height: 350px;
 }
-
+#cardFont{
+    font-size: 1.3em;
+    font-family: raleway;
+}
 .centerCard{
     display: flex;
     justify-content: center;
@@ -33,6 +36,7 @@
     align-items: center;
     border-radius: 2px;
     justify-content: center;
+    margin: 0;
 }
 
 .front{
@@ -51,8 +55,8 @@
     height: 75px;
     font-weight: bold;
     font-size: 1.2rem;
+    position: relative;
 }
-
 .edit-btn {
     font-size: 0.8rem;
     font-weight: bold;
