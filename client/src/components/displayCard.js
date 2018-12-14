@@ -52,7 +52,7 @@ class displayCard extends Component{
                     <p id ="cardFont" className="front flow-text">{card.frontText}</p>
                     <p id ="cardFont" className="back flow-text">{isLoading ? '' : card.backText}</p>
                 </div>
-                <div className="row down btnDown">
+                <div className="row col s12">
                     <i className="nav-btn large material-icons white-text" onClick={() => this.nextPrevCard('previous')}>arrow_back</i>
                     <button className="btn green darken-2 flip-btn" onClick={this.flipCard}>{flipped ? "Flip to Back" : "Flip to Front"}</button>
                     <i className="nav-btn large material-icons white-text" onClick={() => this.nextPrevCard('next')}>arrow_forward</i>
