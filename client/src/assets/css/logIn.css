@@ -21,3 +21,7 @@ body{
     height: 100vh;
     margin: 0px;
 }
+
+input[type=password]:not(.browser-default){
+    color: white;
+}

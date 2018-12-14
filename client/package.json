@@ -1,7 +1,7 @@
 {
-  "name": "react_starter",
+  "name": "pocketcards",
   "version": "1.0.0",
-  "description": "Starting setup for react redux project",
+  "description": "Online Flashcard making application",
   "main": "index.js",
   "proxy": {
     "/api/*": {
@@ -17,7 +17,7 @@
     "bundle": "webpack --config webpack.prod.js --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Scott Bowler",
+  "author": "Tiffany Kim, Brandon Park, Vienna Tran, Kyle Umbarger",
   "license": "ISC",
   "repository": {
     "type": "git",
