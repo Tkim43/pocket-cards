@@ -15,11 +15,6 @@ class Navbar extends Component {
                 text: 'Profile'
             },
             {
-
-                to: '/sets',
-                text: 'My Sets'
-            },
-            {
                 to: '/about',
                 text: 'Meet The Team'
             }
