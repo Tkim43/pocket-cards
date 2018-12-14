@@ -31,8 +31,9 @@ class Profile extends Component {
         const profileCategories =  this.props.sets.map ( (item, ID) => {
 
             const created = new Date(item.created).getTime();
-            const ms = created - timeZoneOffset;
-            const diff = new Date().getTime() - ms;
+            // const ms = created - timeZoneOffset;
+            // const diff = new Date().getTime() - ms;
+            const diff = new Date().getTime() - created;
 
             return (
                 <div className="row category-info" key = {item.ID}>
