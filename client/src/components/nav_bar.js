@@ -15,8 +15,13 @@ class Navbar extends Component {
                 text: 'Profile'
             },
             {
-                to: '/flashcards',
-                text: 'Flashcards'
+
+                to: '/sets',
+                text: 'My Sets'
+            },
+            {
+                to: '/about',
+                text: 'Meet The Team'
             }
         ]
     }
