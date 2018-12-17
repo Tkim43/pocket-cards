@@ -12,12 +12,12 @@ class About extends Component {
     render () {
         return (
             <div>
-                <div className="developer-container">
-                <h1 className=" main-title white-text">Meet the Team</h1>
-                <h4 className="white-text center">Front End Developers</h4>
-                    <div>
+                <div className="developers-container">
+                <h1 className=" main-title">Meet the Team</h1>
+                <h4 className="center">Front End Developers</h4>
+                    <div className="developer-wrapper"> 
                         <img className="developer tiffany" src={tiffany}/>
-                        <h4 className="name white-text">Tiffany Kim</h4>
+                        <h5 className="name">Tiffany Kim</h5>
                         <div className="iconDiv">
                             <a href="https://github.com/Tkim43">
                             <img className="icon" src={github}/>
@@ -32,7 +32,7 @@ class About extends Component {
                     </div>
                     <div>
                         <img className="developer brandon" src={brandon}/>
-                        <h4 className="name white-text">Brandon Park</h4>
+                        <h5 className="name">Brandon Park</h5>
                         <div className="iconDiv">
                             <a href="https://github.com/brandon206">
                             <img className="icon" src={github}/>
@@ -47,7 +47,7 @@ class About extends Component {
                     </div>
                     <div>
                         <img className="developer vienna" src={vienna}/>
-                        <h4 className="name white-text">Vienna Tran</h4>
+                        <h5 className="name">Vienna Tran</h5>
                         <div className="iconDiv">
                             <a href="https://github.com/viennaltran">
                             <img className="icon" src={github}/>
