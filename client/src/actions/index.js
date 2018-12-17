@@ -223,7 +223,17 @@ export function deleteCategory(cardID, userID){
         try{
             const resp = await axios.delete(`/api/set_management/ID/${cardID}/userID/${userID}`, authHeaders());
         }catch(err){
-            console.log("this is the error from the delete");
+            console.log("this is the error from the category delete");
+        }
+    }
+}
+
+export function deleteSubCategory(){
+    return async function(dispatch){
+        try{
+            const resp = await axios.post(`/api/set_management/delete_subCategory_set`, {ID,setID}, authHeaders());
+        }catch{
+            console.log("this is the error from subcategory delete")
         }
     }
 }
