@@ -3,7 +3,7 @@ import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTopicsCards } from '../actions';
-import { deleteCard } from '../actions';
+import { deleteCard} from '../actions';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
@@ -19,7 +19,7 @@ class FlashcardGeneration extends Component {
         try{
             const { getTopicsCards, match: { params } } = this.props;
 
-            getTopicsCards(params.set_id, params.topic_id);
+            await getTopicsCards(params.set_id, params.topic_id);
         }catch(err){
             console.log("error getting list data")
         }
