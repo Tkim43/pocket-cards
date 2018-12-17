@@ -47,9 +47,9 @@ export function userSignOut(){
     }
 }
 
-export function getProfileData () {
-    const resp = axios.get('/api/userhome', authHeaders());
-}
+// export function getProfileData () {
+//     const resp = axios.get('/api/userhome', authHeaders());
+// }
 
 export async function sortAlphabetical () {
     const resp = await axios.get('/api/userhome', authHeaders());
@@ -214,7 +214,16 @@ export function deleteCard(ID, topicID){
 export function sendCreateCardData(topicId, cardData){
     return async function(dispatch){
         await axios.post(`/api/set_management/create_card/topics/${topicId}`, cardData, authHeaders());
-
         return true;
+    }
+}
+
+export function deleteCategory(cardID, userID){
+    return async function(dispatch) {
+        try{
+            const resp = await axios.delete(`/api/set_management/ID/${cardID}/userID/${userID}`, authHeaders());
+        }catch(err){
+            console.log("this is the error from the delete");
+        }
     }
 }

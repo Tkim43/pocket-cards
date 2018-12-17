@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import "../assets/css/profile.css";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { sortAlphabetical, sortByLatest } from '../actions';
+import { sortAlphabetical, sortByLatest} from '../actions';
 import BasicModal from './modal';
 import FindTimePassed from './findTimePassed';
 import defaultAvatar from '../assets/images/default_avatar.png';
+import { deleteCategory} from '../actions';
 
 class Profile extends Component {
 
@@ -19,6 +20,21 @@ class Profile extends Component {
     
     componentDidMount () {
         this.props.sortByLatest ();
+    }
+
+    delete = async (cardID) =>{
+        console.log("this is your props delete", this.props);
+        const userID = this.props.user.userID
+        await this.props.deleteCategory(cardID,userID);
+        this.updateCategoryList();
+    }
+    async updateCategoryList(){
+        try{
+            const {sortByLatest} = this.props
+            await sortByLatest();
+        }catch(err){
+            console.log("error getting list data")
+        }
     }
 
     render () { 
@@ -40,6 +56,9 @@ class Profile extends Component {
                     <FindTimePassed created={diff}/>
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
+                        <button className="red lighten-2 btn-large" onClick={() => this.delete(item.ID)}>
+                                <i className = "large material-icons">delete</i>
+                        </button>
                     </div>
                 </div>
             );
@@ -92,4 +111,5 @@ function mapStateToProps(state){
 export default connect(mapStateToProps, {
     sortAlphabetical : sortAlphabetical,
     sortByLatest: sortByLatest,
+    deleteCategory,
 })(Profile);
