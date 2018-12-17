@@ -39,7 +39,7 @@ class Sets extends Component{
 }
 
 function mapStateToProps(state){
-    console.log("this is the state", state)
+    // console.log("this is the state", state)
     return{
         category: state.sets.category,
         topics: state.sets.topics

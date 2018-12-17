@@ -36,6 +36,8 @@ import types from '../actions/types';
             return {...state, categories: action.payload };
         case types.SORT_BY_LATEST:
             return {...state, categories: action.payload };
+        case types.SIGN_OUT:
+            return { ...DEFAULT_STATE };
         default:
             return state;
     }
