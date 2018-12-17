@@ -4,10 +4,11 @@
 }
 
 img.developer{
-    width: 20%;
+    width: 50%;
     height:0%;
-    left: 40%;
+    left: 25%;
     position: relative;
+    border-radius: 10%;
 }
 
 img.icon{
@@ -27,4 +28,8 @@ img.icon{
 
 .description{
     text-align:center;
+}
+
+.developer-container{
+    background-color:bisque;
 }
