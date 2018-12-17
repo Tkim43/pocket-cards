@@ -16,5 +16,6 @@ export default {
     DELETE_CARD: 'delete_card',
     CREATE_CARD_DATA: 'create_card_data',
     SEND_CREATE_CARD_DATA: 'send_create_card_data',
-    UPDATE_FIND_TIME_PASSED: 'update_find_time_passed'
+    UPDATE_FIND_TIME_PASSED: 'update_find_time_passed',
+    DELETE_SUBCATEGORY: 'delete_subcategory',
 };

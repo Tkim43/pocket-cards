@@ -92,14 +92,15 @@ export async function sortByLatest () {
 export function getSetsData (id){
     return async function(dispatch){
         try {
-            const { data: { sets } } = await axios.get(`/api/set_management/${id}`, authHeaders());
+            const { data: { sets = [] } } = await axios.get(`/api/set_management/${id}`, authHeaders());
 
             dispatch({
                 type: types.GET_SETS_DATA,
                 sets
             });
         } catch(err){
-            console.log('Error getting set data');
+            console.log('Error getting sets data');
+            console.log(err);
         }
     }
 }
@@ -228,10 +229,12 @@ export function deleteCategory(cardID, userID){
     }
 }
 
-export function deleteSubCategory(){
+export function deleteSubcategory(topicID, setID){
     return async function(dispatch){
         try{
-            const resp = await axios.post(`/api/set_management/delete_subCategory_set`, {ID,setID}, authHeaders());
+            const resp = await axios.post(`/api/set_management/delete_subCategory_set`, {ID: topicID, setID}, authHeaders());
+
+            return true;
         }catch{
             console.log("this is the error from subcategory delete")
         }
