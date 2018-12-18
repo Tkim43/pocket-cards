@@ -9,7 +9,9 @@ class Login extends Component{
     render(){
         return(
             <div className="center mainContainer">
-                <img src={kangaroo}></img>
+                <div className = "responsive-img container">
+                    <img src={kangaroo}></img>
+                </div>
                 <div className="divider cyan lighten-3"></div>
                 <div className="container">
                     <p className="white-text">Welcome to Pocket Cards, our mission is to help students practice and master whatever they are learning. Pocket Cards provides engaging, customizable flashcards with contributions from people everywhere.</p>
