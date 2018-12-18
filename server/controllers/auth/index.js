@@ -70,7 +70,7 @@ exports.signUp = async (req, res) => {
         }
 
         const user = {
-            id: insertId,
+            ID: insertId,
             email,
             displayName
         }

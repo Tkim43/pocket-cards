@@ -128,7 +128,7 @@ export function userSignUp(newUser){
             const { data: { token, user } } = await axios.post('/auth/sign-up', newUser);
 
             localStorage.setItem('token', token);
-
+            
             dispatch({
                 type: types.SIGN_UP,
                 user
