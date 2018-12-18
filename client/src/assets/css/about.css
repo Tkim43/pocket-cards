@@ -1,6 +1,10 @@
 .main-title{
-    font-size: 3.5rem;
+    font-size: 4em;
     text-align: center;
+    border-bottom: 3px solid #ffb74d;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Lobster', cursive;
 }
 
 img.developer{
@@ -18,11 +22,6 @@ img.icon{
     margin:2%;
 }
 
-.name{
-    text-align:center;
-    margin: 0 auto;
-}
-
 .iconDiv{
     text-align:center;
 }
@@ -36,4 +35,12 @@ img.icon{
     width:90%;
     margin:5%;
     border-radius:15px;
+}
+
+.iconDiv>a:hover {
+    background-color: yellow;
+}
+
+.front-end,.name{
+font-family: 'Bree Serif', serif;
 }
