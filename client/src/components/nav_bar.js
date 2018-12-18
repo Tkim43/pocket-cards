@@ -53,7 +53,7 @@ class Navbar extends Component {
             linkElements.push(<li className = "nav-item" key="divider">
                                     <div className="divider" />
                               </li>);
-            linkElements.push(<li className = "nav-item" key="/signin">
+            linkElements.push(<li className = "nav-item center" key="/signin">
                                     <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
                               </li>);
             linkElements.unshift(<li className = "nav-item" key="profileuser">

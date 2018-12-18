@@ -44,10 +44,16 @@ class InputDefinition extends Component {
 
         if(cards && cards.length){
             cardElements = cards.map((card, i) => {
+                if(card.frontText.length > 80){
+                    card.frontText = card.frontText.substring(0,60) + "...";
+                }
+                if(card.backText.length > 80){
+                    card.backText = card.backText.substring(0,60) + "...";
+                }
                 return (
                     <div className="row center grey-text" key={i}>
-                        <div className="col s6">{card.frontText.substring(0,20) + "..."}</div>
-                        <div className="col s6">{card.backText.substring(0,20) + "..."}</div>
+                        <div className="col s6">{card.frontText}</div>
+                        <div className="col s6">{card.backText}</div>
                     </div>
                 );
             });

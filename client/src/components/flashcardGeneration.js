@@ -31,11 +31,11 @@ class FlashcardGeneration extends Component {
             let frontText = item.frontText;
             let backText = item.backText;
 
-            if(frontText.length > 20){
-                frontText = item.frontText.substring(0,20) + "...";
+            if(frontText.length > 80){
+                frontText = item.frontText.substring(0,80) + "...";
             }
-            if(backText.length > 20){
-                backText = item.backText.substring(0,20) + "...";
+            if(backText.length > 80){
+                backText = item.backText.substring(0,80) + "...";
             }
 
             const path = `/editMode/${params.set_id}/topic/${params.topic_id}/card/${item.ID}`;
