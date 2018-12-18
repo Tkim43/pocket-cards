@@ -36,7 +36,6 @@ const jwtOptions = {
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, async function (payload, done) {
-    console.log("Damnit 6");
     try {
         let query = 'SELECT * FROM users WHERE ?? = ? LIMIT 1';
         let inserts = ['id', payload.uid];
