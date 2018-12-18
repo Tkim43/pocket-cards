@@ -14,10 +14,10 @@ class About extends Component {
             <div>
                 <div className="developers-container">
                 <h1 className=" main-title">Meet the Team</h1>
-                <h4 className="center">Front End Developers</h4>
+                <h4 className="front-end center">Front End Developers</h4>
                     <div className="developer-wrapper"> 
                         <img className="developer tiffany" src={tiffany}/>
-                        <h5 className="name">Tiffany Kim</h5>
+                        <h5 className="name center">Tiffany Kim</h5>
                         <div className="iconDiv">
                             <a href="https://github.com/Tkim43">
                             <img className="icon" src={github}/>
@@ -32,7 +32,7 @@ class About extends Component {
                     </div>
                     <div>
                         <img className="developer brandon" src={brandon}/>
-                        <h5 className="name">Brandon Park</h5>
+                        <h5 className="name center">Brandon Park</h5>
                         <div className="iconDiv">
                             <a href="https://github.com/brandon206">
                             <img className="icon" src={github}/>
@@ -47,7 +47,7 @@ class About extends Component {
                     </div>
                     <div>
                         <img className="developer vienna" src={vienna}/>
-                        <h5 className="name">Vienna Tran</h5>
+                        <h5 className="name center">Vienna Tran</h5>
                         <div className="iconDiv">
                             <a href="https://github.com/viennaltran">
                             <img className="icon" src={github}/>
