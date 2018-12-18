@@ -72,7 +72,7 @@ function validate (formValues) {
 }
 
 function checkIfValidEmail(email){
-    const regex = /^(\w)*[@]{1}(\w)+[.]{1}(\w)+$/g;
+    const regex = /^(\S)*[@]{1}(\w)+[.]{1}(\w)+$/g;
     const testEmail = regex.test(email);
 
     if(testEmail){
@@ -101,7 +101,7 @@ function checkIfPasswordHasANum (password = "", error){
 }
 
 function checkIfPasswordIsLongEnough (password = "", error){
-    const regex = /[\w]{6,32}/g;
+    const regex = /[\W]{6,32}/g;
     const testIfStartWithLetter = regex.test(password);
     
     if(!testIfStartWithLetter){

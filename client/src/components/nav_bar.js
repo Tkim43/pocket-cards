@@ -5,6 +5,8 @@ import { userSignOut } from "../actions/index";
 import SideNav from './side_nav';
 import '../assets/css/nav_bar.css'
 import logo from '../assets/images/kangaroo_smaller_logo.png'
+import defaultAvatar from '../assets/images/default_avatar.png';
+
 
 class Navbar extends Component {
 
@@ -36,6 +38,9 @@ class Navbar extends Component {
     }
 
     render () {
+        const profileUserInfo = this.props.user.displayName;
+        const profileUserAvatar = this.props.user.avatar || defaultAvatar;
+
         const { auth, signOut } = this.props;
         if(auth){
             const linkElements = this.state.links.map((link => {
@@ -51,6 +56,16 @@ class Navbar extends Component {
             linkElements.push(<li className = "nav-item" key="/signin">
                                     <button onClick = {signOut} className = "red lighten-2 btn"> Sign Out </button>
                               </li>);
+            linkElements.unshift(<li className = "nav-item" key="profileuser">
+                                    <div className = "sidenav-header navy hide-on-large-only">
+                                        <div className="s4 sidenav-title">
+                                            <img src= {profileUserAvatar} alt="" className="circle profile-pic"/>
+                                        </div>
+                                        <div className="s8 avatar-box sidenav-title hide-on-large-only">
+                                            <div className="avatar-text">{profileUserInfo}</div>
+                                        </div>
+                                    </div>
+                                </li>);
         return (
             <Fragment>
                 <nav className = "main-nav">
@@ -115,7 +130,8 @@ class Navbar extends Component {
 
 function mapStateToProps (state){
     return {
-        auth: state.user.auth
+        auth: state.user.auth,
+        user: state.user.info
     }
 }
 

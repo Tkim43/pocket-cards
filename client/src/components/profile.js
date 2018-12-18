@@ -72,10 +72,10 @@ class Profile extends Component {
         <div className = "container">
             <div className = "profile-container row col s12">
                 <div className="profile-section">
-                    <div className="col s4">
+                    <div className="col s4 profile-section-img">
                         <img src= {profileUserAvatar} alt="" className="circle profile-pic"/>
                     </div>
-                    <div className="col s8 avatar-box">
+                    <div className="col s8 avatar-box profile-section-title">
                         <div className="white-text avatar-text">
                         {profileUserInfo}
                         </div>
