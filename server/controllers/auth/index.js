@@ -6,7 +6,7 @@ const { jwtConfig } = require('../../config');
 
 exports.signIn = (req, res) => {
     const { user } = req;
-
+    console.log("This is the user from our auth route", user);
     res.send({
         success: true,
         token: tokenForUser(user),
@@ -100,6 +100,7 @@ function tokenForUser(user) {
 
 function userDataToSend(user) {
     return {
+        userID: user.ID,
         avatar: user.avatar || null,
         displayName: user.displayName,
         email: user.email,
