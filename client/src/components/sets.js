@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import '../assets/css/sets.css'
 import { connect } from 'react-redux';
-import { getSetsData , deleteSubcategory} from '../actions';
+import { getSetsData , deleteSubcategory, createSubcategory} from '../actions';
 
 class Sets extends Component{
+    state = {show: false};
     componentDidMount(){
         this.props.getSetsData(this.props.match.params.set_id);
     }
@@ -20,17 +21,61 @@ class Sets extends Component{
         try{
             const {getSetsData, match: {params}} = this.props
             await getSetsData(params.set_id);
-            console.log("set ID", params.set_id)
         }catch(err){
             console.log("error subcategory list")
         }
     }
+    showModal = () =>{
+        this.setState({
+            show: true
+        })
+    }
+    updateSubCategory = event =>{
+        this.setState({
+            subCategory: event.currentTarget.value
+        });
+    }
+    createSubcategory  = (e) => {
+        e.preventDefault();
+        const {createSubcategory, match:{params}} = this.props
+        createSubcategory(params.set_id, {subCategory: this.state.subCategory})
+        this.hideModal();
+        this.updateSubcategoryList();
+    }
+    hideModal = () =>{
+        this.setState({
+            show: false
+        })
+    }
     render(){
+        if(this.state.show){
+            return (
+                <div className="basic-modal" onClick={this.hideModal}>
+                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
+                        <div onClick={this.hideModal} className="basic-modal-close center">X</div>
+                            <div>
+                                <form className="col s12">
+                                        <div className="row"> 
+                                            <div className="input-field col s12">
+                                                <textarea onChange ={this.updateSubCategory} className="materialize-textarea" id="textarea2"></textarea>
+                                                <label htmlFor="textarea2">Create Title</label>
+                                            </div>  
+                                        </div>
+                                        <div className = "row">
+                                            <button onClick = {this.createSubcategory}className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                                Done
+                                            </button>
+                                        </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            )
+        }
         const { category } = this.props;
         const userSubCategories = this.props.topics.map ((item, index) => {
             
             return(
-
                 <div key= {item.setID} className="row set">
                     <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
                     <button className="red lighten-2 btn-large" onClick={() => this.delete(item.topicID, item.setID)}>
@@ -48,6 +93,7 @@ class Sets extends Component{
                 </div>
                 <div className="row">
                     <div className="col s12 center">
+                    <button onClick = {this.showModal} className="btn green lighten-2 wide-btn" >Add Title</button>
                         <Link to="/profile" className="btn yellow darken-2 wide-btn">Home</Link>
                     </div>
                 </div>
@@ -57,7 +103,6 @@ class Sets extends Component{
 }
 
 function mapStateToProps(state){
-    // console.log("this is the state", state)
     return{
         category: state.sets.category,
         topics: state.sets.topics
@@ -67,6 +112,7 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps, {
     getSetsData,
-    deleteSubcategory
+    deleteSubcategory,
+    createSubcategory
 })(Sets);
 
