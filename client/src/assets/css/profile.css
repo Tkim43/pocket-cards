@@ -12,13 +12,26 @@
 }
 
 .profile-pic{
-    height: 100px;
-    width: 100px;
+    height: 100%;
+    width: 80%;
+}
+
+.profile-section-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-section-title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .avatar-text {
     font-size: 2em;
     align-items: center;
+    color:white;
 }
 
 .avatar-box {
