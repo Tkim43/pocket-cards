@@ -240,3 +240,13 @@ export function deleteSubcategory(topicID, setID){
         }
     }
 }
+
+export function createSubcategory(setID, subCategory){
+    return async function(dispatch){
+        try{
+            const resp = await axios.post(`/api/set_management/create_subcategory/${setID}`, subCategory, authHeaders());
+        }catch{
+            console.log("error creating a subcategory");
+        }
+    }
+}
