@@ -18,11 +18,25 @@ class InputDefinition extends Component {
         getTopicsCards(params.set_id, params.topic_id);
     }
 
+    // renderInput (props) {
+    //     return (
+    //         <div className= {`input-field col ${props.size}`}>
+    //             <input {...props.input} type= {props.type || "text"} id = {props.input.name} autoComplete = "off"/>
+    //             <label htmlFor= {props.input.name} >{props.label}</label>
+    //         </div>
+    //     );
+    // }
+
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type= {props.type || "text"} id = {props.input.name} autoComplete = "off"/>
+                <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
+                <ul>
+                    {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
+                        return <li key = {index} className="red-text">{item}</li>
+                    })}
+                </ul>
             </div>
         );
     }
@@ -98,6 +112,23 @@ class InputDefinition extends Component {
     }
 }
 
+function validate (formValues) {
+    const error = {};
+
+    console.log("THESE ARE THE FORM VALUES: ", formValues);
+
+    if(!formValues.frontText){
+        error.frontText = ['Please input a term'];
+    }
+
+    if(!formValues.backText){
+        error.backText = ['Please input a definition'];
+    }
+
+    return error;
+
+}
+
 
 function mapStateToProps(state){
     const { sets } = state;
@@ -110,6 +141,7 @@ function mapStateToProps(state){
 
 InputDefinition = reduxForm ({
     form: "input-defintion",
+    validate: validate
 })(InputDefinition);
 
 export default connect(mapStateToProps,{
