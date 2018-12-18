@@ -123,7 +123,7 @@ class Sets extends Component{
         const userSubCategories = this.props.topics.map ((item, index) => {
             
             return(
-                <div key= {item.setID} className="row set">
+                <div key= {index} className="row set">
                     <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
                     <div className = "row">
                     <button className="red lighten-2 btn-large" onClick ={this.showModal}>
