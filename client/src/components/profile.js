@@ -9,6 +9,9 @@ import defaultAvatar from '../assets/images/default_avatar.png';
 import { deleteCategory} from '../actions';
 
 class Profile extends Component {
+    state ={
+        show: false
+    }
 
     handleAlphabeticalClick = () => {
         this.props.sortAlphabetical ();
@@ -20,6 +23,17 @@ class Profile extends Component {
     
     componentDidMount () {
         this.props.sortByLatest ();
+    }
+
+    showModal=()=>{
+        this.setState({
+            show: true
+        })
+    }
+    hideModal=()=>{
+        this.setState({
+            show: false
+        })
     }
 
     delete = async (cardID) =>{
@@ -38,6 +52,7 @@ class Profile extends Component {
     }
 
     render () { 
+        
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
         }
@@ -56,13 +71,34 @@ class Profile extends Component {
                     <FindTimePassed created={diff}/>
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
-                        <button className="red lighten-2 btn-large" onClick={() => this.delete(item.ID)}>
+                        <button className="red lighten-2 btn-large" onClick={this.showModal}>
                                 <i className = "large material-icons">delete</i>
                         </button>
                     </div>
                 </div>
             );
         } );
+
+        if(this.state.show){
+            return (
+                <div className="basic-modal" onClick={this.hideModal}>
+                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
+                        <div onClick={this.hideModal} className="basic-modal-close center">X</div>
+                            <div>
+                                <form className="col s12">
+                                        <div className="row"> 
+                                            <div className="input-field col s12">
+                                                <p>Are you sure?</p>
+                                                <button onClick={() => this.delete(item.ID)}>Yes</button>
+                                                <button onClick={this.hideModal}>No</button>
+                                            </div>  
+                                        </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            )
+        }
 
         const profileUserInfo = this.props.user.displayName;
 
