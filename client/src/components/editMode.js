@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCardData } from '../actions'; 
 import { sendCardData } from '../actions';
+import CancelModal from './cancelModal';
 
 class editMode extends Component{
     state = {
@@ -95,7 +96,12 @@ class editMode extends Component{
                     <label className={autoFill ? 'active' : ''} htmlFor="back">Definition</label>
                 </div>
                 <div className="row">
-                    <button className="btn green darken-2" onClick = {this.sendCardData}>Save</button>
+                    
+                        <button className="col s12 btn green darken-2" onClick = {this.sendCardData}>Save</button>
+                        <CancelModal />
+                        {/* <button className="col s12 btn red darken-2" onClick = {this.showCancelModal}>Cancel</button> */}
+                        {/* { this.state.cancel ? <CancelModal/> : '' } */}
+                    
                 </div>
                 
             </div>
