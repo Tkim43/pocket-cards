@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCardData } from '../actions'; 
 import { sendCardData } from '../actions';
-import CancelModal from './cancelModal';
 
 class editMode extends Component{
     state = {
         frontText: '',
         backText: '',
-        autoFill: false
+        autoFill: false,
+        show: false,
+
     }
     async componentDidMount(){
         const { card: {frontText, backText}, getCardData, match: { params } } = this.props;
@@ -24,7 +25,9 @@ class editMode extends Component{
 
         await getCardData(params.topic_id, params.card_id);
     }
-    
+    cancel=()=>{
+        this.props.getCardData(this.props.params.match.topic_id, this.props.params.match.card_id);
+    }
     componentDidUpdate({card: prevCard}) {
         const { card } = this.props;
         const { frontText, backText } = this.state;
@@ -37,7 +40,16 @@ class editMode extends Component{
             });
         }
     }
-
+    showModal=()=>{
+        this.setState({
+            show: true
+        })
+    }
+    hideModal=()=>{
+        this.setState({
+            show: false
+        })
+    }
     updateFrontValue = event => {
         this.setState({
             frontText: event.currentTarget.value
@@ -79,6 +91,30 @@ class editMode extends Component{
                 </div>
             )
         }
+        if(this.state.show){
+            return (
+                <div className="basic-modal" onClick={this.hideModal}>
+                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
+                        <div onClick={this.close} className="basic-modal-close center">X</div>
+                            <div>
+                                <form className="col s12">
+                                        <div>
+                                            <h6 className="center">Are you sure you want to discard the changes you made?</h6>
+                                        </div>
+                                        <div className = "row">
+                                            <button onClick={this.cancel} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                                Yes
+                                            </button>
+                                            <button onClick={this.hideModal} className="red lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                                No
+                                            </button>
+                                        </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            )
+        }
         
         return(
             <div className="container">
@@ -98,9 +134,7 @@ class editMode extends Component{
                 <div className="row">
                     
                         <button className="col s12 btn green darken-2" onClick = {this.sendCardData}>Save</button>
-                        <CancelModal />
-                        {/* <button className="col s12 btn red darken-2" onClick = {this.showCancelModal}>Cancel</button> */}
-                        {/* { this.state.cancel ? <CancelModal/> : '' } */}
+                        <button className="col s12 btn red darken-2" onClick = {this.showModal}>Cancel</button>
                     
                 </div>
                 
