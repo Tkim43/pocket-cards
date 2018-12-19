@@ -4,10 +4,10 @@ class DeleteModal extends Component {
 
 
     render() {
-        const { hideModal, deleteItem } = this.props;
+        const {deleteItem, hideModal} = this.props;
 
         return (
-            <div className="basic-modal" onClick={ hideModal }>
+            <div className="basic-modal" onClick={hideModal}>
                 <div className="basic-modal-content">
                     <div onClick={ hideModal } className="basic-modal-close center">X</div>
                         <div>
@@ -15,7 +15,7 @@ class DeleteModal extends Component {
                                 <div className="row"> 
                                     <div className="input-field col s12">
                                         <p>Are you sure?</p>
-                                        <button onClick={ deleteItem }>Yes</button>
+                                        <button onClick={deleteItem}>Yes</button>
                                         <button onClick={ hideModal }>No</button>
                                     </div>  
                                 </div>
