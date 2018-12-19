@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest} from '../actions';
 import BasicModal from './modal';
+import DeleteModal from './deleteModal';
 import FindTimePassed from './findTimePassed';
 import defaultAvatar from '../assets/images/default_avatar.png';
 import { deleteCategory} from '../actions';
 
 class Profile extends Component {
+    state ={
+        show: false,
+        categoryID: null
+    }
 
     handleAlphabeticalClick = () => {
         this.props.sortAlphabetical ();
@@ -22,11 +27,23 @@ class Profile extends Component {
         this.props.sortByLatest ();
     }
 
-    delete = async (cardID) =>{
-        console.log("this is your props delete", this.props);
+    showModal = (categoryID) => {
+        this.setState({
+            show: true,
+            categoryID
+        })
+    }
+    hideModal=()=>{
+        this.setState({
+            show: false
+        })
+    }
+    delete = async () =>{
+        const { categoryID } = this.state;
         const userID = this.props.user.userID
-        await this.props.deleteCategory(cardID,userID);
+        await this.props.deleteCategory(categoryID,userID);
         this.updateCategoryList();
+        this.hideModal();
     }
     async updateCategoryList(){
         try{
@@ -38,6 +55,7 @@ class Profile extends Component {
     }
 
     render () { 
+        
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
         }
@@ -50,19 +68,22 @@ class Profile extends Component {
             // const ms = created - timeZoneOffset;
             // const diff = new Date().getTime() - ms;
             const diff = new Date().getTime() - created;
-
+            
             return (
                 <div className="row category-info" key = {item.ID}>
                     <FindTimePassed created={diff}/>
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
-                        <button className="red lighten-2 btn-large" onClick={() => this.delete(item.ID)}>
-                                <i className = "large material-icons">delete</i>
+                        <button className="red lighten-2 btn-large" onClick={() => {
+                            this.showModal(item.ID)
+                        }}>
+                            <i className = "large material-icons">delete</i>
                         </button>
                     </div>
                 </div>
             );
         } );
+        
 
         const profileUserInfo = this.props.user.displayName;
 
@@ -94,6 +115,7 @@ class Profile extends Component {
                 </div>
                 {profileCategories}
             </div>
+            { this.state.show ? <DeleteModal deleteItem={this.delete} /> : '' }
         </div>
         );
     }
