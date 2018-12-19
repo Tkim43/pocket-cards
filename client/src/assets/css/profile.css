@@ -54,7 +54,7 @@
 .sort-row {
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 10px;
+    padding: 10px;
 }
 
 .sort-button {
@@ -71,6 +71,10 @@
 
 .category-info {
     flex-direction: column;
+}
+
+.category-container {
+    margin: 0;
 }
 
 /* Getting the button to change color */

@@ -108,11 +108,10 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                <div className = "sort-row row">
-                    <div className="sort col s12 white-text">Sort: 
+                <div className = "white-text container sort-row row">
+                        <strong>Sort:</strong>
                         <button onClick = {this.handleSortByLatestClick} className = "btn-small soft-blue sort-button button-bold-text">Latest</button>
                         <button onClick = {this.handleAlphabeticalClick} className = "btn-small soft-blue sort-button button-bold-text">Alphabetical</button>
-                    </div>
                 </div>
                 <div className="row">
                 <div className="col s12 card-container create-category-bold-text">
