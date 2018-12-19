@@ -18,15 +18,14 @@ class Sets extends Component{
 
     delete = async ()=>{
         debugger;
-        console.log("these are your delete props", this.props)
-        const {deleteSubcategory} = this.props
-        await deleteSubcategory(this.props.match.params.topic_id, this.props.match.params.set_id);
-        
-        this.props.getSetsData(this.props.match.params.set_id);
         this.setState({
             delete: true
         })
-        // this.hideModal();
+        const {deleteSubcategory} = this.props
+        console.log("this is your topic ID and set ID", this.props)
+        await deleteSubcategory(this.props.topics[0].topicID, this.props.match.params.set_id);
+        this.props.getSetsData(this.props.match.params.set_id);
+        this.hideModal();
     }
 
     async updateSubcategoryList(){
@@ -49,6 +48,7 @@ class Sets extends Component{
         const {createSubcategory, match:{params}} = this.props
         createSubcategory(params.set_id, {subCategory: this.state.subCategory})
         this.updateSubcategoryList();
+        this.hideModal();
     }
 
     showModal = (event) =>{
@@ -108,8 +108,8 @@ class Sets extends Component{
                 <div key= {index} className="row set">
                     <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
                     <div className = "row">
-                    <button className="red lighten-2 btn-large">
-                        <i className = "large material-icons">delete</i>
+                    <button className="red lighten-2 btn-large" onClick={this.showModal}>
+                        <i className= "large material-icons">delete</i>
                     </button>
                     </div>
                 </div>
