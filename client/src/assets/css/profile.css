@@ -105,3 +105,24 @@
     font-size: 2rem;
     font-weight: bold;
 }
+
+.categoryDiv{
+    margin-left: 3%;
+}
+
+.category{
+    height:55px;
+}
+
+.delete-container{
+    position: relative;
+    top: 8px;
+    position: relative;
+    left: 5%;
+}
+
+.delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
