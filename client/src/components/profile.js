@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest} from '../actions';
 import BasicModal from './modal';
+import DeleteModal from './deleteModal';
 import FindTimePassed from './findTimePassed';
 import defaultAvatar from '../assets/images/default_avatar.png';
 import { deleteCategory} from '../actions';
 
 class Profile extends Component {
     state ={
-        show: false
+        show: false,
+        categoryID: null
     }
 
     handleAlphabeticalClick = () => {
@@ -25,9 +27,10 @@ class Profile extends Component {
         this.props.sortByLatest ();
     }
 
-    showModal=()=>{
+    showModal = (categoryID) => {
         this.setState({
-            show: true
+            show: true,
+            categoryID
         })
     }
     hideModal=()=>{
@@ -35,12 +38,12 @@ class Profile extends Component {
             show: false
         })
     }
-
-    delete = async (cardID) =>{
-        console.log("this is your props delete", this.props);
+    delete = async () =>{
+        const { categoryID } = this.state;
         const userID = this.props.user.userID
-        await this.props.deleteCategory(cardID,userID);
+        await this.props.deleteCategory(categoryID,userID);
         this.updateCategoryList();
+        this.hideModal();
     }
     async updateCategoryList(){
         try{
@@ -65,40 +68,22 @@ class Profile extends Component {
             // const ms = created - timeZoneOffset;
             // const diff = new Date().getTime() - ms;
             const diff = new Date().getTime() - created;
-
+            
             return (
                 <div className="row category-info" key = {item.ID}>
                     <FindTimePassed created={diff}/>
                     <div className="col s12 card-container">
                         <Link to = {`/sets/${item.ID}`} className = "card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
-                        <button className="red lighten-2 btn-large" onClick={this.showModal}>
-                                <i className = "large material-icons">delete</i>
+                        <button className="red lighten-2 btn-large" onClick={() => {
+                            this.showModal(item.ID)
+                        }}>
+                            <i className = "large material-icons">delete</i>
                         </button>
                     </div>
                 </div>
             );
         } );
-
-        if(this.state.show){
-            return (
-                <div className="basic-modal" onClick={this.hideModal}>
-                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
-                        <div onClick={this.hideModal} className="basic-modal-close center">X</div>
-                            <div>
-                                <form className="col s12">
-                                        <div className="row"> 
-                                            <div className="input-field col s12">
-                                                <p>Are you sure?</p>
-                                                <button onClick={() => this.delete(item.ID)}>Yes</button>
-                                                <button onClick={this.hideModal}>No</button>
-                                            </div>  
-                                        </div>
-                                </form>
-                            </div>
-                    </div>
-                </div>
-            )
-        }
+        
 
         const profileUserInfo = this.props.user.displayName;
 
@@ -130,6 +115,7 @@ class Profile extends Component {
                 </div>
                 {profileCategories}
             </div>
+            { this.state.show ? <DeleteModal deleteItem={this.delete} /> : '' }
         </div>
         );
     }

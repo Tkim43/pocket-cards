@@ -4,26 +4,29 @@ import { Link } from 'react-router-dom';
 import '../assets/css/sets.css'
 import { connect } from 'react-redux';
 import { getSetsData , deleteSubcategory, createSubcategory} from '../actions';
+import DeleteModal from './deleteModal';
 
 class Sets extends Component{
     state = {
         show: false,
-        delete: false
+        delete: false,
     };
     
     componentDidMount(){
         this.props.getSetsData(this.props.match.params.set_id);
     }
 
-    delete = async (topicID, setID)=>{
+    delete = async ()=>{
+        debugger;
+        console.log("these are your delete props", this.props)
         const {deleteSubcategory} = this.props
-        await deleteSubcategory(topicID, setID);
+        await deleteSubcategory(this.props.match.params.topic_id, this.props.match.params.set_id);
         
         this.props.getSetsData(this.props.match.params.set_id);
         this.setState({
             delete: true
         })
-        
+        // this.hideModal();
     }
 
     async updateSubcategoryList(){
@@ -45,7 +48,6 @@ class Sets extends Component{
         e.preventDefault();
         const {createSubcategory, match:{params}} = this.props
         createSubcategory(params.set_id, {subCategory: this.state.subCategory})
-        this.hideModal();
         this.updateSubcategoryList();
     }
 
@@ -63,7 +65,7 @@ class Sets extends Component{
         }
         this.setState({
             show: show,
-            delete: remove
+            delete: remove,
         });
     }
 
@@ -99,34 +101,14 @@ class Sets extends Component{
                 </div>
             )
         }
-        if(this.state.delete){
-            return (
-                <div className="basic-modal" onClick={this.hideModal}>
-                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
-                        <div onClick={this.hideModal} className="basic-modal-close center">X</div>
-                            <div>
-                                <form className="col s12">
-                                        <div className="row"> 
-                                            <div className="input-field col s12">
-                                                <p>Are you sure?</p>
-                                                <button onClick={() => this.delete(item.topicID, item.setID)}>Yes</button>
-                                                <button onClick={this.hideModal}>No</button>
-                                            </div>  
-                                        </div>
-                                </form>
-                            </div>
-                    </div>
-                </div>
-            )
-        }
+        
         const { category } = this.props;
         const userSubCategories = this.props.topics.map ((item, index) => {
-            
             return(
                 <div key= {index} className="row set">
                     <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
                     <div className = "row">
-                    <button className="red lighten-2 btn-large" onClick ={this.showModal}>
+                    <button className="red lighten-2 btn-large">
                         <i className = "large material-icons">delete</i>
                     </button>
                     </div>
@@ -146,6 +128,7 @@ class Sets extends Component{
                         <Link to="/profile" className="btn yellow darken-2 wide-btn">Home</Link>
                     </div>
                 </div>
+                { this.state.delete ? <DeleteModal deleteItem={this.delete} /> : '' }
             </div>
         );
     }
