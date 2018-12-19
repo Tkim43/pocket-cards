@@ -121,7 +121,7 @@ class Profile extends Component {
                 </div>
                 {profileCategories}
             </div>
-            { this.state.show ? <DeleteModal deleteItem={this.delete} /> : '' }
+            { this.state.show ? <DeleteModal hideModal={this.hideModal }deleteItem={this.delete} /> : '' }
         </div>
         );
     }
