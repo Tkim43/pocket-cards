@@ -37,9 +37,9 @@ class Signup extends Component {
         return (
             <div className = "container">
                 <h1>Sign Up</h1>
+                <h5 className = "white-text">Please Select Your Desired Avatar</h5>
                 <AvatarImages
                     avatars = {[
-                        {value: 'Select an avatar', id: 0},
                         {value: 'crab', id: 1},
                         {value: 'crocodile', id: 2},
                         {value: 'fish', id: 3},
