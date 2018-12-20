@@ -10,7 +10,6 @@ const { jwtConfig } = require('../config');
 
 const localOptions = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOptions, async function (email, password, done) {
-
     try {
         let query = 'SELECT * FROM users WHERE ?? = ? LIMIT 1';
         let inserts = ['email', email];

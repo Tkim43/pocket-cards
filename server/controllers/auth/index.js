@@ -6,7 +6,6 @@ const { jwtConfig } = require('../../config');
 
 exports.signIn = (req, res) => {
     const { user } = req;
-
     res.send({
         success: true,
         token: tokenForUser(user),
@@ -70,7 +69,7 @@ exports.signUp = async (req, res) => {
         }
 
         const user = {
-            id: insertId,
+            ID: insertId,
             email,
             displayName
         }
@@ -100,6 +99,7 @@ function tokenForUser(user) {
 
 function userDataToSend(user) {
     return {
+        userID: user.ID,
         avatar: user.avatar || null,
         displayName: user.displayName,
         email: user.email,

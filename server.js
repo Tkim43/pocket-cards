@@ -325,12 +325,13 @@ app.post('/api/set_management/delete_user', (req, res, next)=>{
 
 // delete category, subCategories, and all cards (DONE)
 app.delete('/api/set_management/ID/:ID/userID/:userID', (req, res, next)=>{
-    const { ID, userID } = req.body;
-    
+    const { ID, userID } = req.params;
+
     let query = 'DELETE FROM ?? WHERE ??.??=? AND ??.??=?';
     let inserts = ['sets','sets','ID',Number(ID),'sets','userID',Number(userID)];
 
     let sql = mysql.format(query, inserts);
+    console.log("the sql", sql);
 
     const output = {
         success: true

@@ -3,7 +3,7 @@ import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTopicsCards } from '../actions';
-import { deleteCard } from '../actions';
+import { deleteCard} from '../actions';
 
 class FlashcardGeneration extends Component {
     componentDidMount(){
@@ -19,7 +19,7 @@ class FlashcardGeneration extends Component {
         try{
             const { getTopicsCards, match: { params } } = this.props;
 
-            getTopicsCards(params.set_id, params.topic_id);
+            await getTopicsCards(params.set_id, params.topic_id);
         }catch(err){
             console.log("error getting list data")
         }
@@ -31,11 +31,11 @@ class FlashcardGeneration extends Component {
             let frontText = item.frontText;
             let backText = item.backText;
 
-            if(frontText.length > 20){
-                frontText = item.frontText.substring(0,20) + "...";
+            if(frontText.length > 80){
+                frontText = item.frontText.substring(0,80) + "...";
             }
-            if(backText.length > 20){
-                backText = item.backText.substring(0,20) + "...";
+            if(backText.length > 80){
+                backText = item.backText.substring(0,80) + "...";
             }
 
             const path = `/editMode/${params.set_id}/topic/${params.topic_id}/card/${item.ID}`;

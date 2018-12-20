@@ -18,7 +18,6 @@ class ButtonModal extends Component {
         });
     }
 
-
     updateCategory = event =>{
         this.setState({
             category: event.currentTarget.value

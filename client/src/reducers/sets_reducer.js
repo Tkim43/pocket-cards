@@ -31,11 +31,13 @@ import types from '../actions/types';
         case types.SEND_CARD_DATA:
             return{...state, front_description: '',back_description: ''}
         case types.GET_SETS_DATA:
-            return {...state, category: action.sets[0].category, topics: action.sets};
+            return {...state, category: action.sets.length ? action.sets[0].category : '', topics: action.sets};
         case types.SORT_ALPHABETICAL:
             return {...state, categories: action.payload };
         case types.SORT_BY_LATEST:
             return {...state, categories: action.payload };
+        case types.SIGN_OUT:
+            return { ...DEFAULT_STATE };
         default:
             return state;
     }

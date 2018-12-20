@@ -12,13 +12,26 @@
 }
 
 .profile-pic{
-    height: 100px;
-    width: 100px;
+    height: 100%;
+    width: 80%;
+}
+
+.profile-section-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-section-title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .avatar-text {
     font-size: 2em;
     align-items: center;
+    color:white;
 }
 
 .avatar-box {
@@ -41,7 +54,7 @@
 .sort-row {
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 10px;
+    padding: 10px;
 }
 
 .sort-button {
@@ -58,6 +71,10 @@
 
 .category-info {
     flex-direction: column;
+}
+
+.category-container {
+    margin: 0;
 }
 
 /* Getting the button to change color */
@@ -91,4 +108,24 @@
 .create-category-bold-text {
     font-size: 2rem;
     font-weight: bold;
+}
+
+.categoryDiv{
+    margin-left: 3%;
+}
+
+.category{
+    height:55px;
+}
+
+.delete-container{
+    position: relative;
+    top: 8px;
+    left: 5%;
+}
+
+.delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

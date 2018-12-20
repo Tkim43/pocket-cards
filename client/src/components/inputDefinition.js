@@ -18,11 +18,25 @@ class InputDefinition extends Component {
         getTopicsCards(params.set_id, params.topic_id);
     }
 
+    // renderInput (props) {
+    //     return (
+    //         <div className= {`input-field col ${props.size}`}>
+    //             <input {...props.input} type= {props.type || "text"} id = {props.input.name} autoComplete = "off"/>
+    //             <label htmlFor= {props.input.name} >{props.label}</label>
+    //         </div>
+    //     );
+    // }
+
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type= {props.type || "text"} id = {props.input.name} autoComplete = "off"/>
+                <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
+                <ul>
+                    {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
+                        return <li key = {index} className="red-text">{item}</li>
+                    })}
+                </ul>
             </div>
         );
     }
@@ -44,10 +58,16 @@ class InputDefinition extends Component {
 
         if(cards && cards.length){
             cardElements = cards.map((card, i) => {
+                if(card.frontText.length > 80){
+                    card.frontText = card.frontText.substring(0,60) + "...";
+                }
+                if(card.backText.length > 80){
+                    card.backText = card.backText.substring(0,60) + "...";
+                }
                 return (
                     <div className="row center grey-text" key={i}>
-                        <div className="col s6">{card.frontText.substring(0,20) + "..."}</div>
-                        <div className="col s6">{card.backText.substring(0,20) + "..."}</div>
+                        <div className="col s6">{card.frontText}</div>
+                        <div className="col s6">{card.backText}</div>
                     </div>
                 );
             });
@@ -92,6 +112,23 @@ class InputDefinition extends Component {
     }
 }
 
+function validate (formValues) {
+    const error = {};
+
+    console.log("THESE ARE THE FORM VALUES: ", formValues);
+
+    if(!formValues.frontText){
+        error.frontText = ['Please input a term'];
+    }
+
+    if(!formValues.backText){
+        error.backText = ['Please input a definition'];
+    }
+
+    return error;
+
+}
+
 
 function mapStateToProps(state){
     const { sets } = state;
@@ -104,6 +141,7 @@ function mapStateToProps(state){
 
 InputDefinition = reduxForm ({
     form: "input-defintion",
+    validate: validate
 })(InputDefinition);
 
 export default connect(mapStateToProps,{
