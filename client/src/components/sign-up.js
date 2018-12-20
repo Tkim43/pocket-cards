@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { userSignUp } from '../actions';
+import AvatarImages from './avatarList';
+import crab_img from '../assets/images/avatarImages/crab.png';
+import crocodile_img from '../assets/images/avatarImages/crocodile.png';
+import fish_img from '../assets/images/avatarImages/fish.png';
+import frog_img from '../assets/images/avatarImages/frog.png';
+import rabbit_img from '../assets/images/avatarImages/rabbit.png';
+import reindeer_img from '../assets/images/avatarImages/reindeer.png';
+import turtle_img from '../assets/images/avatarImages/turtle.png';
 
 
 class Signup extends Component {
@@ -29,6 +37,18 @@ class Signup extends Component {
         return (
             <div className = "container">
                 <h1>Sign Up</h1>
+                <AvatarImages
+                    avatars = {[
+                        {value: 'Select an avatar', id: 0},
+                        {value: 'crab', id: 1},
+                        {value: 'crocodile', id: 2},
+                        {value: 'fish', id: 3},
+                        {value: 'frog', id: 4},
+                        {value: 'rabbit', id: 5},
+                        {value: 'reindeer', id: 6},
+                        {value: 'turtle', id: 7},
+                    ]}
+                />
                 <form onSubmit = {handleSubmit(this.handleSignUp)}>
                     <div className="row">
                         <Field size = "s12" name = "displayName" label = "Username" component = {this.renderInput}/>
