@@ -3,14 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { userSignUp } from '../actions';
 import AvatarImages from './avatarList';
-import crab_img from '../assets/images/avatarImages/crab.png';
-import crocodile_img from '../assets/images/avatarImages/crocodile.png';
-import fish_img from '../assets/images/avatarImages/fish.png';
-import frog_img from '../assets/images/avatarImages/frog.png';
-import rabbit_img from '../assets/images/avatarImages/rabbit.png';
-import reindeer_img from '../assets/images/avatarImages/reindeer.png';
-import turtle_img from '../assets/images/avatarImages/turtle.png';
-
 
 class Signup extends Component {
     renderInput (props) {
@@ -33,6 +25,7 @@ class Signup extends Component {
 
     render () {
         const { handleSubmit} = this.props;
+        console.log("THIS IS PROPS: ", this.props);
 
         return (
             <div className = "container">
@@ -135,6 +128,7 @@ Signup = reduxForm ({
 })(Signup);
 
 function mapStateToProps (state){
+    console.log("this is the state: ", state);
     return {
         signUpError: state.user.signUpError
     }
