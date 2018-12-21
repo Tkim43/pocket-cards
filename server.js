@@ -268,6 +268,93 @@ app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) =>
     }
 }, errorHandling);
 
+//update displayName (DONE)
+
+app.patch('/api/update_displayname/:ID', async (req, res, next)=>{
+    const {displayName} = req.body;
+    const {ID} =req.params;
+
+    try {
+    
+        let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+        let inserts = ['users', 'displayName', displayName, 'ID', Number(ID)];
+
+        let sql = mysql.format(query, inserts);
+
+        const dName = await db.query(sql);
+
+        res.send({
+            success: true,
+            message: 'Display Name updated'
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error updating Display Name';
+
+        return next();
+    }
+}, errorHandling);
+
+//update Categories (DONE)
+
+app.patch('/api/update_category/:ID', async (req, res, next)=>{
+    const {category} = req.body;
+    const {ID} =req.params;
+
+    try {
+    
+        let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+        let inserts = ['sets', 'category', category, 'ID', Number(ID)];
+
+        let sql = mysql.format(query, inserts);
+
+        const cat = await db.query(sql);
+
+        res.send({
+            success: true,
+            message: 'Categories updated'
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error updating Categories';
+
+        return next();
+    }
+}, errorHandling);
+
+//update subCategories (DONE)
+
+app.patch('/api/update_subCategory/:ID', async (req, res, next)=>{
+    const {subCategory} = req.body;
+    const {ID} =req.params;
+
+    try {
+    
+        let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+        let inserts = ['topics', 'subCategory', subCategory, 'ID', Number(ID)];
+
+        let sql = mysql.format(query, inserts);
+
+        const subCat = await db.query(sql);
+
+        res.send({
+            success: true,
+            message: 'Subcategory updated'
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error updating subcategory';
+
+        return next();
+    }
+}, errorHandling);
+
 //update front and back of card (DONE)
 app.patch('/api/update_card/:ID', async (req, res, next)=>{
     const {frontText, backText } = req.body;
@@ -295,7 +382,6 @@ app.patch('/api/update_card/:ID', async (req, res, next)=>{
         return next();
     }
 }, errorHandling);
-
 
 //delete displayName, subCategories, and all cards (DONE)
 app.post('/api/set_management/delete_user', (req, res, next)=>{
