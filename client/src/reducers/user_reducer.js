@@ -12,6 +12,9 @@ export default (state = DEFAULT_STATE, action) => {
         case types.SIGN_IN:
         case types.SIGN_UP:
             return { ...DEFAULT_STATE, auth: true, info: action.user || {} };
+        case types.SEND_AVATAR:
+            console.log('this is the action: ',action);
+            return { ...state }
         case types.SIGN_IN_ERROR:
             return { ...DEFAULT_STATE, signInError: action.error };
         case types.SIGN_UP_ERROR:
