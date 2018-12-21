@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { userSignUp } from '../actions';
+import AvatarImages from './avatarList';
 
 class Signup extends Component {
     state = {
@@ -85,7 +86,6 @@ class Signup extends Component {
                         }
                         </div>
                     </div>
-                    <input type="hidden" name={this.state.name} value={this.state.selectedItem.value} />
                 </div>
 
 
