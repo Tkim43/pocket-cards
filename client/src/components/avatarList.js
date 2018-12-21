@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import '../assets/css/dropdown.css'
+import '../assets/css/dropdown.css';
+import { sendAvatar } from '../actions';
+import { connect } from 'react-redux';
 
 class AvatarImages extends Component {
   state = {
@@ -19,9 +21,16 @@ class AvatarImages extends Component {
       selectedItem: item,
       showItems: false,
     })
+    this.props.sendAvatar(item);
   }
 
+  // onAvatarClick = async (values) => {
+  //   debugger;
+  //   this.props.sendAvatar(values);
+  // }
+
   render() {
+    console.log("THIS IS THE AVATAR STATE: ", this.state);
     return <div>
       <div className="select-box--box">
         <div className="select-box--container">
@@ -48,9 +57,30 @@ class AvatarImages extends Component {
           }
         </div>
       </div>
-      <input type="hidden" name={this.state.name} value={this.state.selectedItem.id} />
+      <input type="hidden" name={this.state.name} value={this.state.selectedItem.value} />
     </div>
   }
 }
 
-export default AvatarImages
+function mapStateToProps (state){
+  debugger;
+  console.log("MAP STATE TO PROPS STATE: ", state);
+  return {
+      avatar: state.info
+  }
+}
+
+export default connect (mapStateToProps, {
+  sendAvatar: sendAvatar
+})(AvatarImages);
+
+// export default connect(
+//   (state) => ({ 
+//     avatar: state.selectedItem.value,
+//   }),
+//   {
+//     sendAvatar: sendAvatar,
+//   }
+// )(AvatarImages);
+
+// export default AvatarImages;

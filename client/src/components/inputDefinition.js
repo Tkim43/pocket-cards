@@ -42,6 +42,7 @@ class InputDefinition extends Component {
     }
 
     handleAddDefinition = async (values) => {
+        console.log("this.props: ", this.props);
         const { match: { params }, reset, sendCreateCardData } = this.props;
         
         await sendCreateCardData(params.topic_id, values);

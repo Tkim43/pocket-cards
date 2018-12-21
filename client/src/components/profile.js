@@ -127,7 +127,7 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state){
-    // console.log("this is the profile state: ", state);
+    console.log("this is the profile state: ", state.user.info);
     return {
         sets: state.sets.categories,
         user: state.user.info
