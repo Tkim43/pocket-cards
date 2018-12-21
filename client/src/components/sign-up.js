@@ -47,15 +47,12 @@ class Signup extends Component {
     }
 
     handleSignUp = (values) => {
-        debugger;
         values.avatar = this.state.selectedItem.value;
         this.props.userSignUp(values);
     }
 
     render () {
-        console.log("THIS IS THE SIGNUP PROPS: ", this.props);
         const { handleSubmit} = this.props;
-        console.log("THIS IS THE signup STATE: ", this.state);
 
         return (
             <div className = "container">
