@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { userSignUp } from '../actions';
 import '../assets/css/dropdown.css';
-import { sendAvatar } from '../actions';
 
 class Signup extends Component {
     state = {

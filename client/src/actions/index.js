@@ -47,10 +47,6 @@ export function userSignOut(){
     }
 }
 
-// export function getProfileData () {
-//     const resp = axios.get('/api/userhome', authHeaders());
-// }
-
 export async function sortAlphabetical () {
     const resp = await axios.get('/api/userhome', authHeaders());
 
@@ -140,7 +136,6 @@ export function getTopicsCards(setId, topicId){
 export function userSignUp(newUser){
     return async function (dispatch){
         try {
-            // console.log("this is the user ",user);
             const { data: { token, user } } = await axios.post('/auth/sign-up', newUser);
 
             localStorage.setItem('token', token);
@@ -266,11 +261,3 @@ export function createSubcategory(setID, subCategory){
         }
     }
 }
-
-// export function sendAvatar (avatarName) {
-//     return async function (dispatch) {
-//         try {
-//             // const resp = await axios.post()
-//         }
-//     }
-// }
