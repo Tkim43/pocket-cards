@@ -91,7 +91,6 @@ export async function sortByLatest () {
 export function sendAvatar (avatar){
     return async function (dispatch){
         try {
-            debugger;
             console.log("This is the data from sendAvatar: ", data);
             const { data: { user: {userAvatar} } } = await axios.post('/auth/sign-up', avatar);
             dispatch({

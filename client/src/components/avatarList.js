@@ -73,14 +73,3 @@ function mapStateToProps (state){
 export default connect (mapStateToProps, {
   sendAvatar: sendAvatar
 })(AvatarImages);
-
-// export default connect(
-//   (state) => ({ 
-//     avatar: state.selectedItem.value,
-//   }),
-//   {
-//     sendAvatar: sendAvatar,
-//   }
-// )(AvatarImages);
-
-// export default AvatarImages;

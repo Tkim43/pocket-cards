@@ -93,6 +93,7 @@ class Profile extends Component {
         console.log("this is the props from user: ", this.props.user);
         const profileUserInfo = this.props.user.displayName;
 
+        debugger;
         const profileUserAvatar = this.props.user.avatar || defaultAvatar;
 
         return (

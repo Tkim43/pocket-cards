@@ -112,10 +112,11 @@ function tokenForUser(user) {
 }
 
 function userDataToSend(user) {
+    debugger;
     return {
         userID: user.ID,
         // avatar: user.avatar || null,
-        avatar: user.userAvatar || null,
+        avatar: user.avatar || null,
         displayName: user.displayName,
         email: user.email,
     }
