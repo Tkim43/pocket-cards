@@ -85,7 +85,7 @@ exports.signUp = async (req, res) => {
             ID: insertId,
             email,
             displayName,
-            userAvatar
+            avatar: userAvatar
         }
 
         res.send({
