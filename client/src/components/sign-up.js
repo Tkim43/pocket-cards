@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { userSignUp } from '../actions';
-import AvatarImages from './avatarList';
+import '../assets/css/dropdown.css';
 
 class Signup extends Component {
     state = {

@@ -85,7 +85,7 @@ exports.signUp = async (req, res) => {
             ID: insertId,
             email,
             displayName,
-            userAvatar
+            avatar: userAvatar
         }
 
         res.send({
@@ -114,8 +114,7 @@ function tokenForUser(user) {
 function userDataToSend(user) {
     return {
         userID: user.ID,
-        // avatar: user.avatar || null,
-        avatar: user.userAvatar || null,
+        avatar: user.avatar || null,
         displayName: user.displayName,
         email: user.email,
     }

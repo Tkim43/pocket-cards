@@ -90,9 +90,7 @@ class Profile extends Component {
             );
         } );
         
-        console.log("this is the props from user: ", this.props.user);
         const profileUserInfo = this.props.user.displayName;
-
         const profileUserAvatar = this.props.user.avatar || defaultAvatar;
 
         return (
@@ -127,7 +125,6 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state){
-    console.log("this is the profile state: ", state.user.info);
     return {
         sets: state.sets.categories,
         user: state.user.info
