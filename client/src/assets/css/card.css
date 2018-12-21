@@ -72,8 +72,7 @@
 }
 
 .numeric{
-    color: #616161;
-    position: absolute;
-    left: 5%;
-    top: 1%;
+    color:white;
+    text-align:center;
+    margin: 0 auto;
 }

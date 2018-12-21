@@ -45,12 +45,14 @@ class displayCard extends Component{
                 <div className="row">
                     <h4 style={{ textTransform: 'capitalize' }} className="center grey-text text-lighten-1">{card.subCategory}</h4>
                 </div>
+                <p className="numeric">1/2</p>
+
                 {/* <div className="row">
                     <h3 className = "white-text">{flipped ? "Front of Card" : "Back of Card"}</h3>
                 </div> */}
                 <div className={"cardBox flow-text center cardflip " + (flipped ? "" : "flipped")}>
-                    <p id ="cardFont" className="front flow-text"><span className="numeric">1a</span>{card.frontText}</p>
-                    <p id ="cardFont" className="back flow-text"><span className="numeric">1b</span>{isLoading ? '' : card.backText}</p>
+                    <p id ="cardFont" className="front flow-text">{card.frontText}</p>
+                    <p id ="cardFont" className="back flow-text">{isLoading ? '' : card.backText}</p>
                 </div>
                 <div className="row col s12">
                     <i className="nav-btn large material-icons white-text" onClick={() => this.nextPrevCard('previous')}>arrow_back</i>
