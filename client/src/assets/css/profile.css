@@ -115,12 +115,13 @@
 }
 
 .category{
-    height:55px;
+    height:6rem;
 }
 
 .delete-container{
+    display:inline;
     position: relative;
-    top: 8px;
+    top: 1.5rem;
     left: 5%;
 }
 

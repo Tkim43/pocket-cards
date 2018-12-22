@@ -196,21 +196,40 @@ app.get('/api/topic/:topicId/card/:cardId', async (req, res, next) => {
     const { topicId, cardId } = req.params; 
 
     try {
-        let cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?';
-        let cardInserts = ['cards', 'topics', 'cards.ID', cardId, 'topicID', topicId];
-        
-        if(cardId === '0' || isNaN(cardId)){
-            cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? ORDER BY cards.created';
-            cardInserts = ['cards', 'topics', 'topicID', topicId];
-        }
+        // let cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?';
+        // let cardInserts = ['cards', 'topics', 'cards.ID', cardId, 'topicID', topicId];
+
+        let cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? ORDER BY cards.created';
+        let cardInserts = ['cards', 'topics', 'topicID', topicId];
 
         const cardSql = mysql.format(cardQuery, cardInserts);
 
-        const [card] = await db.query(cardSql);
+        const cards = await db.query(cardSql);
+
+        const count = cards.length;
+        let card = {};
+        let location = '';
+
+        console.log('CARD ID:', typeof cardId);
+        console.log('Cards:', cards);
+        
+        if(cardId === '0' || isNaN(cardId)){
+            card = cards[0];
+            location = `1/${count}`;
+        } else {
+            for(let i = 0; i < count; i++){
+                if(cards[i].ID == cardId){
+                    card = cards[i];
+                    location = `${i + 1}/${count}`;
+                    break;
+                }
+            }
+        }
 
         res.send({
             success: true,
-            card: card || {}
+            card: card || {},
+            location
         });
     } catch(err){
         req.status = 500;
@@ -233,6 +252,7 @@ app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) =>
         const cards = await db.query(cardsSql);
 
         let card = {};
+        let location = '';
         
         const count = cards.length;
 
@@ -241,15 +261,19 @@ app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) =>
                 if(direction === 'previous'){
                     if(i === 0){
                         card = cards[count - 1];
+                        location = `${count}/${count}`;
                     } else {
                         card = cards[i - 1];
+                        location = `${i}/${count}`;
                     }
                     break;
                 } else {
                     if(i === count - 1){
                         card = cards[0];
+                        location = `1/${count}`;
                     } else {
                         card = cards[i + 1];
+                        location = `${i + 2}/${count}`;
                     }
                     break;
                 }
@@ -258,7 +282,8 @@ app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) =>
 
         res.send({
             success: true,
-            card: card || {}
+            card: card || {},
+            location
         });
     } catch (err) {
         req.status = 500;
