@@ -40,7 +40,6 @@ class displayCard extends Component{
     render(){
         const {card, match: { params: {set_id, topic_id} } } = this.props;
         const { isLoading, flipped } = this.state;
-        
         const location = this.props.location;
 
         return(

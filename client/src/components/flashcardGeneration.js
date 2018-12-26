@@ -25,6 +25,7 @@ class FlashcardGeneration extends Component {
         }
     }
     render () {
+        console.log("these are your props", this.props);
         const { cardCount, cards, match: { params }, topic } = this.props;
 
         const listCards = cards.map((item,ID) =>{
