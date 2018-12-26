@@ -11,8 +11,10 @@ function authHeaders(){
 
 export const getNextOrPrevCard = (direction = 'next', topicId, currentCardId) => async dispatch => {
     try {
-        const { data: { card } } = await axios.get(`/api/topic/${topicId}/card/${currentCardId}/${direction}`);
+        const { data: { card, location } } = await axios.get(`/api/topic/${topicId}/card/${currentCardId}/${direction}`);
 
+        console.log('Card:', card);
+        console.log('Location:', location);
         dispatch({
             type: types.GET_CARD_DATA,
             card
@@ -25,11 +27,14 @@ export const getNextOrPrevCard = (direction = 'next', topicId, currentCardId) =>
 
 export const getCardData = (topicId, cardId) => async dispatch => {
     try {
-        const { data: { card } } = await axios.get(`/api/topic/${topicId}/card/${cardId}`);
+        const { data: { card, location } } = await axios.get(`/api/topic/${topicId}/card/${cardId}`);
 
-        dispatch({
+        console.log('Card:', card);
+        console.log('Location:', location);
+
+        dispatch({ 
             type: types.GET_CARD_DATA,
-            card
+            card,location
         });
         return card.ID;
     } catch(err){
