@@ -1,10 +1,11 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import '../assets/css/sets.css'
 import { connect } from 'react-redux';
 import { getSetsData , deleteSubcategory, createSubcategory} from '../actions';
 import DeleteModal from './deleteModal';
+import { getTopicsCards } from '../actions';
 
 class Sets extends Component{
     state = {
@@ -15,9 +16,7 @@ class Sets extends Component{
     componentDidMount(){
         this.props.getSetsData(this.props.match.params.set_id);
     }
-
     delete = async ()=>{
-        debugger;
         this.setState({
             delete: true
         })
@@ -102,7 +101,7 @@ class Sets extends Component{
             )
         }
         
-        const { category } = this.props;
+        const { category} = this.props;
         const userSubCategories = this.props.topics.map ((item, index) => {
             return(
                 <div key= {index} className="row set">
@@ -111,6 +110,7 @@ class Sets extends Component{
                     <button className="red lighten-2 btn-large" onClick={this.showModal}>
                         <i className= "large material-icons">delete</i>
                     </button>
+                    <div className="white-text">{`${this.props.topics[index].cardCount} terms`}</div>
                     </div>
                 </div>
             );  
@@ -118,7 +118,7 @@ class Sets extends Component{
 
         return(
             <div className="center set-container">
-                <h3 className="white-text">{category}</h3>
+                <h3 className="white-text">Category: {category}</h3>
                 <div className="col s12">
                     {userSubCategories}
                 </div>
@@ -137,14 +137,14 @@ class Sets extends Component{
 function mapStateToProps(state){
     return{
         category: state.sets.category,
-        topics: state.sets.topics
-        
+        topics: state.sets.topics,
+        cards: state.sets
     }
 }
 
 export default connect(mapStateToProps, {
     getSetsData,
     deleteSubcategory,
-    createSubcategory
+    createSubcategory,
 })(Sets);
 

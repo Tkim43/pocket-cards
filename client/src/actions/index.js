@@ -94,6 +94,8 @@ export function getSetsData (id){
         try {
             const { data: { sets = [] } } = await axios.get(`/api/set_management/${id}`, authHeaders());
 
+            console.log('SETS:', sets);
+
             dispatch({
                 type: types.GET_SETS_DATA,
                 sets

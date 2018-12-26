@@ -39,6 +39,7 @@ class displayCard extends Component{
     render(){
         const {card, match: { params: {set_id, topic_id} } } = this.props;
         const { isLoading, flipped } = this.state;
+        console.log("this is your props", this.props);
 
         return(
             <div className="container">

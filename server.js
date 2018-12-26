@@ -62,9 +62,21 @@ app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
 
         const sets = await db.query(sql);
 
+        const setsWithCardCount = await Promise.all(sets.map( async (set, i) => {
+            const query = 'SELECT COUNT(`ID`) AS `count` FROM `cards` WHERE topicID=?';
+            const inserts = [set.topicID];
+            const sql = mysql.format(query, inserts);
+
+            const [card] = await db.query(sql);
+
+            set.cardCount = card.count;
+
+            return set;
+        }));
+
         res.send({
             success: true,
-            sets
+            sets: setsWithCardCount
         });
     } catch(err){
         req.status = 500;
