@@ -32,9 +32,9 @@ export const getCardData = (topicId, cardId) => async dispatch => {
         console.log('Card:', card);
         console.log('Location:', location);
 
-        dispatch({
+        dispatch({ 
             type: types.GET_CARD_DATA,
-            card
+            card,location
         });
         return card.ID;
     } catch(err){

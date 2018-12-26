@@ -15,6 +15,7 @@ class displayCard extends Component{
         const cardId = await getCardData(params.topic_id, params.card_id);
 
         history.push(`/displayCard/${params.set_id}/topic/${params.topic_id}/card/${cardId}`);
+        
     }
 
     async nextPrevCard(direction){
@@ -39,13 +40,15 @@ class displayCard extends Component{
     render(){
         const {card, match: { params: {set_id, topic_id} } } = this.props;
         const { isLoading, flipped } = this.state;
+        
+        const location = this.props.location;
 
         return(
             <div className="container">
                 <div className="row">
                     <h4 style={{ textTransform: 'capitalize' }} className="center grey-text text-lighten-1">{card.subCategory}</h4>
                 </div>
-                <p className="numeric">1/2</p>
+                <p className="numeric">{location}</p>
 
                 {/* <div className="row">
                     <h3 className = "white-text">{flipped ? "Front of Card" : "Back of Card"}</h3>
@@ -69,9 +72,11 @@ class displayCard extends Component{
 }
 
 function mapStateToProps(state){
+    console.log(state);
     const { sets } = state;
     return {
-        card: sets.singleCard
+        card: sets.singleCard,
+        location:sets.location
     }
 }
 
