@@ -69,6 +69,7 @@ class Sets extends Component{
     }
 
     hideModal = () =>{
+        console.log("called hide modal")
         this.setState({
             show: false,
             delete: false
@@ -128,7 +129,7 @@ class Sets extends Component{
                         <Link to="/profile" className="btn yellow darken-2 wide-btn">Home</Link>
                     </div>
                 </div>
-                { this.state.delete ? <DeleteModal deleteItem={this.delete} /> : '' }
+                { this.state.delete ? <DeleteModal hideModal={this.hideModal }deleteItem={this.delete} /> : '' }
             </div>
         );
     }
