@@ -4,6 +4,17 @@ const db = require('../../db');
 const bcrypt = require('../../services/bcrypt');
 const { jwtConfig } = require('../../config');
 
+
+const avatars = {
+    'crab': '/avatars/crab.png',
+    'crocodile': '/avatars/crocodile.png',
+    'fish': '/avatars/fish.png',
+    'frog': '/avatars/frog.png',
+    'rabbit': '/avatars/rabbit.png',
+    'reindeer': '/avatars/reindeer.png',
+    'turtle': '/avatars/turtle.png'
+}
+
 exports.signIn = (req, res) => {
     const { user } = req;
     res.send({
@@ -14,7 +25,7 @@ exports.signIn = (req, res) => {
 }
 
 exports.signUp = async (req, res) => {
-    const { displayName, email, password } = req.body;
+    const { displayName, email, password, avatar } = req.body;
 
     try {
         const errors = [];
@@ -57,8 +68,10 @@ exports.signUp = async (req, res) => {
 
         const hash = await hashPassword(password);
 
-        const queryInsertUser = 'INSERT INTO users (??, ??, ??) VALUES (?, ?, ?)';
-        const insertsInsertUser = ['displayName', 'email', 'password', displayName, email, hash];
+        const userAvatar = avatars[avatar] || avatars['crab'];
+
+        const queryInsertUser = 'INSERT INTO users (??, ??, ??, ??) VALUES (?, ?, ?, ?)';
+        const insertsInsertUser = ['displayName', 'email', 'password', 'avatar', displayName, email, hash, userAvatar];
 
         const sqlInsertUser = mysql.format(queryInsertUser, insertsInsertUser);
 
@@ -71,7 +84,8 @@ exports.signUp = async (req, res) => {
         const user = {
             ID: insertId,
             email,
-            displayName
+            displayName,
+            avatar: userAvatar
         }
 
         res.send({

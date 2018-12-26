@@ -2,9 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { userSignUp } from '../actions';
-
+import '../assets/css/dropdown.css';
 
 class Signup extends Component {
+    state = {
+        avatars: [
+            {value: 'crab', id: 0},
+            {value: 'crocodile', id: 1},
+            {value: 'fish', id: 2},
+            {value: 'frog', id: 3},
+            {value: 'rabbit', id: 4},
+            {value: 'reindeer', id: 5},
+            {value: 'turtle', id: 6},
+        ],
+        showItems: false,
+        selectedItem: ""
+      }
+    
+    dropDown = () => {
+        this.setState(prevState => ({
+            showItems: !prevState.showItems
+        }))
+    }
+
+    selectItem = (item) => {
+        this.setState({
+            selectedItem: item,
+            showItems: false,
+        })
+    }
+
+
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
@@ -20,6 +48,7 @@ class Signup extends Component {
     }
 
     handleSignUp = (values) => {
+        values.avatar = this.state.selectedItem.value;
         this.props.userSignUp(values);
     }
 
@@ -29,6 +58,37 @@ class Signup extends Component {
         return (
             <div className = "container">
                 <h1>Sign Up</h1>
+                <h5 className = "white-text">Please Select An Avatar</h5>
+
+                <div>
+                    <div className="select-box--box">
+                        <div className="select-box--container">
+                            <div className="select-box--selected-item">
+                                { this.state.selectedItem.value }
+                            </div>
+                            <div
+                                className="select-box--arrow"
+                                onClick={this.dropDown}
+                            ><div className={`${this.state.showItems ? 'select-box--arrow-up' : 'select-box--arrow-down'}`}/></div>
+                        </div>
+                        <div
+                            className="select-box--items"
+                            style={{display: this.state.showItems ? 'block' : 'none'}}
+                        >
+                            {
+                                this.state.avatars.map(item => <div
+                                    key={item.id}
+                                    onClick={() => this.selectItem(item)}
+                                    className={this.state.selectedItem === item ? 'selected' : ''}
+                            >
+                                { item.value }
+                            </div>)
+                        }
+                        </div>
+                    </div>
+                </div>
+
+
                 <form onSubmit = {handleSubmit(this.handleSignUp)}>
                     <div className="row">
                         <Field size = "s12" name = "displayName" label = "Username" component = {this.renderInput}/>
@@ -72,7 +132,7 @@ function validate (formValues) {
 }
 
 function checkIfValidEmail(email){
-    const regex = /^(\S)*[@]{1}(\w)+[.]{1}(\w)+$/g;
+    const regex = /^(\w)*[@]{1}(\w)+[.]{1}(\w)+$/g;
     const testEmail = regex.test(email);
 
     if(testEmail){
@@ -101,7 +161,7 @@ function checkIfPasswordHasANum (password = "", error){
 }
 
 function checkIfPasswordIsLongEnough (password = "", error){
-    const regex = /[\W]{6,32}/g;
+    const regex = /[\w]{6,32}/g;
     const testIfStartWithLetter = regex.test(password);
     
     if(!testIfStartWithLetter){
