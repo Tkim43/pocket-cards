@@ -10,22 +10,30 @@
 
 .set > .blue.darken-3 {
     width:90%;
-    height: 50px;
-    font-size: 1.5em;
+    height: 58px;
+    /* font-size: 1.5em; */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .set-container .wide-btn{
-    width: 50%;
+    width: 100%;
 }
 
 .row.set {
-    width: 100%;
+    width: 90%;
     margin: 0;
     display: flex;
     align-items: center;
+}
+
+.row .red.lighten-2{
+  
+    height: 4rem;
+    padding: 0 20px;
+    margin-left: 30%;
+    
 }
 
 .row.set > a {
