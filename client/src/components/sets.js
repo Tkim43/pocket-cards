@@ -124,8 +124,10 @@ class Sets extends Component{
                     {userSubCategories}
                 </div>
                 <div className="row">
-                    <div className="col s12 center">
-                    <button onClick = {this.showModal} className="green btn lighten-2 wide-btn" >Add Title</button>
+                    <div className="col s12">
+                        <button onClick = {this.showModal} className="green btn lighten-2 wide-btn" >Add Title</button>
+                    </div>
+                    <div className="col s12">
                         <Link to="/profile" className="btn yellow darken-2 wide-btn">Home</Link>
                     </div>
                 </div>
