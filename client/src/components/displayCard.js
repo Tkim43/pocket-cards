@@ -27,12 +27,12 @@ class displayCard extends Component{
 
         history.push(`/displayCard/${params.set_id}/topic/${params.topic_id}/card/${cardId}`);
 
-        setTimeout(() => this.setState({ isLoading: false }), 1000);        
+        setTimeout(() => this.setState({ isLoading: false }), 1000);     
+        
+        
     }
-
     flipCard =()=>{
         const { flipped } = this.state;
-
         this.setState({
             flipped: !flipped
         })
@@ -40,9 +40,7 @@ class displayCard extends Component{
     render(){
         const {card, match: { params: {set_id, topic_id} } } = this.props;
         const { isLoading, flipped } = this.state;
-        
         const location = this.props.location;
-
         return(
             <div className="container">
                 <div className="row">
@@ -72,7 +70,7 @@ class displayCard extends Component{
 }
 
 function mapStateToProps(state){
-    console.log(state);
+    console.log('MSTP:', state);
     const { sets } = state;
     return {
         card: sets.singleCard,

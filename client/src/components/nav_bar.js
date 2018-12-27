@@ -47,7 +47,7 @@ class Navbar extends Component {
                 return (
                     <li onClick = {this.handleLinkClick} key = {link.to}>
                         <Link to = {link.to}>{link.text}</Link>
-                    </li>
+                    </li>      
                 );
             }));
             linkElements.push(<li className = "nav-item" key="divider">

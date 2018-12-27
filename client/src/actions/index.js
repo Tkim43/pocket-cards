@@ -17,7 +17,8 @@ export const getNextOrPrevCard = (direction = 'next', topicId, currentCardId) =>
         console.log('Location:', location);
         dispatch({
             type: types.GET_CARD_DATA,
-            card
+            card,
+            location
         });
         return card.ID;
     } catch(err){
@@ -109,6 +110,8 @@ export function getSetsData (id){
     return async function(dispatch){
         try {
             const { data: { sets = [] } } = await axios.get(`/api/set_management/${id}`, authHeaders());
+
+            console.log('SETS:', sets);
 
             dispatch({
                 type: types.GET_SETS_DATA,
