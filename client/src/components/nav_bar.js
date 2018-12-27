@@ -47,7 +47,7 @@ class Navbar extends Component {
                 return (
                     <li onClick = {this.handleLinkClick} key = {link.to}>
                         <Link to = {link.to}>{link.text}</Link>
-                    </li>
+                    </li>      
                 );
             }));
             linkElements.push(<li className = "nav-item" key="divider">
@@ -71,7 +71,7 @@ class Navbar extends Component {
                 <nav className = "main-nav">
                     <div className="nav-wrapper">
                         <Link className = "brand-logo" to = "/profile">                                
-                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                                {/* <img className ="logo-large hide-on-med-and-down" src={logo} /> */}
                                 <span>Pocket Cards</span>
                                 <img className ="logo-large hide-on-med-and-down" src={logo} />
                                 <img className ="logo hide-on-med-and-up" src={logo} />

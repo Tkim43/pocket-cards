@@ -70,7 +70,7 @@ class displayCard extends Component{
 }
 
 function mapStateToProps(state){
-    console.log(state);
+    console.log('MSTP:', state);
     const { sets } = state;
     return {
         card: sets.singleCard,

@@ -17,7 +17,8 @@ export const getNextOrPrevCard = (direction = 'next', topicId, currentCardId) =>
         console.log('Location:', location);
         dispatch({
             type: types.GET_CARD_DATA,
-            card
+            card,
+            location
         });
         return card.ID;
     } catch(err){
