@@ -222,8 +222,6 @@ app.get('/api/topic/:topicId/card/:cardId', async (req, res, next) => {
         let card = {};
         let location = '';
 
-        console.log('CARD ID:', typeof cardId);
-        console.log('Cards:', cards);
         
         if(cardId === '0' || isNaN(cardId)){
             card = cards[0];
