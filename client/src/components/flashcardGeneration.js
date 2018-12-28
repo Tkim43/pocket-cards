@@ -9,14 +9,15 @@ import DeleteModal from './deleteModal';
 class FlashcardGeneration extends Component {
     state = {
         delete: false,
+        cardId: null,
     };
     componentDidMount(){
         const { getTopicsCards, match: { params } } = this.props;
         getTopicsCards(params.set_id, params.topic_id);
     }
-    delete = async (cardId) =>{
+    delete = async () =>{
         const {match: { params } } = this.props;
-        await this.props.deleteCard(cardId, params.topic_id);
+        await this.props.deleteCard(this.state.cardId, params.topic_id);
         this.updateCardList();
         this.hideModal();
     }
@@ -29,9 +30,10 @@ class FlashcardGeneration extends Component {
             console.log("error getting list data")
         }
     }
-    showModal = () =>{
+    showModal = (cardId) =>{
         this.setState({
             delete: true,
+            cardId
         });
     }
 
@@ -71,7 +73,7 @@ class FlashcardGeneration extends Component {
                             </Link>
                         </div>
                         <div className="col s2 card-container">
-                            <button className="red lighten-2 btn-large" onClick={this.showModal}>
+                        <button className="red lighten-2 btn-large" onClick={() => this.showModal(item.ID)}>
                                 <i className = "large material-icons">delete</i>
                             </button>
                         </div>
