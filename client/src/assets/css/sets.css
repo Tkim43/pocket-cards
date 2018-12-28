@@ -22,22 +22,25 @@
 }
 
 .row.set {
-    width: 90%;
+    width: 98%;
     margin: 0;
     display: flex;
     align-items: center;
 }
 
-.delete-button{
+/* .delete-button{
   
     height: 4rem;
     padding: 0 20px;
     margin-left: 30%;
     
-}
+} */
 
 .row.set > a {
     display: flex;
     align-items: center;
 }
- 
+
+.set .btn-large{
+    padding: 0 5%;
+}

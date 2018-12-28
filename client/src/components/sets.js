@@ -108,7 +108,7 @@ class Sets extends Component{
                 <div key= {index}>
                     <div className = "row set">
                         <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
-                        <button className="delete-button red lighten-2 btn-large" onClick={this.showModal}>
+                        <button className="delete-button red lighten-2 set btn-large" onClick={this.showModal}>
                             <i className= "large material-icons">delete</i>
                         </button>
                     </div>
