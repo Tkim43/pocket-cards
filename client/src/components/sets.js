@@ -105,14 +105,14 @@ class Sets extends Component{
         const { category} = this.props;
         const userSubCategories = this.props.topics.map ((item, index) => {
             return(
-                <div key= {index} className="row set">
-                    <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
-                    <div className = "row">
-                    <button className="delete-button red lighten-2 btn-large" onClick={this.showModal}>
-                        <i className= "large material-icons">delete</i>
-                    </button>
-                    <div className="white-text">{`${this.props.topics[index].cardCount} terms`}</div>
+                <div key= {index}>
+                    <div className = "row set">
+                        <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
+                        <button className="delete-button red lighten-2 btn-large" onClick={this.showModal}>
+                            <i className= "large material-icons">delete</i>
+                        </button>
                     </div>
+                    <div className="row white-text">{`${this.props.topics[index].cardCount} terms`}</div>
                 </div>
             );  
         });
