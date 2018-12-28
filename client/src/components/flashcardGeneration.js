@@ -4,16 +4,21 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTopicsCards } from '../actions';
 import { deleteCard} from '../actions';
+import DeleteModal from './deleteModal';
 
 class FlashcardGeneration extends Component {
+    state = {
+        delete: false,
+    };
     componentDidMount(){
         const { getTopicsCards, match: { params } } = this.props;
         getTopicsCards(params.set_id, params.topic_id);
     }
     delete = async (cardId) =>{
-        const { match: { params } } = this.props;
+        const {match: { params } } = this.props;
         await this.props.deleteCard(cardId, params.topic_id);
         this.updateCardList();
+        this.hideModal();
     }
     async updateCardList(){
         try{
@@ -23,6 +28,17 @@ class FlashcardGeneration extends Component {
         }catch(err){
             console.log("error getting list data")
         }
+    }
+    showModal = () =>{
+        this.setState({
+            delete: true,
+        });
+    }
+
+    hideModal = () =>{
+        this.setState({
+            delete: false
+        })
     }
     render () {
         console.log("these are your props", this.props);
@@ -55,7 +71,7 @@ class FlashcardGeneration extends Component {
                             </Link>
                         </div>
                         <div className="col s2 card-container">
-                            <button className="red lighten-2 btn-large" onClick={() => this.delete(item.ID)}>
+                            <button className="red lighten-2 btn-large" onClick={this.showModal}>
                                 <i className = "large material-icons">delete</i>
                             </button>
                         </div>
@@ -92,7 +108,7 @@ class FlashcardGeneration extends Component {
                     </Link>
 
                 </div>
-
+                { this.state.delete ? <DeleteModal hideModal={this.hideModal }deleteItem={this.delete} /> : '' }
             </div>
         );
     }
