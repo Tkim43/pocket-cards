@@ -30,20 +30,12 @@
   
   .select-box--selected-item {
     display: inline-block;
-    color: white;
     height: 100%;
     width: 100%;
     padding: 4px 12px;
     vertical-align: middle;
+    background-color: white;
   }
-
-  .select-box--items > div{
-    /* background-color: white; */
-}
-
-.select-box--selected-item {
-    /* background-color: white; */
-}
   
   .select-box--items div {
     border-bottom: 1px solid #ddd;
@@ -51,6 +43,7 @@
     border-right: 1px solid #ddd;
     padding: 6px;
     padding-left: 20px;
+    background-color: white;
   }
   
   .select-box--items div.selected {
@@ -73,7 +66,7 @@
     height: 0; 
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 10px solid #fff;
+    border-top: 10px solid #000;
   }
   
   .select-box--arrow-up {
@@ -84,9 +77,5 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 10px solid #fff;
+    border-bottom: 10px solid #000;
   }
-
-  .select-box--items > div {
-    color: white;
-}
