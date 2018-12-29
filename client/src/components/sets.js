@@ -11,6 +11,7 @@ class Sets extends Component{
     state = {
         show: false,
         delete: false,
+        index: null,
     };
     
     componentDidMount(){
@@ -21,8 +22,7 @@ class Sets extends Component{
             delete: true
         })
         const {deleteSubcategory} = this.props
-        console.log("this is your topic ID and set ID", this.props)
-        await deleteSubcategory(this.props.topics[0].topicID, this.props.match.params.set_id);
+        await deleteSubcategory(this.props.topics[this.state.index].topicID, this.props.match.params.set_id);
         this.props.getSetsData(this.props.match.params.set_id);
         this.hideModal();
     }
@@ -50,11 +50,11 @@ class Sets extends Component{
         this.hideModal();
     }
 
-    showModal = (event) =>{
+    showModal = (event, index) =>{
+        console.log("this is the index", index)
         const buttonType = event.target.classList[0];
         let show = null;
         let remove = null;
-
         if (buttonType === 'green') {
             show = true;
             remove = false;
@@ -65,6 +65,7 @@ class Sets extends Component{
         this.setState({
             show: show,
             delete: remove,
+            index
         });
     }
 
@@ -108,7 +109,7 @@ class Sets extends Component{
                 <div key= {index}>
                     <div className = "row set">
                         <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
-                        <button className="delete-button red lighten-2 set btn-large" onClick={this.showModal}>
+                        <button className="delete-button red lighten-2 set btn-large" onClick={(e)=>{this.showModal(e, index)}}>
                             <i className= "large material-icons">delete</i>
                         </button>
                     </div>
