@@ -22,7 +22,7 @@
     margin: 0px;
     padding: 0px;
     display: inline-block;
-    /* background: #aaa; */
+    background: #aaa;
     position: absolute;
     right: 0;
     top: 0;
@@ -36,6 +36,14 @@
     padding: 4px 12px;
     vertical-align: middle;
   }
+
+  .select-box--items > div{
+    /* background-color: white; */
+}
+
+.select-box--selected-item {
+    /* background-color: white; */
+}
   
   .select-box--items div {
     border-bottom: 1px solid #ddd;
@@ -73,7 +81,7 @@
     top: 10px;
     left: 8px;
     width: 0; 
-    height: 0; 
+    height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 10px solid #fff;
