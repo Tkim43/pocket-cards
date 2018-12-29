@@ -132,7 +132,7 @@ function validate (formValues) {
 }
 
 function checkIfValidEmail(email){
-    const regex = /^(\w)*[@]{1}(\w)+[.]{1}(\w)+$/g;
+    const regex = /^(\S)*[@]{1}(\w)+[.]{1}(\w)+$/g;
     const testEmail = regex.test(email);
 
     if(testEmail){
