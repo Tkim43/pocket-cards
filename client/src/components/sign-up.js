@@ -7,14 +7,14 @@ import '../assets/css/dropdown.css';
 class Signup extends Component {
     state = {
         avatars: [
-            {value: 'default', id: 0},
-            {value: 'crab', id: 1},
-            {value: 'crocodile', id: 2},
-            {value: 'fish', id: 3},
-            {value: 'frog', id: 4},
-            {value: 'rabbit', id: 5},
-            {value: 'reindeer', id: 6},
-            {value: 'turtle', id: 7},
+            {value: 'default', img: '/avatars/crab.png', id: 0},
+            {value: 'crab', img: '/avatars/crab.png', id: 1},
+            {value: 'crocodile', img: '/avatars/crocodile.png', id: 2},
+            {value: 'fish', img: '/avatars/fish.png' ,id: 3},
+            {value: 'frog', img: '/avatars/frog.png' ,id: 4},
+            {value: 'rabbit', img: '/avatars/rabbit.png' , id: 5},
+            {value: 'reindeer', img: '/avatars/reindeer.png', id: 6},
+            {value: 'turtle', img: '/avatars/turtle.png' ,id: 7},
         ],
         showItems: false,
         selectedItem: "default"
@@ -82,7 +82,8 @@ class Signup extends Component {
                                     onClick={() => this.selectItem(item)}
                                     className={this.state.selectedItem === item ? 'selected' : ''}
                             >
-                                { item.value }
+                                { item.value}
+                                <img className = "icon_image" src={item.img} alt=""/> 
                             </div>)
                         }
                         </div>

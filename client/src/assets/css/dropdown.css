@@ -38,11 +38,15 @@
   }
   
   .select-box--items div {
+    background-color: white;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     padding: 6px;
     padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    justify-items: flex-end;
     background-color: white;
   }
   
@@ -78,4 +82,11 @@
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 10px solid #000;
+  }
+
+  .icon_image {
+    height: 32px;
+    width: 32px;
+    position: flex;
+    justify-content: flex-end;
   }
