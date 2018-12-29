@@ -7,16 +7,17 @@ import '../assets/css/dropdown.css';
 class Signup extends Component {
     state = {
         avatars: [
-            {value: 'crab', id: 0},
-            {value: 'crocodile', id: 1},
-            {value: 'fish', id: 2},
-            {value: 'frog', id: 3},
-            {value: 'rabbit', id: 4},
-            {value: 'reindeer', id: 5},
-            {value: 'turtle', id: 6},
+            {value: 'default', id: 0},
+            {value: 'crab', id: 1},
+            {value: 'crocodile', id: 2},
+            {value: 'fish', id: 3},
+            {value: 'frog', id: 4},
+            {value: 'rabbit', id: 5},
+            {value: 'reindeer', id: 6},
+            {value: 'turtle', id: 7},
         ],
         showItems: false,
-        selectedItem: ""
+        selectedItem: "default"
       }
     
     dropDown = () => {
@@ -64,7 +65,7 @@ class Signup extends Component {
                     <div className="select-box--box">
                         <div className="select-box--container">
                             <div className="select-box--selected-item">
-                                { this.state.selectedItem.value }
+                                { this.state.selectedItem.value || this.state.avatars[0].value }
                             </div>
                             <div
                                 className="select-box--arrow"
