@@ -108,7 +108,8 @@ class Sets extends Component{
             return(
                 <div key= {index}>
                     <div className = "row set">
-                        <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link>
+                    {this.props.topics[index].cardCount > 0 ? <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link> : <Link to={`/flashcardGeneration/${item.setID}/topic/${item.topicID}/`} className ="btn blue darken-3 ">{item.subCategory}</Link>}
+                        {/* <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link> */}
                         <button className="delete-button red lighten-2 set btn-large" onClick={(e)=>{this.showModal(e, index)}}>
                             <i className= "large material-icons">delete</i>
                         </button>
