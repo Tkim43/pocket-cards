@@ -175,6 +175,7 @@ export function userSignIn(userInfo){
         } catch (err){
             dispatch({
                 type: types.SIGN_IN_ERROR,
+                error: "Invalid email and/or password"
             });
         }
         

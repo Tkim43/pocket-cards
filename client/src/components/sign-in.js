@@ -24,7 +24,7 @@ class Signin extends Component {
     }
 
     render () {
-        const { handleSubmit} = this.props;
+        const { handleSubmit, signInError} = this.props;
 
         return (
             <div className = "container">
@@ -39,6 +39,7 @@ class Signin extends Component {
                     <div className="row">
                         <div className="col s12 right-align">
                             <button className = "btn green lighten-2">Sign In</button>
+                            <div className="red-text text-darken-2">{signInError}</div>
                         </div>
                     </div>
                 </form>
