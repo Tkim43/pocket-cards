@@ -13,13 +13,13 @@
 
 .profile-pic{
     height: 100%;
-    width: 80%;
+    width: 90%;
 }
 
 .profile-section-img{
-    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    display: flex;
 }
 
 .profile-section-title{
@@ -152,4 +152,12 @@
 
 .avatar_box_shadow:hover {
     box-shadow: 0 0 30px #000; 
-  }
+}
+
+.cog-img {
+    position: relative;
+    height: 35%;
+    width: 35%;
+    top: 33%;
+    left: 100%;
+}

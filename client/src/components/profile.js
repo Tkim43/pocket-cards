@@ -7,6 +7,7 @@ import BasicModal from './modal';
 import DeleteModal from './deleteModal';
 import FindTimePassed from './findTimePassed';
 import defaultAvatar from '../assets/images/default_avatar.png';
+import cogImg from '../assets/images/cog-img.png';
 import { deleteCategory} from '../actions';
 
 class Profile extends Component {
@@ -132,7 +133,8 @@ class Profile extends Component {
             <div className = "profile-container row col s12">
                 <div className="profile-section">
                     <div className="col s4 profile-section-img">
-                        <img onClick = {this.open} src= {profileUserAvatar} alt="" className="circle profile-pic"/>
+                        <img onClick = {this.open} className = "cog-img" src= {cogImg} alt=""/>
+                        <img src= {profileUserAvatar} alt="" className="circle profile-pic"/>
                     </div>
                     <div className="col s8 avatar-box profile-section-title">
                         <div className="white-text avatar-text">
