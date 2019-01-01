@@ -13,18 +13,18 @@ class FindTimePassed extends Component {
         const { timePassed } = this.state;
         if(timePassed >= 86400000){
             var numOfDays = timePassed / 86400000;
-            return `Updated : ${Math.floor(numOfDays)} days ago`;
+            return `Created : ${Math.floor(numOfDays)} days ago`;
         }
         else if(timePassed >= 3600000){
             var numOfHours = timePassed / 3600000;
-            return `Updated : ${Math.floor(numOfHours)} hours ago`;
+            return `Created : ${Math.floor(numOfHours)} hours ago`;
         }
         else if(timePassed >= 60000){
             var numOfMinutes = timePassed / 60000;
-            return `Updated : ${Math.floor(numOfMinutes)} minutes ago`;
+            return `Created : ${Math.floor(numOfMinutes)} minutes ago`;
         }
         else {
-            return "Updated : Now";
+            return "Created : Now";
         }
     }
 
