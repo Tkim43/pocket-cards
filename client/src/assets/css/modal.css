@@ -44,3 +44,7 @@
     color: #ff0000;
     background-color: #dedede;
 }
+
+input[type=text]:not(.browser-default).validate{
+    color:black;
+}

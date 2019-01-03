@@ -79,19 +79,31 @@
 
 /* Getting the button to change color */
 
-.button.btn-small.soft-blue.sort-button:active {
-    background-color: #6db0cf;
+.btn-small.dark-blue.sort-button{
+    /* background-color: pink;   */
+    /* background-color: #6db0cf; */
+    background-color: #81d4fa; 
+    box-shadow:2px 3px 6px 0px rgb(0, 0, 0);
+}
+
+.btn, .btn-large, .btn-small{
+    background-color: #81d4fa;  
+    
 }
 
 .soft-blue {
-    background-color: #81d4fa;
+    background-color: #81d4fa; 
+    opacity: 0.5;
 }
 .btn:focus, .btn-large:focus, .btn-small:focus, .btn-floating:focus{
     background-color: #6db0cf;
+    /* background-color: pink; */
 }
 
 .btn:hover, .btn-large:hover, .btn-small:hover{
     background-color: #6db0cf;
+    /* background-color:pink; */
+    
 }
 
 /* For texts  */
