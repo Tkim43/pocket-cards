@@ -24,7 +24,7 @@ const App = () => (
         <Route path = "/displayCard/:set_id/topic/:topic_id/card/:card_id" component= {displayCard}/>
         <Route path = "/sets/:set_id" component = {auth(Sets)}/>
         <Route path = "/profile" component = {auth(Profile)}/>
-        <Route path = "/about" component = {auth(About)}/>
+        <Route path = "/about" component = {About}/>
         <Route path = "/editMode/:set_id/topic/:topic_id/card/:card_id" component= {editMode}/>
         <Route path = "/createflashcards/:set_id/subcategory/:topic_id" component = {InputDefinition}/>
         <Route path = "/flashcardGeneration/:set_id/topic/:topic_id" component = {FlashcardGeneration}/>

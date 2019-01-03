@@ -112,6 +112,9 @@ class Navbar extends Component {
                             <li>
                                 <Link to = "/signup">Sign Up</Link>
                             </li>
+                            <li>
+                                <Link to = "/about">Meet The Team</Link>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -119,6 +122,7 @@ class Navbar extends Component {
                 <SideNav setRef = {this.setSideNavRef} links = {<li onClick = {this.handleLinkClick}>
                         <Link to = "/signin">Sign In</Link>
                         <Link to = "/signup">Sign Up</Link>
+                        <Link to = "/about">Meet The Team</Link>
                     </li>}>
                 </SideNav>
             </Fragment>

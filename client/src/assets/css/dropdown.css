@@ -15,6 +15,13 @@
     position: relative;
     left: 0;
   }
+
+  .select-box--items {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 180px;
+  }
   
   .select-box--arrow {
     width: 30px;

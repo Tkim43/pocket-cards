@@ -90,20 +90,20 @@ export async function sortByLatest () {
     }
 }
 
-export function sendAvatar (avatar){
-    return async function (dispatch){
-        try {
-            console.log("This is the data from sendAvatar: ", data);
-            const { data: { user: {userAvatar} } } = await axios.post('/auth/sign-up', avatar);
-            dispatch({
-                type: types.SEND_AVATAR,
-                userAvatar
-            });
-        } catch(err){
-            console.log('Error sending avatar data');
-        }
-    }
-}
+// export function sendAvatar (avatar){
+//     return async function (dispatch){
+//         try {
+//             console.log("This is the data from sendAvatar: ", data);
+//             const { data: { user: {userAvatar} } } = await axios.post('/auth/sign-up', avatar);
+//             dispatch({
+//                 type: types.SEND_AVATAR,
+//                 userAvatar
+//             });
+//         } catch(err){
+//             console.log('Error sending avatar data');
+//         }
+//     }
+// }
 
 export function updateAvatar (updatedAvatar){
     return async function (dispatch){
