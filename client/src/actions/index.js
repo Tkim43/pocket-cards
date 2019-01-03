@@ -105,6 +105,24 @@ export function sendAvatar (avatar){
     }
 }
 
+export function updateAvatar (updatedAvatar){
+    return async function (dispatch){
+        try {
+            const avatarPath = { avatar: updatedAvatar };
+            
+            const response = await axios.patch(`/api/user/avatar`, avatarPath, authHeaders());
+
+            dispatch({
+                type: types.UPDATE_AVATAR,
+                avatar: updatedAvatar
+            });
+
+        } catch(err){
+            console.log("Error updating user avatar");
+        }
+    }
+}
+
 
 export function getSetsData (id){
     return async function(dispatch){

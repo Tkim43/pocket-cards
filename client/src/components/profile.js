@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import "../assets/css/profile.css";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { sortAlphabetical, sortByLatest} from '../actions';
+import { sortAlphabetical, sortByLatest, updateAvatar} from '../actions';
 import BasicModal from './modal';
 import DeleteModal from './deleteModal';
 import FindTimePassed from './findTimePassed';
@@ -36,6 +36,13 @@ class Profile extends Component {
 
     handleSortByLatestClick = () => {
         this.props.sortByLatest ();
+    }
+
+    handleUpdatedAvatarImg = (updatedAvatar) => {
+        console.log("AVATAR CLICKED: ", updatedAvatar);
+        updatedAvatar = `/avatars/${updatedAvatar}.png`
+        this.props.updateAvatar (updatedAvatar);
+        this.close();
     }
     
     componentDidMount () {
@@ -83,7 +90,7 @@ class Profile extends Component {
             const avatarsList = this.state.avatars.map((item,id) => {
                 return (
                     <Fragment key = {id}>
-                        <img className = "avatar_box_shadow" src={item.img} alt=""/>
+                        <img onClick = {() => this.handleUpdatedAvatarImg(item.value)} className = "avatar_box_shadow" src={item.img} alt=""/>
                     </Fragment>
                 );
             });
@@ -172,4 +179,5 @@ export default connect(mapStateToProps, {
     sortAlphabetical : sortAlphabetical,
     sortByLatest: sortByLatest,
     deleteCategory,
+    updateAvatar
 })(Profile);
