@@ -46,6 +46,28 @@ app.get('/api/userhome', requireAuth, async (req, res, next) => {
     
 }, errorHandling);
 
+app.patch('/api/user/avatar', requireAuth, async(req, res, next) => {
+    try {
+        const { ID } = req.user;
+        const { avatar } = req.body;
+
+        const query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+        const inserts = ['users', 'avatar', avatar, 'ID', ID];
+
+        const sql = mysql.format(query, inserts);
+        const updatedAvatar = await db.query(sql);
+
+        res.send({
+            success: true,
+            updatedAvatar
+        });
+    } catch (err) {
+        req.status = 500;
+        req.error = 'Error updating user avatar';
+
+        return next();
+    }
+}, errorHandling);
 
 // get category and all subcategory data of sets joined to topics based on userID (DONE)
 app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
