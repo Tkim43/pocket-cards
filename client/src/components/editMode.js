@@ -105,9 +105,9 @@ class editMode extends Component{
                                             <button onClick={this.cancel} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 Yes
                                             </button>
-                                            <button onClick={this.hideModal} className="red lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                            <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="red lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 No
-                                            </button>
+                                            </Link>
                                         </div>
                                 </form>
                             </div>
