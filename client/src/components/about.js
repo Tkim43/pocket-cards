@@ -19,13 +19,13 @@ class About extends Component {
                         <img className="developer tiffany" src={tiffany}/>
                         <h5 className="name center">Tiffany Kim</h5>
                         <div className="iconDiv">
-                            <a href="https://github.com/Tkim43">
+                            <a href="https://github.com/Tkim43" target="_blank">
                             <img className="icon" src={github}/>
                             </a>
-                            <a href="https://www.linkedin.com/in/tiffany-kim-b24966171/">
+                            <a href="https://www.linkedin.com/in/tiffany-kim-b24966171/" target="_blank">
                                 <img className="icon" src={linkedin}/>
                             </a>
-                            <a href="http://tiffanyykim.com/">
+                            <a href="http://tiffanyykim.com/" target="_blank">
                                 <img className="icon" src={home}/>
                             </a>
                         </div>
@@ -34,13 +34,13 @@ class About extends Component {
                         <img className="developer brandon" src={brandon}/>
                         <h5 className="name center">Brandon Park</h5>
                         <div className="iconDiv">
-                            <a href="https://github.com/brandon206">
+                            <a href="https://github.com/brandon206" target="_blank">
                             <img className="icon" src={github}/>
                             </a>
-                            <a href="https://www.linkedin.com/in/brandonpark206/">
+                            <a href="https://www.linkedin.com/in/brandonpark206/" target="_blank">
                                 <img className="icon" src={linkedin}/>
                             </a>
-                            <a href="http://www.brandontravispark.com/">
+                            <a href="http://www.brandontravispark.com/" target="_blank">
                                 <img className="icon" src={home}/>
                             </a>
                         </div>
@@ -49,13 +49,13 @@ class About extends Component {
                         <img className="developer vienna" src={vienna}/>
                         <h5 className="name center">Vienna Tran</h5>
                         <div className="iconDiv">
-                            <a href="https://github.com/viennaltran">
+                            <a href="https://github.com/viennaltran" target="_blank">
                             <img className="icon" src={github}/>
                             </a>
-                            <a href="https://www.linkedin.com/in/vienna-tran-180586159/">
+                            <a href="https://www.linkedin.com/in/vienna-tran-180586159/" target="_blank">
                                 <img className="icon" src={linkedin}/>
                             </a>
-                            <a href="http://viennatran.com/">
+                            <a href="http://viennatran.com/" target="_blank">
                                 <img className="icon" src={home}/>
                             </a>
                         </div>

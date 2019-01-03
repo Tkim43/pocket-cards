@@ -44,3 +44,58 @@
 .set .btn-large{
     padding: 0 5%;
 }
+
+/* @media screen and (max-width: 1200px) {
+    .terms{
+        margin-left: 26.5rem;
+        margin-right: -0.75rem;
+    }
+  }
+
+@media screen and (max-width: 992px) {
+    .terms{
+        margin-left: 17.5rem;
+        margin-right: -0.75rem;
+    }
+  }
+
+@media screen and (max-width: 600px) {
+    .terms{
+        margin-left: 9.5rem;
+        margin-right: -0.75rem;
+    }
+  } */
+
+  /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .terms{
+        margin-left: 5.5rem;
+        margin-right: -0.75rem;
+    }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .terms{
+        margin-left: 17.5rem;
+        margin-right: -0.75rem;
+    }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .terms{
+        margin-left: 40.5rem;
+        margin-right: -0.75rem;
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
