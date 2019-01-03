@@ -114,18 +114,19 @@ class Sets extends Component{
                             <i className= "large material-icons">delete</i>
                         </button>
                     </div>
-                    <div className="row white-text">{`${this.props.topics[index].cardCount} terms`}</div>
+                    <div className="terms white-text">{`${this.props.topics[index].cardCount} terms`}</div>
                 </div>
             );  
         });
 
         return(
+        <div className="container">
             <div className="center set-container">
                 <h3 className="white-text">Category: {category}</h3>
                 <div className="col s12">
                     {userSubCategories}
                 </div>
-                <div className="row">
+                <div className="set-buttons row">
                     <div className="col s12">
                         <button onClick = {this.showModal} className="green btn lighten-2 wide-btn" >Add Title</button>
                     </div>
@@ -135,6 +136,7 @@ class Sets extends Component{
                 </div>
                 { this.state.delete ? <DeleteModal hideModal={this.hideModal }deleteItem={this.delete} /> : '' }
             </div>
+        </div>
         );
     }
 }

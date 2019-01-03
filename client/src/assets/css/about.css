@@ -44,3 +44,27 @@ img.icon{
 .front-end,.name{
 font-family: 'Bree Serif', serif;
 }
+
+@media screen and (max-width: 1200px) {
+    .iconDiv{
+        width:50%;
+        height:0%;
+    }
+  }
+
+@media screen and (max-width: 992px) {
+    .logo{
+        width: 7%;
+        height: 0%;
+        position: relative;
+        top: 0px;
+    }
+  }
+
+@media screen and (max-width: 600px) {
+    .logo{
+        width:12%;
+        height:0%;
+    }
+  }
+
