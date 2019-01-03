@@ -39,7 +39,6 @@ class Profile extends Component {
     }
 
     handleUpdatedAvatarImg = (updatedAvatar) => {
-        console.log("AVATAR CLICKED: ", updatedAvatar);
         updatedAvatar = `/avatars/${updatedAvatar}.png`
         this.props.updateAvatar (updatedAvatar);
         this.close();
