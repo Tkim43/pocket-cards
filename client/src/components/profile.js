@@ -13,6 +13,7 @@ import { deleteCategory} from '../actions';
 class Profile extends Component {
     state ={
         show: false,
+        sortLatest: true,
         isOpen: false,
         categoryID: null,
         avatars: [
@@ -24,6 +25,7 @@ class Profile extends Component {
             {value: 'reindeer', img: '/avatars/reindeer.png', id: 6},
             {value: 'turtle', img: '/avatars/turtle.png' ,id: 7},
         ]
+       
     }
 
     open = () => this.setState({isOpen: true});
@@ -32,10 +34,12 @@ class Profile extends Component {
 
     handleAlphabeticalClick = () => {
         this.props.sortAlphabetical ();
+        this.setState({sortLatest: false});
     }
 
     handleSortByLatestClick = () => {
         this.props.sortByLatest ();
+        this.setState({sortLatest: true});
     }
     
     componentDidMount () {
@@ -73,6 +77,8 @@ class Profile extends Component {
 
         console.log("this is the state: ", this.state);
         console.log("this is the props: ", this.props);
+        
+
         
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
@@ -144,8 +150,8 @@ class Profile extends Component {
                 </div>
                 <div className = "white-text container sort-row row">
                         <strong>Sort:</strong>
-                        <button onClick = {this.handleSortByLatestClick} className = "btn-small soft-blue sort-button button-bold-text">Latest</button>
-                        <button onClick = {this.handleAlphabeticalClick} className = "btn-small soft-blue sort-button button-bold-text">Alphabetical</button>
+                        <button onClick = {this.handleSortByLatestClick}  className ={`btn-small sort-button button-bold-text ${this.state.sortLatest ? "dark-blue" : "soft-blue"}`}>Latest</button>
+                        <button onClick = {this.handleAlphabeticalClick}  className ={`btn-small sort-button button-bold-text ${this.state.sortLatest ? "soft-blue" : "dark-blue"}`}>Alphabetical</button>
                 </div>
                 <div className="row">
                 <div className="col s12 card-container create-category-bold-text">

@@ -44,6 +44,7 @@ class ButtonModal extends Component {
 
     render(){
 
+
         if(this.state.isOpen){
             return (
                 <div className="basic-modal" onClick={this.close}>
@@ -53,13 +54,13 @@ class ButtonModal extends Component {
                                 <form className="col s12">
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <textarea onChange={this.updateCategory} className="materialize-textarea" id="textarea1"></textarea>
+                                                <input onChange={this.updateCategory} type="text" className="validate" id="textarea1"></input>
                                                 <label htmlFor="textarea1">Create Category</label>
                                             </div>
                                         </div>
                                         <div className="row"> 
                                             <div className="input-field col s12">
-                                                <textarea onChange={this.updateSubCategory}  className="materialize-textarea" id="textarea2"></textarea>
+                                                <input onChange={this.updateSubCategory} type="text" className="validate" id="textarea2"></input>
                                                 <label htmlFor="textarea2">Create Title</label>
                                             </div>  
                                         </div>

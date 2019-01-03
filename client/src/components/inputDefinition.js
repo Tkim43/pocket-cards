@@ -78,7 +78,7 @@ class InputDefinition extends Component {
             <Fragment>
                 <div className = "add-card container">
                     <h5 style={{textTransform: 'capitalize'}} className="center white-text">{topic.subCategory || 'Category'}</h5>
-                    <h1>Cards Created: {cardCount || '...'}</h1>
+                    <h1>Cards Created: {cardCount || '0'}</h1>
     
                     <form onSubmit = {handleSubmit(this.handleAddDefinition)}>
                         <div className="row">

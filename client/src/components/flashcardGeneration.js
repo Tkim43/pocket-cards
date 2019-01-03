@@ -86,7 +86,7 @@ class FlashcardGeneration extends Component {
 
             <div className = "flashcard-container center">
                 <h2 style={{textTransform: 'capitalize'}} className = "col s12 center white-text">{topic && topic.subCategory || 'Category'}</h2>
-                <h3 className = "col s12 center white-text">Cards: {cardCount || '...'}</h3>
+                <h3 className = "col s12 center white-text">Cards: {cardCount || '0'}</h3>
                 <div className="row container flashcard-row">                    
                     <div className="col s5 card-container">
                         <div className="card-panel blue lighten-2 white-text center">Term</div> 
