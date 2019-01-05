@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/modal.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form'; 
 import { sendCategoryAndSubcategoryData } from '../actions';
 
 class ButtonModal extends Component {
@@ -28,6 +29,20 @@ class ButtonModal extends Component {
         this.setState({
             subCategory: event.currentTarget.value
         });
+    }
+
+    renderInput (props) {
+        return (
+            <div className= {`input-field col ${props.size}`}>
+                <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
+                <label htmlFor= {props.input.name} >{props.label}</label>
+                <ul>
+                    {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
+                        return <li key = {index} className="red-text">{item}</li>
+                    })}
+                </ul>
+            </div>
+        );
     }
 
     handleClick = async (e) => {
@@ -70,6 +85,29 @@ class ButtonModal extends Component {
                                             </button>
                                         </div>
                                 </form>
+
+
+                                {/* <form onSubmit = {handleSubmit(this.handleAddDefinition)}>
+                                    <div className="row">
+                                        <Field name = "frontText" size = "s12" type = "text" label = "Term" component = {this.renderInput}/>
+                                    </div>
+                                    <div className="row">
+                                        <Field name = "backText" size = "s12" type = "text" label = "Definition" component = {this.renderInput}/>
+                                    </div>
+                                    <div className="row">
+                                        
+                                    </div>
+                                    <div className = "buttonDiv">
+                                        <button className="blue lighten-2 btn btn-large" name="action">Add Card
+                                            <i className="material-icons right">add</i>
+                                        </button>
+                                    </div>
+                                    <div className = "buttonDiv">
+                                        <Link to = {`/flashCardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn btn-large" type="done" name="action">Done
+                                            <i className="material-icons right">done</i>
+                                        </Link>
+                                    </div>
+                                </form> */}
                             </div>
                     </div>
                 </div>
@@ -85,12 +123,35 @@ class ButtonModal extends Component {
     }
 }
 
+function validate (formValues) {
+    const error = {};
+
+    console.log("THESE ARE THE FORM VALUES: ", formValues);
+
+    if(!formValues.frontText){
+        error.frontText = ['Please input a term'];
+    }
+
+    if(!formValues.backText){
+        error.backText = ['Please input a definition'];
+    }
+
+    return error;
+
+}
+
+
 function mapStateToProps(state){
     return{
         category:state.sets.category,
         subCategory:state.sets.subCategory
     }
 }
+
+ButtonModal = reduxForm ({
+    form: "button-modal",
+    validate: validate
+})(ButtonModal);
 
 export default connect(mapStateToProps, {
     sendCategoryAndSubcategoryData
