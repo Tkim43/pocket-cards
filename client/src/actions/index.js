@@ -159,6 +159,23 @@ export function getTopicsCards(setId, topicId){
     
 }
 
+export function endTutorial(){
+    return async function(dispatch){
+        try{
+            const { data: { success, ...tutorial }} = await axios.patch(`/api/user/tutorial`);
+
+            dispatch({
+                type: types.END_TUTORIAL,
+                data
+            });
+        } catch(err){
+            console.log('Error with tutorial');
+        }
+    }
+      
+    
+}
+
 export function userSignUp(newUser){
     return async function (dispatch){
         try {

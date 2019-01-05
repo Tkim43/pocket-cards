@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTopicsCards } from '../actions';
 import { deleteCard} from '../actions';
+import {endTutorial} from '../actions';
 import DeleteModal from './deleteModal';
 
 class FlashcardGeneration extends Component {
     state = {
         delete: false,
         cardId: null,
+        show: false
     };
     componentDidMount(){
         const { getTopicsCards, match: { params } } = this.props;
@@ -20,6 +22,10 @@ class FlashcardGeneration extends Component {
         await this.props.deleteCard(this.state.cardId, params.topic_id);
         this.updateCardList();
         this.hideModal();
+    }
+    endTutorial = async () =>{
+        const{endTutorial} = this.props;
+        await endTutorial();
     }
     async updateCardList(){
         try{
@@ -33,16 +39,42 @@ class FlashcardGeneration extends Component {
     showModal = (cardId) =>{
         this.setState({
             delete: true,
-            cardId
+            cardId,
+            show: true
         });
     }
 
     hideModal = () =>{
         this.setState({
-            delete: false
+            delete: false,
+            show: false
         })
     }
     render () {
+        if(this.state.show){
+            return (
+                <div className="basic-modal" onClick={this.hideModal}>
+                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
+                        <div onClick={this.hideModal} className="basic-modal-close center">X</div>
+                            <div>
+                                <form className="col s12">
+                                        <div>
+                                            <h6 className="center">how to edit your cards example below: </h6>
+                                        </div>
+                                        <div className = "row">
+                                                <p>
+                                                    <label>
+                                                        <input onClick={this.endTutorial}type ="checkbox"/>
+                                                        <span className="black-text">Do not show again</span>
+                                                    </label>
+                                                </p>
+                                        </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            )
+        }
         console.log("these are your props", this.props);
         const { cardCount, cards, match: { params }, topic } = this.props;
 
@@ -63,14 +95,16 @@ class FlashcardGeneration extends Component {
                 <div key = {item.ID}>
                     <div className="row container flashcard-row">
                         <div className="col s5 card-container">
-                            <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
+                            {/* <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
                                 <div>{frontText}</div>
-                            </Link> 
+                            </Link>  */}
+                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
                         </div>
                         <div className="col s5 card-container">
-                            <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
+                            {/* <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
                                 <div>{backText}</div>
-                            </Link>
+                            </Link> */}
+                            <div onClick ={this.showModal}className="card-panel teal lighten-1 white-text text-inside-card">backText</div>
                         </div>
                         <div className="col s2 card-container">
                         <button className="red lighten-2 btn-large" onClick={() => this.showModal(item.ID)}>
@@ -128,5 +162,6 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps, {
     getTopicsCards,
-    deleteCard
+    deleteCard,
+    endTutorial
 })(FlashcardGeneration);

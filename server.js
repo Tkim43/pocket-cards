@@ -205,10 +205,12 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
     const {user} = req;
     
     try {
+        // this one selects and then 
         const query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
+        // inserts replaces the question marks
         const inserts = ['cards', 'topicID', 'frontText', 'backText', topicID, frontText, backText];
         const sql = mysql.format(query, inserts);
-
+        // card is the response of the query
         const card = await db.query(sql);
 
         res.send({
@@ -220,9 +222,10 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
         
         req.status = 500;
         req.error = 'Error posting cards';
-
+        // sends it to the next fucntion
         return next();
     }
+    // errorhandling is the middleware
 }, errorHandling);
 
 //Get single card data
@@ -439,6 +442,38 @@ app.patch('/api/update_card/:ID', async (req, res, next)=>{
         return next();
     }
 }, errorHandling);
+
+
+// tutorial end point changes 0 to 1 
+// dont forget to put requireAuth
+app.patch('/api/user/tutorial/', requireAuth, async (req, res, next)=>{
+    try {
+        const { user } = req;
+        // this one selects and then 
+        const query = 'UPDATE ?? SET ?? = 1 WHERE ?? = ?';
+        // inserts replaces the question marks
+        // const inserts = ['users', 'tutorial', 'ID', user.ID];
+        const inserts = ['users', 'tutorial', 'ID', user.ID];
+        console.log("user", user)
+        const sql = mysql.format(query, inserts);
+        // card is the response of the query
+        const tutorial = await db.query(sql);
+        res.send({
+            success: true,
+            tutorial
+        });
+        
+    } catch(err) {
+        req.status = 500;
+        req.error = 'Error in the tutorial process';
+        // sends it to the next function
+        return next();
+    }
+    // errorhandling is the middleware
+}, errorHandling);
+
+
+
 
 //delete displayName, subCategories, and all cards (DONE)
 app.post('/api/set_management/delete_user', (req, res, next)=>{
