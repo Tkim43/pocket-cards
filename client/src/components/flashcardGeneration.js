@@ -24,58 +24,57 @@ class FlashcardGeneration extends Component {
 
     
         // Binds our scroll event handler
-        window.onscroll = this.someThing.bind(this);
-      }
+        // window.onscroll = this.checkScroll.bind(this);
+
+        window.onscroll = () => {
+            const {
+              loadCards,
+              state: {
+                error,
+                isLoading,
+                hasMore,
+              },
+            } = this;
+
+            // Bails early if:
+            // * there's an error
+            // * it's already loading
+            // * there's nothing left to load
+            if (error || isLoading || !hasMore) return;
+    
+            // Checks that the page has scrolled to the bottom
+            this.setState({
+                windowHeight: window.innerHeight,
+                scrollPosition: document.documentElement.scrollTop,
+                getDataHeight: document.documentElement.scrollHeight
+            });
+            //   this.state.windowHeight = window.innerHeight;
+            //   const scrollPosition = document.documentElement.scrollTop;
+            //   const getDataHeight = document.documentElement.scrollHeight;
+            //   console.log("win height: ", windowHeight);
+            //   console.log("scroll position: ", scrollPosition);
+            //   console.log("getData height: ", getDataHeight);
+
+            let calculated = this.state.scrollPosition + this.state.windowHeight;
+            
+            if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards) {
+                this.setState({
+                    loadingData : true
+                });
+                //   console.log('=============== GET MORE DATA ===============');
+                
+                setTimeout(function() {
+                    loadCards();
+                }, 1000);
+
+            }
+        }
+    }
 
     componentDidMount(){
         const { getTopicsCards, match: { params } } = this.props;
         getTopicsCards(params.set_id, params.topic_id);
     }
-
-    someThing = () => {
-        const {
-          showSpinner,
-          loadCards,
-          state: {
-            error,
-            isLoading,
-            hasMore,
-          },
-        } = this;
-  
-        // Bails early if:
-        // * there's an error
-        // * it's already loading
-        // * there's nothing left to load
-        if (error || isLoading || !hasMore) return;
-  
-        // Checks that the page has scrolled to the bottom
-        this.setState({
-            windowHeight: window.innerHeight,
-            scrollPosition: document.documentElement.scrollTop,
-            getDataHeight: document.documentElement.scrollHeight
-        });
-      //   this.state.windowHeight = window.innerHeight;
-      //   const scrollPosition = document.documentElement.scrollTop;
-      //   const getDataHeight = document.documentElement.scrollHeight;
-      //   console.log("win height: ", windowHeight);
-      //   console.log("scroll position: ", scrollPosition);
-      //   console.log("getData height: ", getDataHeight);
-
-        let calculated = this.state.scrollPosition + this.state.windowHeight;
-        
-        if (calculated >= this.state.getDataHeight && this.state.loadingData === false) {
-          this.setState({
-            loadingData : true
-          });
-          console.log('=============== GET MORE DATA ===============');
-          
-          setTimeout(function() {
-              loadCards();
-          }, 1000);
-
-        }
-      };
 
     loadCards = () => {
         let page_counter = this.state.page + 1;

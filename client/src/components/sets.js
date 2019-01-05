@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import '../assets/css/sets.css'
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form'; 
 import { getSetsData , deleteSubcategory, createSubcategory} from '../actions';
 import DeleteModal from './deleteModal';
 import { getTopicsCards } from '../actions';
@@ -42,10 +43,28 @@ class Sets extends Component{
         });
     }
 
-    createSubcategory  = (e) => {
-        e.preventDefault();
+    renderInput (props) {
+        return (
+            <div className= {`input-field col ${props.size}`}>
+                <input {...props.input} className = "black-text" type= {props.type || "text"} id = {props.input.name}/>
+                <label htmlFor= {props.input.name} >{props.label}</label>
+                <ul>
+                    {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
+                        return <li key = {index} className="red-text">{item}</li>
+                    })}
+                </ul>
+            </div>
+        );
+    }
+
+
+    createSubcategory  = async (values) => {
+            this.setState({
+                subCategory: subCategory.value
+            });
+    
         const {createSubcategory, match:{params}} = this.props
-        createSubcategory(params.set_id, {subCategory: this.state.subCategory})
+        createSubcategory(params.set_id, {subCategory: values.subCategory})
         this.updateSubcategoryList();
         this.hideModal();
     }
@@ -70,7 +89,6 @@ class Sets extends Component{
     }
 
     hideModal = () =>{
-        console.log("called hide modal")
         this.setState({
             show: false,
             delete: false
@@ -78,22 +96,23 @@ class Sets extends Component{
     }
 
     render(){
+
+        const { handleSubmit, match: { params }, reset } = this.props;
+
         if(this.state.show){
             return (
                 <div className="basic-modal" onClick={this.hideModal}>
                     <div onClick={e => e.stopPropagation()} className="basic-modal-content">
                         <div onClick={this.hideModal} className="basic-modal-close center">X</div>
                         <div>
-                            <form className="col s12">
-                                <div className="row"> 
-                                    <div className="input-field col s12">
-                                        <textarea onChange ={this.updateSubCategory} className="materialize-textarea" id="textarea2"></textarea>
-                                        <label htmlFor="textarea2">Create Title</label>
-                                    </div>  
+
+                            <form onSubmit = {handleSubmit(this.createSubcategory)}>
+                                <div className="row text-black">
+                                    <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Subcategory" component = {this.renderInput}/>
                                 </div>
                                 <div className = "row">
-                                    <button onClick = {this.createSubcategory}className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
-                                        Done
+                                    <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                        Create Subcategory
                                     </button>
                                 </div>
                             </form>
@@ -155,6 +174,19 @@ class Sets extends Component{
     }
 }
 
+function validate (formValues) {
+    const error = {};
+
+    console.log("THESE ARE THE FORM VALUES: ", formValues);
+
+    if(!formValues.subCategory){
+        error.subCategory = ['Please input a subcategory title'];
+    }
+
+    return error;
+
+}
+
 function mapStateToProps(state){
     return{
         category: state.sets.category,
@@ -162,6 +194,11 @@ function mapStateToProps(state){
         cards: state.sets
     }
 }
+
+Sets = reduxForm ({
+    form: "sets-modal",
+    validate: validate
+})(Sets);
 
 export default connect(mapStateToProps, {
     getSetsData,

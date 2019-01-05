@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/modal.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form'; 
 import { sendCategoryAndSubcategoryData } from '../actions';
 
 class ButtonModal extends Component {
@@ -30,9 +31,29 @@ class ButtonModal extends Component {
         });
     }
 
-    handleClick = async (e) => {
-        e.preventDefault();
-        const { categoryId, subCategoryId } = await this.props.sendCategoryAndSubcategoryData({category: this.state.category},{subCategory: this.state.subCategory});
+    renderInput (props) {
+        return (
+            <div className= {`input-field col ${props.size}`}>
+                <input {...props.input} className = "black-text" type= {props.type || "text"} id = {props.input.name}/>
+                <label htmlFor= {props.input.name} >{props.label}</label>
+                <ul>
+                    {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
+                        return <li key = {index} className="red-text text-size">{item}</li>
+                    })}
+                </ul>
+            </div>
+        );
+    }
+
+    handleClick = async (values) => {
+        console.log("SIgn up values: ", values);
+
+        this.setState({
+            category: category.value,
+            subCategory: subCategory.value
+        });
+
+        const { categoryId, subCategoryId } = await this.props.sendCategoryAndSubcategoryData({category: values.category},{subCategory: values.subCategory});
 
 
         this.props.history.push(`/createflashcards/${categoryId}/subcategory/${subCategoryId}`);
@@ -43,7 +64,10 @@ class ButtonModal extends Component {
     close = () => this.setState({isOpen: false});
 
     render(){
+        const { handleSubmit, match: { params }, reset } = this.props;
 
+        console.log("THIS IS PROPS: ", this.props);
+        console.log("THIS IS STATE: ", this.state);
 
         if(this.state.isOpen){
             return (
@@ -51,24 +75,18 @@ class ButtonModal extends Component {
                     <div onClick={e => e.stopPropagation()} className="basic-modal-content">
                         <div onClick={this.close} className="basic-modal-close center">X</div>
                             <div>
-                                <form className="col s12">
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <input onChange={this.updateCategory} type="text" className="validate" id="textarea1"></input>
-                                                <label htmlFor="textarea1">Create Category</label>
-                                            </div>
-                                        </div>
-                                        <div className="row"> 
-                                            <div className="input-field col s12">
-                                                <input onChange={this.updateSubCategory} type="text" className="validate" id="textarea2"></input>
-                                                <label htmlFor="textarea2">Create Title</label>
-                                            </div>  
-                                        </div>
-                                        <div className = "row">
-                                            <button onClick={this.handleClick} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
-                                                Create Card
-                                            </button>
-                                        </div>
+                                <form onSubmit = {handleSubmit(this.handleClick)}>
+                                    <div className="row text-black">
+                                        <Field className = "text-black" name = "category" size = "s12" type = "text" label = "Create Category" component = {this.renderInput}/>
+                                    </div>
+                                    <div className="row text-black">
+                                        <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Subcategory" component = {this.renderInput}/>
+                                    </div>
+                                    <div className = "row">
+                                        <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                            Create Card
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                     </div>
@@ -85,12 +103,35 @@ class ButtonModal extends Component {
     }
 }
 
+function validate (formValues) {
+    const error = {};
+
+    console.log("THESE ARE THE FORM VALUES: ", formValues);
+
+    if(!formValues.category){
+        error.category = ['Please input a category title'];
+    }
+
+    if(!formValues.subCategory){
+        error.subCategory = ['Please input a subcategory title'];
+    }
+
+    return error;
+
+}
+
+
 function mapStateToProps(state){
     return{
         category:state.sets.category,
         subCategory:state.sets.subCategory
     }
 }
+
+ButtonModal = reduxForm ({
+    form: "button-modal",
+    validate: validate
+})(ButtonModal);
 
 export default connect(mapStateToProps, {
     sendCategoryAndSubcategoryData
