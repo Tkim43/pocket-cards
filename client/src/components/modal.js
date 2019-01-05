@@ -53,7 +53,6 @@ class ButtonModal extends Component {
             subCategory: subCategory.value
         });
 
-        // e.preventDefault();
         const { categoryId, subCategoryId } = await this.props.sendCategoryAndSubcategoryData({category: values.category},{subCategory: values.subCategory});
 
 
@@ -67,10 +66,8 @@ class ButtonModal extends Component {
     render(){
         const { handleSubmit, match: { params }, reset } = this.props;
 
-        // debugger
         console.log("THIS IS PROPS: ", this.props);
         console.log("THIS IS STATE: ", this.state);
-
 
         if(this.state.isOpen){
             return (
@@ -78,27 +75,6 @@ class ButtonModal extends Component {
                     <div onClick={e => e.stopPropagation()} className="basic-modal-content">
                         <div onClick={this.close} className="basic-modal-close center">X</div>
                             <div>
-                                {/* <form className="col s12">
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <input onChange={this.updateCategory} type="text" className="validate" id="textarea1"></input>
-                                                <label htmlFor="textarea1">Create Category</label>
-                                            </div>
-                                        </div>
-                                        <div className="row"> 
-                                            <div className="input-field col s12">
-                                                <input onChange={this.updateSubCategory} type="text" className="validate" id="textarea2"></input>
-                                                <label htmlFor="textarea2">Create Title</label>
-                                            </div>  
-                                        </div>
-                                        <div className = "row">
-                                            <button onClick={this.handleClick} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
-                                                Create Card
-                                            </button>
-                                        </div>
-                                </form> */}
-
-
                                 <form onSubmit = {handleSubmit(this.handleClick)}>
                                     <div className="row text-black">
                                         <Field className = "text-black" name = "category" size = "s12" type = "text" label = "Create Category" component = {this.renderInput}/>
@@ -111,16 +87,6 @@ class ButtonModal extends Component {
                                             Create Card
                                         </button>
                                     </div>
-                                    {/* <div className = "buttonDiv">
-                                        <button className="blue lighten-2 btn btn-large" name="action">Add Card
-                                            <i className="material-icons right">add</i>
-                                        </button>
-                                    </div> */}
-                                    {/* <div className = "buttonDiv">
-                                        <Link to = {`/flashCardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn btn-large" type="done" name="action">Done
-                                            <i className="material-icons right">done</i>
-                                        </Link>
-                                    </div> */}
                                 </form>
                             </div>
                     </div>
