@@ -31,7 +31,7 @@ import types from '../actions/types';
         case types.DELETE_CARD:
             return{...state}
         case types.END_TUTORIAL:
-            return{...state, tutorial: action}
+            return{...state, tutorial: action.tutorial}
         case types.SEND_CARD_DATA:
             return{...state, front_description: '',back_description: ''}
         case types.GET_SETS_DATA:

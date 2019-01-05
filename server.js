@@ -446,18 +446,18 @@ app.patch('/api/update_card/:ID', async (req, res, next)=>{
 
 // tutorial end point changes 0 to 1 
 // dont forget to put requireAuth
-app.patch('/api/user/tutorial/', requireAuth, async (req, res, next)=>{
+app.patch('/api/tutorial', requireAuth, async (req, res, next)=>{
+    const { user } = req;
     try {
-        const { user } = req;
         // this one selects and then 
         const query = 'UPDATE ?? SET ?? = 1 WHERE ?? = ?';
         // inserts replaces the question marks
         // const inserts = ['users', 'tutorial', 'ID', user.ID];
         const inserts = ['users', 'tutorial', 'ID', user.ID];
-        console.log("user", user)
         const sql = mysql.format(query, inserts);
         // card is the response of the query
         const tutorial = await db.query(sql);
+
         res.send({
             success: true,
             tutorial
@@ -465,7 +465,7 @@ app.patch('/api/user/tutorial/', requireAuth, async (req, res, next)=>{
         
     } catch(err) {
         req.status = 500;
-        req.error = 'Error in the tutorial process';
+        req.error = 'Error in the tutorial process on server';
         // sends it to the next function
         return next();
     }

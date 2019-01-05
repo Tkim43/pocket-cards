@@ -11,7 +11,8 @@ class FlashcardGeneration extends Component {
     state = {
         delete: false,
         cardId: null,
-        show: false
+        show: false,
+        endTutorial: false
     };
     componentDidMount(){
         const { getTopicsCards, match: { params } } = this.props;
@@ -26,6 +27,9 @@ class FlashcardGeneration extends Component {
     endTutorial = async () =>{
         const{endTutorial} = this.props;
         await endTutorial();
+        this.setState({
+            endTutorial: true
+        })
     }
     async updateCardList(){
         try{
@@ -94,24 +98,43 @@ class FlashcardGeneration extends Component {
             return(
                 <div key = {item.ID}>
                     <div className="row container flashcard-row">
+                        
+                        {this.state.endTutorial ? 
+                        <div>
                         <div className="col s5 card-container">
-                            {/* <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
-                                <div>{frontText}</div>
-                            </Link>  */}
-                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
+                        <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
+                            <div>{frontText}</div>
+                        </Link> 
                         </div>
                         <div className="col s5 card-container">
-                            {/* <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
+                        <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
+                            <div>{backText}</div>
+                        </Link>
+                        </div> 
+                        </div>
+                        : 
+                        <div>
+                        <div className="col s5 card-container">
+                            <div onClick={!this.state.endTutorial ? this.showModal : ""} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
+                        </div>
+                        <div className="col s5 card-container">
+                            <div onClick={!this.state.endTutorial ? this.showModal : ""} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
+                        </div>
+                        </div>
+                        } 
+                        {/* <div className="col s5 card-container">
+                            <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
                                 <div>{backText}</div>
-                            </Link> */}
+                            </Link>
                             <div onClick ={this.showModal}className="card-panel teal lighten-1 white-text text-inside-card">backText</div>
-                        </div>
+                        </div> */}
                         <div className="col s2 card-container">
                         <button className="red lighten-2 btn-large" onClick={() => this.showModal(item.ID)}>
                                 <i className = "large material-icons">delete</i>
                             </button>
                         </div>
                     </div>
+                
                 </div>
             )
         })
@@ -156,7 +179,7 @@ function mapStateToProps(state){
     return {
         topic: sets.currentTopic,
         cards: sets.topicsCards,
-        cardCount: sets.topicsCardCount
+        cardCount: sets.topicsCardCount,
     }
 }
 
