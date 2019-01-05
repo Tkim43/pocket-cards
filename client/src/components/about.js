@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import auth from '../hoc/auth';
 import github from '../assets/images/github.png';
 import linkedin from '../assets/images/linkedin.png';
-import home from '../assets/images/home.png';
+import home from '../assets/images/home.png'; 
 import tiffany from '../assets/images/tiffany.jpeg';
 import brandon from '../assets/images/brandon.jpeg';
 import vienna from '../assets/images/vienna.JPG';
@@ -30,7 +30,7 @@ class About extends Component {
                             </a>
                         </div>
                     </div>
-                    <div>
+                    <div className="developer-wrapper">
                         <img className="developer brandon" src={brandon}/>
                         <h5 className="name center">Brandon Park</h5>
                         <div className="iconDiv">
@@ -45,7 +45,7 @@ class About extends Component {
                             </a>
                         </div>
                     </div>
-                    <div>
+                    <div className="developer-wrapper">
                         <img className="developer vienna" src={vienna}/>
                         <h5 className="name center">Vienna Tran</h5>
                         <div className="iconDiv">
