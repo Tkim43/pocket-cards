@@ -24,7 +24,7 @@ class FlashcardGeneration extends Component {
 
     
         // Binds our scroll event handler
-        window.onscroll = this.someThing.bind(this);
+        window.onscroll = this.checkScroll.bind(this);
       }
 
     componentDidMount(){
@@ -32,7 +32,7 @@ class FlashcardGeneration extends Component {
         getTopicsCards(params.set_id, params.topic_id);
     }
 
-    someThing = () => {
+    checkScroll = () => {
         const {
           showSpinner,
           loadCards,
@@ -64,11 +64,11 @@ class FlashcardGeneration extends Component {
 
         let calculated = this.state.scrollPosition + this.state.windowHeight;
         
-        if (calculated >= this.state.getDataHeight && this.state.loadingData === false) {
+        if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards) {
           this.setState({
             loadingData : true
           });
-          console.log('=============== GET MORE DATA ===============');
+        //   console.log('=============== GET MORE DATA ===============');
           
           setTimeout(function() {
               loadCards();
