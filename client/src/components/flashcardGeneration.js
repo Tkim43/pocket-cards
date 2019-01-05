@@ -100,20 +100,20 @@ class FlashcardGeneration extends Component {
                     <div className="row container flashcard-row">
                         
                         {this.state.endTutorial ? 
-                        <div>
-                        <div className="col s5 card-container">
-                        <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
-                            <div>{frontText}</div>
-                        </Link> 
-                        </div>
-                        <div className="col s5 card-container">
-                        <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
-                            <div>{backText}</div>
-                        </Link>
-                        </div> 
+                        <div className="row container flashcard-row">
+                            <div className="col s5 card-container">
+                                <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
+                                    <div>{frontText}</div>
+                                </Link> 
+                            </div>
+                            <div className="col s5 card-container">
+                                <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
+                                    <div>{backText}</div>
+                                </Link>
+                            </div> 
                         </div>
                         : 
-                        <div>
+                        <div className="row container flashcard-row">
                         <div className="col s5 card-container">
                             <div onClick={!this.state.endTutorial ? this.showModal : ""} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
                         </div>
