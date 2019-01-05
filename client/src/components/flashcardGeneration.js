@@ -82,7 +82,11 @@ class FlashcardGeneration extends Component {
         this.setState({ page: page_counter,
                         loadingData: false});
         
-
+        if(this.props.cards[((this.state.page * 10))] === undefined){
+            this.setState({
+                hasMore: false
+            });
+        }
         //change loadingData back to false if more cards to show
         if(this.props.cards[page_counter * 10]){
             this.setState({
@@ -122,11 +126,6 @@ class FlashcardGeneration extends Component {
     }
 
     showLoadingBar = () => {
-        if(this.props.cards[((this.state.page * 10))] === undefined){
-            this.setState({
-                hasMore: false
-            });
-        }
         return (
             <div className="progress container">
                 <div className="indeterminate"></div>
