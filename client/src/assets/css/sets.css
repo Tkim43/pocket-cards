@@ -52,9 +52,10 @@
 
 .terms{
     font-size: 1em;
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     justify-content: flex-end;
+    margin-top: -5%;
 }
 
   /* Extra small devices (phones, 600px and down) */
