@@ -15,70 +15,85 @@ class FlashcardGeneration extends Component {
           hasMore: true,
           isLoading: false,
           total_cards: [],
-          page: 1
+          page: 1,
+          windowHeight: null,
+          scrollPosition: null,
+          getDataHeight: null,
+          loadingData: false
         };
 
-        this.loadingData = false;
     
         // Binds our scroll event handler
-        window.onscroll = () => {
-          const {
-            loadCards,
-            state: {
-              error,
-              isLoading,
-              hasMore,
-            },
-          } = this;
-    
-          // Bails early if:
-          // * there's an error
-          // * it's already loading
-          // * there's nothing left to load
-          if (error || isLoading || !hasMore) return;
-    
-          // Checks that the page has scrolled to the bottom
-          const windowHeight = window.innerHeight;
-          const scrollPosition = document.documentElement.scrollTop;
-          const getDataHeight = document.documentElement.scrollHeight;
-        //   console.log("win height: ", windowHeight);
-        //   console.log("scroll position: ", scrollPosition);
-        //   console.log("getData height: ", getDataHeight);
-          
-          if (scrollPosition + windowHeight >= getDataHeight && this.loadingData === false) {
-            // loadCards();
-            setTimeout(function() { 
-                loadCards();
-            }, 500);
-
-            this.loadingData = true;
-            console.log('=============== GET MORE DATA ===============');
-            // debugger;
-          }
-        };
+        window.onscroll = this.someThing.bind(this);
       }
 
-    // state = {
-    //     delete: false,
-    //     cardId: null,
-    //     error: false,
-    //     hasMore: true,
-    //     isLoading: false,
-    //     page: 1
-    // };
     componentDidMount(){
         const { getTopicsCards, match: { params } } = this.props;
         getTopicsCards(params.set_id, params.topic_id);
     }
 
+    someThing = () => {
+        const {
+          showSpinner,
+          loadCards,
+          state: {
+            error,
+            isLoading,
+            hasMore,
+          },
+        } = this;
+  
+        // Bails early if:
+        // * there's an error
+        // * it's already loading
+        // * there's nothing left to load
+        if (error || isLoading || !hasMore) return;
+  
+        // Checks that the page has scrolled to the bottom
+        this.setState({
+            windowHeight: window.innerHeight,
+            scrollPosition: document.documentElement.scrollTop,
+            getDataHeight: document.documentElement.scrollHeight
+        });
+      //   this.state.windowHeight = window.innerHeight;
+      //   const scrollPosition = document.documentElement.scrollTop;
+      //   const getDataHeight = document.documentElement.scrollHeight;
+      //   console.log("win height: ", windowHeight);
+      //   console.log("scroll position: ", scrollPosition);
+      //   console.log("getData height: ", getDataHeight);
+
+        let calculated = this.state.scrollPosition + this.state.windowHeight;
+        
+        if (calculated >= this.state.getDataHeight && this.state.loadingData === false) {
+          this.setState({
+            loadingData : true
+          });
+          console.log('=============== GET MORE DATA ===============');
+          
+          setTimeout(function() {
+              loadCards();
+          }, 1000);
+
+        }
+      };
+
     loadCards = () => {
         let page_counter = this.state.page + 1;
-        this.setState({ page: page_counter });
-
-        //change loadingData back to false if more cards to show
-        if(this.props.cards[page_counter * 9]){
-            this.loadingData = false;
+        this.setState({ page: page_counter,
+                        loadingData: false});
+        
+        if(this.props.cards[((this.state.page * 10))] === undefined){
+            this.setState({
+                hasMore: false
+            });
         }
+        //change loadingData back to false if more cards to show
+        if(this.props.cards[page_counter * 10]){
+            this.setState({
+                loadingData : false
+              });
+        }
+
     }
 
 
@@ -109,9 +124,30 @@ class FlashcardGeneration extends Component {
             delete: false
         })
     }
+
+    showLoadingBar = () => {
+        return (
+            <div className="progress container">
+                <div className="indeterminate"></div>
+            </div>
+        );
+    }
+
     render () {
+
         console.log("these are your props", this.props);
-        console.log("Page Counter: ", this.state.page);
+        console.log("Page Counter: ", this.state);
+
+        if(this.state.loadingData === true && this.state.hasMore){
+            let calculated = this.state.scrollPosition + this.state.windowHeight;
+
+            if(this.state.loadingData === true && calculated >= this.state.getDataHeight){
+                var showLoadingBarVariable = this.showLoadingBar();
+            }
+            
+        }
+
+
         const { cardCount, cards, match: { params }, topic } = this.props;
 
         let start = this.state.page - 1;
@@ -173,6 +209,7 @@ class FlashcardGeneration extends Component {
                     </div>
                 </div>
                 {listCards}
+                {showLoadingBarVariable}
                 <div className = "buttonDiv center">
                     <Link className="blue lighten-2 btn btn-large col s6" to = {`/createflashcards/${params.set_id}/subcategory/${params.topic_id}`} name="action">
                         <i className="material-icons right">add</i>
