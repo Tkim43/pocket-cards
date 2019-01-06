@@ -96,10 +96,8 @@ class Navbar extends Component {
                     <div className="nav-wrapper">
                         <Link className = "brand-logo" to = "/profile">
                             <div>
-                                
-                                <img className ="logo-large hide-on-med-and-down" src={logo} />
                                 <span>Pocket Cards</span>
-                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                                <img className ="logo-large hide-on-small-only" src={logo} />
                                 <img className ="logo hide-on-med-and-up" src={logo} />
                             </div>
                         </Link>

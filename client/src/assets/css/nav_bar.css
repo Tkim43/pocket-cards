@@ -12,10 +12,10 @@
     right: 0;
 }
 
-/* .logo{
-    width:15%;
+.logo-large{
+    width:7%;
     height:0%;
-} */
+}
 
 .logo{
     width:5%;
@@ -45,9 +45,9 @@
     }
   }
 
-.brand-logo{
+/* .brand-logo{
     width:60%;
-}
+} */
 
 
 

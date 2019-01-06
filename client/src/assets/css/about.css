@@ -44,3 +44,38 @@ img.icon{
 .front-end,.name{
 font-family: 'Bree Serif', serif;
 }
+
+@media screen and (min-width: 1200px) {
+    .developer-wrapper{
+        width:32%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+    }
+  }
+
+@media screen and (max-width: 1200px) {
+    .developer-wrapper{
+        width:32%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+    }
+  }
+
+@media screen and (max-width: 992px) {
+    .developer-wrapper{
+        width:32%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+    }
+  }
+
+@media screen and (max-width: 600px) {
+    .developer-wrapper{
+        width:100%;
+        height:0%;
+    }
+  }
+

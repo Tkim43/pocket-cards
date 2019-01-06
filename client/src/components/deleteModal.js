@@ -14,9 +14,11 @@ class DeleteModal extends Component {
                             <form className="col s12" onClick={e => e.preventDefault()}>
                                 <div className="row"> 
                                     <div className="input-field col s12">
-                                        <p>Are you sure?</p>
-                                        <button onClick={deleteItem}>Yes</button>
-                                        <button onClick={ hideModal }>No</button>
+                                        <h6 className="center">Are you sure?</h6>
+                                        <div className = "row">
+                                            <button className="green lighten-2 btn waves-effect waves-light btn-large" onClick={deleteItem}>Yes</button>
+                                            <button className="red lighten-2 btn waves-effect waves-light btn-large" onClick={ hideModal }>No</button>
+                                        </div>
                                     </div>  
                                 </div>
                             </form>

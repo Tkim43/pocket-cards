@@ -9,16 +9,98 @@ import {getTutorialCompleted} from '../actions';
 import DeleteModal from './deleteModal';
 
 class FlashcardGeneration extends Component {
-    state = {
-        delete: false,
-        cardId: null,
-        show: false,
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+          delete: false,
+          cardId: null,
+          show: false,
+          error: false,
+          hasMore: true,
+          isLoading: false,
+          total_cards: [],
+          page: 1,
+          windowHeight: null,
+          scrollPosition: null,
+          getDataHeight: null,
+          loadingData: false
+        };
+
+    
+        // Binds our scroll event handler
+        // window.onscroll = this.checkScroll.bind(this);
+
+        window.onscroll = () => {
+            const {
+              loadCards,
+              state: {
+                error,
+                isLoading,
+                hasMore,
+              },
+            } = this;
+
+            // Bails early if:
+            // * there's an error
+            // * it's already loading
+            // * there's nothing left to load
+            if (error || isLoading || !hasMore) return;
+    
+            // Checks that the page has scrolled to the bottom
+            this.setState({
+                windowHeight: window.innerHeight,
+                scrollPosition: document.documentElement.scrollTop,
+                getDataHeight: document.documentElement.scrollHeight
+            });
+            //   this.state.windowHeight = window.innerHeight;
+            //   const scrollPosition = document.documentElement.scrollTop;
+            //   const getDataHeight = document.documentElement.scrollHeight;
+            //   console.log("win height: ", windowHeight);
+            //   console.log("scroll position: ", scrollPosition);
+            //   console.log("getData height: ", getDataHeight);
+
+            let calculated = this.state.scrollPosition + this.state.windowHeight;
+            
+            if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards) {
+                this.setState({
+                    loadingData : true
+                });
+                //   console.log('=============== GET MORE DATA ===============');
+                
+                setTimeout(function() {
+                    loadCards();
+                }, 1000);
+
+            }
+        }
+    }
     componentDidMount(){
         const { getTutorialCompleted, getTopicsCards, match: { params } } = this.props;
         getTutorialCompleted();
         getTopicsCards(params.set_id, params.topic_id);
     }
+
+    loadCards = () => {
+        let page_counter = this.state.page + 1;
+        this.setState({ page: page_counter,
+                        loadingData: false});
+        
+        if(this.props.cards[((this.state.page * 10))] === undefined){
+            this.setState({
+                hasMore: false
+            });
+        }
+        //change loadingData back to false if more cards to show
+        if(this.props.cards[page_counter * 10]){
+            this.setState({
+                loadingData : false
+              });
+        }
+
+    }
+
+
     delete = async () =>{
         const {match: { params } } = this.props;
         await this.props.deleteCard(this.state.cardId, params.topic_id);
@@ -52,7 +134,17 @@ class FlashcardGeneration extends Component {
             show: false
         })
     }
+
+    showLoadingBar = () => {
+        return (
+            <div className="progress container">
+                <div className="indeterminate"></div>
+            </div>
+        );
+    }
+
     render () {
+
         if(this.props.tutorial === 0){
             return (
                 <div className="basic-modal" onClick={this.hideModal}>
@@ -78,17 +170,35 @@ class FlashcardGeneration extends Component {
             )
         }
         console.log("these are your props", this.props);
+        console.log("Page Counter: ", this.state);
+
+        if(this.state.loadingData === true && this.state.hasMore){
+            let calculated = this.state.scrollPosition + this.state.windowHeight;
+
+            if(this.state.loadingData === true && calculated >= this.state.getDataHeight){
+                var showLoadingBarVariable = this.showLoadingBar();
+            }
+            
+        }
+
+
         const { cardCount, cards, match: { params }, topic } = this.props;
 
-        const listCards = cards.map((item,ID) =>{
+        let start = this.state.page - 1;
+        let end = this.state.page * 10;
+
+        let duplicate_arr = cards.slice(start,end);
+        console.log("Number of cards displayed: ", duplicate_arr);
+
+        let listCards = duplicate_arr.map((item,ID) =>{
             let frontText = item.frontText;
             let backText = item.backText;
 
-            if(frontText.length > 80){
-                frontText = item.frontText.substring(0,80) + "...";
+            if(frontText.length > 50){
+                frontText = item.frontText.substring(0,50) + "...";
             }
-            if(backText.length > 80){
-                backText = item.backText.substring(0,80) + "...";
+            if(backText.length > 50){
+                backText = item.backText.substring(0,50) + "...";
             }
 
             const path = `/editMode/${params.set_id}/topic/${params.topic_id}/card/${item.ID}`;
@@ -153,6 +263,7 @@ class FlashcardGeneration extends Component {
                     </div>
                 </div>
                 {listCards}
+                {showLoadingBarVariable}
                 <div className = "buttonDiv center">
                     <Link className="blue lighten-2 btn btn-large col s6" to = {`/createflashcards/${params.set_id}/subcategory/${params.topic_id}`} name="action">
                         <i className="material-icons right">add</i>

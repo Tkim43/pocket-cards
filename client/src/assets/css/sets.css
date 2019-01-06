@@ -44,3 +44,73 @@
 .set .btn-large{
     padding: 0 5%;
 }
+
+.title-name{
+    font-size:1rem;
+
+}
+
+.terms{
+    font-size: 1em;
+    /* width: 100%; */
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -5%;
+}
+
+  /* Extra small devices (phones, 600px and down) */
+
+  @media only screen and (max-width: 320px) {
+    .title-name{
+        font-size: 80%;
+    }
+} 
+
+@media only screen and (max-width: 600px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 5%;
+        top: 20%;
+    }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 600px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 20%;
+        top: 20%;
+    }
+}  */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 20%;
+        top: 20%;
+    }
+}  */
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 25%;
+        top: 20%;
+    }
+}  */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 30%;
+        top: 20%;
+    }
+} */

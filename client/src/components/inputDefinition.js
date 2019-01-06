@@ -59,10 +59,10 @@ class InputDefinition extends Component {
 
         if(cards && cards.length){
             cardElements = cards.map((card, i) => {
-                if(card.frontText.length > 80){
+                if(card.frontText.length > 60){
                     card.frontText = card.frontText.substring(0,60) + "...";
                 }
-                if(card.backText.length > 80){
+                if(card.backText.length > 60){
                     card.backText = card.backText.substring(0,60) + "...";
                 }
                 return (
