@@ -76,9 +76,14 @@ class FlashcardGeneration extends Component {
             }
         }
     }
-    componentDidMount(){
+    componentDidMount = async()=>{
         const { getTutorialCompleted, getTopicsCards, match: { params } } = this.props;
-        getTutorialCompleted();
+        await getTutorialCompleted();
+        if(this.props.tutorial === 0){
+            this.setState({
+                tutorial: true
+            })
+        }
         getTopicsCards(params.set_id, params.topic_id);
     }
 
@@ -214,7 +219,7 @@ class FlashcardGeneration extends Component {
             return(
                 <div key = {item.ID}>
                     <div className="row container flashcard-row">
-                        {this.props.tutorial === 0 ? 
+                        {/* {this.props.tutorial === 0 ? 
                         <Fragment>
                         <div className="col s5 card-container">
                             <div onClick={this.showTutorialModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
@@ -223,7 +228,7 @@ class FlashcardGeneration extends Component {
                             <div onClick={this.showTutorialModal} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
                         </div>
                         </Fragment>
-                        : 
+                        :  */}
                         <Fragment>
                             <div className="col s5 card-container">
                                 <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
@@ -236,7 +241,6 @@ class FlashcardGeneration extends Component {
                                 </Link>
                             </div> 
                         </Fragment>
-                        } 
                         {/* <div className="col s5 card-container">
                             <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
                                 <div>{backText}</div>
