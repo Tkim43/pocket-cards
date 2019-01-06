@@ -162,11 +162,29 @@ export function getTopicsCards(setId, topicId){
 export function endTutorial(){
     return async function(dispatch){
         try{
-            const { data: { success, ...tutorial }} = await axios.patch("/api/tutorial", true, authHeaders());
+            const { data: { success, tutorial }} = await axios.patch("/api/tutorial", true, authHeaders());
 
             dispatch({
                 type: types.END_TUTORIAL,
-                ...tutorial
+                success,
+                tutorial,
+            });
+        } catch(err){
+            console.log('Error with tutorial on front end');
+        }
+    }
+      
+    
+}
+
+export function getTutorialCompleted(){
+    return async function(dispatch){
+        try{
+            const { data: {tutorialCompleted}} = await axios.get("/api/usertutorial", authHeaders());
+            console.log("tutorial completed", tutorialCompleted)
+            dispatch({
+                type: types.TUTORIAL_COMPLETED,
+                tutorialCompleted,
             });
         } catch(err){
             console.log('Error with tutorial on front end');

@@ -19,5 +19,6 @@ export default {
     UPDATE_FIND_TIME_PASSED: 'update_find_time_passed',
     DELETE_SUBCATEGORY: 'delete_subcategory',
     UPDATE_AVATAR: 'update_avatar',
-    END_TUTORIAL: 'end_tutorial'
+    END_TUTORIAL: 'end_tutorial',
+    TUTORIAL_COMPLETED: 'tutorial_completed'
 };

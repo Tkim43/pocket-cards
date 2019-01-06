@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTopicsCards } from '../actions';
 import { deleteCard} from '../actions';
 import {endTutorial} from '../actions';
+import {getTutorialCompleted} from '../actions';
 import DeleteModal from './deleteModal';
 
 class FlashcardGeneration extends Component {
@@ -12,10 +13,10 @@ class FlashcardGeneration extends Component {
         delete: false,
         cardId: null,
         show: false,
-        endTutorial: false
     };
     componentDidMount(){
-        const { getTopicsCards, match: { params } } = this.props;
+        const { getTutorialCompleted, getTopicsCards, match: { params } } = this.props;
+        getTutorialCompleted();
         getTopicsCards(params.set_id, params.topic_id);
     }
     delete = async () =>{
@@ -27,9 +28,6 @@ class FlashcardGeneration extends Component {
     endTutorial = async () =>{
         const{endTutorial} = this.props;
         await endTutorial();
-        this.setState({
-            endTutorial: true
-        })
     }
     async updateCardList(){
         try{
@@ -55,7 +53,7 @@ class FlashcardGeneration extends Component {
         })
     }
     render () {
-        if(this.state.show){
+        if(this.props.tutorial === 0){
             return (
                 <div className="basic-modal" onClick={this.hideModal}>
                     <div onClick={e => e.stopPropagation()} className="basic-modal-content">
@@ -98,9 +96,17 @@ class FlashcardGeneration extends Component {
             return(
                 <div key = {item.ID}>
                     <div className="row container flashcard-row">
-                        
-                        {this.state.endTutorial ? 
-                        <div className="row container flashcard-row">
+                        {this.props.tutorial === 0 ? 
+                        <Fragment>
+                        <div className="col s5 card-container">
+                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
+                        </div>
+                        <div className="col s5 card-container">
+                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
+                        </div>
+                        </Fragment>
+                        : 
+                        <Fragment>
                             <div className="col s5 card-container">
                                 <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
                                     <div>{frontText}</div>
@@ -111,16 +117,7 @@ class FlashcardGeneration extends Component {
                                     <div>{backText}</div>
                                 </Link>
                             </div> 
-                        </div>
-                        : 
-                        <div className="row container flashcard-row">
-                        <div className="col s5 card-container">
-                            <div onClick={!this.state.endTutorial ? this.showModal : ""} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
-                        </div>
-                        <div className="col s5 card-container">
-                            <div onClick={!this.state.endTutorial ? this.showModal : ""} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
-                        </div>
-                        </div>
+                        </Fragment>
                         } 
                         {/* <div className="col s5 card-container">
                             <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
@@ -174,17 +171,20 @@ class FlashcardGeneration extends Component {
 }
 
 function mapStateToProps(state){
-    const { sets } = state;
+    const { sets} = state;
 
     return {
         topic: sets.currentTopic,
         cards: sets.topicsCards,
         cardCount: sets.topicsCardCount,
+        on: sets.on,
+        tutorial: sets.on
     }
 }
 
 export default connect(mapStateToProps, {
     getTopicsCards,
     deleteCard,
-    endTutorial
+    endTutorial,
+    getTutorialCompleted,
 })(FlashcardGeneration);

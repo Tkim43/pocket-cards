@@ -445,7 +445,6 @@ app.patch('/api/update_card/:ID', async (req, res, next)=>{
 
 
 // tutorial end point changes 0 to 1 
-// dont forget to put requireAuth
 app.patch('/api/tutorial', requireAuth, async (req, res, next)=>{
     const { user } = req;
     try {
@@ -460,7 +459,7 @@ app.patch('/api/tutorial', requireAuth, async (req, res, next)=>{
 
         res.send({
             success: true,
-            tutorial
+            tutorial,
         });
         
     } catch(err) {
@@ -472,6 +471,29 @@ app.patch('/api/tutorial', requireAuth, async (req, res, next)=>{
     // errorhandling is the middleware
 }, errorHandling);
 
+// get tutorial information
+app.get('/api/usertutorial', async (req, res, next) => {
+    // const { user } = req;
+    try {
+        const query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+        const inserts = ['tutorial', 'users', 'ID', 1];
+
+        const sql = mysql.format(query, inserts);
+
+        const tutorialCompleted = await db.query(sql);
+
+        res.send({
+            success: true,
+            tutorialCompleted
+        });
+    } catch (err){
+        req.status = 500;
+        req.error = 'Error in the tutorial process on the server';
+
+        return next();
+    }
+    
+}, errorHandling);
 
 
 
