@@ -16,6 +16,7 @@ class FlashcardGeneration extends Component {
           delete: false,
           cardId: null,
           show: false,
+          tutorial: false,
           error: false,
           hasMore: true,
           isLoading: false,
@@ -124,14 +125,21 @@ class FlashcardGeneration extends Component {
         this.setState({
             delete: true,
             cardId,
-            show: true
+            show: true,
+            false: true,
         });
+    }
+    showTutorialModal = () => {
+        this.setState({
+            tutorial: true
+        })
     }
 
     hideModal = () =>{
         this.setState({
             delete: false,
-            show: false
+            show: false,
+            tutorial: false
         })
     }
 
@@ -145,7 +153,7 @@ class FlashcardGeneration extends Component {
 
     render () {
 
-        if(this.props.tutorial === 0){
+        if(this.state.tutorial){
             return (
                 <div className="basic-modal" onClick={this.hideModal}>
                     <div onClick={e => e.stopPropagation()} className="basic-modal-content">
@@ -209,10 +217,10 @@ class FlashcardGeneration extends Component {
                         {this.props.tutorial === 0 ? 
                         <Fragment>
                         <div className="col s5 card-container">
-                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
+                            <div onClick={this.showTutorialModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
                         </div>
                         <div className="col s5 card-container">
-                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
+                            <div onClick={this.showTutorialModal} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
                         </div>
                         </Fragment>
                         : 
