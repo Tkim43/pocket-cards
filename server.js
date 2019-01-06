@@ -205,10 +205,12 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
     const {user} = req;
     
     try {
+        // this one selects and then 
         const query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
+        // inserts replaces the question marks
         const inserts = ['cards', 'topicID', 'frontText', 'backText', topicID, frontText, backText];
         const sql = mysql.format(query, inserts);
-
+        // card is the response of the query
         const card = await db.query(sql);
 
         res.send({
@@ -220,9 +222,10 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
         
         req.status = 500;
         req.error = 'Error posting cards';
-
+        // sends it to the next fucntion
         return next();
     }
+    // errorhandling is the middleware
 }, errorHandling);
 
 //Get single card data
@@ -439,6 +442,60 @@ app.patch('/api/update_card/:ID', async (req, res, next)=>{
         return next();
     }
 }, errorHandling);
+
+
+// tutorial end point changes 0 to 1 
+app.patch('/api/tutorial', requireAuth, async (req, res, next)=>{
+    const { user } = req;
+    try {
+        // this one selects and then 
+        const query = 'UPDATE ?? SET ?? = 1 WHERE ?? = ?';
+        // inserts replaces the question marks
+        // const inserts = ['users', 'tutorial', 'ID', user.ID];
+        const inserts = ['users', 'tutorial', 'ID', user.ID];
+        const sql = mysql.format(query, inserts);
+        // card is the response of the query
+        const tutorial = await db.query(sql);
+
+        res.send({
+            success: true,
+            tutorial,
+        });
+        
+    } catch(err) {
+        req.status = 500;
+        req.error = 'Error in the tutorial process on server';
+        // sends it to the next function
+        return next();
+    }
+    // errorhandling is the middleware
+}, errorHandling);
+
+// get tutorial information
+app.get('/api/usertutorial', async (req, res, next) => {
+    // const { user } = req;
+    try {
+        const query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+        const inserts = ['tutorial', 'users', 'ID', 1];
+
+        const sql = mysql.format(query, inserts);
+
+        const tutorialCompleted = await db.query(sql);
+
+        res.send({
+            success: true,
+            tutorialCompleted
+        });
+    } catch (err){
+        req.status = 500;
+        req.error = 'Error in the tutorial process on the server';
+
+        return next();
+    }
+    
+}, errorHandling);
+
+
 
 //delete displayName, subCategories, and all cards (DONE)
 app.post('/api/set_management/delete_user', (req, res, next)=>{

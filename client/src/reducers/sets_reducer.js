@@ -15,7 +15,8 @@ import types from '../actions/types';
     topicsCardCount: 0,
     currentTopic: {},
     singleCard: {},
-    location:''
+    location:'',
+    tutorial: []
 };
  export default (state = DEFAULT_STATE, action) => {
     switch(action.type){
@@ -24,11 +25,16 @@ import types from '../actions/types';
         case types.SEND_CREATE_CARD_DATA:
             return {...state, front_description: action.payload.frontText, back_description: action.payload.backText};
         case types.GET_TOPICS_CARDS:
-            return { ...state, topicsCards: action.cards, topicsCardCount: action.cardCount, currentTopic: action.topic };
+            return { ...state, topicsCards: action.cards, topicsCardCount: action.cardCount, currentTopic: action.topic, tutorial: action.tutorial };
         case types.GET_CARD_DATA:
             return { ...state, singleCard: action.card,location:action.location};
         case types.DELETE_CARD:
             return{...state}
+        case types.END_TUTORIAL:
+            return{...state, on: action.success}
+        case types.TUTORIAL_COMPLETED:
+        console.log("action", action)
+            return{...state, on: action.tutorialCompleted[0].tutorial}
         case types.SEND_CARD_DATA:
             return{...state, front_description: '',back_description: ''}
         case types.GET_SETS_DATA:

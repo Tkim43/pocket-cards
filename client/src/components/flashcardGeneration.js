@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../assets/css/FlashcardGeneration.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTopicsCards } from '../actions';
 import { deleteCard} from '../actions';
+import {endTutorial} from '../actions';
+import {getTutorialCompleted} from '../actions';
 import DeleteModal from './deleteModal';
 
 class FlashcardGeneration extends Component {
@@ -11,6 +13,9 @@ class FlashcardGeneration extends Component {
         super(props);
 
         this.state = {
+          delete: false,
+          cardId: null,
+          show: false,
           error: false,
           hasMore: true,
           isLoading: false,
@@ -70,9 +75,9 @@ class FlashcardGeneration extends Component {
             }
         }
     }
-
     componentDidMount(){
-        const { getTopicsCards, match: { params } } = this.props;
+        const { getTutorialCompleted, getTopicsCards, match: { params } } = this.props;
+        getTutorialCompleted();
         getTopicsCards(params.set_id, params.topic_id);
     }
 
@@ -102,6 +107,10 @@ class FlashcardGeneration extends Component {
         this.updateCardList();
         this.hideModal();
     }
+    endTutorial = async () =>{
+        const{endTutorial} = this.props;
+        await endTutorial();
+    }
     async updateCardList(){
         try{
             const { getTopicsCards, match: { params } } = this.props;
@@ -114,13 +123,15 @@ class FlashcardGeneration extends Component {
     showModal = (cardId) =>{
         this.setState({
             delete: true,
-            cardId
+            cardId,
+            show: true
         });
     }
 
     hideModal = () =>{
         this.setState({
-            delete: false
+            delete: false,
+            show: false
         })
     }
 
@@ -134,6 +145,30 @@ class FlashcardGeneration extends Component {
 
     render () {
 
+        if(this.props.tutorial === 0){
+            return (
+                <div className="basic-modal" onClick={this.hideModal}>
+                    <div onClick={e => e.stopPropagation()} className="basic-modal-content">
+                        <div onClick={this.hideModal} className="basic-modal-close center">X</div>
+                            <div>
+                                <form className="col s12">
+                                        <div>
+                                            <h6 className="center">how to edit your cards example below: </h6>
+                                        </div>
+                                        <div className = "row">
+                                                <p>
+                                                    <label>
+                                                        <input onClick={this.endTutorial}type ="checkbox"/>
+                                                        <span className="black-text">Do not show again</span>
+                                                    </label>
+                                                </p>
+                                        </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            )
+        }
         console.log("these are your props", this.props);
         console.log("Page Counter: ", this.state);
 
@@ -171,22 +206,42 @@ class FlashcardGeneration extends Component {
             return(
                 <div key = {item.ID}>
                     <div className="row container flashcard-row">
+                        {this.props.tutorial === 0 ? 
+                        <Fragment>
                         <div className="col s5 card-container">
-                            <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
-                                <div>{frontText}</div>
-                            </Link> 
+                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
                         </div>
                         <div className="col s5 card-container">
+                            <div onClick={this.showModal} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
+                        </div>
+                        </Fragment>
+                        : 
+                        <Fragment>
+                            <div className="col s5 card-container">
+                                <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
+                                    <div>{frontText}</div>
+                                </Link> 
+                            </div>
+                            <div className="col s5 card-container">
+                                <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
+                                    <div>{backText}</div>
+                                </Link>
+                            </div> 
+                        </Fragment>
+                        } 
+                        {/* <div className="col s5 card-container">
                             <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
                                 <div>{backText}</div>
                             </Link>
-                        </div>
+                            <div onClick ={this.showModal}className="card-panel teal lighten-1 white-text text-inside-card">backText</div>
+                        </div> */}
                         <div className="col s2 card-container">
                         <button className="red lighten-2 btn-large" onClick={() => this.showModal(item.ID)}>
                                 <i className = "large material-icons">delete</i>
                             </button>
                         </div>
                     </div>
+                
                 </div>
             )
         })
@@ -227,16 +282,20 @@ class FlashcardGeneration extends Component {
 }
 
 function mapStateToProps(state){
-    const { sets } = state;
+    const { sets} = state;
 
     return {
         topic: sets.currentTopic,
         cards: sets.topicsCards,
-        cardCount: sets.topicsCardCount
+        cardCount: sets.topicsCardCount,
+        on: sets.on,
+        tutorial: sets.on
     }
 }
 
 export default connect(mapStateToProps, {
     getTopicsCards,
-    deleteCard
+    deleteCard,
+    endTutorial,
+    getTutorialCompleted,
 })(FlashcardGeneration);
