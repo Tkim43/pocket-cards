@@ -24,3 +24,80 @@ body{
 input[type=password]:not(.browser-default){
     color: white;
 }
+
+ .landingLogo{
+    position: relative;
+    /* left: 20%; */
+    top: 0px;
+    z-index: 1;
+    /* width: 50%; */
+} 
+
+.kangaroo{
+    position: absolute;
+    left: 0%;
+    /* top: -9rem; */
+    z-index: 1;
+    width: 94%;
+    /* display: inline-block; */
+}  
+
+/* @media screen and (min-width: 1200px) {
+
+    .landingLogo{
+        position: relative;
+        left: 20%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+    .kangaroo{
+        position: relative;
+        right: 25%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .landingLogo{
+        position: relative;
+        left: 20%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+    .kangaroo{
+        position: relative;
+        right: 25%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+  }
+
+@media screen and (max-width: 992px) {
+    .landingLogo{
+        position: relative;
+        left: 20%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+    .kangaroo{
+        position: relative;
+        right: 25%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+  } */
+
+/* @media screen and (max-width: 600px) {
+    .logo{
+        width:12%;
+        height:0%;
+    }
+  } */
