@@ -25,24 +25,20 @@ input[type=password]:not(.browser-default){
     color: white;
 }
 
- .landingLogo{
+ /* .landingLogo{
     position: relative;
-    /* left: 20%; */
     top: 0px;
     z-index: 1;
-    /* width: 50%; */
 } 
 
 .kangaroo{
     position: absolute;
     left: 0%;
-    /* top: -9rem; */
     z-index: 1;
     width: 94%;
-    /* display: inline-block; */
-}  
+}   */
 
-/* @media screen and (min-width: 1200px) {
+ /* @media screen and (min-width: 1200px) {
 
     .landingLogo{
         position: relative;
@@ -58,46 +54,88 @@ input[type=password]:not(.browser-default){
         z-index: 1;
         width:50%;
     }
+}  */
+
+/* @media screen and (max-width: 1200px) {
+
+    .landingLogo{
+        position: relative;
+        left: 20%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+    .kangaroo{
+        position: relative;
+        right: 25%;
+        top: 0px;
+        z-index: 1;
+        width:50%;
+    }
+  }  */
+ 
+
+
+  @media screen and (min-width: 601px) {
+    .landingLogo{
+        position: relative;
+        top: 0px;
+        z-index: 1;
+        width: 100%;
+    }
+    .kangaroo{
+        position: absolute;
+        right: 25%;
+        z-index: 1;
+        width:90%;
+        left: 0%;
+    }
+  }  
+  @media screen and (min-width: 630px) {
+    .landingLogo{
+    position: relative;
+    top: 0px;
+    z-index: 1;
+    width: 50%;
+    }
+    .kangaroo{
+        position: absolute;
+        left: 25%;
+        /* top: 0px; */
+        z-index: 1;
+        width: 45%;
+        
+  }
+}
+@media screen and (min-width: 992px) {
+    .landingLogo{
+    position: relative;
+    top: 0px;
+    z-index: 1;
+    width: 65%;
+    }
+    .kangaroo{
+        position: absolute;
+        left: 25%;
+        /* top: 0px; */
+        z-index: 1;
+        width: 45%;
+        
+  }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 600px) {
+     .landingLogo{
+    position: relative;
+    top: 0px;
+    z-index: 1;
+} 
 
-    .landingLogo{
-        position: relative;
-        left: 20%;
-        top: 0px;
-        z-index: 1;
-        width:50%;
-    }
-    .kangaroo{
-        position: relative;
-        right: 25%;
-        top: 0px;
-        z-index: 1;
-        width:50%;
-    }
-  }
+.kangaroo{
+    position: absolute;
+    left: 0%;
+    z-index: 1;
+    width: 94%;
+}  
+  } 
 
-@media screen and (max-width: 992px) {
-    .landingLogo{
-        position: relative;
-        left: 20%;
-        top: 0px;
-        z-index: 1;
-        width:50%;
-    }
-    .kangaroo{
-        position: relative;
-        right: 25%;
-        top: 0px;
-        z-index: 1;
-        width:50%;
-    }
-  } */
-
-/* @media screen and (max-width: 600px) {
-    .logo{
-        width:12%;
-        height:0%;
-    }
-  } */
