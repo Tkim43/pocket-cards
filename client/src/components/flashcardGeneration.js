@@ -22,9 +22,9 @@ class FlashcardGeneration extends Component {
           isLoading: false,
           total_cards: [],
           page: 1,
-          windowHeight: null,
-          scrollPosition: null,
-          getDataHeight: null,
+          windowHeight: window.innerHeight,
+          scrollPosition: document.documentElement.scrollTop,
+          getDataHeight: document.documentElement.scrollHeight,
           loadingData: false
         };
 
@@ -49,11 +49,7 @@ class FlashcardGeneration extends Component {
             if (error || isLoading || !hasMore) return;
     
             // Checks that the page has scrolled to the bottom
-            this.setState({
-                windowHeight: window.innerHeight,
-                scrollPosition: document.documentElement.scrollTop,
-                getDataHeight: document.documentElement.scrollHeight
-            });
+            
             //   this.state.windowHeight = window.innerHeight;
             //   const scrollPosition = document.documentElement.scrollTop;
             //   const getDataHeight = document.documentElement.scrollHeight;
@@ -62,12 +58,14 @@ class FlashcardGeneration extends Component {
             //   console.log("getData height: ", getDataHeight);
 
             let calculated = this.state.scrollPosition + this.state.windowHeight;
-            
-            if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards) {
+            // debugger;
+            if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards.length > 0) {
                 this.setState({
+                    // windowHeight: window.innerHeight,
+                    // scrollPosition: document.documentElement.scrollTop,
+                    // getDataHeight: document.documentElement.scrollHeight,
                     loadingData : true
                 });
-                //   console.log('=============== GET MORE DATA ===============');
                 
                 setTimeout(function() {
                     loadCards();
