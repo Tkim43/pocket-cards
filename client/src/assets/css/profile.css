@@ -173,3 +173,37 @@
     top: 33%;
     left: 100%;
 }
+
+@media screen and (min-width: 1145px) {
+    .profile-pic {
+        height: 100%;
+        width: 80%;
+    }
+}
+@media screen and (min-width: 1159px) {
+    .cog-img {
+        position: relative;
+        height: 35%;
+        width: 35%;
+        top: 33%;
+        left: 90%;
+        z-index: 1;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .profile-pic {
+        height: 100%;
+        width: 70%;
+        position:relative;
+        right:20%;
+    }
+    .cog-img {
+        position: relative;
+        height: 35%;
+        width: 35%;
+        top: 33%;
+        left: 65%;
+        z-index: 1;
+    }
+}
