@@ -94,6 +94,13 @@ class ButtonModal extends Component {
             )
         }
 
+        if (this.props.createCards) {
+            return(
+                <button onClick ={this.open} className="col s12 bold-text blue lighten-2 btn-large">Create Cards    <i className="material-icons large">add_box</i>
+            </button>
+            )
+        }
+
         return (
           
             <div onClick={this.open} className = "card-panel orange lighten-2 white-text center" >Create Category</div>

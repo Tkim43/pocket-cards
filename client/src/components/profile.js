@@ -113,6 +113,11 @@ class Profile extends Component {
         }
 
         const timeZoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
+        // const emptyCategory = (() =>{
+        //     return(
+                
+        //     );
+        // });
 
         const profileCategories =  this.props.sets.map ( (item, ID) => {
 
@@ -161,10 +166,19 @@ class Profile extends Component {
                 </div>
                 <div className="row">
                 <div className="col s12 card-container create-category-bold-text">
-                        <BasicModal/>
+                        <BasicModal />
                 </div>
                 </div>
-                {profileCategories}
+             {this.props.sets.length > 0 ? profileCategories :
+            <div>
+            <p className="white-text center">Welcome to PocketCards!</p>
+            <p className="white-text center">Click down below to begin</p>
+            {/* <button className="col s12 card-container create-category-bold-text blue lighten-2 btn-large">
+                Create Cards <i className="material-icons large" onClick={()=> <BasicModal/>}>add</i>
+            </button> */}
+            <BasicModal createCards={true} />
+            </div>
+            }
             </div>
             { this.state.show ? <DeleteModal hideModal={this.hideModal }deleteItem={this.delete} /> : '' }
         </div>
