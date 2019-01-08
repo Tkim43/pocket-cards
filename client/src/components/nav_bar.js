@@ -70,9 +70,12 @@ class Navbar extends Component {
             <Fragment>
                 <nav className = "main-nav">
                     <div className="nav-wrapper">
-                        <Link className = "brand-logo" to = "/profile">                                
-                                <span>Pocket Cards</span>
-                                <img className ="logo" src={logo} />
+                        <Link className = "brand-logo" to = "/profile">
+                            <div className="nav-container">
+                                <span className="pocket-cards">Pocket Cards</span>
+                                <img className ="logo-large hide-on-small-only" src={logo} />
+                                <img className ="logo hide-on-med-and-up" src={logo} />
+                            </div>
                         </Link>
                         
                         <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
