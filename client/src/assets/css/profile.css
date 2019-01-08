@@ -180,7 +180,7 @@
         width: 80%;
     }
 }
-@media screen and (min-width: 1159px) {
+@media screen and (min-width: 1150px) {
     .cog-img {
         position: relative;
         height: 35%;
@@ -200,7 +200,7 @@
     }
     .cog-img {
         position: relative;
-        height: 35%;
+        height: 50%;
         width: 35%;
         top: 33%;
         left: 65%;

@@ -16,9 +16,9 @@ p{
 
 body{
     background-color:#314256;
-    width: 100vw;
+    /* width: 100vw;
     height: 100vh;
-    margin: 0px;
+    margin: 0px; */
 }
 
 input[type=password]:not(.browser-default){
