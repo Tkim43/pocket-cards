@@ -95,8 +95,8 @@ class Navbar extends Component {
                 <nav className="main-nav">
                     <div className="nav-wrapper">
                         <Link className = "brand-logo" to = "/profile">
-                            <div>
-                                <span>Pocket Cards</span>
+                            <div className="nav-container">
+                                <span className="pocket-cards">Pocket Cards</span>
                                 <img className ="logo-large hide-on-small-only" src={logo} />
                                 <img className ="logo hide-on-med-and-up" src={logo} />
                             </div>

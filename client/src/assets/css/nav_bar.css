@@ -29,6 +29,7 @@
     }
   }
 
+
 @media screen and (max-width: 992px) {
     .logo{
         width: 7%;
@@ -36,14 +37,51 @@
         position: relative;
         top: 0px;
     }
+    .nav-container{
+        text-align: center;
+    }
   }
 
 @media screen and (max-width: 600px) {
     .logo{
-        width:12%;
-        height:0%;
+        width: 15%;
+        height: 0%;
+        right: 3%;
+        top: 3px;
     }
   }
+@media screen and (max-width: 400px) {
+    .logo{
+        width: 15%;
+        right: 0%;
+        top: 0px;
+    }
+    .pocket-cards {
+        font-family: 'Baloo Chettan', cursive;
+        color: white;
+        font-size: 68%;
+        vertical-align: top;
+    }
+  }
+@media screen and (min-width: 601px) {
+    .logo-large{
+        width: 13%;
+        height: 0%;
+        right: 2%;
+        position: relative;
+        top: 3px;
+    }
+  }
+  @media screen and (min-width: 993px) {
+    .logo-large{
+        width: 5%;
+        height: 0%;
+        position: relative;
+        right: 0.5%;
+  }
+}
+
+
 
 /* .brand-logo{
     width:60%;
