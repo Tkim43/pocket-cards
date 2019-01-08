@@ -472,11 +472,11 @@ app.patch('/api/tutorial', requireAuth, async (req, res, next)=>{
 }, errorHandling);
 
 // get tutorial information
-app.get('/api/usertutorial', async (req, res, next) => {
-    // const { user } = req;
+app.get('/api/usertutorial', requireAuth, async (req, res, next) => {
+    const { user } = req;
     try {
         const query = 'SELECT ?? FROM ?? WHERE ?? = ?';
-        const inserts = ['tutorial', 'users', 'ID', 1];
+        const inserts = ['tutorial', 'users', 'ID', user.ID];
 
         const sql = mysql.format(query, inserts);
 
