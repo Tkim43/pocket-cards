@@ -30,7 +30,6 @@ class FlashcardGeneration extends Component {
 
     
         // Binds our scroll event handler
-        // window.onscroll = this.checkScroll.bind(this);
 
         window.onscroll = () => {
             const {
