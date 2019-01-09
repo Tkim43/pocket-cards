@@ -58,7 +58,7 @@ class FlashcardGeneration extends Component {
 
             let calculated = this.state.scrollPosition + this.state.windowHeight;
             // debugger;
-            if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards.length > 0) {
+            if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards.length > 10) {
                 this.setState({
                     // windowHeight: window.innerHeight,
                     // scrollPosition: document.documentElement.scrollTop,
@@ -91,7 +91,8 @@ class FlashcardGeneration extends Component {
         
         if(this.props.cards[((this.state.page * 10))] === undefined){
             this.setState({
-                hasMore: false
+                hasMore: false,
+                loadingData : false
             });
         }
         //change loadingData back to false if more cards to show
@@ -146,11 +147,14 @@ class FlashcardGeneration extends Component {
     }
 
     showLoadingBar = () => {
-        return (
-            <div className="progress container">
-                <div className="indeterminate"></div>
-            </div>
-        );
+        let calculated = this.state.scrollPosition + this.state.windowHeight;
+        if(this.state.hasMore && this.state.loadingData === true && calculated >= this.state.getDataHeight && this.props.cards[this.state.page * 10]){
+            return (
+                <div className="progress container">
+                    <div className="indeterminate"></div>
+                </div>
+            );
+        }
     }
 
     render () {
@@ -182,20 +186,14 @@ class FlashcardGeneration extends Component {
         console.log("these are your props", this.props);
         console.log("Page Counter: ", this.state);
 
-        if(this.state.loadingData === true && this.state.hasMore){
-            let calculated = this.state.scrollPosition + this.state.windowHeight;
-
-            if(this.state.loadingData === true && calculated >= this.state.getDataHeight){
-                var showLoadingBarVariable = this.showLoadingBar();
-            }
-            
-        }
-
-
         const { cardCount, cards, match: { params }, topic } = this.props;
 
-        let start = this.state.page - 1;
-        let end = this.state.page * 10;
+        let start = 0;
+        if(!cards[this.state.page * 10]){
+            var end = cards.length;
+        }else{
+            end = this.state.page * 10;
+        }
 
         let duplicate_arr = cards.slice(start,end);
         console.log("Number of cards displayed: ", duplicate_arr);
@@ -272,7 +270,7 @@ class FlashcardGeneration extends Component {
                     </div>
                 </div>
                 {listCards}
-                {showLoadingBarVariable}
+                {this.showLoadingBar()}
                 <div className = "buttonDiv center">
                     <Link className="blue lighten-2 btn btn-large col s6" to = {`/createflashcards/${params.set_id}/subcategory/${params.topic_id}`} name="action">
                         <i className="material-icons right">add</i>
