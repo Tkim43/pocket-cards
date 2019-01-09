@@ -66,7 +66,7 @@ class InputDefinition extends Component {
                     card.backText = card.backText.substring(0,60) + "...";
                 }
                 return (
-                    <div className="row center grey-text" key={i}>
+                    <div className="previews row center black-text" key={i}>
                         <div className="col s6">{card.frontText}</div>
                         <div className="col s6">{card.backText}</div>
                     </div>
