@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import { connect } from 'react-redux';
 
-export default function (WrappedComponent , to = "/signin", requireAuth = true){
+export default function (WrappedComponent , to = "/", requireAuth = true){
     class Auth extends Component {
 
         componentDidMount () {
@@ -13,6 +13,7 @@ export default function (WrappedComponent , to = "/signin", requireAuth = true){
         }
 
         checkAuth () {
+            console.log("Auth props: ", this.props);
             if(this.props.auth !== requireAuth){
                 this.props.history.push(to);
             }

@@ -7,6 +7,13 @@ import "../assets/css/logIn.css";
 
 
 class Login extends Component{
+
+    componentDidMount(){
+        if(window.localStorage.getItem('token') !== null ){
+            this.props.history.push("/profile");
+        }
+    }
+
     render(){
         return(
             <div className="center mainContainer">
