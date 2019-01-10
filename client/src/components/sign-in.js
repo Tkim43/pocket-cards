@@ -37,9 +37,11 @@ class Signin extends Component {
                         <Field size = "s12" type = "password" name = "password" label = "password" component = {this.renderInput}/>
                     </div>
                     <div className="row">
+                        <div className="red-text text-darken-2">{signInError}</div>
+                    </div>
+                    <div className="row">
                         <div className="col s12 right-align">
                             <button className = "btn green lighten-2">Sign In</button>
-                            <div className="red-text text-darken-2">{signInError}</div>
                         </div>
                     </div>
                 </form>

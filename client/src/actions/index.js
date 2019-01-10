@@ -195,9 +195,12 @@ export function getTutorialCompleted(){
 }
 
 export function userSignUp(newUser){
+    console.log("this is new user: ", newUser);
     return async function (dispatch){
         try {
-            const { data: { token, user } } = await axios.post('/auth/sign-up', newUser);
+            const { data: { token, user } } = await axios.post('/auth/sign-up', newUser).catch(err => {
+                throw err;
+            });
 
             localStorage.setItem('token', token);
             
@@ -209,6 +212,7 @@ export function userSignUp(newUser){
         } catch (err){
             dispatch ({
                 type: types.SIGN_UP_ERROR,
+                errors: err.response.data.errors
             });
         }
     }
