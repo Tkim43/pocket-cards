@@ -54,6 +54,7 @@ class Signup extends Component {
     }
 
     render () {
+
         const { handleSubmit} = this.props;
 
         return (
@@ -63,7 +64,7 @@ class Signup extends Component {
 
                 <div>
                     <div className="select-box--box">
-                        <div className="select-box--container">
+                        <div className="select-box--container" onClick={this.dropDown}>
                             <div className="select-box--selected-item">
                                 { this.state.selectedItem.value || this.state.avatars[0].value }
                             </div>
@@ -102,6 +103,15 @@ class Signup extends Component {
                         <Field size = "s12" name = "password" type = "password" label = "password" component = {this.renderInput}/>
                     </div>
                     <div className="row">
+                        <Field size = "s12" name = "confirmpassword" type = "password" label = "confirm password" component = {this.renderInput}/>
+                    </div>
+                    <div className="row">
+                        <div className="col s12 red-text">{this.props.repeatUserError[1]}</div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12 red-text">{this.props.repeatUserError[0]}</div>
+                    </div>
+                    <div className="row">
                         <div className="col s12 right-align">
                             <button className = "green lighten-2 btn">Sign up</button>
                         </div>
@@ -116,6 +126,7 @@ class Signup extends Component {
 function validate (formValues) {
     const error = {};
     const passwordErrors = [];
+    const confirmPasswordError = [];
 
     if(!formValues.displayName){
         error.displayName = ['Please choose a username'];
@@ -125,9 +136,14 @@ function validate (formValues) {
     checkIfPasswordStartsWithLetter (formValues.password, passwordErrors);
     checkIfPasswordHasANum (formValues.password, passwordErrors);
     checkIfPasswordIsLongEnough (formValues.password, passwordErrors);
+    checkIfPasswordsMatch (formValues.password, formValues.confirmpassword, confirmPasswordError);
 
     if(passwordErrors.length){
         error.password = passwordErrors;
+    }
+
+    if(confirmPasswordError.length){
+        error.confirmpassword = confirmPasswordError;
     }
 
     return error;
@@ -142,6 +158,13 @@ function checkIfValidEmail(email){
     }
     
     return [ "Please input an email that ends with @[your-email-provider]"];
+}
+
+function checkIfPasswordsMatch (password = "", confirmpassword = "", error){
+    
+    if(password !== confirmpassword || confirmpassword !== password){
+        error.push("Passwords need to match");
+    }
 }
 
 function checkIfPasswordStartsWithLetter (password = "", error){
@@ -178,7 +201,8 @@ Signup = reduxForm ({
 
 function mapStateToProps (state){
     return {
-        signUpError: state.user.signUpError
+        signUpError: state.user.signUpError,
+        repeatUserError: state.user.repeatUserError
     }
 }
  
