@@ -64,8 +64,8 @@ class Signup extends Component {
 
                 <div>
                     <div className="select-box--box">
-                        <div className="select-box--container" onClick={this.dropDown}>
-                            <div className="select-box--selected-item">
+                        <div className="select-box--container">
+                            <div className="select-box--selected-item" onClick={this.dropDown}>
                                 { this.state.selectedItem.value || this.state.avatars[0].value }
                             </div>
                             <div
