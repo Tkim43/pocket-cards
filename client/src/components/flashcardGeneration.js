@@ -50,13 +50,13 @@ class FlashcardGeneration extends Component {
             // Checks that the page has scrolled to the bottom
             
             //   this.state.windowHeight = window.innerHeight;
-            //   const scrollPosition = document.documentElement.scrollTop;
+              const scrollPosition = document.documentElement.scrollTop;
             //   const getDataHeight = document.documentElement.scrollHeight;
             //   console.log("win height: ", windowHeight);
             //   console.log("scroll position: ", scrollPosition);
             //   console.log("getData height: ", getDataHeight);
 
-            let calculated = this.state.scrollPosition + this.state.windowHeight;
+            let calculated = scrollPosition + this.state.windowHeight;
             // debugger;
             if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards.length > 10) {
                 this.setState({
@@ -147,7 +147,8 @@ class FlashcardGeneration extends Component {
     }
 
     showLoadingBar = () => {
-        let calculated = this.state.scrollPosition + this.state.windowHeight;
+        const scrollPosition = document.documentElement.scrollTop;
+        let calculated = scrollPosition + this.state.windowHeight;
         if(this.state.hasMore && this.state.loadingData === true && calculated >= this.state.getDataHeight && this.props.cards[this.state.page * 10]){
             return (
                 <div className="progress container">
