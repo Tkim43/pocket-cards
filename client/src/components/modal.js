@@ -32,13 +32,14 @@ class ButtonModal extends Component {
     }
 
     renderInput (props) {
+        console.log('INPUT ERROR:', props.meta.error);
         return (
             <div className= {`input-field col ${props.size}`}>
                 <input {...props.input} className = "black-text" type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
                 <ul>
                     {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
-                        return <li key = {index} className="red-text text-size">{item}</li>
+                        return <li key = {index} className="red-text">{item}</li>
                     })}
                 </ul>
             </div>
@@ -103,7 +104,7 @@ class ButtonModal extends Component {
 
         return (
           
-            <div onClick={this.open} className = "card-panel orange lighten-2 white-text center" >Create Category</div>
+            <div onClick={this.open} className = "create-category-bold-text card-panel orange lighten-2 white-text center" >Create Category</div>
             
     
         );
@@ -112,8 +113,6 @@ class ButtonModal extends Component {
 
 function validate (formValues) {
     const error = {};
-
-    console.log("THESE ARE THE FORM VALUES: ", formValues);
 
     if(!formValues.category){
         error.category = ['Please input a category title'];
@@ -129,17 +128,29 @@ function validate (formValues) {
 
 
 function mapStateToProps(state){
+
+    //creates initial values for your input form
+    const initialValues = {};
+
+    //when the form exists on the page, creates initial values for inputs
+    if(state.form['button-modal']){
+        initialValues.category = '';
+        initialValues.subCategory = '';
+    }
     return{
         category:state.sets.category,
-        subCategory:state.sets.subCategory
+        subCategory:state.sets.subCategory,
+        //returning initial values populates initial values with whatever you assigned the value to be
+        initialValues
     }
 }
 
 ButtonModal = reduxForm ({
     form: "button-modal",
-    validate: validate
+    validate: validate,
+    enableReinitialize: true
 })(ButtonModal);
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
     sendCategoryAndSubcategoryData
-})(withRouter(ButtonModal));
+})(ButtonModal));
