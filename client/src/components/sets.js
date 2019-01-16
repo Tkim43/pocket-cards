@@ -89,6 +89,7 @@ class Sets extends Component{
     }
 
     hideModal = () =>{
+        this.props.untouch('category', 'subCategory');
         this.setState({
             show: false,
             delete: false
@@ -188,16 +189,32 @@ function validate (formValues) {
 }
 
 function mapStateToProps(state){
+
+    //creates initial values for your input form
+    const initialValues = {};
+
+    //when the form exists on the page, creates initial values for inputs
+    if(state.form['button-modal']){
+        initialValues.category = '';
+        initialValues.subCategory = '';
+    }
     return{
         category: state.sets.category,
         topics: state.sets.topics,
-        cards: state.sets
+        cards: state.sets,
+        //returning initial values populates initial values with whatever you assigned the value to be
+        initialValues
     }
 }
 
 Sets = reduxForm ({
     form: "sets-modal",
-    validate: validate
+    validate: validate,
+    // enableReinitialize: true,
+    shouldError: function(params){
+        if (params.initialRender) { return false; }
+        return params.nextProps.anyTouched;
+    }
 })(Sets);
 
 export default connect(mapStateToProps, {

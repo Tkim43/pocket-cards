@@ -75,14 +75,14 @@ class Profile extends Component {
             const {sortByLatest} = this.props
             await sortByLatest();
         }catch(err){
-            console.log("error getting list data")
+            // console.log("error getting list data")
         }
     }
 
     render () { 
 
-        console.log("this is the state: ", this.state);
-        console.log("this is the props: ", this.props);
+        // console.log("this is the state: ", this.state);
+        // console.log("this is the props: ", this.props);
         
 
         
