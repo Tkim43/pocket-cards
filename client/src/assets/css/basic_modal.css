@@ -10,6 +10,7 @@
 }
 
 .basic-modal-content {
+    text-align: center;
     background-color: white;
     border-radius: 20px;
     margin: auto;
