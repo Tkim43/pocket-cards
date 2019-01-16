@@ -3,7 +3,7 @@ import "../assets/css/profile.css";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest, updateAvatar} from '../actions';
-import BasicModal from './modal';
+import ButtonModal from './modal';
 import DeleteModal from './deleteModal';
 import FindTimePassed from './findTimePassed';
 import defaultAvatar from '../assets/images/default_avatar.png';
@@ -165,8 +165,8 @@ class Profile extends Component {
                         <button onClick = {this.handleAlphabeticalClick}  className ={`btn-small sort-button button-bold-text ${this.state.sortLatest ? "soft-blue" : "dark-blue"}`}>Alphabetical</button>
                 </div>
                 <div className="row">
-                <div className="col s12 card-container create-category-bold-text">
-                        <BasicModal />
+                <div className="col s12 card-container">
+                        <ButtonModal />
                 </div>
                 </div>
              {this.props.sets.length > 0 ? profileCategories :
@@ -176,7 +176,7 @@ class Profile extends Component {
             {/* <button className="col s12 card-container create-category-bold-text blue lighten-2 btn-large">
                 Create Cards <i className="material-icons large" onClick={()=> <BasicModal/>}>add</i>
             </button> */}
-            <BasicModal createCards={true} />
+            <ButtonModal createCards={true} />
             </div>
             }
             </div>
