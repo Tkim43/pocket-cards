@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import "../assets/css/profile.css";
+import "../assets/css/basic_modal.css";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sortAlphabetical, sortByLatest, updateAvatar} from '../actions';
