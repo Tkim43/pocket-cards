@@ -23,7 +23,10 @@ class Login extends Component{
                 </div>
                 <div className="divider cyan lighten-3"></div>
                 <div className="container">
-                    <p className="white-text">Welcome to Pocket Cards, our mission is to help students practice and master whatever they are learning. Pocket Cards provides engaging, customizable flashcards with contributions from people everywhere.</p>
+                    <p className="white-text">Welcome to Pocket Cards.
+                        Our mission is to provide an easy, engaging environment to create customizable flashcards 
+                        that help students practice and master what they are learning.
+                    </p>
                 </div>
                 <div className="divider cyan lighten-3"></div>
                 <div className="row">
