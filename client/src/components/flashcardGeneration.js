@@ -7,6 +7,7 @@ import { deleteCard} from '../actions';
 import {endTutorial} from '../actions';
 import {getTutorialCompleted} from '../actions';
 import DeleteModal from './deleteModal';
+import gif from '../assets/images/pocketcard_final.gif';
 
 class FlashcardGeneration extends Component {
     constructor(props) {
@@ -169,6 +170,7 @@ class FlashcardGeneration extends Component {
                                 <form className="col s12">
                                         <div>
                                             <h6 className="center">how to edit your cards example below: </h6>
+                                            <img src={gif}/>
                                         </div>
                                         <div className = "row">
                                                 <p>
