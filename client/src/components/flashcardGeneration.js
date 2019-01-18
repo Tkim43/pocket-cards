@@ -169,7 +169,7 @@ class FlashcardGeneration extends Component {
                             <div>
                                 <form className="col s12">
                                         <div>
-                                            <h6 className="center">how to edit your cards example below: </h6>
+                                            <h3 className="center">How to Edit your Cards Example Below: </h3>
                                             <img className="gif" src={gif}/>
                                         </div>
                                         <div className = "row">
