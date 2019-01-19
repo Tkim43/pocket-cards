@@ -80,16 +80,15 @@ class About extends Component {
                 
                     <h1 className="main-title black-text">About This App</h1>
                     <p className="description">
-                        We created Pocket Cards to solve the pain of creating flashcards online. With user experience being the focus, we wanted to create an easy and painless way to study for your next test or quiz.
+                        The conception of our app started with our struggle when we were college students. 
+                        Known to be one of the most effective study methods, we frequently used a flashcard-making application to memorize terms and definitions needed for upcoming tests and quizzes, 
+                        but often found the interface frustrating.
                     </p>
                     <p className="description">
-                        The inception of this idea started with planning out the feature sets we wanted to incorporate in the application. Using Figma, we were able to create mockups of how the MVP (Minimum Viable Product) would look like. We kept track of our responsibilities using Trello and utilizing the Agile Process.
+                        We created this mobile-first web application to solve the pain of creating flashcards online. With user experience being the main focus, we wanted to create an easy and painless way to study for your next test or quiz.
                     </p>
                     <p className="description">
-                        Pocket Cards is constructed with a ReactJS Front-End utilizing Redux so that state can be accessed or changed throughout components. In conjunction with Redux, our team used React Router DOM, Redux Form, Axios, and Materialize.<br></br>
-                    </p>
-                    <p className="description">
-                        The Back-End features NodeJS using Express, Passport, Bcrypt-NodeJS, MySQL to handle validation, user authentication, and storing of user data.<br></br>
+                        Thank you for visiting our app. Happy studying!
                     </p>
                 </div>
             </div>
