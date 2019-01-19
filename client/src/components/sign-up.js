@@ -18,7 +18,16 @@ class Signup extends Component {
         ],
         showItems: false,
         selectedItem: "default"
-      }
+    }
+
+    closeDropDown = () => {
+        console.log("close drop down");
+        if(document.querySelector(".select-box--arrow-up")){
+            this.setState({
+                showItems: false
+            });
+        }
+    }
     
     dropDown = () => {
         this.setState(prevState => ({
@@ -58,7 +67,7 @@ class Signup extends Component {
         const { handleSubmit} = this.props;
 
         return (
-            <div className = "container">
+            <div onClick = {this.closeDropDown} className = "container">
                 <h1>Sign Up</h1>
                 <h5 className = "white-text">Please Select An Avatar</h5>
 
