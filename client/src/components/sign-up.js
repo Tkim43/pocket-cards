@@ -21,7 +21,6 @@ class Signup extends Component {
     }
 
     closeDropDown = () => {
-        console.log("close drop down");
         if(document.querySelector(".select-box--arrow-up")){
             this.setState({
                 showItems: false

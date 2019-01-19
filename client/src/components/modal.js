@@ -52,6 +52,7 @@ class ButtonModal extends Component {
     close = () => {
         this.props.untouch('category', 'subCategory');
         this.setState({isOpen: false});
+        this.props.reset();
     }
 
     render(){
@@ -138,7 +139,7 @@ function mapStateToProps(state){
 ButtonModal = reduxForm ({
     form: "button-modal",
     validate: validate,
-    // enableReinitialize: true,
+    enableReinitialize: true,
     shouldError: function(params){
         if (params.initialRender) { return false; }
         return params.nextProps.anyTouched;
