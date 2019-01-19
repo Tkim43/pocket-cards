@@ -93,7 +93,8 @@ class Sets extends Component{
         this.setState({
             show: false,
             delete: false
-        })
+        });
+        this.props.reset();
     }
 
     render(){
