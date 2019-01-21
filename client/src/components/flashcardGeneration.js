@@ -160,7 +160,11 @@ class FlashcardGeneration extends Component {
     }
 
     render () {
-
+        if(!this.props.error === undefined || ""){
+            return (
+                <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
+            )
+        }
         if(this.state.tutorial){
             return (
                 <div className="basic-modal" onClick={this.hideModal}>
@@ -292,6 +296,7 @@ class FlashcardGeneration extends Component {
 }
 
 function mapStateToProps(state){
+    console.log("this is your state", state);
     const { sets} = state;
 
     return {

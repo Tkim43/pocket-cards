@@ -14,7 +14,6 @@ class Sets extends Component{
         delete: false,
         index: null,
     };
-    
     componentDidMount(){
         this.props.getSetsData(this.props.match.params.set_id);
     }
@@ -98,9 +97,13 @@ class Sets extends Component{
     }
 
     render(){
-
+        console.log("these are your props", this.props);
         const { handleSubmit, match: { params }, reset } = this.props;
-
+        if(!this.props.error === undefined || ""){
+            return (
+                <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
+            )
+        }
         if(this.state.show){
             return (
                 <div className="basic-modal" onClick={this.hideModal}>
@@ -203,6 +206,7 @@ function mapStateToProps(state){
         category: state.sets.category,
         topics: state.sets.topics,
         cards: state.sets,
+        error: state.sets.error,
         //returning initial values populates initial values with whatever you assigned the value to be
         initialValues
     }

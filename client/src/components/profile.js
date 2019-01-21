@@ -86,7 +86,11 @@ class Profile extends Component {
         // console.log("this is the props: ", this.props);
         
 
-        
+        if(!this.props.error === undefined || ""){
+            return (
+                <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
+            )
+        }
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
         }
@@ -190,7 +194,8 @@ class Profile extends Component {
 function mapStateToProps(state){
     return {
         sets: state.sets.categories,
-        user: state.user.info
+        user: state.user.info,
+        error: state.sets.error
     }
 }
 
