@@ -24,6 +24,28 @@ input[type=password]:not(.browser-default){
     color: white;
 }  
 
+.hop {
+    top: 64px;
+    animation: hop 1s linear;
+    animation-iteration-count: 3;
+    animation-delay: .5s;
+}
+
+@keyframes hop {
+    0% {
+        top: 64px;
+        /* transform: rotate(0deg); */
+    }
+    50% {
+        top: 9%;
+        /* transform: rotate(15deg); */
+    }
+    100% {
+        top: 64px;
+        /* transform: rotate(0deg); */
+    }
+}
+
 @media screen and (min-width: 601px) {
     .landingLogo{
         position: relative;
