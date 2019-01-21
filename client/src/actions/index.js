@@ -12,34 +12,34 @@ function authHeaders(){
 export const getNextOrPrevCard = (direction = 'next', topicId, currentCardId) => async dispatch => {
     try {
         const { data: { card, location } } = await axios.get(`/api/topic/${topicId}/card/${currentCardId}/${direction}`);
-
-        console.log('Card:', card);
-        console.log('Location:', location);
         dispatch({
             type: types.GET_CARD_DATA,
             card,
             location
         });
+        
         return card.ID;
     } catch(err){
-        console.log(`Error getting ${direction} card`);
+        dispatch({
+            type: types.ERROR,
+            error: `Error getting ${direction} card`
+        });
     }
 }
 
 export const getCardData = (topicId, cardId) => async dispatch => {
     try {
         const { data: { card, location } } = await axios.get(`/api/topic/${topicId}/card/${cardId}`);
-
-        console.log('Card:', card);
-        console.log('Location:', location);
-
         dispatch({ 
             type: types.GET_CARD_DATA,
             card,location
         });
         return card.ID;
     } catch(err){
-        console.log('Error Getting Card:', err);
+        dispatch({
+            type: types.ERROR,
+            error: `Error getting card information`
+        });
     }
     
 }
@@ -118,7 +118,10 @@ export function updateAvatar (updatedAvatar){
             });
 
         } catch(err){
-            console.log("Error updating user avatar");
+            dispatch({
+                type: types.ERROR,
+                error: "Error updating Avatar"
+            });
         }
     }
 }
@@ -129,15 +132,16 @@ export function getSetsData (id){
         try {
             const { data: { sets = [] } } = await axios.get(`/api/set_management/${id}`, authHeaders());
 
-            console.log('SETS:', sets);
-
             dispatch({
                 type: types.GET_SETS_DATA,
                 sets
             });
+
         } catch(err){
-            console.log('Error getting sets data');
-            console.log(err);
+            dispatch({
+                type: types.ERROR,
+                error: `Error getting sets data`
+            });
         }
     }
 }
@@ -146,13 +150,16 @@ export function getTopicsCards(setId, topicId){
     return async function(dispatch){
         try{
             const { data: { success, ...cardsData }} = await axios.get(`/api/cards/${setId}/topic/${topicId}`, authHeaders());
-
             dispatch({
                 type: types.GET_TOPICS_CARDS,
                 ...cardsData
             });
+            
         } catch(err){
-            console.log('Error getting topic\'s cards data');
+            dispatch({
+                type: types.ERROR,
+                error: "Error getting card data"
+            });
         }
     }
       
@@ -169,8 +176,12 @@ export function endTutorial(){
                 success,
                 tutorial,
             });
+        
         } catch(err){
-            console.log('Error with tutorial on front end');
+            dispatch({
+                type: types.ERROR,
+                error: "Error completing tutorial"
+            });
         }
     }
       
@@ -186,8 +197,12 @@ export function getTutorialCompleted(){
                 type: types.TUTORIAL_COMPLETED,
                 tutorialCompleted,
             });
+           
         } catch(err){
-            console.log('Error with tutorial on front end');
+            dispatch({
+                type: types.ERROR,
+                error: "Error completing tutorial"
+            });
         }
     }
       
@@ -229,6 +244,7 @@ export function userSignIn(userInfo){
                 type: types.SIGN_IN,
                 user
             });
+            
         } catch (err){
             dispatch({
                 type: types.SIGN_IN_ERROR,
@@ -282,9 +298,12 @@ export function deleteCard(ID, topicID){
     return async function(dispatch) {
         try{
             const resp = await axios.post(`/api/set_management/delete_card`, {ID, topicID}, authHeaders());
-
+           
         }catch(err){
-            console.log("this is the error from the delete");
+            dispatch({
+                type: types.ERROR,
+                error: "Error deleting card"
+            });
         }
     }
 }
@@ -300,8 +319,12 @@ export function deleteCategory(cardID, userID){
     return async function(dispatch) {
         try{
             const resp = await axios.delete(`/api/set_management/ID/${cardID}/userID/${userID}`, authHeaders());
+            
         }catch(err){
-            console.log("this is the error from the category delete");
+            dispatch({
+                type: types.ERROR,
+                error: "Error deleting category"
+            });
         }
     }
 }
@@ -310,10 +333,13 @@ export function deleteSubcategory(topicID, setID){
     return async function(dispatch){
         try{
             const resp = await axios.post(`/api/set_management/delete_subCategory_set`, {ID: topicID, setID}, authHeaders());
-
+            
             return true;
         }catch{
-            console.log("this is the error from subcategory delete")
+            dispatch({
+                type: types.ERROR,
+                error: "Error deleting subcategory"
+            });
         }
     }
 }
@@ -322,8 +348,12 @@ export function createSubcategory(setID, subCategory){
     return async function(dispatch){
         try{
             const resp = await axios.post(`/api/set_management/create_subcategory/${setID}`, subCategory, authHeaders());
+           
         }catch{
-            console.log("error creating a subcategory");
+            dispatch({
+                type: types.ERROR,
+                error: "Error creating a subcategory"
+            });
         }
     }
 }

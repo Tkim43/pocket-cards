@@ -71,7 +71,11 @@ class editMode extends Component{
     render(){
         const { match: { params } } = this.props;
         const { autoFill } = this.state;
-
+        if(!this.props.error === undefined || ""){
+            return (
+                <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
+            )
+        }
         if(this.state.frontText === undefined){
             return (
                 <div className="loading-container">

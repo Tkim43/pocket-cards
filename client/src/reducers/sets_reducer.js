@@ -16,7 +16,8 @@ import types from '../actions/types';
     currentTopic: {},
     singleCard: {},
     location:'',
-    tutorial: []
+    tutorial: [],
+    error: ''
 };
  export default (state = DEFAULT_STATE, action) => {
     switch(action.type){
@@ -28,6 +29,8 @@ import types from '../actions/types';
             return { ...state, topicsCards: action.cards, topicsCardCount: action.cardCount, currentTopic: action.topic, tutorial: action.tutorial };
         case types.GET_CARD_DATA:
             return { ...state, singleCard: action.card,location:action.location};
+        case types.ERROR:
+            return { ...state, error: action.error};
         case types.DELETE_CARD:
             return{...state}
         case types.END_TUTORIAL:

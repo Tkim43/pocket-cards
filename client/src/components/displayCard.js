@@ -10,6 +10,7 @@ class displayCard extends Component{
         isLoading: false
     }
     async componentDidMount(){
+
         const { getCardData, history, match: { params } } = this.props;
         
         const cardId = await getCardData(params.topic_id, params.card_id);
@@ -41,6 +42,12 @@ class displayCard extends Component{
         const {card, match: { params: {set_id, topic_id} } } = this.props;
         const { isLoading, flipped } = this.state;
         const location = this.props.location;
+        console.log("these are your props", this.props);
+        if(!this.props.error === undefined || ""){
+            return (
+                <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
+            )
+        }
         return(
             <div className="container">
                 <div className="row">
@@ -74,7 +81,8 @@ function mapStateToProps(state){
     const { sets } = state;
     return {
         card: sets.singleCard,
-        location:sets.location
+        location: sets.location,
+        error: sets.error,
     }
 }
 
