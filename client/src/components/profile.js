@@ -84,13 +84,14 @@ class Profile extends Component {
 
         // console.log("this is the state: ", this.state);
         // console.log("this is the props: ", this.props);
-        
+        console.log("this props", this.props);
 
-        if(this.props.error !== undefined || ""){
+        if(this.props.error){
             return (
                 <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
             )
         }
+
         if(typeof this.props.user === 'undefined'){
             return <h1>loading spinner</h1>
         }

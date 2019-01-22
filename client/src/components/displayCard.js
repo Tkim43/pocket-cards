@@ -43,7 +43,7 @@ class displayCard extends Component{
         const { isLoading, flipped } = this.state;
         const location = this.props.location;
         console.log("these are your props", this.props);
-        if(this.props.error !== undefined || ""){
+        if(this.props.error){
             return (
                 <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
             )
