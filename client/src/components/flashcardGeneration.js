@@ -160,7 +160,7 @@ class FlashcardGeneration extends Component {
     }
 
     render () {
-        if(!this.props.error === undefined || ""){
+        if(this.props.error !== undefined || ""){
             return (
                 <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
             )
