@@ -30,7 +30,7 @@ import types from '../actions/types';
         case types.GET_CARD_DATA:
             return { ...state, singleCard: action.card,location:action.location};
         case types.ERROR:
-            return { ...state, error: action.error};
+            return {error: action.error};
         case types.DELETE_CARD:
             return{...state}
         case types.END_TUTORIAL:

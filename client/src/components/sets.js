@@ -99,7 +99,7 @@ class Sets extends Component{
     render(){
         console.log("these are your props", this.props);
         const { handleSubmit, match: { params }, reset } = this.props;
-        if(this.props.error !== undefined || ""){
+        if(this.props.error){
             return (
                 <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
             )
