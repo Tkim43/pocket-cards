@@ -218,7 +218,10 @@ Sets = reduxForm ({
     // enableReinitialize: true,
     shouldError: function(params){
         if (params.initialRender) { return false; }
-        return params.nextProps.anyTouched;
+        if(params.nextProps.submitting === true && params.props.submitting === false){
+            return true;
+        }
+        return true;
     }
 })(Sets);
 
