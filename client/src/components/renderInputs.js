@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
 
 class RenderInput extends Component {
-
-    // componentWillUnmount(){
-    //     debugger;
-    // }
-
     render () {
-        console.log('INPUT ERROR:', this.props.meta.error);
 
         return (
             <div className= {`input-field col ${this.props.size}`}>

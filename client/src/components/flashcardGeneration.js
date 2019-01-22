@@ -29,9 +29,6 @@ class FlashcardGeneration extends Component {
           loadingData: false
         };
 
-    
-        // Binds our scroll event handler
-
         window.onscroll = () => {
             const {
               loadCards,
@@ -42,28 +39,13 @@ class FlashcardGeneration extends Component {
               },
             } = this;
 
-            // Bails early if:
-            // * there's an error
-            // * it's already loading
-            // * there's nothing left to load
             if (error || isLoading || !hasMore) return;
     
-            // Checks that the page has scrolled to the bottom
-            
-            //   this.state.windowHeight = window.innerHeight;
               const scrollPosition = document.documentElement.scrollTop;
-            //   const getDataHeight = document.documentElement.scrollHeight;
-            //   console.log("win height: ", windowHeight);
-            //   console.log("scroll position: ", scrollPosition);
-            //   console.log("getData height: ", getDataHeight);
 
             let calculated = scrollPosition + this.state.windowHeight;
-            // debugger;
             if (calculated >= this.state.getDataHeight && this.state.loadingData === false && this.props.cards.length > 10) {
                 this.setState({
-                    // windowHeight: window.innerHeight,
-                    // scrollPosition: document.documentElement.scrollTop,
-                    // getDataHeight: document.documentElement.scrollHeight,
                     loadingData : true
                 });
                 
@@ -96,7 +78,6 @@ class FlashcardGeneration extends Component {
                 loadingData : false
             });
         }
-        //change loadingData back to false if more cards to show
         if(this.props.cards[page_counter * 10]){
             this.setState({
                 loadingData : false
@@ -122,7 +103,10 @@ class FlashcardGeneration extends Component {
 
             await getTopicsCards(params.set_id, params.topic_id);
         }catch(err){
-            console.log("error getting list data")
+            dispatch({
+                type: types.ERROR,
+                error: "Error getting card information"
+            });
         }
     }
     showModal = (cardId) =>{
@@ -190,8 +174,7 @@ class FlashcardGeneration extends Component {
                 </div>
             )
         }
-        console.log("these are your props", this.props);
-        console.log("Page Counter: ", this.state);
+
 
         const { cardCount, cards, match: { params }, topic } = this.props;
 
@@ -203,7 +186,6 @@ class FlashcardGeneration extends Component {
         }
 
         let duplicate_arr = cards.slice(start,end);
-        console.log("Number of cards displayed: ", duplicate_arr);
 
         let listCards = duplicate_arr.map((item,ID) =>{
             let frontText = item.frontText;
@@ -221,16 +203,7 @@ class FlashcardGeneration extends Component {
             return(
                 <div key = {item.ID}>
                     <div className="row container flashcard-row">
-                        {/* {this.props.tutorial === 0 ? 
-                        <Fragment>
-                        <div className="col s5 card-container">
-                            <div onClick={this.showTutorialModal} className="card-panel teal lighten-1 white-text text-inside-card">{frontText}</div>
-                        </div>
-                        <div className="col s5 card-container">
-                            <div onClick={this.showTutorialModal} className="card-panel teal lighten-1 white-text text-inside-card">{backText}</div>
-                        </div>
-                        </Fragment>
-                        :  */}
+                        
                         <Fragment>
                             <div className="col s5 card-container">
                                 <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
@@ -243,12 +216,7 @@ class FlashcardGeneration extends Component {
                                 </Link>
                             </div> 
                         </Fragment>
-                        {/* <div className="col s5 card-container">
-                            <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
-                                <div>{backText}</div>
-                            </Link>
-                            <div onClick ={this.showModal}className="card-panel teal lighten-1 white-text text-inside-card">backText</div>
-                        </div> */}
+                        
                         <div className="col s2 card-container">
                         <button className="red lighten-2 btn-large" onClick={() => this.showModal(item.ID)}>
                                 <i className = "large material-icons">delete</i>
@@ -273,7 +241,6 @@ class FlashcardGeneration extends Component {
                         <div className="card-panel blue lighten-2 white-text center">Definition</div>
                     </div>
                     <div className="col s2 card-container">
-                        {/* <div className="card-panel red lighten-2 white-text center">Delete</div> */}
                     </div>
                 </div>
                 {listCards}
@@ -296,7 +263,6 @@ class FlashcardGeneration extends Component {
 }
 
 function mapStateToProps(state){
-    console.log("this is your state", state);
     const { sets} = state;
 
     return {

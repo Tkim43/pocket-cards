@@ -18,15 +18,6 @@ class InputDefinition extends Component {
         getTopicsCards(params.set_id, params.topic_id);
     }
 
-    // renderInput (props) {
-    //     return (
-    //         <div className= {`input-field col ${props.size}`}>
-    //             <input {...props.input} type= {props.type || "text"} id = {props.input.name} autoComplete = "off"/>
-    //             <label htmlFor= {props.input.name} >{props.label}</label>
-    //         </div>
-    //     );
-    // }
-
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
@@ -42,7 +33,6 @@ class InputDefinition extends Component {
     }
 
     handleAddDefinition = async (values) => {
-        console.log("this.props: ", this.props);
         const { match: { params }, reset, sendCreateCardData } = this.props;
         
         await sendCreateCardData(params.topic_id, values);
@@ -115,9 +105,6 @@ class InputDefinition extends Component {
 
 function validate (formValues) {
     const error = {};
-
-    console.log("THESE ARE THE FORM VALUES: ", formValues);
-
     if(!formValues.frontText){
         error.frontText = ['Please input a term'];
     }

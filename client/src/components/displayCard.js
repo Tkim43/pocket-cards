@@ -42,7 +42,6 @@ class displayCard extends Component{
         const {card, match: { params: {set_id, topic_id} } } = this.props;
         const { isLoading, flipped } = this.state;
         const location = this.props.location;
-        console.log("these are your props", this.props);
         if(this.props.error){
             return (
                 <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
@@ -55,9 +54,7 @@ class displayCard extends Component{
                 </div>
                 <p className="numeric">{location}</p>
 
-                {/* <div className="row">
-                    <h3 className = "white-text">{flipped ? "Front of Card" : "Back of Card"}</h3>
-                </div> */}
+            
                 <div className={"cardBox flow-text center cardflip " + (flipped ? "" : "flipped")}>
                     <p id ="cardFont" className="front flow-text">{card.frontText}</p>
                     <p id ="cardFont" className="back flow-text">{isLoading ? '' : card.backText}</p>
@@ -77,7 +74,6 @@ class displayCard extends Component{
 }
 
 function mapStateToProps(state){
-    console.log('MSTP:', state);
     const { sets } = state;
     return {
         card: sets.singleCard,

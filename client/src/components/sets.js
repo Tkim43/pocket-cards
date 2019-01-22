@@ -32,7 +32,10 @@ class Sets extends Component{
             const {getSetsData, match: {params}} = this.props
             await getSetsData(params.set_id);
         }catch(err){
-            console.log("error subcategory list")
+            dispatch({
+                type: types.ERROR,
+                error: "Error updating subcategory list"
+            });
         }
     }
 
@@ -69,7 +72,6 @@ class Sets extends Component{
     }
 
     showModal = (event, index) =>{
-        console.log("this is the index", index)
         const buttonType = event.target.classList[0];
         let show = null;
         let remove = null;
@@ -97,7 +99,6 @@ class Sets extends Component{
     }
 
     render(){
-        console.log("these are your props", this.props);
         const { handleSubmit, match: { params }, reset } = this.props;
         if(this.props.error){
             return (
@@ -147,12 +148,10 @@ class Sets extends Component{
                         </Link>
                     }
                     
-                        {/* <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">{item.subCategory}</Link> */}
                         <button className="delete-button red lighten-2 set btn-large" onClick={(e)=>{this.showModal(e, index)}}>
                             <i className= "large material-icons">delete</i>
                         </button>
                     </div>
-                    {/* <div className="terms white-text">{`${this.props.topics[index].cardCount} terms`}</div> */}
                 </div>
             );  
         });
@@ -182,7 +181,6 @@ class Sets extends Component{
 function validate (formValues) {
     const error = {};
 
-    console.log("THESE ARE THE FORM VALUES: ", formValues);
 
     if(!formValues.subCategory){
         error.subCategory = ['Please input a subcategory title'];
@@ -194,10 +192,8 @@ function validate (formValues) {
 
 function mapStateToProps(state){
 
-    //creates initial values for your input form
     const initialValues = {};
 
-    //when the form exists on the page, creates initial values for inputs
     if(state.form['button-modal']){
         initialValues.category = '';
         initialValues.subCategory = '';
@@ -207,7 +203,6 @@ function mapStateToProps(state){
         topics: state.sets.topics,
         cards: state.sets,
         error: state.sets.error,
-        //returning initial values populates initial values with whatever you assigned the value to be
         initialValues
     }
 }
@@ -215,7 +210,6 @@ function mapStateToProps(state){
 Sets = reduxForm ({
     form: "sets-modal",
     validate: validate,
-    // enableReinitialize: true,
     shouldError: function(params){
         if (params.initialRender) { return false; }
         if(params.nextProps.submitting === true && params.props.submitting === false){

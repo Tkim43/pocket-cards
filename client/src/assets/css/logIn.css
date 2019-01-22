@@ -15,9 +15,6 @@ p{
 
 body{
     background-color:#314256;
-    /* width: 100vw;
-    height: 100vh;
-    margin: 0px; */
 }
 
 input[type=password]:not(.browser-default){
@@ -34,15 +31,12 @@ input[type=password]:not(.browser-default){
 @keyframes hop {
     0% {
         top: 64px;
-        /* transform: rotate(0deg); */
     }
     50% {
         top: 9%;
-        /* transform: rotate(15deg); */
     }
     100% {
         top: 64px;
-        /* transform: rotate(0deg); */
     }
 }
 

@@ -90,21 +90,6 @@ export async function sortByLatest () {
     }
 }
 
-// export function sendAvatar (avatar){
-//     return async function (dispatch){
-//         try {
-//             console.log("This is the data from sendAvatar: ", data);
-//             const { data: { user: {userAvatar} } } = await axios.post('/auth/sign-up', avatar);
-//             dispatch({
-//                 type: types.SEND_AVATAR,
-//                 userAvatar
-//             });
-//         } catch(err){
-//             console.log('Error sending avatar data');
-//         }
-//     }
-// }
-
 export function updateAvatar (updatedAvatar){
     return async function (dispatch){
         try {
@@ -192,7 +177,6 @@ export function getTutorialCompleted(){
     return async function(dispatch){
         try{
             const { data: {tutorialCompleted}} = await axios.get("/api/usertutorial", authHeaders());
-            console.log("tutorial completed", tutorialCompleted)
             dispatch({
                 type: types.TUTORIAL_COMPLETED,
                 tutorialCompleted,
@@ -210,7 +194,6 @@ export function getTutorialCompleted(){
 }
 
 export function userSignUp(newUser){
-    console.log("this is new user: ", newUser);
     return async function (dispatch){
         try {
             const { data: { token, user } } = await axios.post('/auth/sign-up', newUser).catch(err => {

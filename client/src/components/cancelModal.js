@@ -11,33 +11,6 @@ class ButtonModal extends Component {
         subCategory: ''
     };
 
-    // async componentDidMount(){
-    //     this.setState({
-    //         category: this.props.category,
-    //         subCategory: this.props.subCategory
-    //     });
-    // }
-
-    // updateCategory = event =>{
-    //     this.setState({
-    //         category: event.currentTarget.value
-    //     });
-    // }
-
-    // updateSubCategory = event =>{
-    //     this.setState({
-    //         subCategory: event.currentTarget.value
-    //     });
-    // }
-
-    // handleClick = async (e) => {
-    //     e.preventDefault();
-    //     const { categoryId, subCategoryId } = await this.props.sendCategoryAndSubcategoryData({category: this.state.category},{subCategory: this.state.subCategory});
-
-
-    //     this.props.history.push(`/createflashcards/${categoryId}/subcategory/${subCategoryId}`);
-    // }
-
     open = () => this.setState({isOpen: true});
 
     close = () => this.setState({isOpen: false});
@@ -71,22 +44,11 @@ class ButtonModal extends Component {
 
         return (
             <React.Fragment>
-                {/* <div onClick={this.open} className = "card-panel red lighten-2 white-text center btn-small" >Cancel</div> */}
                 <button onClick={this.open} className = "col s12 btn red darken-2">Cancel</button>
             </React.Fragment>
         );
     }
 }
 
-// function mapStateToProps(state){
-//     return{
-//         category:state.sets.category,
-//         subCategory:state.sets.subCategory
-//     }
-// }
-
-// export default connect(mapStateToProps, {
-//     sendCategoryAndSubcategoryData
-// })(withRouter(ButtonModal));
 
 export default ButtonModal;

@@ -34,7 +34,6 @@ class ButtonModal extends Component {
 
 
     handleClick = async (values) => {
-        console.log("Values: ", values);
 
         if(values[0] || values[1] === ""){
             return;
@@ -61,9 +60,6 @@ class ButtonModal extends Component {
 
     render(){
         const { handleSubmit, match: { params }, reset } = this.props;
-
-        // console.log("THIS IS PROPS: ", this.props);
-        // console.log("THIS IS STATE: ", this.state);
 
         if(this.state.isOpen){
             return (
@@ -124,10 +120,8 @@ function validate (formValues) {
 
 function mapStateToProps(state){
 
-    //creates initial values for your input form
     const initialValues = {};
 
-    //when the form exists on the page, creates initial values for inputs
     if(state.form['button-modal']){
         initialValues.category = '';
         initialValues.subCategory = '';
@@ -135,7 +129,6 @@ function mapStateToProps(state){
     return{
         category:state.sets.category,
         subCategory:state.sets.subCategory,
-        //returning initial values populates initial values with whatever you assigned the value to be
         initialValues
     }
 }
@@ -143,7 +136,6 @@ function mapStateToProps(state){
 ButtonModal = reduxForm ({
     form: "button-modal",
     validate: validate,
-    // enableReinitialize: true,
     shouldError: function(params){
         if (params.initialRender) { return false; }
         if(params.nextProps.submitting === true && params.props.submitting === false){

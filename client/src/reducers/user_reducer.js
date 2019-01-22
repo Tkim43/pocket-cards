@@ -9,14 +9,10 @@ const DEFAULT_STATE = {
 };
 
 export default (state = DEFAULT_STATE, action) => {
-    // console.log("this is the action: ",action);
     switch(action.type){
         case types.SIGN_IN:
         case types.SIGN_UP:
             return { ...DEFAULT_STATE, auth: true, info: action.user || {} };
-        // case types.SEND_AVATAR:
-        //     console.log('this is the action: ',action);
-        //     return { ...state }
         case types.UPDATE_AVATAR:
             return { ...state, info: { ...state.info, avatar: action.avatar} };
         case types.SIGN_IN_ERROR:

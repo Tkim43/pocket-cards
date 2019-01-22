@@ -76,15 +76,14 @@ class Profile extends Component {
             const {sortByLatest} = this.props
             await sortByLatest();
         }catch(err){
-            // console.log("error getting list data")
+            dispatch({
+                type: types.ERROR,
+                error: "Error updating category"
+            });
         }
     }
 
     render () { 
-
-        // console.log("this is the state: ", this.state);
-        // console.log("this is the props: ", this.props);
-        console.log("this props", this.props);
 
         if(this.props.error){
             return (
@@ -119,17 +118,11 @@ class Profile extends Component {
         }
 
         const timeZoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
-        // const emptyCategory = (() =>{
-        //     return(
-                
-        //     );
-        // });
 
         const profileCategories =  this.props.sets.map ( (item, ID) => {
 
             const created = new Date(item.created).getTime();
-            // const ms = created - timeZoneOffset;
-            // const diff = new Date().getTime() - ms;
+        
             const diff = new Date().getTime() - created;
             
             return (
@@ -179,9 +172,6 @@ class Profile extends Component {
             <div>
             <p className="white-text center">Welcome to PocketCards!</p>
             <p className="white-text center">Click down below to begin</p>
-            {/* <button className="col s12 card-container create-category-bold-text blue lighten-2 btn-large">
-                Create Cards <i className="material-icons large" onClick={()=> <BasicModal/>}>add</i>
-            </button> */}
             <ButtonModal createCards={true} />
             </div>
             }

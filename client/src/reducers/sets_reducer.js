@@ -36,7 +36,6 @@ import types from '../actions/types';
         case types.END_TUTORIAL:
             return{...state, on: action.success}
         case types.TUTORIAL_COMPLETED:
-        console.log("action", action)
             return{...state, on: action.tutorialCompleted[0].tutorial}
         case types.SEND_CARD_DATA:
             return{...state, front_description: '',back_description: ''}

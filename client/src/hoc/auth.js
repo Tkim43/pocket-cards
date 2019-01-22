@@ -13,7 +13,6 @@ export default function (WrappedComponent , to = "/", requireAuth = true){
         }
 
         checkAuth () {
-            console.log("Auth props: ", this.props);
             if(this.props.auth !== requireAuth){
                 this.props.history.push(to);
             }
