@@ -34,7 +34,11 @@ class ButtonModal extends Component {
 
 
     handleClick = async (values) => {
-        // console.log("SIgn up values: ", values);
+        console.log("Values: ", values);
+
+        if(values[0] || values[1] === ""){
+            return;
+        }
 
         this.setState({
             category: category.value,
@@ -139,10 +143,13 @@ function mapStateToProps(state){
 ButtonModal = reduxForm ({
     form: "button-modal",
     validate: validate,
-    enableReinitialize: true,
+    // enableReinitialize: true,
     shouldError: function(params){
         if (params.initialRender) { return false; }
-        return params.nextProps.anyTouched;
+        if(params.nextProps.submitting === true && params.props.submitting === false){
+            return true;
+        }
+        return true;
     }
 })(ButtonModal);
 
