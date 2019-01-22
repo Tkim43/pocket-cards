@@ -6,6 +6,7 @@ import home from '../assets/images/home.png';
 import tiffany from '../assets/images/tiffany.jpeg';
 import brandon from '../assets/images/brandon.png';
 import vienna from '../assets/images/vienna.png';
+import kyle from '../assets/images/kyle.png';
 import scott from '../assets/images/scott.jpg';
 import andy from '../assets/images/andy.jpg';
 import cody from '../assets/images/cody.jpg';
@@ -17,7 +18,7 @@ class About extends Component {
             <div>
                 <div className="developers-container">
                     <h1 className=" main-title">Meet the Team</h1>
-                    <h4 className="front-end center">Web Developers</h4>
+                    <h4 className="title center">Front-end Developers</h4>
                         <div className="developer-wrapper"> 
                             <img className="developer tiffany" src={tiffany}/>
                             <h5 className="name center">Tiffany Kim</h5>
@@ -63,18 +64,36 @@ class About extends Component {
                                 </a>
                             </div>
                         </div>
-                    
-                    <h4 className="front-end center">Project Managers</h4>
+                    <h4 className="title center">Back-end Developer</h4>
+
+                    <div className="backend-container">
+                        <div className="backend-wrapper">
+                            <img className="developer kyle" src={kyle}/>
+                            <h5 className="name center">Kyle Umbarger</h5>
+                            <div className="iconDiv">
+                                <a href="https://github.com/chronicSurfer" target="_blank">
+                                <img className="icon" src={github}/>
+                                </a>
+                                <a href="https://www.linkedin.com/in/kyle-umbarger-1035245b/" target="_blank">
+                                    <img className="icon" src={linkedin}/>
+                                </a>
+                                <a href="https://www.kyleumbarger.com/" target="_blank">
+                                    <img className="icon" src={home}/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 className="title center">Project Managers</h4>
                         <div className="developer-wrapper">
                             <img className="developer scott" src={scott}/>
                             <h5 className="name center">Scott Bowler</h5>
                         </div>
                         <div className="developer-wrapper">
-                            <img className="developer scott" src={andy}/>
+                            <img className="developer andy" src={andy}/>
                             <h5 className="name center">Andy Ong</h5>
                         </div>
                         <div className="developer-wrapper">
-                            <img className="developer scott" src={cody}/>
+                            <img className="developer cody" src={cody}/>
                             <h5 className="name center">Cody Miller</h5>
                         </div>
                 

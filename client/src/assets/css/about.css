@@ -44,12 +44,23 @@ img.icon{
     background-color: yellow;
 }
 
-.front-end,.name{
+.title,.name{
 font-family: 'Bree Serif', serif;
 }
 
 @media screen and (min-width: 1200px) {
     .developer-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
+    .backend-container{
+        display: flex;
+        justify-content: center;
+    }
+    .backend-wrapper{
         width:33%;
         height:0%;
         position:relative;
@@ -66,6 +77,17 @@ font-family: 'Bree Serif', serif;
         display:inline-block;
         text-align:center;
     }
+    .backend-container{
+        display: flex;
+        justify-content: center;
+    }
+    .backend-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
   }
 
 @media screen and (max-width: 992px) {
@@ -75,10 +97,25 @@ font-family: 'Bree Serif', serif;
         position:relative;
         display:inline-block;
     }
+    .backend-container{
+        display: flex;
+        justify-content: center;
+    }
+    .backend-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
   }
 
 @media screen and (max-width: 600px) {
     .developer-wrapper{
+        width:100%;
+        height:0%;
+    }
+    .backend-wrapper{
         width:100%;
         height:0%;
     }
