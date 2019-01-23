@@ -57,8 +57,8 @@ class InputDefinition extends Component {
                 }
                 return (
                     <div className="previews row center black-text" key={i}>
-                        <div className="col s6">{card.frontText}</div>
-                        <div className="col s6">{card.backText}</div>
+                        <div className="col s6 truncate">{card.frontText}</div>
+                        <div className="col s6 truncate">{card.backText}</div>
                     </div>
                 );
             });
@@ -67,7 +67,7 @@ class InputDefinition extends Component {
         return (
             <Fragment>
                 <div className = "add-card container">
-                    <h5 style={{textTransform: 'capitalize'}} className="center white-text">{topic.subCategory || 'Category'}</h5>
+                    <h5 style={{textTransform: 'capitalize'}} className="center white-text truncate">{topic.subCategory || 'Category'}</h5>
                     <h1>Cards Created: {cardCount || '0'}</h1>
     
                     <form onSubmit = {handleSubmit(this.handleAddDefinition)}>

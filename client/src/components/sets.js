@@ -136,13 +136,13 @@ class Sets extends Component{
                     {this.props.topics[index].cardCount > 0 ?
                         <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">
                         <div className="container">
-                            <div className="title-name">{item.subCategory}</div>
+                            <div className="title-name truncate">{item.subCategory}</div>
                             <div className="terms">{`${this.props.topics[index].cardCount} terms`}</div>
                         </div>
                         </Link> : 
                         <Link to={`/flashcardGeneration/${item.setID}/topic/${item.topicID}/`} className ="btn blue darken-3 ">
                         <div className="container">
-                            <div className="title-name">{item.subCategory}</div>
+                            <div className="title-name truncate">{item.subCategory}</div>
                             <div className="terms">{`${this.props.topics[index].cardCount} terms`}</div>
                         </div>
                         </Link>
@@ -159,7 +159,7 @@ class Sets extends Component{
         return(
         <div className="container">
             <div className="center set-container">
-                <h3 className="white-text">Category: {category}</h3>
+                <h3 className="white-text truncate">Category: {category}</h3>
                 <div className="col s12">
                     {userSubCategories}
                 </div>

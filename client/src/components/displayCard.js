@@ -50,7 +50,7 @@ class displayCard extends Component{
         return(
             <div className="container">
                 <div className="row">
-                    <h4 style={{ textTransform: 'capitalize' }} className="center grey-text text-lighten-1">{card.subCategory}</h4>
+                    <h4 style={{ textTransform: 'capitalize' }} className="center grey-text text-lighten-1 card-subcategory-title truncate">{card.subCategory}</h4>
                 </div>
                 <p className="numeric">{location}</p>
 
@@ -66,7 +66,7 @@ class displayCard extends Component{
                 </div>
                 <div className="row down">
                     <Link to ={`/flashcardGeneration/${set_id}/topic/${topic_id}`} className="btn green darken-2 edit-btn">Edit Cards</Link>
-                    <Link to={`/sets/${set_id}`} className="btn green darken-2 edit-btn">Return to Sets</Link>
+                    <Link to={`/sets/${set_id}`} className="btn green darken-2 edit-btn">To Sets</Link>
                 </div>
             </div>
         )

@@ -10,6 +10,11 @@
     height: 150px;
 }
 
+.frontText, .backText {
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
 .row {
     display: flex;
 }
