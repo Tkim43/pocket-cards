@@ -6,7 +6,15 @@
 #cardFont{
     font-size: 1.3em;
     font-family: raleway;
+    word-break: break-word;
+    overflow: hidden;
 }
+
+.card-subcategory-title{
+    word-break: break-word;
+    overflow: hidden;
+}
+
 .centerCard{
     display: flex;
     justify-content: center;

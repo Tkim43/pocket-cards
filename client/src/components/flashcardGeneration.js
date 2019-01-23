@@ -234,12 +234,12 @@ class FlashcardGeneration extends Component {
                         <Fragment>
                             <div className="col s5 card-container">
                                 <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card" >
-                                    <div>{frontText}</div>
+                                    <div className = "frontText">{frontText}</div>
                                 </Link> 
                             </div>
                             <div className="col s5 card-container">
                                 <Link to = {path} className="card-panel teal lighten-1 white-text text-inside-card">
-                                    <div>{backText}</div>
+                                    <div className = "backText">{backText}</div>
                                 </Link>
                             </div> 
                         </Fragment>
@@ -263,7 +263,7 @@ class FlashcardGeneration extends Component {
         return (
 
             <div className = "flashcard-container center">
-                <h2 style={{textTransform: 'capitalize'}} className = "col s12 center white-text">{topic && topic.subCategory || 'Category'}</h2>
+                <h2 style={{textTransform: 'capitalize'}} className = "col s12 center white-text truncate">{topic && topic.subCategory || 'Category'}</h2>
                 <h3 className = "col s12 center white-text">Cards: {cardCount || '0'}</h3>
                 <div className="row container flashcard-row">                    
                     <div className="col s5 card-container">

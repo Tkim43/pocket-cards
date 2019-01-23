@@ -128,6 +128,8 @@
 
 .category{
     height:6rem;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .delete-container{
@@ -173,6 +175,12 @@
     top: 33%;
     left: 100%;
 }
+
+@media only screen and (max-width: 350px) {
+    .frontText, .backText {
+        font-size: 0.85rem;
+    }
+  }
 
 @media screen and (min-width: 1145px) {
     .profile-pic {

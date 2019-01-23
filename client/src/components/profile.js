@@ -126,18 +126,25 @@ class Profile extends Component {
         // });
 
         const profileCategories =  this.props.sets.map ( (item, ID) => {
+            let category;
 
             const created = new Date(item.created).getTime();
             // const ms = created - timeZoneOffset;
             // const diff = new Date().getTime() - ms;
             const diff = new Date().getTime() - created;
+
+            if(item.category.length > 30){
+                category = item.category.substring(0,15) + "...";
+            }else {
+                category = item.category;
+            }
             
             return (
                 <div className="row category-info" key = {item.ID}>
                     <FindTimePassed created={diff}/>
 
                     <div className="col s12 categoryDiv card-container">
-                        <Link to = {`/sets/${item.ID}`} className = "category col s9 card-panel green lighten-2 white-text center sets-bold-text">{item.category}</Link>
+                        <Link to = {`/sets/${item.ID}`} className = "category col s9 card-panel green lighten-2 white-text center sets-bold-text truncate">{category}</Link>
                         <button className="delete-container red lighten-2 btn-large" onClick={() => {
                             this.showModal(item.ID)
                         }}>
