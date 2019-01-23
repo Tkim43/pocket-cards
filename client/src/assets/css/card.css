@@ -8,6 +8,7 @@
     font-family: raleway;
     word-break: break-word;
     overflow: hidden;
+    padding: 1rem;
 }
 
 .card-subcategory-title{
