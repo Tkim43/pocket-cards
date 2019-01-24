@@ -17,7 +17,9 @@ import types from '../actions/types';
     singleCard: {},
     location:'',
     tutorial: [],
-    error: ''
+    error: '',
+    subCategoryError: '',
+    categoryError: ''
 };
  export default (state = DEFAULT_STATE, action) => {
     switch(action.type){
@@ -47,6 +49,8 @@ import types from '../actions/types';
             return {...state, categories: action.payload };
         case types.SIGN_OUT:
             return { ...DEFAULT_STATE };
+        case types.ADD_CATEGORY_ERROR:
+            return { ...DEFAULT_STATE, addCategoryError: action.error, repeatUserError: action.errors };
         default:
             return state;
     }
