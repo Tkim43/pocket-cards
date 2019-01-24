@@ -63,3 +63,21 @@
     width: 75%;
     height: 75%;
 }
+
+@media only screen and (max-width: 600px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 5%;
+        top: 20%;
+    }
+
+    .flashcard-container > h2 {
+        font-size: 1.8rem;
+    }
+
+    .flashcard-container > h3 {
+        font-size: 1.6rem;
+    }
+} 
+
