@@ -9,8 +9,8 @@
 }
 
 .set > .blue.darken-3 {
-    width:90%;
-    height: 58px;
+    width:70%;
+    height: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +39,8 @@
 
 .title-name{
     font-size:1rem;
-
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .terms{

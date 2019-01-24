@@ -120,6 +120,9 @@ class Sets extends Component{
                                     <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                         Create Subcategory
                                     </button>
+                                    <div className="row">
+                                        {/* <div className="col s12 red-text">{this.props.}</div> */}
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -136,13 +139,13 @@ class Sets extends Component{
                     {this.props.topics[index].cardCount > 0 ?
                         <Link to={`/displayCard/${item.setID}/topic/${item.topicID}/card/0`} className ="btn blue darken-3 ">
                         <div className="container">
-                            <div className="title-name truncate">{item.subCategory}</div>
+                            <div className="title-name">{item.subCategory}</div>
                             <div className="terms">{`${this.props.topics[index].cardCount} terms`}</div>
                         </div>
                         </Link> : 
                         <Link to={`/flashcardGeneration/${item.setID}/topic/${item.topicID}/`} className ="btn blue darken-3 ">
                         <div className="container">
-                            <div className="title-name truncate">{item.subCategory}</div>
+                            <div className="title-name">{item.subCategory}</div>
                             <div className="terms">{`${this.props.topics[index].cardCount} terms`}</div>
                         </div>
                         </Link>
@@ -180,18 +183,34 @@ class Sets extends Component{
 
 function validate (formValues) {
     const error = {};
-
+    const subCategoryError = [];
 
     if(!formValues.subCategory){
         error.subCategory = ['Please input a subcategory title'];
     }
 
+    checkIfSubCategoryIsLongEnough (formValues.subCategory, subCategoryError);
+
+    if(subCategoryError.length){
+        error.subCategory = subCategoryError;
+    }
+
     return error;
+
+    
 
 }
 
-function mapStateToProps(state){
+function checkIfSubCategoryIsLongEnough (subcategory = "", error){
+    const regex = /^\w{1,40}$/;
+    const testIfSubcategoryIsLongEnough = regex.test(subcategory);
+    
+    if(!testIfSubcategoryIsLongEnough){
+        error.push("Subcategory needs to have between 1 to 40 chars");
+    }
+}
 
+function mapStateToProps(state){
     const initialValues = {};
 
     if(state.form['button-modal']){

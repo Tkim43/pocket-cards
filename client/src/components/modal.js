@@ -104,6 +104,8 @@ class ButtonModal extends Component {
 
 function validate (formValues) {
     const error = {};
+    const categoryError = [];
+    const subCategoryError = [];
 
     if(!formValues.category){
         error.category = ['Please input a category title'];
@@ -113,8 +115,37 @@ function validate (formValues) {
         error.subCategory = ['Please input a subcategory title'];
     }
 
+    checkIfSubCategoryIsLongEnough (formValues.subCategory, subCategoryError);
+    checkIfCategoryIsLongEnough (formValues.category, categoryError);
+
+    if(subCategoryError.length){
+        error.subCategory = subCategoryError;
+    }
+
+    if(categoryError.length){
+        error.category = categoryError;
+    }
+
     return error;
 
+}
+
+function checkIfSubCategoryIsLongEnough (subcategory = "", error){
+    const regex = /^\w{1,40}$/;
+    const testIfSubcategoryIsLongEnough = regex.test(subcategory);
+    
+    if(!testIfSubcategoryIsLongEnough){
+        error.push("Subcategory needs to have between 1 to 40 chars");
+    }
+}
+
+function checkIfCategoryIsLongEnough (category = "", error){
+    const regex = /^\w{1,50}$/;
+    const testIfCategoryIsLongEnough = regex.test(category);
+    
+    if(!testIfCategoryIsLongEnough){
+        error.push("Category needs to have between 1 to 50 chars");
+    }
 }
 
 
