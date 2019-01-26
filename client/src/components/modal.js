@@ -75,7 +75,7 @@ class ButtonModal extends Component {
                                         <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Subcategory" component = {RenderInput}/>
                                     </div>
                                     <div className = "row">
-                                        <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                        <button className="green lighten-2 btn btn-large" type="done" name="action">
                                             Create Card
                                         </button>
                                     </div>
@@ -131,20 +131,20 @@ function validate (formValues) {
 }
 
 function checkIfSubCategoryIsLongEnough (subcategory = "", error){
-    const regex = /^\w{1,40}$/;
+    const regex = /^\S.{1,40}$/;
     const testIfSubcategoryIsLongEnough = regex.test(subcategory);
     
     if(!testIfSubcategoryIsLongEnough){
-        error.push("Subcategory needs to have between 1 to 40 chars");
+        error.push("Subcategory needs to have between 1 to 40 characters");
     }
 }
 
 function checkIfCategoryIsLongEnough (category = "", error){
-    const regex = /^\w{1,50}$/;
+    const regex = /^\S.{1,50}$/;
     const testIfCategoryIsLongEnough = regex.test(category);
     
     if(!testIfCategoryIsLongEnough){
-        error.push("Category needs to have between 1 to 50 chars");
+        error.push("Category needs to have between 1 to 50 characters");
     }
 }
 

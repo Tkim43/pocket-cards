@@ -19,7 +19,7 @@ class Login extends Component{
             <div className="center mainContainer">
                 <div className = "responsive-img container">
                     <img className="landingLogo"src={logo}></img>
-                    <img className="kangaroo hop" src={kangaroo}></img>
+                    <img className="kangaroo" src={kangaroo}></img>
                 </div>
                 <div className="divider cyan lighten-3"></div>
                 <div className="container">
