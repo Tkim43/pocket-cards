@@ -117,12 +117,9 @@ class Sets extends Component{
                                     <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Subcategory" component = {this.renderInput}/>
                                 </div>
                                 <div className = "row">
-                                    <button className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                    <button className="green lighten-2 btn btn-large" type="done" name="action">
                                         Create Subcategory
                                     </button>
-                                    <div className="row">
-                                        {/* <div className="col s12 red-text">{this.props.}</div> */}
-                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -202,7 +199,7 @@ function validate (formValues) {
 }
 
 function checkIfSubCategoryIsLongEnough (subcategory = "", error){
-    const regex = /^\w{1,40}$/;
+    const regex = /^\S.{1,40}$/;
     const testIfSubcategoryIsLongEnough = regex.test(subcategory);
     
     if(!testIfSubcategoryIsLongEnough){
