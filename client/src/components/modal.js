@@ -69,10 +69,10 @@ class ButtonModal extends Component {
                             <div>
                                 <form onSubmit = {handleSubmit(this.handleClick)}>
                                     <div className="row text-black">
-                                        <Field className = "text-black" name = "category" getRenderedComponent={true} size = "s12" type = "text" label = "Create Category" component = {RenderInput}/>
+                                        <Field className = "text-black" name = "category" getRenderedComponent={true} size = "s12" type = "text" label = "Create Subject" component = {RenderInput}/>
                                     </div>
                                     <div className="row text-black">
-                                        <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Subcategory" component = {RenderInput}/>
+                                        <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Topic" component = {RenderInput}/>
                                     </div>
                                     <div className = "row">
                                         <button className="green lighten-2 btn btn-large" type="done" name="action">
@@ -88,14 +88,14 @@ class ButtonModal extends Component {
 
         if (this.props.createCards) {
             return(
-                <button onClick ={this.open} className="create-card col s12 bold-text blue lighten-2 btn-large">Create Cards    <i className="material-icons large">add_box</i>
+                <button onClick ={this.open} className="create-card col s12 bold-text blue lighten-2 btn-large">Create Cards<i className="material-icons large">add_box</i>
             </button>
             )
         }
 
         return (
           
-            <div onClick={this.open} className = "create-category-bold-text card-panel orange lighten-2 white-text center" >Create Category</div>
+            <div onClick={this.open} className = "create-category-bold-text card-panel orange lighten-2 white-text center" >Create Subject</div>
             
     
         );
@@ -108,11 +108,11 @@ function validate (formValues) {
     const subCategoryError = [];
 
     if(!formValues.category){
-        error.category = ['Please input a category title'];
+        error.category = ['Please input a subject title'];
     }
 
     if(!formValues.subCategory){
-        error.subCategory = ['Please input a subcategory title'];
+        error.subCategory = ['Please input a topic title'];
     }
 
     checkIfSubCategoryIsLongEnough (formValues.subCategory, subCategoryError);
@@ -135,7 +135,7 @@ function checkIfSubCategoryIsLongEnough (subcategory = "", error){
     const testIfSubcategoryIsLongEnough = regex.test(subcategory);
     
     if(!testIfSubcategoryIsLongEnough){
-        error.push("Subcategory needs to have between 1 to 40 characters");
+        error.push("Topic needs to have between 1 to 40 characters");
     }
 }
 
@@ -144,7 +144,7 @@ function checkIfCategoryIsLongEnough (category = "", error){
     const testIfCategoryIsLongEnough = regex.test(category);
     
     if(!testIfCategoryIsLongEnough){
-        error.push("Category needs to have between 1 to 50 characters");
+        error.push("Subject needs to have between 1 to 50 characters");
     }
 }
 

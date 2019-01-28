@@ -114,7 +114,7 @@ class Sets extends Component{
 
                             <form onSubmit = {handleSubmit(this.createSubcategory)}>
                                 <div className="row text-black">
-                                    <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Subcategory" component = {this.renderInput}/>
+                                    <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Topic" component = {this.renderInput}/>
                                 </div>
                                 <div className = "row">
                                     <button className="green lighten-2 btn btn-large" type="done" name="action">
@@ -203,7 +203,7 @@ function checkIfSubCategoryIsLongEnough (subcategory = "", error){
     const testIfSubcategoryIsLongEnough = regex.test(subcategory);
     
     if(!testIfSubcategoryIsLongEnough){
-        error.push("Subcategory needs to have between 1 to 40 chars");
+        error.push("Topic needs to have between 1 to 40 chars");
     }
 }
 
