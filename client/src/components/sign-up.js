@@ -7,7 +7,7 @@ import '../assets/css/dropdown.css';
 class Signup extends Component {
     state = {
         avatars: [
-            {value: 'default', img: '/avatars/crab.png', id: 0},
+            {value: 'default', img: '/avatars/default_avatar.png', id: 0},
             {value: 'crab', img: '/avatars/crab.png', id: 1},
             {value: 'crocodile', img: '/avatars/crocodile.png', id: 2},
             {value: 'fish', img: '/avatars/fish.png' ,id: 3},

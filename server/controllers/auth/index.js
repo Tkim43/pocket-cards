@@ -6,6 +6,7 @@ const { jwtConfig } = require('../../config');
 
 
 const avatars = {
+    'default-avatar' : '/avatars/default_avatar.png',
     'crab': '/avatars/crab.png',
     'crocodile': '/avatars/crocodile.png',
     'fish': '/avatars/fish.png',
@@ -68,7 +69,7 @@ exports.signUp = async (req, res) => {
 
         const hash = await hashPassword(password);
 
-        const userAvatar = avatars[avatar] || avatars['crab'];
+        const userAvatar = avatars[avatar] || avatars['default-avatar'];
 
         const queryInsertUser = 'INSERT INTO users (??, ??, ??, ??) VALUES (?, ?, ?, ?)';
         const insertsInsertUser = ['displayName', 'email', 'password', 'avatar', displayName, email, hash, userAvatar];
