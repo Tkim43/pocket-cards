@@ -13,6 +13,7 @@
 .frontText, .backText {
     word-wrap: break-word;
     overflow: hidden;
+    white-space:pre;
 }
 
 .row {

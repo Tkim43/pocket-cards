@@ -28,7 +28,7 @@
 textarea{
     background-color: #fff9c4;
     height: 6rem;
-    white-space: pre-line;
+    /* white-space: pre; */
 }
 
 

@@ -9,6 +9,8 @@
     word-break: break-word;
     overflow: hidden;
     padding: 1rem;
+    white-space: pre;
+    
 }
 
 .card-subcategory-title{
