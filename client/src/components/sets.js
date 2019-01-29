@@ -144,7 +144,7 @@ class Sets extends Component{
                         <Link to={`/flashcardGeneration/${item.setID}/topic/${item.topicID}/`} className ="btn blue darken-3 ">
                         <div>
                             <div className="title-name">{item.subCategory}</div>
-                            <div className="terms">{`${this.props.topics[index].cardCount} terms`}</div>
+                            <div className="terms">{`${this.props.topics[index].cardCount} terms`} <i className="material-icons">view_list</i></div>
                         </div>
                         </Link>
                     }

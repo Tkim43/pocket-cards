@@ -56,7 +56,7 @@
 }
 
 .card-container .btn-large i{
-    font-size: 3.5rem;
+    font-size: 2.5rem;
 }
 
 .gif{
@@ -92,7 +92,7 @@
     }
 } 
 
-@media only screen and (min-width: 991px){
+@media only screen and (min-width: 600px){
     .delete-box > button.red {
         height: 100px;
         width: 70%;
