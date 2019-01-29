@@ -106,9 +106,10 @@ class editMode extends Component{
                                             <h6 className="center">Are you sure you want to discard the changes you made?</h6>
                                         </div>
                                         <div className = "row">
-                                            <button onClick={this.cancel} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                            {/* <button onClick={this.cancel} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 Yes
-                                            </button>
+                                            </button> */}
+                                             <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Yes</Link>
                                             <Link to={this.hideModal} className="red lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 No
                                             </Link>
@@ -138,7 +139,7 @@ class editMode extends Component{
                 <div className="row">
                     
                         <button className="col s12 btn green darken-2" onClick = {this.sendCardData}>Save</button>
-                        <button className="col s12 btn red darken-2" onClick = {this.showModal}>Reset</button>
+                        <button className="col s12 btn red darken-2" onClick = {this.showModal}>Cancel</button>
                     
                 </div>
                 
