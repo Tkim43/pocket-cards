@@ -9,7 +9,26 @@ class displayCard extends Component{
         flipped: true,
         isLoading: false
     }
+
+    handleKeyDown = (event) => {
+        if(event.keyCode === 32){
+            const { flipped } = this.state; 
+            this.setState({
+                flipped: !flipped
+            });
+        }else if(event.keyCode === 37){
+            this.nextPrevCard('previous');
+        }else if(event.keyCode === 39){
+            this.nextPrevCard('next');
+        }
+    }
+
+    componentWillMount() {
+        document.removeEventListener("keydown", this.handleKeyDown);
+    }
+
     async componentDidMount(){
+        document.addEventListener("keydown", this.handleKeyDown);
 
         const { getCardData, history, match: { params } } = this.props;
         
@@ -32,12 +51,13 @@ class displayCard extends Component{
         
         
     }
-    flipCard =()=>{
+    flipCard = () =>{
         const { flipped } = this.state;
         this.setState({
             flipped: !flipped
         })
     }
+
     render(){
         const {card, match: { params: {set_id, topic_id} } } = this.props;
         const { isLoading, flipped } = this.state;
@@ -60,9 +80,9 @@ class displayCard extends Component{
                     <p id ="cardFont" className="back flow-text">{isLoading ? '' : card.backText}</p>
                 </div>
                 <div className="row col s12">
-                    <i className="nav-btn large material-icons white-text" onClick={() => this.nextPrevCard('previous')}>arrow_back</i>
-                    <button className="btn green darken-2 flip-btn" onClick={this.flipCard}>{flipped ? "Flip to Back" : "Flip to Front"}</button>
-                    <i className="nav-btn large material-icons white-text" onClick={() => this.nextPrevCard('next')}>arrow_forward</i>
+                    <i className="nav-btn large material-icons white-text" onKeyDown = {() => this.handleKeyDown} onClick={() => this.nextPrevCard('previous')}>arrow_back</i>
+                    <button className="btn green darken-2 flip-btn" onKeyDown = {this.handleKeyDown} onClick={this.flipCard}>{flipped ? "Flip to Back" : "Flip to Front"}</button>
+                    <i className="nav-btn large material-icons white-text" onKeyDown = {() => this.handleKeyDown} onClick={() => this.nextPrevCard('next')}>arrow_forward</i>
                 </div>
                 <div className="row down">
                     <Link to ={`/flashcardGeneration/${set_id}/topic/${topic_id}`} className="btn green darken-2 edit-btn">Edit Cards</Link>
