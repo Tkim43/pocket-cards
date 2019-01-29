@@ -142,7 +142,7 @@ class Sets extends Component{
                         </div>
                         </Link> : 
                         <Link to={`/flashcardGeneration/${item.setID}/topic/${item.topicID}/`} className ="btn blue darken-3 ">
-                        <div className="container">
+                        <div>
                             <div className="title-name">{item.subCategory}</div>
                             <div className="terms">{`${this.props.topics[index].cardCount} terms`}</div>
                         </div>

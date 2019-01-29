@@ -9,8 +9,9 @@
 }
 
 .set > .blue.darken-3 {
-    width:70%;
+    width:90%;
     height: 90%;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,11 +48,16 @@
     font-size: 1em;
     display: flex;
     justify-content: flex-end;
-    margin-top: -5%;
+}
+
+a.blue > div {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 100%;
 }
 
 
-  @media only screen and (max-width: 320px) {
+@media only screen and (max-width: 320px) {
     .title-name{
         font-size: 80%;
     }
@@ -65,7 +71,32 @@
         top: 20%;
     }
 
+    .btn .blue .darken-3 > div {
+        margin: 0 auto;
+        max-width: 1280px;
+        width: 90%;
+    }
+
     .set-container > h3 {
         font-size: 1.3rem;
     }
-} 
+
+    .set > .blue.darken-3 {
+        width: 70%;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 991px){
+    .btn-large i {
+        font-size: 2.5rem;
+    }
+}
+
+@media only screen and (min-width: 991px){
+    .basic-modal-content {
+        width: 50%;
+    }
+    .btn-large i {
+        font-size: 3.5rem;
+    }
+}
