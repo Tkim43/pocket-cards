@@ -178,7 +178,7 @@ class Profile extends Component {
              {this.props.sets.length > 0 ? profileCategories :
             <div>
             <p className="white-text center">Welcome to PocketCards!</p>
-            <p className="white-text center">Click down below to begin</p>
+            <p className="white-text center">Create a card below to begin</p>
             <ButtonModal createCards={true} />
             </div>
             }
