@@ -64,6 +64,17 @@
     height: 75%;
 }
 
+.btn-large i {
+    margin: 0;
+}
+
+
+@media only screen and (max-width: 325px) {
+    .card-container .btn-large i {
+        font-size: 2.5rem;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .terms{
         font-size: 75%;
@@ -80,4 +91,14 @@
         font-size: 1.6rem;
     }
 } 
+
+@media only screen and (min-width: 991px){
+    .delete-box > button.red {
+        height: 100px;
+        width: 70%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}
 

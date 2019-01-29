@@ -217,7 +217,7 @@ class FlashcardGeneration extends Component {
                             </div> 
                         </Fragment>
                         
-                        <div className="col s2 card-container">
+                        <div className="col s2 card-container delete-box">
                         <button className="red lighten-2 btn-large" onClick={() => this.showModal(item.ID)}>
                                 <i className = "large material-icons">delete</i>
                             </button>
@@ -245,7 +245,7 @@ class FlashcardGeneration extends Component {
                 </div>
                 {listCards}
                 {this.showLoadingBar()}
-                <div className = "buttonDiv center">
+                <div className = "buttonDiv center container">
                     <Link className="blue lighten-2 btn btn-large col s6" to = {`/createflashcards/${params.set_id}/subcategory/${params.topic_id}`} name="action">
                         <i className="material-icons right">add</i>
                         Add Card
