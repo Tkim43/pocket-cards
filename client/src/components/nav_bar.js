@@ -14,7 +14,7 @@ class Navbar extends Component {
         links: [
             {
                 to: '/profile',
-                text: 'Profile'
+                text: 'Home'
             },
             {
                 to: '/about',
