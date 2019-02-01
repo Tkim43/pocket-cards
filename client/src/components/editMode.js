@@ -109,7 +109,7 @@ class editMode extends Component{
                                             {/* <button onClick={this.cancel} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 Yes
                                             </button> */}
-                                             <Link to={`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Yes</Link>
+                                             <Link to= {`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Yes</Link>
                                             <Link to={this.hideModal} className="red lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 No
                                             </Link>

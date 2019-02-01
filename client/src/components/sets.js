@@ -17,6 +17,13 @@ class Sets extends Component{
     componentDidMount(){
         this.props.getSetsData(this.props.match.params.set_id);
     }
+    startSets= async ()=>{
+        return(
+            <div>
+
+            </div>
+        )
+    }
     delete = async ()=>{
         this.setState({
             delete: true
@@ -156,17 +163,23 @@ class Sets extends Component{
                 </div>
             );  
         });
-
+        console.log("this props", this.props)
         return(
         <div className="container">
             <div className="center set-container">
                 <h3 className="white-text truncate">Category: {category}</h3>
                 <div className="col s12">
-                    {userSubCategories}
+                    {/* {userSubCategories} */}
+                    {this.props.topics[0] ? userSubCategories :
+                    <div>
+                    <p className="white-text center">Welcome to PocketCards!</p>
+                    <p className="white-text center">Create a topic below to begin</p>
+                    </div>
+                    }
                 </div>
                 <div className="set-buttons row">
                     <div className="col s12">
-                        <button onClick = {this.showModal} className="green btn lighten-2 wide-btn" >Add Title</button>
+                        <button onClick = {this.showModal} className="green btn lighten-2 wide-btn">Add Topic</button>
                     </div>
                     <div className="col s12">
                         <Link to="/profile" className="btn yellow darken-2 wide-btn">Home</Link>
