@@ -150,7 +150,7 @@ class Profile extends Component {
         
         const profileUserInfo = this.props.user.displayName;
         const profileUserAvatar = this.props.user.avatar || defaultAvatar;
-
+        console.log("sets length", this.props.sets);
         return (
         <div className = "container">
             <div className = "profile-container row col s12">
@@ -175,7 +175,7 @@ class Profile extends Component {
                         <ButtonModal />
                 </div>
                 </div>
-             {this.props.sets.length > 0 ? profileCategories :
+             {this.props.sets[0] ? profileCategories :
             <div>
             <p className="white-text center">Welcome to PocketCards!</p>
             <p className="white-text center">Create a card below to begin</p>
