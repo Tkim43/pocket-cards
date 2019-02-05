@@ -250,7 +250,7 @@ class FlashcardGeneration extends Component {
                         <i className="material-icons right">add</i>
                         Add Card
                     </Link>
-                    <Link className="green lighten-2 btn btn-large col s6" to={`/sets/${params.set_id}`} name="action">
+                    <Link className="green lighten-2 btn btn-large col s6" to={`/displayCard/${params.set_id}/topic/${params.topic_id}/card/${cards}`} name="action">
                         <i className="material-icons right">done</i>
                         Done
                     </Link>
