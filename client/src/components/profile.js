@@ -150,7 +150,6 @@ class Profile extends Component {
         
         const profileUserInfo = this.props.user.displayName;
         const profileUserAvatar = this.props.user.avatar || defaultAvatar;
-        console.log("sets length", this.props.sets);
         return (
         <div className = "container">
             <div className = "profile-container row col s12">
