@@ -23,7 +23,7 @@ class displayCard extends Component{
         }
     }
 
-    componentWillMount() {
+    componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyDown);
     }
 
