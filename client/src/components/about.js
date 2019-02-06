@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import auth from '../hoc/auth';
 import github from '../assets/images/github.png';
 import linkedin from '../assets/images/linkedin.png';
 import home from '../assets/images/home.png'; 
