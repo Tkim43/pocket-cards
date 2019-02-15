@@ -1,23 +1,24 @@
 # My Pocket Cards
 
 
-<a href="https://docs.google.com/document/d/e/2PACX-1vRnMhvRsIwCM5L5HrqSSKtPj1Nv0on5mibMI11Sfl8hiL9IRtGw-iutG0uJzlUcRXaevK1bGtRLdUSX/pub" target="_blank">Info</a>
+<a href="https://docs.google.com/document/d/e/2PACX-1vRnMhvRsIwCM5L5HrqSSKtPj1Nv0on5mibMI11Sfl8hiL9IRtGw-iutG0uJzlUcRXaevK1bGtRLdUSX/pub" target="_blank">Details/ Information </a>
 
-### Live Website
-> <a href="https://mypocketcards.com/" target="_blank">Portfolio</a>
+## Live Website
+> <a href="https://mypocketcards.com/" target="_blank">My Pocket Cards</a>
 
+## Preview of the Website
 > ![alt text](https://media.giphy.com/media/fipY3GDKQUgPno7QvX/giphy.gif)
 
 ### Members
-- Tiffany Kim 
-> <a href="https://tiffanyykim.com/" target="_blank">Portfolio</a>
-- Vienna Tran 
-> <a href="https://viennatran.com//" target="_blank">Portfolio</a>
-- Brandon Park 
-> <a href="https://brandontravispark.com/" target="_blank">Portfolio</a>
-- Kyle Umbarger
+> Tiffany Kim 
+- <a href="https://tiffanyykim.com/" target="_blank">Portfolio</a>
+> Vienna Tran 
+-  <a href="https://viennatran.com//" target="_blank">Portfolio</a>
+> Brandon Park 
+- <a href="https://brandontravispark.com/" target="_blank">Portfolio</a>
+> Kyle Umbarger
 
-### Technologies Used:
+## Technologies Used:
 - Javascript
 - React
 - Redux
@@ -29,7 +30,7 @@
 - SCSS
 - AWS
 
-### Mentors
+## Mentors
 - Scott B.
 - Andy O.
 - Cody M.
