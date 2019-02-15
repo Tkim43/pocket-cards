@@ -163,7 +163,6 @@ class Sets extends Component{
                 </div>
             );  
         });
-        console.log("this props", this.props)
         return(
         <div className="container">
             <div className="center set-container">
