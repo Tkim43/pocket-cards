@@ -29,7 +29,8 @@
     height: 30px;
     width: 30px;
     line-height: 30px;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -42,4 +43,21 @@
 .basic-modal-close:hover {
     color: #ff0000;
     background-color: #dedede;
+}
+
+input[type=text]:not(.browser-default).validate{
+    color:black;
+}
+
+.text-size {
+    font-size: 0.5em;
+}
+
+.text-black {
+    color: black;
+}
+
+.create-card{
+    display: flex;
+    justify-content: center;
 }

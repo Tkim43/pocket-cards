@@ -1,4 +1,4 @@
-/* Flashcard Generation Page */
+
 
 .card{
     max-height: 500px;
@@ -8,6 +8,12 @@
 .text-inside-card {
     max-height: 500px;
     height: 150px;
+}
+
+.frontText, .backText {
+    word-wrap: break-word;
+    overflow: hidden;
+    white-space:pre;
 }
 
 .row {
@@ -51,5 +57,49 @@
 }
 
 .card-container .btn-large i{
-    font-size: 3.5rem;
+    font-size: 2.5rem;
 }
+
+.gif{
+    width: 75%;
+    height: 75%;
+}
+
+.btn-large i {
+    margin: 0;
+}
+
+
+@media only screen and (max-width: 325px) {
+    .card-container .btn-large i {
+        font-size: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 5%;
+        top: 20%;
+    }
+
+    .flashcard-container > h2 {
+        font-size: 1.8rem;
+    }
+
+    .flashcard-container > h3 {
+        font-size: 1.6rem;
+    }
+} 
+
+@media only screen and (min-width: 600px){
+    .delete-box > button.red {
+        height: 100px;
+        width: 70%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}
+

@@ -14,7 +14,7 @@ class Navbar extends Component {
         links: [
             {
                 to: '/profile',
-                text: 'Profile'
+                text: 'Home'
             },
             {
                 to: '/about',
@@ -47,7 +47,7 @@ class Navbar extends Component {
                 return (
                     <li onClick = {this.handleLinkClick} key = {link.to}>
                         <Link to = {link.to}>{link.text}</Link>
-                    </li>
+                    </li>      
                 );
             }));
             linkElements.push(<li className = "nav-item" key="divider">
@@ -70,11 +70,12 @@ class Navbar extends Component {
             <Fragment>
                 <nav className = "main-nav">
                     <div className="nav-wrapper">
-                        <Link className = "brand-logo" to = "/profile">                                
-                                <img className ="logo-large hide-on-med-and-down" src={logo} />
-                                <span>Pocket Cards</span>
-                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                        <Link className = "brand-logo" to = "/profile">
+                            <div className="nav-container">
+                                <span className="pocket-cards">Pocket Cards</span>
+                                <img className ="logo-large hide-on-small-only" src={logo} />
                                 <img className ="logo hide-on-med-and-up" src={logo} />
+                            </div>
                         </Link>
                         
                         <a href="#" data-target="side-nav" className="sidenav-trigger"><i className="material-icons">dehaze</i></a>
@@ -97,11 +98,9 @@ class Navbar extends Component {
                 <nav className="main-nav">
                     <div className="nav-wrapper">
                         <Link className = "brand-logo" to = "/profile">
-                            <div>
-                                
-                                <img className ="logo-large hide-on-med-and-down" src={logo} />
-                                <span>Pocket Cards</span>
-                                <img className ="logo-large hide-on-med-and-down" src={logo} />
+                            <div className="nav-container">
+                                <span className="pocket-cards">Pocket Cards</span>
+                                <img className ="logo-large hide-on-small-only" src={logo} />
                                 <img className ="logo hide-on-med-and-up" src={logo} />
                             </div>
                         </Link>
@@ -114,6 +113,9 @@ class Navbar extends Component {
                             <li>
                                 <Link to = "/signup">Sign Up</Link>
                             </li>
+                            <li>
+                                <Link to = "/about">Meet The Team</Link>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -121,6 +123,7 @@ class Navbar extends Component {
                 <SideNav setRef = {this.setSideNavRef} links = {<li onClick = {this.handleLinkClick}>
                         <Link to = "/signin">Sign In</Link>
                         <Link to = "/signup">Sign Up</Link>
+                        <Link to = "/about">Meet The Team</Link>
                     </li>}>
                 </SideNav>
             </Fragment>

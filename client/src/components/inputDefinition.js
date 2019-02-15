@@ -18,19 +18,10 @@ class InputDefinition extends Component {
         getTopicsCards(params.set_id, params.topic_id);
     }
 
-    // renderInput (props) {
-    //     return (
-    //         <div className= {`input-field col ${props.size}`}>
-    //             <input {...props.input} type= {props.type || "text"} id = {props.input.name} autoComplete = "off"/>
-    //             <label htmlFor= {props.input.name} >{props.label}</label>
-    //         </div>
-    //     );
-    // }
-
     renderInput (props) {
         return (
             <div className= {`input-field col ${props.size}`}>
-                <input {...props.input} type= {props.type || "text"} id = {props.input.name}/>
+                <textarea {...props.input} type= {props.type || "text"} id = {props.input.name}/>
                 <label htmlFor= {props.input.name} >{props.label}</label>
                 <ul>
                     {(props.meta.touched || props.meta.dirty) && props.meta.error && props.meta.error.map ( (item, index) => {
@@ -58,16 +49,16 @@ class InputDefinition extends Component {
 
         if(cards && cards.length){
             cardElements = cards.map((card, i) => {
-                if(card.frontText.length > 80){
+                if(card.frontText.length > 60){
                     card.frontText = card.frontText.substring(0,60) + "...";
                 }
-                if(card.backText.length > 80){
+                if(card.backText.length > 60){
                     card.backText = card.backText.substring(0,60) + "...";
                 }
                 return (
-                    <div className="row center grey-text" key={i}>
-                        <div className="col s6">{card.frontText}</div>
-                        <div className="col s6">{card.backText}</div>
+                    <div className="previews row center black-text" key={i}>
+                        <div className="col s6 truncate">{card.frontText}</div>
+                        <div className="col s6 truncate">{card.backText}</div>
                     </div>
                 );
             });
@@ -76,8 +67,8 @@ class InputDefinition extends Component {
         return (
             <Fragment>
                 <div className = "add-card container">
-                    <h5 style={{textTransform: 'capitalize'}} className="center white-text">{topic.subCategory || 'Category'}</h5>
-                    <h1>Cards Created: {cardCount || '...'}</h1>
+                    <h5 style={{textTransform: 'capitalize'}} className="center white-text truncate">{topic.subCategory || 'Category'}</h5>
+                    <h1>Cards Created: {cardCount || '0'}</h1>
     
                     <form onSubmit = {handleSubmit(this.handleAddDefinition)}>
                         <div className="row">
@@ -114,9 +105,6 @@ class InputDefinition extends Component {
 
 function validate (formValues) {
     const error = {};
-
-    console.log("THESE ARE THE FORM VALUES: ", formValues);
-
     if(!formValues.frontText){
         error.frontText = ['Please input a term'];
     }

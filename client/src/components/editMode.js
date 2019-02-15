@@ -71,7 +71,11 @@ class editMode extends Component{
     render(){
         const { match: { params } } = this.props;
         const { autoFill } = this.state;
-
+        if(this.props.error){
+            return (
+                <a onClick={M.toast({html: "Oops! Something went wrong"})} className="btn, center">{this.props.error}</a>
+            )
+        }
         if(this.state.frontText === undefined){
             return (
                 <div className="loading-container">
@@ -102,12 +106,13 @@ class editMode extends Component{
                                             <h6 className="center">Are you sure you want to discard the changes you made?</h6>
                                         </div>
                                         <div className = "row">
-                                            <button onClick={this.cancel} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                            {/* <button onClick={this.cancel} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 Yes
-                                            </button>
-                                            <button onClick={this.hideModal} className="red lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
+                                            </button> */}
+                                             <Link to= {`/flashcardGeneration/${params.set_id}/topic/${params.topic_id}`} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">Yes</Link>
+                                            <Link to={this.hideModal} className="red lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
                                                 No
-                                            </button>
+                                            </Link>
                                         </div>
                                 </form>
                             </div>

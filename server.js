@@ -46,6 +46,28 @@ app.get('/api/userhome', requireAuth, async (req, res, next) => {
     
 }, errorHandling);
 
+app.patch('/api/user/avatar', requireAuth, async(req, res, next) => {
+    try {
+        const { ID } = req.user;
+        const { avatar } = req.body;
+
+        const query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+        const inserts = ['users', 'avatar', avatar, 'ID', ID];
+
+        const sql = mysql.format(query, inserts);
+        const updatedAvatar = await db.query(sql);
+
+        res.send({
+            success: true,
+            updatedAvatar
+        });
+    } catch (err) {
+        req.status = 500;
+        req.error = 'Error updating user avatar';
+
+        return next();
+    }
+}, errorHandling);
 
 // get category and all subcategory data of sets joined to topics based on userID (DONE)
 app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
@@ -62,9 +84,21 @@ app.get('/api/set_management/:setID', requireAuth, async (req, res, next)=> {
 
         const sets = await db.query(sql);
 
+        const setsWithCardCount = await Promise.all(sets.map( async (set, i) => {
+            const query = 'SELECT COUNT(`ID`) AS `count` FROM `cards` WHERE topicID=?';
+            const inserts = [set.topicID];
+            const sql = mysql.format(query, inserts);
+
+            const [card] = await db.query(sql);
+
+            set.cardCount = card.count;
+
+            return set;
+        }));
+
         res.send({
             success: true,
-            sets
+            sets: setsWithCardCount
         });
     } catch(err){
         req.status = 500;
@@ -171,10 +205,12 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
     const {user} = req;
     
     try {
+        // this one selects and then 
         const query = 'INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)';
+        // inserts replaces the question marks
         const inserts = ['cards', 'topicID', 'frontText', 'backText', topicID, frontText, backText];
         const sql = mysql.format(query, inserts);
-
+        // card is the response of the query
         const card = await db.query(sql);
 
         res.send({
@@ -186,9 +222,10 @@ app.post('/api/set_management/create_card/topics/:topicID', requireAuth, async (
         
         req.status = 500;
         req.error = 'Error posting cards';
-
+        // sends it to the next fucntion
         return next();
     }
+    // errorhandling is the middleware
 }, errorHandling);
 
 //Get single card data
@@ -196,21 +233,38 @@ app.get('/api/topic/:topicId/card/:cardId', async (req, res, next) => {
     const { topicId, cardId } = req.params; 
 
     try {
-        let cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?';
-        let cardInserts = ['cards', 'topics', 'cards.ID', cardId, 'topicID', topicId];
-        
-        if(cardId === '0' || isNaN(cardId)){
-            cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? ORDER BY cards.created';
-            cardInserts = ['cards', 'topics', 'topicID', topicId];
-        }
+        // let cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? AND ?? = ?';
+        // let cardInserts = ['cards', 'topics', 'cards.ID', cardId, 'topicID', topicId];
+
+        let cardQuery = 'SELECT cards.ID, cards.frontText, cards.backText, topics.subCategory FROM ?? INNER JOIN ?? ON topics.ID = cards.topicID WHERE ?? = ? ORDER BY cards.created';
+        let cardInserts = ['cards', 'topics', 'topicID', topicId];
 
         const cardSql = mysql.format(cardQuery, cardInserts);
 
-        const [card] = await db.query(cardSql);
+        const cards = await db.query(cardSql);
+
+        const count = cards.length;
+        let card = {};
+        let location = '';
+
+        
+        if(cardId === '0' || isNaN(cardId)){
+            card = cards[0];
+            location = `1/${count}`;
+        } else {
+            for(let i = 0; i < count; i++){
+                if(cards[i].ID == cardId){
+                    card = cards[i];
+                    location = `${i + 1}/${count}`;
+                    break;
+                }
+            }
+        }
 
         res.send({
             success: true,
-            card: card || {}
+            card: card || {},
+            location
         });
     } catch(err){
         req.status = 500;
@@ -233,6 +287,7 @@ app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) =>
         const cards = await db.query(cardsSql);
 
         let card = {};
+        let location = '';
         
         const count = cards.length;
 
@@ -241,15 +296,19 @@ app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) =>
                 if(direction === 'previous'){
                     if(i === 0){
                         card = cards[count - 1];
+                        location = `${count}/${count}`;
                     } else {
                         card = cards[i - 1];
+                        location = `${i}/${count}`;
                     }
                     break;
                 } else {
                     if(i === count - 1){
                         card = cards[0];
+                        location = `1/${count}`;
                     } else {
                         card = cards[i + 1];
+                        location = `${i + 2}/${count}`;
                     }
                     break;
                 }
@@ -258,11 +317,99 @@ app.get('/api/topic/:topicId/card/:cardId/:direction', async (req, res, next) =>
 
         res.send({
             success: true,
-            card: card || {}
+            card: card || {},
+            location
         });
     } catch (err) {
         req.status = 500;
         req.error = 'Error getting card';
+
+        return next();
+    }
+}, errorHandling);
+
+//update displayName (DONE)
+
+app.patch('/api/update_displayname/:ID', async (req, res, next)=>{
+    const {displayName} = req.body;
+    const {ID} =req.params;
+
+    try {
+    
+        let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+        let inserts = ['users', 'displayName', displayName, 'ID', Number(ID)];
+
+        let sql = mysql.format(query, inserts);
+
+        const dName = await db.query(sql);
+
+        res.send({
+            success: true,
+            message: 'Display Name updated'
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error updating Display Name';
+
+        return next();
+    }
+}, errorHandling);
+
+//update Categories (DONE)
+
+app.patch('/api/update_category/:ID', async (req, res, next)=>{
+    const {category} = req.body;
+    const {ID} =req.params;
+
+    try {
+    
+        let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+        let inserts = ['sets', 'category', category, 'ID', Number(ID)];
+
+        let sql = mysql.format(query, inserts);
+
+        const cat = await db.query(sql);
+
+        res.send({
+            success: true,
+            message: 'Categories updated'
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error updating Categories';
+
+        return next();
+    }
+}, errorHandling);
+
+//update subCategories (DONE)
+
+app.patch('/api/update_subCategory/:ID', async (req, res, next)=>{
+    const {subCategory} = req.body;
+    const {ID} =req.params;
+
+    try {
+    
+        let query = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+        let inserts = ['topics', 'subCategory', subCategory, 'ID', Number(ID)];
+
+        let sql = mysql.format(query, inserts);
+
+        const subCat = await db.query(sql);
+
+        res.send({
+            success: true,
+            message: 'Subcategory updated'
+        });
+        
+    } catch(err) {
+        
+        req.status = 500;
+        req.error = 'Error updating subcategory';
 
         return next();
     }
@@ -295,6 +442,59 @@ app.patch('/api/update_card/:ID', async (req, res, next)=>{
         return next();
     }
 }, errorHandling);
+
+
+// tutorial end point changes 0 to 1 
+app.patch('/api/tutorial', requireAuth, async (req, res, next)=>{
+    const { user } = req;
+    try {
+        // this one selects and then 
+        const query = 'UPDATE ?? SET ?? = 1 WHERE ?? = ?';
+        // inserts replaces the question marks
+        // const inserts = ['users', 'tutorial', 'ID', user.ID];
+        const inserts = ['users', 'tutorial', 'ID', user.ID];
+        const sql = mysql.format(query, inserts);
+        // card is the response of the query
+        const tutorial = await db.query(sql);
+
+        res.send({
+            success: true,
+            tutorial,
+        });
+        
+    } catch(err) {
+        req.status = 500;
+        req.error = 'Error in the tutorial process on server';
+        // sends it to the next function
+        return next();
+    }
+    // errorhandling is the middleware
+}, errorHandling);
+
+// get tutorial information
+app.get('/api/usertutorial', requireAuth, async (req, res, next) => {
+    const { user } = req;
+    try {
+        const query = 'SELECT ?? FROM ?? WHERE ?? = ?';
+        const inserts = ['tutorial', 'users', 'ID', user.ID];
+
+        const sql = mysql.format(query, inserts);
+
+        const tutorialCompleted = await db.query(sql);
+
+        res.send({
+            success: true,
+            tutorialCompleted
+        });
+    } catch (err){
+        req.status = 500;
+        req.error = 'Error in the tutorial process on the server';
+
+        return next();
+    }
+    
+}, errorHandling);
+
 
 
 //delete displayName, subCategories, and all cards (DONE)

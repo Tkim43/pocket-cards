@@ -3,6 +3,7 @@
     text-align: center;
     border-bottom: 3px solid #ffb74d;
     margin-left: 10px;
+    margin-bottom: 0;
     margin-right: 10px;
     font-family: 'Lobster', cursive;
 }
@@ -10,7 +11,6 @@
 img.developer{
     width: 50%;
     height:0%;
-    left: 25%;
     position: relative;
     border-radius: 10%;
     box-shadow: 2px 4px 10px 0px rgb(100, 100, 100, .50);
@@ -28,11 +28,14 @@ img.icon{
 
 .description{
     text-align:center;
+    padding: 0% 15%;
+    font-size:1.5rem;
 }
 
 .developers-container{
     background-color:beige;
     width:90%;
+    height:100%;
     margin:5%;
     border-radius:15px;
 }
@@ -41,6 +44,80 @@ img.icon{
     background-color: yellow;
 }
 
-.front-end,.name{
+.title,.name{
 font-family: 'Bree Serif', serif;
 }
+
+@media screen and (min-width: 1200px) {
+    .developer-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
+    .backend-container{
+        display: flex;
+        justify-content: center;
+    }
+    .backend-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
+  }
+
+@media screen and (max-width: 1200px) {
+    .developer-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
+    .backend-container{
+        display: flex;
+        justify-content: center;
+    }
+    .backend-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
+  }
+
+@media screen and (max-width: 992px) {
+    .developer-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+    }
+    .backend-container{
+        display: flex;
+        justify-content: center;
+    }
+    .backend-wrapper{
+        width:33%;
+        height:0%;
+        position:relative;
+        display:inline-block;
+        text-align:center;
+    }
+  }
+
+@media screen and (max-width: 600px) {
+    .developer-wrapper{
+        width:100%;
+        height:0%;
+    }
+    .backend-wrapper{
+        width:100%;
+        height:0%;
+    }
+  }
+

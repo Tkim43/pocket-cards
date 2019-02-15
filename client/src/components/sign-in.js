@@ -24,7 +24,7 @@ class Signin extends Component {
     }
 
     render () {
-        const { handleSubmit} = this.props;
+        const { handleSubmit, signInError} = this.props;
 
         return (
             <div className = "container">
@@ -35,6 +35,9 @@ class Signin extends Component {
                     </div>
                     <div className="row">
                         <Field size = "s12" type = "password" name = "password" label = "password" component = {this.renderInput}/>
+                    </div>
+                    <div className="row">
+                        <div className="red-text text-darken-2">{signInError}</div>
                     </div>
                     <div className="row">
                         <div className="col s12 right-align">

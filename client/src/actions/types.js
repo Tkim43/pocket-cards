@@ -3,6 +3,7 @@ export default {
     SIGN_IN_ERROR: 'sign_in_error',
     SIGN_OUT: 'sign_out',
     SIGN_UP: 'sign_up',
+    ERROR: 'error',
     SIGN_UP_ERROR: 'sign_up_error',
     GET_PROFILE_DATA: 'get_profile_data',
     GET_SETS_DATA: 'get_sets_data',
@@ -18,4 +19,7 @@ export default {
     SEND_CREATE_CARD_DATA: 'send_create_card_data',
     UPDATE_FIND_TIME_PASSED: 'update_find_time_passed',
     DELETE_SUBCATEGORY: 'delete_subcategory',
+    UPDATE_AVATAR: 'update_avatar',
+    END_TUTORIAL: 'end_tutorial',
+    TUTORIAL_COMPLETED: 'tutorial_completed'
 };

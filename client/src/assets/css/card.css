@@ -6,7 +6,18 @@
 #cardFont{
     font-size: 1.3em;
     font-family: raleway;
+    word-break: break-word;
+    overflow: hidden;
+    padding: 1rem;
+    white-space: pre-wrap;
+    
 }
+
+.card-subcategory-title{
+    word-break: break-word;
+    overflow: hidden;
+}
+
 .centerCard{
     display: flex;
     justify-content: center;
@@ -72,8 +83,7 @@
 }
 
 .numeric{
-    color: #616161;
-    position: absolute;
-    left: 5%;
-    top: 1%;
+    color:white;
+    text-align:center;
+    margin: 0 auto;
 }

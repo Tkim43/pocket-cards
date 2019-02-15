@@ -10,26 +10,93 @@
 
 .set > .blue.darken-3 {
     width:90%;
-    height: 50px;
-    font-size: 1.5em;
+    height: 90%;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .set-container .wide-btn{
-    width: 50%;
+    width: 100%;
 }
 
 .row.set {
-    width: 100%;
+    width: 98%;
     margin: 0;
     display: flex;
     align-items: center;
 }
 
+
 .row.set > a {
     display: flex;
     align-items: center;
 }
- 
+
+.set .btn-large{
+    padding: 0 5%;
+}
+
+.title-name{
+    font-size:1rem;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.terms{
+    font-size: 1em;
+    display: flex;
+    justify-content: flex-end;
+}
+
+a.blue > div {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 320px) {
+    .title-name{
+        font-size: 80%;
+    }
+} 
+
+@media only screen and (max-width: 600px) {
+    .terms{
+        font-size: 75%;
+        position: relative;
+        left: 5%;
+        top: 20%;
+    }
+
+    .btn .blue .darken-3 > div {
+        margin: 0 auto;
+        max-width: 1280px;
+        width: 90%;
+    }
+
+    .set-container > h3 {
+        font-size: 1.3rem;
+    }
+
+    .set > .blue.darken-3 {
+        width: 70%;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 991px){
+    .btn-large i {
+        font-size: 2.5rem;
+    }
+}
+
+@media only screen and (min-width: 991px){
+    .basic-modal-content {
+        width: 50%;
+    }
+    .btn-large i {
+        font-size: 2.5rem;
+    }
+}

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import '../assets/css/modal.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form'; 
 import { sendCategoryAndSubcategoryData } from '../actions';
+import RenderInput from '../components/renderInputs';
 
 class ButtonModal extends Component {
     state = {
@@ -30,9 +32,19 @@ class ButtonModal extends Component {
         });
     }
 
-    handleClick = async (e) => {
-        e.preventDefault();
-        const { categoryId, subCategoryId } = await this.props.sendCategoryAndSubcategoryData({category: this.state.category},{subCategory: this.state.subCategory});
+
+    handleClick = async (values) => {
+
+        if(values[0] || values[1] === ""){
+            return;
+        }
+
+        this.setState({
+            category: category.value,
+            subCategory: subCategory.value
+        });
+
+        const { categoryId, subCategoryId } = await this.props.sendCategoryAndSubcategoryData({category: values.category},{subCategory: values.subCategory});
 
 
         this.props.history.push(`/createflashcards/${categoryId}/subcategory/${subCategoryId}`);
@@ -40,9 +52,14 @@ class ButtonModal extends Component {
 
     open = () => this.setState({isOpen: true});
 
-    close = () => this.setState({isOpen: false});
+    close = () => {
+        this.props.untouch('category', 'subCategory');
+        this.setState({isOpen: false});
+        this.props.reset();
+    }
 
     render(){
+        const { handleSubmit, match: { params }, reset } = this.props;
 
         if(this.state.isOpen){
             return (
@@ -50,24 +67,18 @@ class ButtonModal extends Component {
                     <div onClick={e => e.stopPropagation()} className="basic-modal-content">
                         <div onClick={this.close} className="basic-modal-close center">X</div>
                             <div>
-                                <form className="col s12">
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <textarea onChange={this.updateCategory} className="materialize-textarea" id="textarea1"></textarea>
-                                                <label htmlFor="textarea1">Create Category</label>
-                                            </div>
-                                        </div>
-                                        <div className="row"> 
-                                            <div className="input-field col s12">
-                                                <textarea onChange={this.updateSubCategory}  className="materialize-textarea" id="textarea2"></textarea>
-                                                <label htmlFor="textarea2">Create Title</label>
-                                            </div>  
-                                        </div>
-                                        <div className = "row">
-                                            <button onClick={this.handleClick} className="green lighten-2 btn waves-effect waves-light btn-large" type="done" name="action">
-                                                Create Card
-                                            </button>
-                                        </div>
+                                <form onSubmit = {handleSubmit(this.handleClick)}>
+                                    <div className="row text-black">
+                                        <Field className = "text-black" name = "category" getRenderedComponent={true} size = "s12" type = "text" label = "Create Subject" component = {RenderInput}/>
+                                    </div>
+                                    <div className="row text-black">
+                                        <Field className = "text-black" name = "subCategory" size = "s12" type = "text" label = "Create Topic" component = {RenderInput}/>
+                                    </div>
+                                    <div className = "row">
+                                        <button className="green lighten-2 btn btn-large" type="done" name="action">
+                                            Create Card
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                     </div>
@@ -75,22 +86,96 @@ class ButtonModal extends Component {
             )
         }
 
+        if (this.props.createCards) {
+            return(
+                <button onClick ={this.open} className="create-card col s12 bold-text blue lighten-2 btn-large">Create Cards<i className="material-icons large">add_box</i>
+            </button>
+            )
+        }
+
         return (
           
-            <div onClick={this.open} className = "card-panel orange lighten-2 white-text center" >Create Category</div>
+            <div onClick={this.open} className = "create-category-bold-text card-panel orange lighten-2 white-text center" >Create Subject</div>
             
     
         );
     }
 }
 
-function mapStateToProps(state){
-    return{
-        category:state.sets.category,
-        subCategory:state.sets.subCategory
+function validate (formValues) {
+    const error = {};
+    const categoryError = [];
+    const subCategoryError = [];
+
+    if(!formValues.category){
+        error.category = ['Please input a subject title'];
+    }
+
+    if(!formValues.subCategory){
+        error.subCategory = ['Please input a topic title'];
+    }
+
+    checkIfSubCategoryIsLongEnough (formValues.subCategory, subCategoryError);
+    checkIfCategoryIsLongEnough (formValues.category, categoryError);
+
+    if(subCategoryError.length){
+        error.subCategory = subCategoryError;
+    }
+
+    if(categoryError.length){
+        error.category = categoryError;
+    }
+
+    return error;
+
+}
+
+function checkIfSubCategoryIsLongEnough (subcategory = "", error){
+    const regex = /^\S.{1,40}$/;
+    const testIfSubcategoryIsLongEnough = regex.test(subcategory);
+    
+    if(!testIfSubcategoryIsLongEnough){
+        error.push("Topic needs to have between 1 to 40 characters");
     }
 }
 
-export default connect(mapStateToProps, {
+function checkIfCategoryIsLongEnough (category = "", error){
+    const regex = /^\S.{1,50}$/;
+    const testIfCategoryIsLongEnough = regex.test(category);
+    
+    if(!testIfCategoryIsLongEnough){
+        error.push("Subject needs to have between 1 to 50 characters");
+    }
+}
+
+
+function mapStateToProps(state){
+
+    const initialValues = {};
+
+    if(state.form['button-modal']){
+        initialValues.category = '';
+        initialValues.subCategory = '';
+    }
+    return{
+        category:state.sets.category,
+        subCategory:state.sets.subCategory,
+        initialValues
+    }
+}
+
+ButtonModal = reduxForm ({
+    form: "button-modal",
+    validate: validate,
+    shouldError: function(params){
+        if (params.initialRender) { return false; }
+        if(params.nextProps.submitting === true && params.props.submitting === false){
+            return true;
+        }
+        return true;
+    }
+})(ButtonModal);
+
+export default withRouter(connect(mapStateToProps, {
     sendCategoryAndSubcategoryData
-})(withRouter(ButtonModal));
+})(ButtonModal));
